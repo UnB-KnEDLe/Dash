@@ -1,6 +1,3 @@
-import sys
-sys.path.insert(1, '../DODFMiner/dodfminer/')
-
 from dodfminer import ContentExtractor
 from dodfminer import Regex
 import base64
@@ -21,6 +18,14 @@ import pandas as pd
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+correct_names = {
+    'aposentadoria': 'Aposentadoria',
+    'reversoes': 'Reversões',
+    'nomeacao': 'Nomeação',
+    'exoneracao': 'Exoneração',
+    'abono': 'Abono'
+}
 
 style_table={
     'max-height': '400',
@@ -77,10 +82,13 @@ def parse_contents(contents, filename, date):
     for act_name in acts_dfs:
         df = acts_dfs[act_name]
         df.to_csv(act_name + ".csv", index=False)
+        download_button = html.Div([
+            html.A(id='download', children="Download CSV", href=f"/{act_name}")
+        ]) if df.shape[0] > 0 else None 
         list_of_tables.append(\
             html.Div([
-                html.H5(act_name.capitalize(), style={'fontWeight': 'Bold'}),
-                html.H6(datetime.datetime.fromtimestamp(date)),
+                html.H5(correct_names[act_name], style={'fontWeight': 'Bold'}),
+                html.H6("Ocorrências no PDF: " + str(df.shape[0])),
 
                 dash_table.DataTable(
                     data=df.to_dict('records'),
@@ -97,9 +105,7 @@ def parse_contents(contents, filename, date):
                         'overflowX': 'auto'
                     }
                 ),
-                html.Div([
-                    html.A(id='download', children="Download CSV", href=f"/{act_name}")
-                ]),
+                download_button,
                 html.Hr()  # horizontal line
             ])\
         )
@@ -122,4 +128,4 @@ def serve_static(file):
     return flask.send_file(file+".csv")
 
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0')
+    app.run_server(host='0.0.0.0', debug=True)
