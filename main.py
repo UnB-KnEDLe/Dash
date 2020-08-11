@@ -1,5 +1,5 @@
-from dodfminer import ContentExtractor
-from dodfminer import Regex
+from dodfminer.extract.pure.core import ContentExtractor
+from dodfminer.extract.polished.core import ActsExtractor
 import base64
 from base64 import b64decode
 import datetime
@@ -17,47 +17,46 @@ import pandas as pd
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 
 correct_names = {
-    'aposentadoria': 'Aposentadoria',
-    'reversoes': 'Reversões',
-    'nomeacao': 'Nomeação',
-    'exoneracao': 'Exoneração',
-    'abono': 'Abono'
-}
-
-style_table={
-    'max-height': '400',
-    'overflowY': 'scroll',
-    'width': '100%'
+    'aposentadoria': 'APOSENTADORIA',
+    'reversoes': 'REVERSÕES',
+    'nomeacao': 'NOMEAÇÃO',
+    'exoneracao': 'EXONERAÇÃO',
+    'retificacoes': 'RETIFICAÇÃO',
+    'substituicao': 'SUBSTITUIÇÃO',
+    'abono': 'ABONO',
+    'cessoes': 'CESSÕES',
+    'sem_efeito_aposentadoria': 'SEM EFEITO APOSENTADORIA',
+    'efetivos_nome': 'EFETIVOS NOME',
+    'efetivos_exo': 'EFETIVOS EXO'
 }
 
 app.layout = html.Div([
-    dcc.Upload(
-        id='upload-data',
-        children=html.Div([
-            'Arraste e solte um DODF ou ',
-            html.A('Selecione no seu Computador')
-        ]),
-        style={
-            'width': '100%',
-            'height': '60px',
-            'lineHeight': '60px',
-            'borderWidth': '1px',
-            'borderStyle': 'dashed',
-            'borderRadius': '5px',
-            'textAlign': 'center',
-            'margin': '10px'
-        },
-        # Allow multiple files to be uploaded
-        multiple=True
-    ),
-    html.Div(id='output-data-upload'),
-], style={'margin': 50})
+    html.Link(href="https://fonts.googleapis.com/css2?family=Raleway&display=swap", rel="stylesheet"),
+    html.Div([
+        html.Div([
+            html.H1('Extrator de PDF', className='card-title'),
+            html.H2('Extrator de dados do diário oficial do DF', className='card-subtitle'),
+            dcc.Upload(
+                id='upload-data',
+                children=html.Div([
+                    html.Img(src='assets/img/file.svg', className='card-logo-pdf'),
+                    html.H3('Arraste e solte o PDF aqui', className='text-pdf'),
+                    html.Button('Selecione no seu Computador', className='choose-button')
+                ], className='card-pdf-box'),
+                # Allow multiple files to be uploaded
+                multiple=True
+            ),
+        ], className='card'),
+        html.Div(id='output-data-upload'),], className='row'),
+    html.Img(src='assets/img/undraw_reviewed_docs_neeb 1.svg', className='background-img'),
+])
 
 
 def parse_contents(contents, filename, date):
+    global df_dict
     content_type, content_string = contents.split(',')
 
     content = b64decode(content_string, validate=True)
@@ -70,7 +69,7 @@ def parse_contents(contents, filename, date):
             temp_txt.write(text)
             temp_txt.close()
 
-            acts_dfs = Regex.get_all_df('tmp_txt.txt')
+            acts_dfs = ActsExtractor.get_all_df('tmp_txt.txt', 'regex')
 
     except Exception as e:
         print(e)
@@ -81,14 +80,14 @@ def parse_contents(contents, filename, date):
     list_of_tables = []
     for act_name in acts_dfs:
         df = acts_dfs[act_name]
-        df.to_csv(act_name + ".csv", index=False)
+        df.to_csv(act_name + ".csv", index=False, mode='w+')
         download_button = html.Div([
             html.A(id='download', children="Download CSV", href=f"/{act_name}")
         ]) if df.shape[0] > 0 else None 
         list_of_tables.append(\
             html.Div([
-                html.H5(correct_names[act_name], style={'fontWeight': 'Bold'}),
-                html.H6("Ocorrências no PDF: " + str(df.shape[0])),
+                html.H2(correct_names[act_name], className='text-act'),
+                html.H4("Ocorrências no PDF: " + str(df.shape[0]), className='text-ocu'),
 
                 dash_table.DataTable(
                     data=df.to_dict('records'),
@@ -102,12 +101,12 @@ def parse_contents(contents, filename, date):
                     style_table={
                         'maxHeight': '700px',
                         'overflowY': 'scroll',
-                        'overflowX': 'auto'
+                        'overflowX': 'auto',
+                        'marginBottom': '40px'
                     }
                 ),
                 download_button,
-                html.Hr()  # horizontal line
-            ])\
+            ], className='card-csv')\
         )
 
     return html.Div(list_of_tables)
@@ -125,7 +124,13 @@ def update_output(list_of_contents, list_of_names, list_of_dates):
 
 @app.server.route('/<file>')
 def serve_static(file):
-    return flask.send_file(file+".csv")
+    print(file)
+    return flask.send_file(file + ".csv", cache_timeout=1, attachment_filename=file+'.csv')
 
 if __name__ == '__main__':
-    app.run_server(host='0.0.0.0', debug=True)
+    app.run_server(host='0.0.0.0', debug=False)
+    cache = Cache(app.server, config={
+        'CACHE_TYPE': 'simple'
+    })
+
+    cache.clear()

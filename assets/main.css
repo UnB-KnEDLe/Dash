@@ -1,0 +1,150 @@
+
+body {
+    background: #CDCBEA;
+}
+
+.row {
+    text-align: center;
+}
+
+.card{
+    width: 60%;
+    height: 70vh;
+    display:inline-block;
+    vertical-align: middle;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.card-csv{
+    width: 90%;
+    padding: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.card-title{
+
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+
+    color: #000000;
+}
+
+.card-subtitle{
+
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+
+    color: #000000;
+}
+
+.card-pdf-box{
+
+    background: #FFFFFF;
+    border: 1px dashed #6C63FF;
+    box-sizing: border-box;
+    margin-left: 30px;
+    text-align: center;
+    margin-right: 30px;
+}
+
+.card-logo-pdf{
+
+    display: block;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.choose-button{
+    
+    width: 172px;
+    height: 41px;
+    text-align: center;
+    background: #6C63FF;
+    border-radius: 20px;
+    margin-bottom: 30px;
+
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.text-pdf{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+    text-align: center;
+}
+
+.text-act{
+    font-family: Raleway;
+    font-style: bold;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 21px;
+    /* identical to box height */
+    text-align: center;
+}
+
+.text-ocu{
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 21px;
+    /* identical to box height */
+    text-align: center;
+}
+
+.background-img{
+    position: relative;
+    width: 624px;
+    height: 395px;
+    left: 50%;
+}
+
+a {
+    font-family: Raleway;
+    font-size: 16px;
+    background-color: #6C63FF;
+    box-shadow: 0 5px 0 rgb(32, 26, 143);
+    color: white;
+    padding: 1em 1.5em;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a:hover {
+    background-color:  rgb(39, 30, 201);
+    cursor: pointer;
+}
+
+a:active {
+    box-shadow: none;
+    top: 5px;
+}
