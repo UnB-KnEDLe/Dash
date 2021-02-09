@@ -4,6 +4,7 @@ import base64
 from base64 import b64decode
 import datetime
 import io
+import sys
 
 import dash
 from dash.dependencies import Input, Output, State
@@ -120,12 +121,11 @@ def parse_contents(contents, filename, date, type_extraction):
         df.to_csv(act_name + ".csv", index=False, mode='w+')
         download_button = html.Div([
             html.A(id='download', children="Download CSV", href=f"/{act_name}")
-        ]) if df.shape[0] > 0 else None 
+        ]) if df.shape[0] > 0 else None
         list_of_tables.append(\
             html.Div([
                 html.H2(correct_names[act_name], className='text-act'),
                 html.H4("Ocorrências no PDF: " + str(df.shape[0]), className='text-ocu'),
-
                 dash_table.DataTable(
                     data=df.to_dict('records'),
                     columns=[{'name': i, 'id': i} for i in df.columns],
@@ -162,7 +162,6 @@ def update_output(list_of_contents, type_extraction, list_of_names, list_of_date
 
 @app.server.route('/<file>')
 def serve_static(file):
-    print(file)
     return flask.send_file(file + ".csv", cache_timeout=1, attachment_filename=file+'.csv')
 
 if __name__ == '__main__':
