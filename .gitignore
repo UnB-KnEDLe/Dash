@@ -5,6 +5,8 @@ data/*.pdf
 data/*/
 .DS_Store
 *.csv
+tmp_file.pdf
+tmp_txt.txt
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
