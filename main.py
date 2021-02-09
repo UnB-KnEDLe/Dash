@@ -99,21 +99,22 @@ def parse_contents(contents, filename, date, type_extraction):
     content_type, content_string = contents.split(',')
 
     content = b64decode(content_string, validate=True)
-    try:
-        if 'pdf' in filename:
-            temp_file = open('tmp_file.pdf', 'wb')
-            temp_txt = open('tmp_txt.txt', 'w+')
-            temp_file.write(content)
-            text = ContentExtractor.extract_text('tmp_file.pdf')
-            temp_txt.write(text)
-            temp_txt.close()
+    # try:
+    if 'pdf' in filename:
+        temp_file = open('tmp_file.pdf', 'wb')
+        temp_txt = open('tmp_txt.txt', 'w+')
+        temp_file.write(content)
+        text = ContentExtractor.extract_text('tmp_file.pdf')
+        temp_txt.write(text)
+        temp_txt.close()
 
-            acts_dfs = ActsExtractor.get_all_df('tmp_txt.txt', type_extraction)
+        acts_dfs = ActsExtractor.get_all_df('tmp_txt.txt', type_extraction)
 
-    except Exception as e:
-        return html.Div([
-            'There was an error processing this file.'
-        ])
+    # except Exception as e:
+    #     print(e)
+    #     return html.Div([
+    #         'There was an error processing this file.'
+    #     ])
 
     list_of_tables = []
     for act_name in acts_dfs:
