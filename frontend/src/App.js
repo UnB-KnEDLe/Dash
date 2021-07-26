@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Container, BigCard, ButtonExtract, ButtonUpload, Upload } from './styles/app'
 import { GlobalStyle } from './styles/global';
-import homeTwoImg from './assets/HomeTwo.png';
-import homeOneImg from './assets/HomeOne.png';
 import dashimg from './assets/dashimg.svg';
 import filesvg from './assets/file.svg';
 
@@ -10,6 +8,8 @@ export default function App() {
 
   const [regexType, setRegexType] = useState(true);
   const [nerType, setNerType] = useState(false);
+  const [selectetdFile, setSelectedFile] = useState([]);
+  const [fileBase64String, setFileBase64String] = useState("");
 
   function regexType_() {
     setRegexType(true)
@@ -21,9 +21,30 @@ export default function App() {
     setNerType(true)
   }
 
-  const changeHandler = (event) => {
-		console.log(event.target.files);
+  const changeHandler = (e) => {
+    var files = e.target.files
+		setSelectedFile(files);
+    // console.log(e.target.files[0]);
+    // console.log(e.target.files[0].name);
+    // console.log(e.target.files[0].size);
+    // console.log(e.target.files[0].type);
+    encodeFileBase64(files[0])
 	};
+
+  const encodeFileBase64 = (file) => {
+    var reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        var Base64 = reader.result;
+        console.log(Base64);
+        setFileBase64String(Base64);
+      };
+      reader.onerror = (error) => {
+        console.log("error: ", error);
+      };
+    }
+  };
 
 
   return (
