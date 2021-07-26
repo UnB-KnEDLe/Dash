@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import HeaderImg from '../assets/header.svg';
 import { shade } from 'polished';
 
@@ -60,7 +60,7 @@ button{
 `;
 
 export const ButtonExtract = styled.button`
-    background: #2980b9;
+    background: #ffffff;
     height: 4.5rem;
     border-radius: 1rem;
     width: 11.125rem;
@@ -73,8 +73,12 @@ export const ButtonExtract = styled.button`
     transition: background-color 0.2s;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 
+    ${props => props.type == true && css` 
+      background: #2980b9;
+    `}
+
   &:hover {
-    background: ${shade(0.2, '#2980B9')};
+    background: ${shade(0, '#2980b9')};
   }
 `;
 
@@ -82,7 +86,7 @@ export const ButtonUpload = styled.button`
     background: #2980b9;
     height: 2.5rem;
     border-radius: 1rem;
-    width: 21.125rem;
+    width: 61%;
     border: 0;
     margin: 13px !important;
     color: #fff;
@@ -90,6 +94,14 @@ export const ButtonUpload = styled.button`
     -webkit-transition: background-color 0.2s;
     transition: background-color 0.2s;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+
+    input{ 
+      display: none; 
+    }
+
+    label{
+      cursor: pointer;
+    }
 
   &:hover {
     background: ${shade(0.2, '#2980B9')};
