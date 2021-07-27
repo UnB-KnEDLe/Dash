@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, BigCard, ButtonExtract, ButtonUpload, Upload } from './styles/app'
 import { GlobalStyle } from './styles/global';
 import dashimg from './assets/dashimg.svg';
@@ -21,30 +21,24 @@ export default function App() {
     setNerType(true)
   }
 
-  const changeHandler = (e) => {
-    var files = e.target.files
-		setSelectedFile(files);
-    // console.log(e.target.files[0]);
-    // console.log(e.target.files[0].name);
-    // console.log(e.target.files[0].size);
-    // console.log(e.target.files[0].type);
-    encodeFileBase64(files[0])
-	};
 
-  const encodeFileBase64 = (file) => {
-    var reader = new FileReader();
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        var Base64 = reader.result;
-        console.log(Base64);
-        setFileBase64String(Base64);
-      };
-      reader.onerror = (error) => {
-        console.log("error: ", error);
-      };
+  function changeHandler(e) {
+    var files = e.target.files
+    setSelectedFile(files);
+  }
+
+  useEffect(() => {
+    function generate_acts() {
+      console.log(selectetdFile[0])
+      if (regexType == true){
+        console.log("regex")
+      }else{
+        console.log("ner")
+      }
+      // Criação da api para resgatar valores da extração
     }
-  };
+    generate_acts();
+  }, [selectetdFile, regexType]);
 
 
   return (
@@ -61,7 +55,7 @@ export default function App() {
           <p>Arraste e solte o PDF aqui</p>
           <ButtonUpload>
             <label for="fupload">SELECIONAR ARQUIVO PDF DO COMPUTADOR</label>
-            <input type="file" id="fupload" onChange={changeHandler} multiple/>
+            <input type="file" id="fupload" onChange={changeHandler} multiple />
           </ButtonUpload>
         </Upload>
       </BigCard>
