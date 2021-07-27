@@ -33,8 +33,8 @@ text-align: -webkit-center;
       }
     }
   }
-`;
 
+`;
 
 export const BigCard = styled.div`
     margin-top: 6rem;
@@ -108,7 +108,6 @@ export const ButtonUpload = styled.button`
   }
 `;
 
-
 export const Upload = styled.section`
     margin-top:40px;
     border: 1px dashed #6C63FF;
@@ -118,3 +117,4 @@ p{
     margin-top: 10px;
 }
 `;
+
