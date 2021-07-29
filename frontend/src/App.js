@@ -4,6 +4,7 @@ import { Container, BigCard, ButtonExtract, ButtonUpload, Upload } from './style
 import { GlobalStyle } from './styles/global';
 import dashimg from './assets/dashimg.svg';
 import filesvg from './assets/file.svg';
+import { TableContent } from './styles/table_style';
 
 export default function App() {
 
@@ -88,17 +89,18 @@ export default function App() {
       </Container>
       {tables &&
         <>
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
-          <Table dados={dados} colunas={colunas} />
+          <TableContent>
+            <Table />
+            <Table />
+            <Table />
+            <Table />
+            <Table />
+            <Table />
+            <Table />
+            <Table />
+            <Table />
+            <Table />
+          </TableContent>
         </>
       }
       <Container>
