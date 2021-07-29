@@ -1,0 +1,10 @@
+version: '2'
+services:
+  dash-api:
+    build: .
+    command: npm start
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3001:3001"
