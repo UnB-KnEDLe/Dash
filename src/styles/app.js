@@ -108,13 +108,60 @@ export const ButtonUpload = styled.button`
   }
 `;
 
-export const Upload = styled.section`
-    margin-top:40px;
-    border: 1px dashed #6C63FF;
-    padding: 22px;
-    width: 70%;
-p{
-    margin-top: 10px;
-}
+const dragActive = css`
+  border-color: #78e5d5;
 `;
 
+const dragReject = css`
+  border-color: #e57878;
+`;
+
+export const DropContainer = styled.div.attrs({
+  className: "dropzone"
+})`
+  margin-top:40px;
+  border: 1px dashed #6C63FF;
+  padding: 22px;
+  width: 70%;
+
+  p{
+  margin-top: 10px;
+  }
+
+  button{
+    cursor: pointer;
+    background: #2980b9;
+    height: 2.5rem;
+    border-radius: 1rem;
+    width: 61%;
+    border: 0;
+    margin: 13px !important;
+    color: #fff;
+    font-weight: bold;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  }
+  label{
+    cursor:pointer;
+  }
+
+  ${props => props.isDragActive && dragActive};
+  ${props => props.isDragReject && dragReject};
+  
+`;
+
+
+const messageColors = {
+  default: "#999",
+  error: "#e57878",
+  success: "#78e5d5"
+};
+
+export const UploadMessage = styled.p`
+  display: flex;
+  color: ${props => messageColors[props.type || "default"]};
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+`;
