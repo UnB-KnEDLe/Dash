@@ -1,5 +1,7 @@
 language: node_js
 sudo: false
+env:
+  PROJECT=Dash
 node_js:
   - 14
 install:
