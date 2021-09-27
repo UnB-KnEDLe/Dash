@@ -73,8 +73,9 @@ export const ButtonExtract = styled.button`
     transition: background-color 0.2s;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 
-    ${props => props.type == true && css` 
+    ${props => props.type === true && css` 
       background: #2980b9;
+      color: white;
     `}
 
   &:hover {
