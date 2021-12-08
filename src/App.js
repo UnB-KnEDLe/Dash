@@ -14,21 +14,6 @@ export default function App() {
   const [selectetdFile, setSelectedFile] = useState([]);
   // const [fileBase64String, setFileBase64String] = useState("");
 
-<<<<<<< HEAD
-  function regexType_() {
-    setRegexType(true)
-    setNerType(false)
-  }
-
-  function nerType_() {
-    setRegexType(false)
-    setNerType(true)
-  }
-
-
-  function changeHandler(e) {
-    var files = e.target.files
-=======
   useEffect(() => {
     function generate_acts() {
       console.log(selectetdFile[0])
@@ -47,7 +32,6 @@ export default function App() {
       .then(res => {
         console.log(res) // Adicionar função que cria as tabelas
       })
->>>>>>> 37561e0 (Adiciona Axios e reduz verbosidade)
     setSelectedFile(files);
   }
 
@@ -96,18 +80,6 @@ export default function App() {
           <h1>Extrator de PDF</h1>
           <h2>Extrator de dados do diário oficial do DF</h2>
           <h2>Selecione a forma de extração</h2>
-<<<<<<< HEAD
-          <ButtonExtract type={regexType} onClick={() => regexType_()}>REGEX</ButtonExtract>
-          <ButtonExtract type={nerType} onClick={() => nerType_()}>NER</ButtonExtract>
-          <Upload>
-            <img src={filesvg} alt="file" />
-            <p>Arraste e solte o PDF aqui</p>
-            <ButtonUpload>
-              <label for="fupload">SELECIONAR ARQUIVO PDF DO COMPUTADOR</label>
-              <input type="file" id="fupload" onChange={changeHandler} multiple />
-            </ButtonUpload>
-          </Upload>
-=======
           <ButtonExtract type={regexType === 'regex'} onClick={() => regexType_('regex')}>REGEX</ButtonExtract>
           <ButtonExtract type={regexType === 'ner'} onClick={() => regexType_('ner')}>NER</ButtonExtract>
           <Dropzone accept="application/pdf" onDropAccepted={changeHandler}>
@@ -126,7 +98,6 @@ export default function App() {
               </DropContainer>
             )}
           </Dropzone>
->>>>>>> 37561e0 (Adiciona Axios e reduz verbosidade)
         </BigCard>
       </Container>
       {tables &&

@@ -2,6 +2,8 @@ import axios from 'axios';
 const api_url = 'http://localhost:5000'
 
 export default async function extractContent(file, type){
+    console.log({file, type})
+
     const formData = new FormData();
     formData.append('type', type);
     formData.append('file', file);
