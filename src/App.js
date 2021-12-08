@@ -5,28 +5,33 @@ import { GlobalStyle } from './styles/global';
 import dashimg from './assets/dashimg.svg';
 import filesvg from './assets/file.svg';
 import { TableContent } from './styles/table_style';
+import extractContent from './services/services';
 
 export default function App() {
 
-  const [regexType, setRegexType] = useState(true);
-  const [nerType, setNerType] = useState(false);
-  const [tables, setTables] = useState(true);
+  const [regexType, setRegexType] = useState('regex');
+  const [tables] = useState(true);
   const [selectetdFile, setSelectedFile] = useState([]);
-  const [fileBase64String, setFileBase64String] = useState("");
+  // const [fileBase64String, setFileBase64String] = useState("");
 
-  function regexType_() {
-    setRegexType(true)
-    setNerType(false)
+  useEffect(() => {
+    function generate_acts() {
+      console.log(selectetdFile[0])
+      console.log(regexType)
+      // Criação da api para resgatar valores da extração
+    }
+    generate_acts();
+  }, [selectetdFile, regexType]);
+
+  async function regexType_(type) {
+    setRegexType(type)
   }
 
-  function nerType_() {
-    setRegexType(false)
-    setNerType(true)
-  }
-
-
-  function changeHandler(e) {
-    var files = e.target.files
+  function changeHandler(files) {
+    extractContent(files[0], regexType)
+      .then(res => {
+        console.log(res) // Adicionar função que cria as tabelas
+      })
     setSelectedFile(files);
   }
 
@@ -75,16 +80,24 @@ export default function App() {
           <h1>Extrator de PDF</h1>
           <h2>Extrator de dados do diário oficial do DF</h2>
           <h2>Selecione a forma de extração</h2>
-          <ButtonExtract type={regexType} onClick={() => regexType_()}>REGEX</ButtonExtract>
-          <ButtonExtract type={nerType} onClick={() => nerType_()}>NER</ButtonExtract>
-          <Upload>
-            <img src={filesvg} alt="file" />
-            <p>Arraste e solte o PDF aqui</p>
-            <ButtonUpload>
-              <label for="fupload">SELECIONAR ARQUIVO PDF DO COMPUTADOR</label>
-              <input type="file" id="fupload" onChange={changeHandler} multiple />
-            </ButtonUpload>
-          </Upload>
+          <ButtonExtract type={regexType === 'regex'} onClick={() => regexType_('regex')}>REGEX</ButtonExtract>
+          <ButtonExtract type={regexType === 'ner'} onClick={() => regexType_('ner')}>NER</ButtonExtract>
+          <Dropzone accept="application/pdf" onDropAccepted={changeHandler}>
+            {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
+              <DropContainer
+                {...getRootProps()}
+                isDragActive={isDragActive} //aceitar arquivos que são PDFs
+                isDragReject={isDragReject} //rejeitar arquivos que não são PDFs
+              >
+                <input {...getInputProps()} />
+                <img src={ filesvg } alt="file" />
+                {renderDragMessage(isDragActive, isDragReject)}
+                <button>
+                  <label>Selecionar Arquivos</label>
+                </button>
+              </DropContainer>
+            )}
+          </Dropzone>
         </BigCard>
       </Container>
       {tables &&
