@@ -1,5 +1,5 @@
 import axios from 'axios';
-const api_url = 'http://164.41.76.30/dash/api/extract_content'
+const api_url = 'http://164.41.76.30/dash/api'
 
 export default async function extractContent(file, type){
     console.log({file, type})
