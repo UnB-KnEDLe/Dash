@@ -1,13 +1,10 @@
-version: "3.3"
+version: '2'
 services:
-  dodfminer-dash:
-    build:
-      context: .
-    network_mode: host
-    image: dodfminer-dash
-    container_name: dodfminer-dash
+  dash-api:
+    build: .
+    command: npm start
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
     ports:
-      - "80:80"
-    environment:
-      - TARGET=LIVE
-    restart: unless-stopped
+      - "3001:3001"
