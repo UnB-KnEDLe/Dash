@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const TableContainer = styled.div`
+  * span {
+    display: inline-block;
+
+    div {
+      padding: 0;
+    }
+  }
+`
+
 export const TableContent = styled.div`
   margin: 3% 10% 3% 10%;
   /* overflow: hidden; */
