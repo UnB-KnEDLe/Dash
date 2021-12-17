@@ -2,7 +2,6 @@ import React from "react";
 import { replaceStr } from "../replaceStr";
 
 export default function Table({title, data, columns}) {
-    console.log(data, columns)
     return (
         <div className="tableContent">
             <hr/>
@@ -15,7 +14,6 @@ export default function Table({title, data, columns}) {
                 </thead>
                 <tbody>
                     { data.map( item => (
-
                         <tr>
                             { Object.keys(item).map( key => typeof item[key] == 'boolean' ? (<td>{ item[key] ? "Sim" : "Não" }</td>) : (<td>{ item[key] }</td>) ) }
                         </tr>
