@@ -1,6 +1,7 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import { TableContainer } from '../styles/table_style';
+import ExpandText from './expandText';
 
 export default function Table({title, data}) {
     const columns = {
@@ -23,11 +24,18 @@ export default function Table({title, data}) {
         sem_efeito_aposentadoria: 'Tornado Sem Efeito a Aposentadoria',
     }
 
+    // data.map(
+    //     (row) => {
+    //         row.map(
+    //             (cell) =>  <><ExpandText text={cell} /></> )
+    //     }
+    // )
+
     return (
         <TableContainer>
             <MUIDataTable
                 title={<h6 style={{fontSize: '189%', color: '#144e81', fontWeight: 'bold', textAlign: 'left'}}>{labelReplace[title]}</h6>}
-                data={data}
+                data={data.map((row) => row.map((cell) => <ExpandText text={cell} />) )}
                 columns={columns[title]}
                 options={{
                     rowsPerPage: 3,
