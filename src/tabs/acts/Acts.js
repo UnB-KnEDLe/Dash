@@ -1,7 +1,6 @@
 import { useState } from "react";
 import UploadComponent from "../../components/UploadComponent";
 import { TableContent } from "../../styles/table_style";
-import dashimg from "../../assets/dashimg.svg";
 import Table from "../../components/Table";
 
 import extractContent from "../../services/services";
@@ -70,7 +69,7 @@ export function Acts() {
 }
 
 const ActsData = {
-  title: "Extrair Dados"  
+  title: "Extrair Atos"  
 };
 
 export default ActsData;

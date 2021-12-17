@@ -3,36 +3,41 @@ import HeaderImg from "../assets/header.svg";
 import { shade } from "polished";
 
 export const Container = styled.div`
-  :first-child {
-    background: url(${HeaderImg});
-    background-repeat: no-repeat;
-    background-size: contain;
-    object-fit: contain;
-    height: 11.5rem;
-  }
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center;
+  width: 100vw;
+
   text-align: -webkit-center;
 
-  header {
+  header{
+    width: 100%;
+    overflow: hidden;
     height: 11.5rem;
+    background: url(${HeaderImg}) repeat center;
   }
 
-  span {
+  span{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-end;
+
     div {
       display: flex;
       flex-direction: column;
       padding-right: 8rem;
       padding-top: 8rem;
+
       h2 {
         font-size: 3rem;
         font-weight: bold;
         margin-bottom: 1.5rem;
         color: var(--primary);
       }
-      p {
+      
+      p  {
         font-size: 2rem;
         max-width: 50rem;
       }
@@ -41,6 +46,11 @@ export const Container = styled.div`
 `;
 
 export const BigCard = styled.div`
+
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  flex-direction: column;
   width: 80%;
   max-width: 1200px;
   border-radius: 10px;
@@ -154,6 +164,10 @@ const dragReject = css`
 export const DropContainer = styled.div.attrs({
   className: "dropzone",
 })`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  place-items: center;
   margin-top: 40px;
   border: 1px dashed #6c63ff;
   padding: 22px;
@@ -179,6 +193,11 @@ export const DropContainer = styled.div.attrs({
   }
   label {
     cursor: pointer;
+  }
+
+  img {
+    width: 90px;
+    height: auto;
   }
 
   ${(props) => props.isDragActive && dragActive};
