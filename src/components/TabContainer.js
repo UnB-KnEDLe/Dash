@@ -10,7 +10,7 @@ import "./simples.css"
 export default function TabContainer(props) {
     const [activeTab, setActiveTab] = useState(0)
     // const tabs = [ActsData, EntitiesData, SearchData, AdvancedSearchData]
-    const tabs = [ActsData, EntitiesData, SearchData]
+    const tabs = [EntitiesData, SearchData]
 
     return (
         <BigCard>
@@ -21,14 +21,14 @@ export default function TabContainer(props) {
                     </Tab>
                 ))}
             </Tabs>            
-            <div className={activeTab !== 0 ? "hidden" : ""}>
-                <Acts />
-            </div>
-            <div className={activeTab !== 1 ? "hidden" : ""} >
+            <div className={activeTab !== 0 ? "hidden" : ""} >
                 <Entities />
             </div>
-            <div className={activeTab !== 2 ? "hidden" : ""}>
+            <div className={activeTab !== 1 ? "hidden" : ""}>
                 <Search />
+            </div>
+            <div className={activeTab !== 2 ? "hidden" : ""} >
+                <Acts />
             </div>
         </BigCard>
     );
