@@ -10,6 +10,12 @@ export function Search() {
 	const [content, setContent] = useState({});
 	const [loading, setLoading] = useState(false);
 
+	const handleKeypress = e => {
+		if (e.code === 'Enter') {
+			onSubmit();
+		}
+	};
+
 	const onChangeActType = (e) => {
 		if (e.target.value === '') return
 		let newFilters = {};
@@ -102,7 +108,7 @@ export function Search() {
 				{Object.keys(filters).map( filter => (
 					<div className="filter">
 						<div className="filter-input">
-							<input onChange={ value => setParameter(filter, value)}placeholder={`Filtro de ${filters[filter].label}`}/>
+							<input onKeyPress={handleKeypress} onChange={ value => setParameter(filter, value)}placeholder={`Filtro de ${filters[filter].label}`}/>
 							<small>{ filter.title }</small>
 						</div>
 					</div>
