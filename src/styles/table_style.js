@@ -7,6 +7,16 @@ export const TableContainer = styled.div`
     div {
       padding: 0;
     }
+
+    .left {
+      text-align: left !important;
+      width: 100%;
+      justify-content: flex-start;
+      display: flex;
+    }
+    
+    * h6.MUIDataTableToolbar-titleText-20 {
+    }
   }
 `
 

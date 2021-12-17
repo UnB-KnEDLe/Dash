@@ -3,9 +3,9 @@ const BASE_URL = 'http://164.41.76.30/dodfminner/api'
 export const actsTypes = {
     abono: {
         paramsKeys: [
-            'pessoa',
-            'cargo',
-            'orgao'
+            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'cargo', title: 'Cargo'},
+            {label: 'orgao', title: 'Órgão'},
         ],
 
         base_url: `${BASE_URL}/abono?`
@@ -13,10 +13,10 @@ export const actsTypes = {
 
     aposentadoria: {
         paramsKeys: [
-            'pessoa',
-            'cargo',
-            'orgao',
-            'matricula',
+            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'cargo', title: 'Cargo'},
+            {label: 'orgao', title: 'Órgão'},
+            {label: 'matricula', title: 'Matrícula'},
         ],
 
         base_url: `${BASE_URL}/aposentadoria?`
@@ -24,11 +24,11 @@ export const actsTypes = {
 
     nomeacao_comissionada: {
         paramsKeys: [
-            'pessoa',
-            'cargo_efetivo',
-            'cargo_comissionado',
-            'orgao',
-            'matricula',
+            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'cargo_efetivo', title: 'Cargo Efetivo'},
+            {label: 'cargo_comissionado', title: 'Cargo Comissionado'},
+            {label: 'orgao', title: 'Órgão'},
+            {label: 'matricula', title: 'Matrícula'},
         ],
 
         base_url: `${BASE_URL}/nomeacao_comissionada?`
@@ -36,11 +36,11 @@ export const actsTypes = {
 
     nomeacao_efetiva: {
         paramsKeys: [
-            'pessoa',
-            'cargo',
-            'orgao',
-            'edital',
-            'matricula',
+            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'cargo', title: 'Cargo'},
+            {label: 'orgao', title: 'Órgão'},
+            {label: 'edital', title: 'Edital'},
+            {label: 'matricula', title: 'Matrícula'},
         ],
         
         base_url: `${BASE_URL}/nomeacao_efetiva?`
@@ -48,9 +48,9 @@ export const actsTypes = {
 
     exoneracao_efetivos: {
         paramsKeys: [
-            'pessoa',
-            'cargo',
-            'orgao'
+            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'cargo', title: 'Cargo'},
+            {label: 'orgao', title: 'Órgão'},
         ],
 
         base_url: `${BASE_URL}/exo_efetivo?`
@@ -58,8 +58,8 @@ export const actsTypes = {
 
     retificacao: {
         paramsKeys: [
-            'pessoa',
-            'matricula',
+            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'matricula', title: 'Matrícula'},
         ],
 
         base_url: `${BASE_URL}/retificacao?`
@@ -68,9 +68,9 @@ export const actsTypes = {
 
     exoneracao_nao_efetivos: {
         paramsKeys: [
-            'nome',
-            'cargo',
-            'orgao'
+            {label: 'nome', title: 'Nome'},
+            {label: 'cargo', title: 'Cargo'},
+            {label: 'orgao', title: 'Órgão'},
         ],
 
         base_url: `${BASE_URL}/exoneracao?`

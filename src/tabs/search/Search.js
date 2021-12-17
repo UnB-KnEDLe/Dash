@@ -21,8 +21,9 @@ export function Search() {
 		let newFilters = {};
 		actsTypes[e.target.value].paramsKeys
 			.forEach( filter => {
-				newFilters[filter] = {
-					label: filter,
+				newFilters[filter.label] = {
+					label: filter.label,
+					title: filter.title,
 					data: ''
 				}
 			} )
@@ -91,7 +92,7 @@ export function Search() {
 		<Container>
 			<div className="search-header">
 				<h2>Hub de pesquisas do DoDFMiner</h2>
-				<h3>Realize pesquisas avançadas nos dados obtidos pela ferramenta.</h3>
+				<h3>Realize pesquisas nos dados obtidos pela ferramenta.</h3>
 			</div>
 			<select onChange={onChangeActType} >
 				<option value="">Selecione o Tipo de Ato</option>
@@ -105,11 +106,10 @@ export function Search() {
 			</select>
 			{ Object.keys(filters).length === 0 && <h3>Selecione um tipo de ato para continuar</h3> }
 			<InputField>
-				{Object.keys(filters).map( filter => (
+				{Object.keys(filters).map( filterKey => (
 					<div className="filter">
 						<div className="filter-input">
-							<input onKeyPress={handleKeypress} onChange={ value => setParameter(filter, value)}placeholder={`Filtro de ${filters[filter].label}`}/>
-							<small>{ filter.title }</small>
+							<input onKeyPress={ handleKeypress } onChange={ value => setParameter(filterKey, value)} placeholder={`Filtro de ${filters[filterKey].title}`}/>
 						</div>
 					</div>
 				)) }
@@ -131,7 +131,6 @@ export function Search() {
 							</thead>
 							<tbody>
 									{ content.map( item => (
-
 											<tr>
 													{ Object.keys(item).map( key => typeof item[key] == 'boolean' ? (<td>{ item[key] ? "Sim" : "Não" }</td>) : (<td>{ item[key] }</td>) ) }
 											</tr>

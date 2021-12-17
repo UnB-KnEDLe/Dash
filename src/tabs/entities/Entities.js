@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export function Entities() {
-	const [type, setType] = useState("ner");
+	const [type, setType] = useState("regex");
 	const [tables, setTables] = useState([]);
 	const [loading, setLoading] = useState(false);
 

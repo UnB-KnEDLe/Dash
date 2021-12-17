@@ -5,7 +5,7 @@ import { BigCard } from '../styles/app'
 import ActsData, { Acts } from '../tabs/acts/Acts';
 import EntitiesData, { Entities } from '../tabs/entities/Entities';
 import SearchData, { Search } from '../tabs/search/Search';
-// import AdvancedSearchData, { AdvancedSearch } from "../tabs/advancedSearch/AdvancedSearch";
+import "./simples.css"
 
 export default function TabContainer(props) {
     const [activeTab, setActiveTab] = useState(0)
@@ -20,19 +20,16 @@ export default function TabContainer(props) {
                         {tab.title}
                     </Tab>
                 ))}
-            </Tabs>
-            { activeTab === 0 && (
+            </Tabs>            
+            <div className={activeTab !== 0 ? "hidden" : ""}>
                 <Acts />
-            ) }
-            { activeTab === 1 && (
+            </div>
+            <div className={activeTab !== 1 ? "hidden" : ""} >
                 <Entities />
-            ) }
-            { activeTab === 2 && (
+            </div>
+            <div className={activeTab !== 2 ? "hidden" : ""}>
                 <Search />
-            ) }
-            {/* { activeTab === 3 && (
-                <AdvancedSearch />
-            ) } */}
+            </div>
         </BigCard>
     );
 }
