@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import Dropzone from 'react-dropzone';
 import filesvg from '../assets/file.svg';
-import { BigCard, ButtonExtract, DropContainer} from '../styles/app'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { DropContainer } from '../styles/app'
 
 export default function UploadComponent({changeHandler, type, setType, renderDragMessage, tables}) {
     return (

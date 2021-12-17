@@ -1,9 +1,9 @@
-import styled, { css } from "styled-components";
-import HeaderImg from "../assets/header.svg";
-import { shade } from "polished";
+import styled from "styled-components";
 
 export const Tabs = styled.div`
     display: flex;
+    width: 100%;
+    margin-bottom: 20px;
 `;
 
 export const Tab = styled.div`
@@ -17,6 +17,7 @@ export const Tab = styled.div`
     border-radius: 0.5rem 0.5rem 0 0;
     background: ${props => props.active ? "white" : "#f4f4f4"};
     z-index: ${props => props.active ? 1 : 0};
+    text-align: center;
     font-weight: bold;
     color: var(--primary);
 

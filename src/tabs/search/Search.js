@@ -1,84 +1,128 @@
 import { useState } from "react";
-import { Filters, InputField, Container } from '../../styles/search';
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter, faSearch, faTimes, faFilePdf } from "@fortawesome/free-solid-svg-icons";
-
-const filters = [{title: "Tipo de Ato"},
-	{title: "Nome"}, {title: "Cargo"}, {title: "Matrícula"},
-	{title: "Data"}, {title: "Classe"}, {title: "Símbolo"}
-];
+import { InputField, Container } from '../../styles/search';
+import { actsTypes } from "./actTypes";
+import Table from '../../components/Table';
 
 export function Search() {
-	const [selectedFilters, setSelectedFilters] = useState([]);
-	const [actType, setActType] = useState('');
+	const [filters, setFilters] = useState({});
+	const [baseUrl, setBaseUrl] = useState('');
+	const [heading, setHeading] = useState([]);
+	const [content, setContent] = useState({});
+	const [loading, setLoading] = useState(false);
 
 	const onChangeActType = (e) => {
-		setActType(e.target.value);
+		if (e.target.value === '') return
+		let newFilters = {};
+		actsTypes[e.target.value].paramsKeys
+			.forEach( filter => {
+				newFilters[filter] = {
+					label: filter,
+					data: ''
+				}
+			} )
+		setBaseUrl(actsTypes[e.target.value].base_url);
+		setFilters(newFilters);
 	}
 
-	const onSelectFilter = (filter_index) => {
-		let newSelectedFilters = [...selectedFilters];
-		newSelectedFilters.push(filters[filter_index]);
-		setSelectedFilters([...new Set(newSelectedFilters)]);
+	const setParameter = (label, value) => {
+		if(value.target.value !== '') {
+			let newFilters = filters;
+			newFilters[label].data = value.target.value;
+			setFilters(newFilters);
+		}
 	}
 
-	const onRemoveFilter = (filter_index) => {
-		let newSelectedFilters = [...selectedFilters];
-		newSelectedFilters.splice(filter_index, 1);
-		setSelectedFilters(newSelectedFilters);
+	const onSubmit = async () => {
+		let url = baseUrl;
+		let headingList = []
+		let contentList = []
+		Object.keys(filters).forEach( label => {
+			if (filters[label].data !== '') {
+				url += `${label}=${filters[label].data}&`;
+			}
+		})
+		setLoading(true)
+		console.log(url)
+		var response = await fetch(url)
+        	.then(response => response.json())
+
+		console.log(response)
+
+		if(Object.keys(response).length === 0) return;
+
+		Array.from(Object.keys(response[0])).forEach( key => {
+			let item = response[0][key]
+			if (typeof item === 'string') {
+				headingList.push(key)
+			} else {
+				for (var itemKey in item) {
+					headingList.push(itemKey)
+				}
+			}
+		})
+		
+		response.forEach( item => {
+			let row = []
+			Object.keys(item).forEach( key => {
+				if(typeof item[key] === 'string') {
+					row.push(item[key])
+				} else {
+					for (var itemKey in item[key]) {
+						row.push(item[key][itemKey])
+					}
+				}
+			})
+			contentList.push(row)
+		} )
+
+		setHeading(headingList)
+		setContent(contentList)
+		setLoading(false)
+
 	}
 
 	return (
 		<Container>
 			<div className="search-header">
-				<h2>Hub de pesquisa avançada do DoDFMiner</h2>
+				<h2>Hub de pesquisas do DoDFMiner</h2>
 				<h3>Realize pesquisas avançadas nos dados obtidos pela ferramenta.</h3>
 			</div>
 			<select onChange={onChangeActType} >
 				<option value="">Selecione o Tipo de Ato</option>
+				<option value="abono">Abono</option>
 				<option value="aposentadoria">Aposentadoria</option>
-				<option value="aposentadoria">Aposentadoria</option>
-				<option value="aposentadoria">Aposentadoria</option>
-				<option value="aposentadoria">Aposentadoria</option>
-				<option value="aposentadoria">Aposentadoria</option>
+				<option value="exoneracao_efetivos">Exoneração Efetivos</option>
+				<option value="exoneracao_nao_efetivos">Exoneração Não-Efetivos</option>
+				<option value="nomeacao_comissionada">Nomeação Comissionada</option>
+				<option value="nomeacao_efetiva">Nomeação Efetiva</option>
+				<option value="retificacao">Retificação</option>
 			</select>
+			{ Object.keys(filters).length === 0 && <h3>Selecione um tipo de ato para continuar</h3> }
 			<InputField>
-				<div class="input-filters">
-					{ selectedFilters.map( (filter, index) => (
-						<div class="active-filter">
-							<button onClick={ () => onRemoveFilter(index) }>
-								<FontAwesomeIcon icon={faTimes}/>
-							</button>
-							<div className="filter-input">
-								<input />
-								<small>{ filter.title }</small>
-							</div>
+				{Object.keys(filters).map( filter => (
+					<div className="filter">
+						<div className="filter-input">
+							<input onChange={ value => setParameter(filter, value)}placeholder={`Filtro de ${filters[filter].label}`}/>
+							<small>{ filter.title }</small>
 						</div>
-					)) }
-				</div>
-				<div class="main-input">
-					<FontAwesomeIcon className="icon" icon={faSearch} size="lg"/>
-					<input/>
-				</div>
+					</div>
+				)) }
 			</InputField>
-			<Filters>
-				{ actType === "aposentadoria" && filters.map( (filter, index) => !selectedFilters.includes(index) && (
-					<button onClick={ () => onSelectFilter(index) }>
-						<FontAwesomeIcon icon={faFilter} />
-						{filter.title}
-					</button>
-				))}
-				{ actType === "" && (
-					<h3>Selecione um Tipo de Ato para visualizar os filtros.</h3>
-				)}
-			</Filters>
+			<div className="search-button">
+				<button onClick={onSubmit}>Pesquisar</button>
+			</div>
+			
+			{ loading && <h3>Carregando...</h3> }
+			{ content.length > 0 && (
+				<Table title="Resultados" columns={heading} data={content} />
+			) }
+			
 		</Container>
 	);
 }
 
 const SearchData = {
-	title: "Pesquisa Avançada"
+	title: "Pesquisa"
 };
 
 export default SearchData;

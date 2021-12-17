@@ -1,20 +1,27 @@
 import React from "react";
-import MUIDataTable from "mui-datatables";
+import { replaceStr } from "../replaceStr";
 
-export default function Table({title, data}) {
-
-    const columns = ["SEI", "Nome", "Matrícula", "Tipo de Aposentadoria", "Cargo", "Classe", "Padrao", "Quadro", "Fundamento Legal", "Vigência"];
-
+export default function Table({title, data, columns}) {
+    console.log(data, columns)
     return (
-        <MUIDataTable
-            title={title}
-            data={data}
-            columns={columns}
-            options={{
-                rowsPerPage: 3,
-                rowsPerPageOptions: [3, 10, 20, 30],
-                selectableRows: false
-            }}
-        />
+        <div className="tableContent">
+            <hr/>
+            <h2>{title}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        { columns.map( item => <th>{Object.keys(replaceStr).includes(item) ? replaceStr[item] : item.replace('_', ' ')}</th> ) }
+                    </tr>
+                </thead>
+                <tbody>
+                    { data.map( item => (
+
+                        <tr>
+                            { Object.keys(item).map( key => typeof item[key] == 'boolean' ? (<td>{ item[key] ? "Sim" : "Não" }</td>) : (<td>{ item[key] }</td>) ) }
+                        </tr>
+                    ) ) }
+                </tbody>
+            </table>
+        </div>
     );
 }
