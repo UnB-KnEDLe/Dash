@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { InputField, Container } from '../../styles/search';
 import { actsTypes } from "./actTypes";
-import Table from '../../components/Table';
+import { replaceStr } from "../../replaceStr"
 
 export function Search() {
 	const [filters, setFilters] = useState({});
@@ -114,7 +114,25 @@ export function Search() {
 			
 			{ loading && <h3>Carregando...</h3> }
 			{ content.length > 0 && (
-				<Table title="Resultados" columns={heading} data={content} />
+				<div className="tableContent">
+					<hr/>
+					<h2>Resultados</h2>
+					<table>
+							<thead>
+									<tr>
+											{ heading.map( item => <th>{Object.keys(replaceStr).includes(item) ? replaceStr[item] : item.replace('_', ' ')}</th> ) }
+									</tr>
+							</thead>
+							<tbody>
+									{ content.map( item => (
+
+											<tr>
+													{ Object.keys(item).map( key => typeof item[key] == 'boolean' ? (<td>{ item[key] ? "Sim" : "Não" }</td>) : (<td>{ item[key] }</td>) ) }
+											</tr>
+									) ) }
+							</tbody>
+					</table>
+				</div>
 			) }
 			
 		</Container>
