@@ -60,7 +60,7 @@ export const BigCard = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 80%;
-  max-width: 1200px;
+  max-width: 1366px;
   border-radius: 10px;
   padding: 15px;
 
@@ -184,7 +184,7 @@ export const DropContainer = styled.div.attrs({
   border: 1px dashed #6c63ff;
   padding: 22px;
   width: 80%;
-  max-width: 1200px;
+  max-width: 1366px;
 
   p {
     margin-top: 10px;

@@ -93,7 +93,7 @@ export function Search() {
 	return (
 		<Container>
 			<div className="search-header">
-				<h2>Hub de pesquisas do DoDFMiner</h2>
+				<h2>Central de pesquisas do DoDFMiner</h2>
 				<h3>Realize pesquisas nos dados obtidos pela ferramenta.</h3>
 			</div>
 			<select onChange={onChangeActType} >
