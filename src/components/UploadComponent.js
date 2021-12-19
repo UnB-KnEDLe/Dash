@@ -2,7 +2,7 @@ import Dropzone from 'react-dropzone';
 import filesvg from '../assets/file.svg';
 import { DropContainer } from '../styles/app'
 
-export default function UploadComponent({changeHandler, type, setType, renderDragMessage}) {
+export default function UploadComponent({changeHandler, type, setType, renderDragMessage, showImage}) {
     return (
         <Dropzone accept="application/pdf" onDropAccepted={changeHandler}>
             {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
@@ -12,7 +12,7 @@ export default function UploadComponent({changeHandler, type, setType, renderDra
                 isDragReject={isDragReject} //rejeitar arquivos que não são PDFs
             >
                 <input {...getInputProps()} />
-                <img src={ filesvg } alt="file" />
+                {showImage && <img src={filesvg} alt="Arraste e solte o PDF aqui" />}
                 {renderDragMessage(isDragActive, isDragReject)}
                 <button>
                 <label>Selecionar Arquivos</label>

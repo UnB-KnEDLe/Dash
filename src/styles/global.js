@@ -43,4 +43,9 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     margin: 0 auto;
   }
+
+  @keyframes rotation {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+  }
 `;

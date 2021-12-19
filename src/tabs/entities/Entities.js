@@ -16,6 +16,7 @@ export function Entities() {
 	const [loading, setLoading] = useState(false);
 
 	async function changeHandler(files) {
+		setTables([]);
 		setLoading(true);
 		await extractEntities(files[0], type).then((res) => setTables(res));
 		setLoading(false);
@@ -43,6 +44,7 @@ export function Entities() {
 					setType={setType}
 					renderDragMessage={renderDragMessage}
 					tables={tables}
+					showImage={tables.length === 0}
 				/>
 			</Container>
 			<Container>

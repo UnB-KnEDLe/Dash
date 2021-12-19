@@ -21,14 +21,12 @@ export const TableContainer = styled.div`
 `
 
 export const TableContent = styled.div`
-  margin: 3% 10% 3% 10%;
-  /* overflow: hidden; */
+  margin: 3% 10%;
 
   .loading-container {
     display: flex;
     justify-content: center;
     place-items: center;
-    margin: 15px 0;
   }
 
   .loading-spinner {

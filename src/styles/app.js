@@ -12,6 +12,15 @@ export const Container = styled.div`
 
   text-align: -webkit-center;
 
+  .loading-spinner {
+    color: #3180b9;
+    animation-name: rotation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    margin: 15px 0;
+  }
+
   header{
     width: 100%;
     overflow: hidden;
@@ -33,7 +42,6 @@ export const Container = styled.div`
       h2 {
         font-size: 3rem;
         font-weight: bold;
-        margin-bottom: 1.5rem;
         color: var(--primary);
       }
       
@@ -172,10 +180,11 @@ export const DropContainer = styled.div.attrs({
   flex-direction: column;
   justify-content: center;
   place-items: center;
-  margin-top: 40px;
+  margin-top: 20px;
   border: 1px dashed #6c63ff;
   padding: 22px;
-  width: 70%;
+  width: 80%;
+  max-width: 1200px;
 
   p {
     margin-top: 10px;

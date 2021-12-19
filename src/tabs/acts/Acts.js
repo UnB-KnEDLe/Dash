@@ -1,7 +1,7 @@
 import { useState } from "react";
 import UploadComponent from "../../components/UploadComponent";
 import { TableContent } from "../../styles/table_style";
-import { ActsButtons } from "../../styles/acts";
+import { ActsList } from "../../styles/acts";
 import ActsComponent from "../../components/ActsComponent";
 
 import { extractActs } from "../../services/services";
@@ -14,12 +14,16 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 export function Acts() {
   const [type, setType] = useState("regex");
   const [acts, setActs] = useState({});
+  const [actsList, setActsList] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [actBodyColor, setActBodyColor] = useState("#ffffff");
 
   async function changeHandler(files) {
     setLoading(true);
     setActs({});
+    setActsList([]);
+    setActBodyColor("#ccc");
     
     try{
       var acts = await extractActs(files[0], type);
@@ -60,27 +64,38 @@ export function Acts() {
           changeHandler={changeHandler}
           type={type}
           setType={setType}
+          showImage={Object.keys(acts).length === 0}
           renderDragMessage={renderDragMessage}
         />
       </Container>
       <Container>
-        <TableContent>
-          {error}
-          {loading && (
-            <div className="loading-container">
-              <FontAwesomeIcon
-                className="loading-spinner"
-                icon={faSpinner}
-                size="lg"
-              />
-            </div>
-          )}
-          <ActsButtons>
+        {error}
+        {loading && (
+          <div className="loading-container">
+            <FontAwesomeIcon
+              className="loading-spinner"
+              icon={faSpinner}
+              size="lg"
+            />
+          </div>
+        )}
+        <ActsList>
+          <div className="acts-menu">
             {Object.keys(acts).map( act => 
-                <ActsComponent actType={act} acts={acts[act]}/>
+                <ActsComponent colorSetFunction={setActBodyColor} actsSetFunction={setActsList} actType={act} acts={acts[act]}/>
             )}
-          </ActsButtons>
-        </TableContent>
+          </div>
+          <div style={{borderTopColor: actBodyColor}}className="acts-content">
+            {actsList.length === 0 && Object.keys(acts).length !== 0 && (
+              <h3>Selecione um tipo de ato para visualizar a lista</h3>
+            )}
+            {actsList.length > 0 && (
+              <ul className="act-body">
+                {actsList.map(act => <li>{act}</li>)}
+              </ul>
+            )}
+          </div>
+        </ActsList>
       </Container>
     </>
   );

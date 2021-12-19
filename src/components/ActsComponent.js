@@ -17,29 +17,22 @@ const actsData = {
     'substituicao':{title: 'Substituição', color: "#ed403c"},
 }
 
-export default function ActsComponent({ actType, acts }) {
-    const [collapsed, setCollapsed] = useState(true);
+export default function ActsComponent({ actType, acts, actsSetFunction, colorSetFunction }) {
+    const [show, setShow] = useState(true);
     const { title, color } = actsData[actType];
 
-    const toggleCollapse = () => setCollapsed(!collapsed);
+    const toggleCollapse = () => {
+        setShow(!show);
+        actsSetFunction(acts);
+        colorSetFunction(color);
+    }
 
     return (
-        <ActContainer color={color} collapsed={collapsed}>
+        <ActContainer color={color} collapsed={show}>
             <h3 onClick={toggleCollapse}>
                 {title}
                 <small><i>{acts.length} atos</i></small>
             </h3>
-            <div className="acts-back">
-                <div className="acts-content">
-                    <div className="act-header">
-                        <h3>{title}</h3>
-                        <FontAwesomeIcon onClick={toggleCollapse} className="close" icon={faTimes} />
-                    </div>
-                    <ul className="act-body">
-                        {acts.map(act => <li>{act}</li>)}
-                    </ul>
-                </div>
-            </div>
         </ActContainer>
     )
 }

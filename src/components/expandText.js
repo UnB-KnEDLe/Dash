@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const CHAR_LIMIT = 200;
+const CHAR_LIMIT = 100;
 
 export default function ExpandText({text}) {
     var showText = typeof text === 'string' ? text : '';
