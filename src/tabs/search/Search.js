@@ -48,6 +48,8 @@ export function Search() {
 				url += `${label}=${filters[label].data}&`;
 			}
 		})
+		setHeading([]);
+		setContent({});
 		setLoading(true)
 		console.log(url)
 		var response = await fetch(url)

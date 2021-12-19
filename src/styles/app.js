@@ -56,6 +56,10 @@ export const BigCard = styled.div`
   border-radius: 10px;
   padding: 15px;
 
+  .hidden {
+    display: none !important;
+  } 
+
   .bigcard-header {
     display: flex;
     justify-content: center;

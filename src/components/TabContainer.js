@@ -5,11 +5,9 @@ import { BigCard } from '../styles/app'
 import ActsData, { Acts } from '../tabs/acts/Acts';
 import EntitiesData, { Entities } from '../tabs/entities/Entities';
 import SearchData, { Search } from '../tabs/search/Search';
-import "./simples.css"
 
 export default function TabContainer() {
     const [activeTab, setActiveTab] = useState(0)
-    // const tabs = [ActsData, EntitiesData, SearchData, AdvancedSearchData]
     const tabs = [ActsData, EntitiesData, SearchData]
 
     return (
