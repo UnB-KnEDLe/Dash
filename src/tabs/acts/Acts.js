@@ -14,11 +14,20 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 export function Acts() {
   const [type, setType] = useState("regex");
   const [acts, setActs] = useState({});
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   async function changeHandler(files) {
     setLoading(true);
-    var acts = await extractActs(files[0], type);
+    try{
+      var acts = await extractActs(files[0], type);
+    } catch(err){
+      console.log(err)
+      setError("Houve um error ao extrair os dados. Verifique se o arquivo é um PDF e se o mesmo está no formato correto.")
+      setTimeout(() => {
+        setError('')  //clear error after 5 seconds
+      }, 5000);
+    }
     var newActs = {};
     for (var act in acts) {
       if(acts[act].length > 0) {
@@ -54,6 +63,7 @@ export function Acts() {
       </Container>
       <Container>
         <TableContent>
+          {error}
           {loading && (
             <div className="loading-container">
               <FontAwesomeIcon
@@ -66,7 +76,7 @@ export function Acts() {
           <ActsButtons>
             {Object.keys(acts).map( act => 
                 <ActsComponent actType={act} acts={acts[act]}/>
-            )}'
+            )}
           </ActsButtons>
         </TableContent>
       </Container>
