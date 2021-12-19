@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const TableContainer = styled.div`
+  max-width: 1200px;
+
   * span {
     display: inline-block;
 
@@ -21,8 +23,6 @@ export const TableContainer = styled.div`
 `
 
 export const TableContent = styled.div`
-  margin: 3% 10%;
-
   .loading-container {
     display: flex;
     justify-content: center;

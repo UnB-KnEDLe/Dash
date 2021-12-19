@@ -46,7 +46,7 @@ export function Acts() {
 
   const renderDragMessage = (isDragActive, isDragReject) => {
     if (!isDragActive) {
-      return <UploadMessage>Arraste e solte o PDF aqui</UploadMessage>;
+      return <UploadMessage>Arraste o PDF aqui</UploadMessage>;
     }
 
     if (isDragReject) {
@@ -79,23 +79,23 @@ export function Acts() {
             />
           </div>
         )}
-        <ActsList>
-          <div className="acts-menu">
-            {Object.keys(acts).map( act => 
-                <ActsComponent colorSetFunction={setActBodyColor} actsSetFunction={setActsList} actType={act} acts={acts[act]}/>
-            )}
-          </div>
-          <div style={{borderTopColor: actBodyColor}}className="acts-content">
-            {actsList.length === 0 && Object.keys(acts).length !== 0 && (
-              <h3>Selecione um tipo de ato para visualizar a lista</h3>
-            )}
-            {actsList.length > 0 && (
+        {Object.keys(acts).length > 0 && (
+          <ActsList>
+            <div className="acts-menu">
+              {Object.keys(acts).map( act => 
+                  <ActsComponent colorSetFunction={setActBodyColor} actsSetFunction={setActsList} actType={act} acts={acts[act]}/>
+              )}
+            </div>
+            <div style={{borderTopColor: actBodyColor}} className="acts-content">
+              {actsList.length === 0 && (
+                <h3>Selecione um tipo de ato para visualizar a lista</h3>
+              )}
               <ul className="act-body">
                 {actsList.map(act => <li>{act}</li>)}
               </ul>
-            )}
-          </div>
-        </ActsList>
+            </div>
+          </ActsList>
+        )}
       </Container>
     </>
   );

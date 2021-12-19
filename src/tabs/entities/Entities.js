@@ -24,7 +24,7 @@ export function Entities() {
 
 	const renderDragMessage = (isDragActive, isDragReject) => {
 		if (!isDragActive) {
-			return <UploadMessage>Arraste e solte o PDF aqui</UploadMessage>;
+			return <UploadMessage>Arraste o PDF aqui</UploadMessage>;
 		}
 
 		if (isDragReject) {

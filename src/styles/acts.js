@@ -54,6 +54,7 @@ export const ActsList = styled.div`
         & > h3 {
             margin: auto;
             text-align: center;
+            margin-top: 60px;
         }
 
         .act-body {
