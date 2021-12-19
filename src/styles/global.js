@@ -5,22 +5,6 @@ export const GlobalStyle = createGlobalStyle`
     --primary: #2980B9;
     --background: #FFFFFF;
   }
-    /* width */
-    ::-webkit-scrollbar {
-    width: 10px;
-  }
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #AEE3FF;
-  }
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #004E81;
-  }
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #2980B9;
-  }
   * {
     margin: 0;
     padding: 0;
