@@ -24,13 +24,6 @@ export default function Table({title, data}) {
         sem_efeito_aposentadoria: 'Tornado Sem Efeito a Aposentadoria',
     }
 
-    // data.map(
-    //     (row) => {
-    //         row.map(
-    //             (cell) =>  <><ExpandText text={cell} /></> )
-    //     }
-    // )
-
     return (
         <TableContainer>
             <MUIDataTable
@@ -40,7 +33,7 @@ export default function Table({title, data}) {
                 options={{
                     rowsPerPage: 3,
                     rowsPerPageOptions: [3, 10, 20, 30],
-                    selectableRows: false
+                    selectableRows: 'none'
                 }}
             />
         </TableContainer>

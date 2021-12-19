@@ -1,6 +1,5 @@
 import { useState } from "react";
 import UploadComponent from "../../components/UploadComponent";
-import { TableContent } from "../../styles/table_style";
 import { ActsList } from "../../styles/acts";
 import ActsComponent from "../../components/ActsComponent";
 
