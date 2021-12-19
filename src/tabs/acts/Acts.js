@@ -19,6 +19,8 @@ export function Acts() {
 
   async function changeHandler(files) {
     setLoading(true);
+    setActs({});
+    
     try{
       var acts = await extractActs(files[0], type);
     } catch(err){

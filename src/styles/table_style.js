@@ -28,6 +28,7 @@ export const TableContent = styled.div`
     display: flex;
     justify-content: center;
     place-items: center;
+    margin: 15px 0;
   }
 
   .loading-spinner {
