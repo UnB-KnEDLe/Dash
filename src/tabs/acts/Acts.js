@@ -1,9 +1,10 @@
 import { useState } from "react";
 import UploadComponent from "../../components/UploadComponent";
 import { TableContent } from "../../styles/table_style";
-import Table from "../../components/Table";
+import { ActsButtons } from "../../styles/acts";
+import ActsComponent from "../../components/ActsComponent";
 
-import extractContent from "../../services/services";
+import { extractActs } from "../../services/services";
 
 import { Container, UploadMessage } from "../../styles/app";
 
@@ -12,12 +13,19 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export function Acts() {
   const [type, setType] = useState("regex");
-  const [tables, setTables] = useState([]);
+  const [acts, setActs] = useState({});
   const [loading, setLoading] = useState(false);
 
   async function changeHandler(files) {
     setLoading(true);
-    await extractContent(files[0], type).then((res) => setTables(res));
+    var acts = await extractActs(files[0], type);
+    var newActs = {};
+    for (var act in acts) {
+      if(acts[act].length > 0) {
+        newActs[act] = acts[act];
+      }
+    }
+    setActs(newActs)
     setLoading(false);
   }
 
@@ -42,7 +50,6 @@ export function Acts() {
           type={type}
           setType={setType}
           renderDragMessage={renderDragMessage}
-          tables={tables}
         />
       </Container>
       <Container>
@@ -56,12 +63,11 @@ export function Acts() {
               />
             </div>
           )}
-
-          {tables.map((table) => {
-            return (
-              <Table key={table.id} data={table.content} title={table.title} />
-            );
-          })}
+          <ActsButtons>
+            {Object.keys(acts).map( act => 
+                <ActsComponent actType={act} acts={acts[act]}/>
+            )}'
+          </ActsButtons>
         </TableContent>
       </Container>
     </>

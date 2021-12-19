@@ -7,10 +7,10 @@ import EntitiesData, { Entities } from '../tabs/entities/Entities';
 import SearchData, { Search } from '../tabs/search/Search';
 import "./simples.css"
 
-export default function TabContainer(props) {
+export default function TabContainer() {
     const [activeTab, setActiveTab] = useState(0)
     // const tabs = [ActsData, EntitiesData, SearchData, AdvancedSearchData]
-    const tabs = [EntitiesData, SearchData]
+    const tabs = [ActsData, EntitiesData, SearchData]
 
     return (
         <BigCard>
@@ -22,13 +22,13 @@ export default function TabContainer(props) {
                 ))}
             </Tabs>            
             <div className={activeTab !== 0 ? "hidden" : ""} >
-                <Entities />
+                <Acts />
             </div>
             <div className={activeTab !== 1 ? "hidden" : ""}>
-                <Search />
+                <Entities />
             </div>
             <div className={activeTab !== 2 ? "hidden" : ""} >
-                <Acts />
+                <Search />
             </div>
         </BigCard>
     );

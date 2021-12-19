@@ -2,7 +2,7 @@ import Dropzone from 'react-dropzone';
 import filesvg from '../assets/file.svg';
 import { DropContainer } from '../styles/app'
 
-export default function UploadComponent({changeHandler, type, setType, renderDragMessage, tables}) {
+export default function UploadComponent({changeHandler, type, setType, renderDragMessage}) {
     return (
         <Dropzone accept="application/pdf" onDropAccepted={changeHandler}>
             {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (

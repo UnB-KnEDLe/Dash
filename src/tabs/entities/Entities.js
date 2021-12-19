@@ -3,7 +3,7 @@ import UploadComponent from "../../components/UploadComponent";
 import { TableContent } from "../../styles/table_style";
 import Table from "../../components/Table";
 
-import extractContent from "../../services/services";
+import { extractEntities } from "../../services/services";
 
 import { Container, UploadMessage } from "../../styles/app";
 
@@ -17,7 +17,7 @@ export function Entities() {
 
 	async function changeHandler(files) {
 		setLoading(true);
-		await extractContent(files[0], type).then((res) => setTables(res));
+		await extractEntities(files[0], type).then((res) => setTables(res));
 		setLoading(false);
 	}
 
