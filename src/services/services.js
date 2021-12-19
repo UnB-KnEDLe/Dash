@@ -1,6 +1,5 @@
 import axios from 'axios';
-// const api_url = 'http://164.41.76.30/dash/api'
-const api_url = 'http://localhost:5000'
+const api_url = 'http://164.41.76.30/dash/api'
 
 export async function extractEntities(file, type){
     const formData = new FormData();
