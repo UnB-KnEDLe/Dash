@@ -29,6 +29,7 @@ export const Container = styled.div`
     background: linear-gradient(to left, #2980b9, #3180b9);
     justify-content: center;
     color: white;
+    transition: .25s;
     
     .header-content {
       display: flex;
@@ -52,9 +53,20 @@ export const Container = styled.div`
         }
       }
 
-      > img {
-        width: auto;
-        height: 30%;
+      > a {
+        height: 100%;
+        display: flex;
+        place-items: center;
+        
+        &:hover img {
+          border-bottom: 2px solid #fff;
+        }
+        
+        img {
+          padding: 5px;
+          width: auto;
+          height: 20%;
+        }
       }
     }
   }

@@ -16,7 +16,9 @@ export default function App() {
               <img className="dodf-logo" src={dodfLogo} alt="Dodf" />
               <h3>Biblioteca de Extração de Dados do DoDF</h3>
             </div>
-            <img className="knedle-logo" src={knedleLogo} alt="Knedle" />
+            <a href="http://nido.unb.br/">
+              <img className="knedle-logo" src={knedleLogo} alt="Knedle" />
+            </a>
           </div>
         </header>
         <TabContainer/>
