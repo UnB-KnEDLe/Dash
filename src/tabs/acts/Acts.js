@@ -58,7 +58,7 @@ export function Acts() {
   return (
     <>
       <Container>
-        <h2>Extração de dados do Diário Oficial do Distrito Federal</h2>
+        <h2>Extração de atos do Diário Oficial do Distrito Federal</h2>
         <UploadComponent
           changeHandler={changeHandler}
           type={type}
