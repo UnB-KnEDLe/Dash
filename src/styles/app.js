@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import HeaderImg from "../assets/header.svg";
 import { shade } from "polished";
 
 export const Container = styled.div`
@@ -7,6 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   place-items: center;
   justify-content: center;
+  overflow-x: hidden;
   
   width: 100vw;
 
@@ -22,10 +22,41 @@ export const Container = styled.div`
   }
 
   header{
+    display: flex;
     width: 100%;
-    overflow: hidden;
+    flex-direction: row;
     height: 11.5rem;
-    background: url(${HeaderImg}) repeat center;
+    background: linear-gradient(to left, #2980b9, #3180b9);
+    justify-content: center;
+    color: white;
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      place-items: center;
+      width: 80%;
+      max-width: 1366px;
+      height: 100%;
+
+
+      .header-left {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        place-items: center;
+        gap: 30px;
+
+        img {
+          width: auto;
+          height: 50%;
+        }
+      }
+
+      > img {
+        width: auto;
+        height: 30%;
+      }
+    }
   }
 
   span{
@@ -56,13 +87,13 @@ export const Container = styled.div`
 export const BigCard = styled.div`
 
   display: flex;
+  margin-top: 15px;
   place-items: center;
   justify-content: center;
   flex-direction: column;
   width: 80%;
   max-width: 1366px;
   border-radius: 10px;
-  padding: 15px;
 
   .hidden {
     display: none !important;

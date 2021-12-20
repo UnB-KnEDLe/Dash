@@ -147,7 +147,7 @@ export function Search() {
 }
 
 const SearchData = {
-	title: "Pesquisa"
+	title: "Pesquisar"
 };
 
 export default SearchData;
