@@ -4,6 +4,7 @@ import { TableContent } from "../../styles/table_style";
 import Table from "../../components/Table";
 
 import { extractEntities } from "../../services/services";
+import { actsData } from "../../actsData";
 
 import { Container, UploadMessage } from "../../styles/app";
 
@@ -48,7 +49,7 @@ export function Entities() {
 				/>
 			</Container>
 			<Container>
-				<TableContent>
+				<TableContent color={actsData}>
 					{loading && (
 						<div className="loading-container">
 							<FontAwesomeIcon
@@ -60,6 +61,7 @@ export function Entities() {
 					)}
 
 					{tables.map((table) => {
+						console.log(table.content)
 						return (
 							<Table key={table.id} data={table.content} title={table.title} />
 						);

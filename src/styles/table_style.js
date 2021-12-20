@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 export const TableContainer = styled.div`
-  max-width: 1366px;
+  .MUIDataTableToolbar-root-13 {
+    border-top: 4px solid ${props => props.color ? props.color : '#fff'};
+  }
 
   * span {
     display: inline-block;
@@ -23,6 +25,8 @@ export const TableContainer = styled.div`
 `
 
 export const TableContent = styled.div`
+  width: 80%;
+  max-width: 1366px;
 
   .loading-container {
     display: flex;
@@ -47,30 +51,60 @@ export const TableContent = styled.div`
     content: "Quantidade:"
   }
   
+  thead {
+
+
+    th {
+      background: #eee;
+    }
+    
+  }
+
+  .MuiTableCell-root {
+    padding: 4px 16px;
+  }
+
+  .MuiTableCell-head {
+    text-align: center;
+  }
+  
   .MuiPaper-elevation4{
-    box-shadow: inset 0 0 2rem #e0ecf5;
-    border: 5px #e0ecf5 solid;
-    border-radius: 10px;
     margin-top: 3%;
   }
 
+  .MUIDataTableHeadRow-root-34{
+    background-color: ${props => props.color ? props.color : '#eee'};
+  }
+
+  .MUIDataTableHeadCell-sortAction-51 > .MUIDataTableHeadCell-sortAction-51{
+    display: center;
+    place-items: center;
+  }
+
   .MUIDataTableHeadCell-fixedHeader-47{
-    background-color: #e0ecf573 !important;
+    background-color: #eee !important;
   }
 
   .MUIDataTableHeadCell-data-50{
     font-weight: 600;
   }
 
+  .MUIDataTableToolbar-left-15 h6{
+    color: black
+  }
+
+  .MUIDataTableToolbar-left-15 h6 {
+    color: #333 !important;
+  }
+
   .MuiTypography-h6{
-    color: #144e81;
     font-size: 189%;
     font-weight: bold;
     text-transform: capitalize;
   }
 
   .MuiIconButton-root{
-    color: #144e81 !important;
+    color: #333 !important;
   }
 
   .MUIDataTablePagination-tableCellContainer-81{
@@ -82,9 +116,4 @@ export const TableContent = styled.div`
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
   }
-
-
-
-
-
 `;
