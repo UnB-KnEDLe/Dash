@@ -24,6 +24,7 @@ export function Search() {
 	const [content, setContent] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [actType, setActType] = useState('');
+	const [error, setError] = useState('');
 
 	const handleKeypress = e => {
 		if (e.code === 'Enter') {
@@ -67,11 +68,19 @@ export function Search() {
 		setHeading([]);
 		setContent({});
 		setLoading(true)
-		console.log(url)
-		var response = await fetch(url)
-        	.then(response => response.json())
 
-		console.log(response)
+		var response = await fetch(url, {
+			method: 'GET',
+			timeout: 10000,
+		})
+        	.then(response => response.json())
+			.catch( err => {
+				console.log(err);
+				setLoading(false)
+				setError('Erro ao buscar dados. Tente novamente mais tarde.')
+				setTimeout( () => setError(''), 5000 )
+				return;
+			} )
 
 		if(Object.keys(response).length === 0) return;
 
@@ -103,7 +112,6 @@ export function Search() {
 		setHeading(headingList)			
 		setContent(contentList)
 		setLoading(false)
-
 	}
 
 	return (
@@ -137,6 +145,8 @@ export function Search() {
 				</div>
 				
 				{ loading && <h3>Carregando...</h3> }
+				{ error.length > 0 && <h3>{error}</h3> }
+
 			</Container>
 			{ content.length > 0 && (
 				<TableContent style={{width: '100%'}}>

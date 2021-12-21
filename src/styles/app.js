@@ -58,10 +58,6 @@ export const Container = styled.div`
         display: flex;
         place-items: center;
         
-        &:hover img {
-          border-bottom: 2px solid #fff;
-        }
-        
         img {
           padding: 5px;
           width: auto;
