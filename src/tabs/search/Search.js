@@ -60,7 +60,7 @@ export function Search() {
 	}
 
 	const setParameter = (label, value) => {
-		if(value.target.value !== '') {
+		if(value.target.value.length >= 3) {
 			let newFilters = filters;
 			newFilters[label].data = value.target.value;
 			setFilters(newFilters);
