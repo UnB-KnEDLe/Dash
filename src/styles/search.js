@@ -12,6 +12,8 @@ export const Container = styled.div`
     }
 
     select {
+        margin: auto;
+        width: 50%;
         padding: 5px 10px;
         font-weight: bold;
         border: 1px solid #ccc;

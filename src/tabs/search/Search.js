@@ -6,18 +6,24 @@ import MUIDataTable from 'mui-datatables';
 import ExpandText from "../../components/expandText";
 import { TableContainer } from "../../styles/table_style";
 import { actsData } from "../../actsData";
+import { columnsReplace } from "../../columnsData";
+import service from './service';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const labelReplace = {
-	aposentadoria: 'Aposentadoria',
-	nomeacao: 'Nomeação',
-	exoneracao: 'Exoneração',
-	abono: 'Abono',
-	substituicao: 'Substituição',
-	efetivos_exo: 'Exoneração de Efetivos',
-	sem_efeito_aposentadoria: 'Tornado Sem Efeito a Aposentadoria',
+	abono: "Abono",
+	aposentadoria: "Aposentadoria",
+	cessao: "Cessão",
+	exoneracao_efetivos: "Exoneração Efetivos",
+	exoneracao: "Exoneração Não Efetivos",
+	nomeacao_comissionada: "Nomeação Comissionada",
+	nomeacao_efetiva: "Nomeação Efetiva",
+	retificacao: "Retificação",
+	reversao: "Reversão",
+	substituicao: "Substituição",
+	tornado_sem_efeito: "Tornada Sem Efeito a Aposentadoria",
 }
 
 export function Search() {
@@ -36,6 +42,8 @@ export function Search() {
 	};
 
 	const onChangeActType = (e) => {
+		setContent([])
+		setFilters({})
 		if (e.target.value === '') return
 		let newFilters = {};
 		setActType(e.target.value);
@@ -63,63 +71,7 @@ export function Search() {
 		}
 	}
 
-	const onSubmit = async () => {
-		let url = baseUrl;
-		let headingList = []
-		let contentList = []
-		Object.keys(filters).forEach( label => {
-			if (filters[label].data !== '') {
-				url += `${label}=${filters[label].data}&`;
-			}
-		})
-		setHeading([]);
-		setContent({});
-		setLoading(true)
-
-		var response = await fetch(url, {
-			method: 'GET',
-			timeout: 10000,
-		})
-        	.then(response => response.json())
-			.catch( err => {
-				console.log(err);
-				setLoading(false)
-				setError('Erro ao buscar dados. Tente novamente mais tarde.')
-				setTimeout( () => setError(''), 5000 )
-				return;
-			} )
-
-		if(Object.keys(response).length === 0) return;
-
-		Array.from(Object.keys(response[0])).forEach( key => {
-			let item = response[0][key]
-			if (typeof item === 'string') {
-				headingList.push(key)
-			} else {
-				for (var itemKey in item) {
-					headingList.push(itemKey)
-				}
-			}
-		})
-		
-		response.forEach( item => {
-			let row = []
-			Object.keys(item).forEach( key => {
-				if(typeof item[key] === 'string') {
-					row.push(item[key])
-				} else {
-					for (var itemKey in item[key]) {
-						row.push(item[key][itemKey])
-					}
-				}
-			})
-			contentList.push(row)
-		} )
-
-		setHeading(headingList)			
-		setContent(contentList)
-		setLoading(false)
-	}
+	const onSubmit = () => service(filters, baseUrl, setHeading, setContent, setLoading, setError);
 
 	return (
 		<>
@@ -131,11 +83,15 @@ export function Search() {
 					<option value="">Selecione o Tipo de Ato</option>
 					<option value="abono">Abono</option>
 					<option value="aposentadoria">Aposentadoria</option>
+					<option value="cessao">Cessão</option>
 					<option value="exoneracao_efetivos">Exoneração Efetivos</option>
-					<option value="exoneracao_nao_efetivos">Exoneração Não-Efetivos</option>
+					<option value="exoneracao">Exoneração Não Efetivos</option>
 					<option value="nomeacao_comissionada">Nomeação Comissionada</option>
 					<option value="nomeacao_efetiva">Nomeação Efetiva</option>
 					<option value="retificacao">Retificação</option>
+					<option value="reversao">Reversão</option>
+					<option value="substituicao">Substituição</option>
+					<option value="tornado_sem_efeito">Tornada Sem Efeito a Aposentadoria</option>
 				</select>
 				{ Object.keys(filters).length === 0 && <h3>Selecione um tipo de ato para continuar</h3> }
 				<InputField>
@@ -169,8 +125,8 @@ export function Search() {
 						<MUIDataTable
 							className="mui-table"
 							title={<h6 style={{fontSize: '189%', color: '#144e81', fontWeight: 'bold', textAlign: 'left'}}>{labelReplace[actType]}</h6>}
-							data={content.map((row) => row.map((cell) => <ExpandText text={cell} />) )}
-							columns={heading}
+							data={content.map((row) => row.map(cell => <ExpandText text={cell} />) )}
+							columns={heading.map(column => columnsReplace(column))}
 							options={{
 								rowsPerPage: 3000
 							}}

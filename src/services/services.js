@@ -13,6 +13,8 @@ export async function extractEntities(file, type){
         })
         .then( response => response.data )
 
+    console.log(response)
+
     return response;
 }
 
