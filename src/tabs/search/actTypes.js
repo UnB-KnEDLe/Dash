@@ -22,6 +22,15 @@ export const actsTypes = {
         base_url: `${BASE_URL}/aposentadoria?`
     },
 
+    cessao: {
+        paramsKeys: [
+            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'matricula', title: 'Matrícula'},
+            {label: 'cargo_cedido', title: 'Cargo Cedido'},
+        ],
+        base_url: `${BASE_URL}/cessao?`
+    },
+
     nomeacao_comissionada: {
         paramsKeys: [
             {label: 'pessoa', title: 'Pessoa'},
@@ -55,6 +64,16 @@ export const actsTypes = {
 
         base_url: `${BASE_URL}/exo_efetivo?`
     },
+    
+    exoneracao: {
+        paramsKeys: [
+            {label: 'nome', title: 'Nome'},
+            {label: 'cargo', title: 'Cargo'},
+            {label: 'orgao', title: 'Órgão'},
+        ],
+
+        base_url: `${BASE_URL}/exoneracao?`
+    },
 
     retificacao: {
         paramsKeys: [
@@ -65,14 +84,35 @@ export const actsTypes = {
         base_url: `${BASE_URL}/retificacao?`
     },
 
-
-    exoneracao_nao_efetivos: {
+    reversao: {
         paramsKeys: [
-            {label: 'nome', title: 'Nome'},
+            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'matricula', title: 'Matrícula'},
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
         ],
-
-        base_url: `${BASE_URL}/exoneracao?`
+        base_url: `${BASE_URL}/reversao?`
     },
+
+    substituicao: {
+        paramsKeys: [
+            {label: 'substituto', title: 'Nome do Substituto'},
+            {label: 'cargo_substituto', title: 'Cargo do Substituto'},
+            {label: 'substituido', title: 'Nome do Substituído'},
+            {label: 'cargo_substituido', title: 'Cargo do Substituído'},
+        ],
+        base_url: `${BASE_URL}/substituicao?`
+    },
+
+    tornado_sem_efeito: {
+        paramsKeys: [
+            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'matricula', title: 'Matrícula'},
+            {label: 'cargo', title: 'Cargo'},
+            {label: 'ordem_servico', title: 'Ordem de Serviço'},
+            {label: 'dodf', title: 'DODF'},
+        ],
+        base_url: `${BASE_URL}/tornado_sea?`
+    }
+
 }
