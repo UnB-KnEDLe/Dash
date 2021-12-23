@@ -77,7 +77,7 @@ export function Search() {
 		<>
 			<Container>
 				<div className="search-header">
-					<h2>Central de pesquisas do DoDFMiner</h2>
+					<h2>Pesquisa no Diário Oficial do Distrito Federal</h2>
 				</div>
 				<select onChange={onChangeActType} >
 					<option value="">Selecione o Tipo de Ato</option>

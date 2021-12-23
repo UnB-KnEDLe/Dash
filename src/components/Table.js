@@ -24,7 +24,7 @@ export default function Table({title, data}) {
     }
 
 
-    // console.log(title, data)
+    console.log(title, data)
 
     return (
         <TableContainer color={actsData[title].color} >
