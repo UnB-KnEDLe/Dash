@@ -61,7 +61,6 @@ export function Entities() {
 					)}
 
 					{tables.map((table) => {
-						console.log(table.content)
 						return (
 							<Table key={table.id} data={table.content} title={table.title} />
 						);
