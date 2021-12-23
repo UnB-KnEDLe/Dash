@@ -19,6 +19,7 @@ var columnsLabels = {
     fundamento_legal: 'Fundamento Legal',
     lotacao: 'Lotação',
     siape: 'SIAPE',
+    a_pedido: 'A pedido',
 }
 
 export const columnsReplace = (columnName) => {
