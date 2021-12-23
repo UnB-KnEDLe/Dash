@@ -4,6 +4,7 @@ export const Tabs = styled.div`
     display: flex;
     width: 100%;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 `;
 
 export const Tab = styled.div`
@@ -20,6 +21,8 @@ export const Tab = styled.div`
     text-align: center;
     font-weight: bold;
     color: var(--primary);
+    min-width: 220px;
+
 
     :hover {
         cursor: pointer;

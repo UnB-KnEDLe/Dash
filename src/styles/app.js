@@ -7,6 +7,7 @@ export const Container = styled.div`
   place-items: center;
   justify-content: center;
   overflow-x: hidden;
+  padding-bottom: 40px;
   
   width: 100vw;
 
@@ -33,35 +34,31 @@ export const Container = styled.div`
     
     .header-content {
       display: flex;
+      flex-wrap: wrap-reverse;
       justify-content: space-between;
       place-items: center;
       width: 80%;
       max-width: 1366px;
       height: 100%;
 
-
-      .header-left {
-        width: 100%;
-        height: 100%;
+      img {
         display: flex;
-        place-items: center;
-        gap: 30px;
-
-        img {
-          width: auto;
-          height: 50%;
-        }
+        margin: auto;
+        max-width: 250px;
+        width: 80%;
+        height: auto;
       }
 
       > a {
-        height: 100%;
         display: flex;
         place-items: center;
+        margin: auto;
         
         img {
           padding: 5px;
-          width: auto;
-          height: 20%;
+          max-width: 95px;
+          width: 100%;
+          height: auto;
         }
       }
     }

@@ -7,6 +7,9 @@ import ExpandText from "../../components/expandText";
 import { TableContainer } from "../../styles/table_style";
 import { actsData } from "../../actsData";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 const labelReplace = {
 	aposentadoria: 'Aposentadoria',
 	nomeacao: 'Nomeação',
@@ -52,6 +55,10 @@ export function Search() {
 		if(value.target.value !== '') {
 			let newFilters = filters;
 			newFilters[label].data = value.target.value;
+			setFilters(newFilters);
+		} else {
+			let newFilters = filters;
+			delete newFilters[label];
 			setFilters(newFilters);
 		}
 	}
@@ -144,7 +151,15 @@ export function Search() {
 					<button onClick={onSubmit}>Pesquisar</button>
 				</div>
 				
-				{ loading && <h3>Carregando...</h3> }
+				{loading && (
+					<div className="loading-container">
+						<FontAwesomeIcon
+						className="loading-spinner"
+						icon={faSpinner}
+						size="lg"
+						/>
+					</div>
+				)}
 				{ error.length > 0 && <h3>{error}</h3> }
 
 			</Container>
