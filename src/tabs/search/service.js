@@ -7,6 +7,8 @@ export default async function service(filters, baseUrl, setHeading, setContent, 
             url += `${label}=${filters[label].data}&`;
         }
     })
+
+    console.log(url)
     setHeading([]);
     setContent({});
 

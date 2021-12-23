@@ -34,9 +34,9 @@ export default function Table({title, data}) {
                 data={data.map((row) => row.map((cell) => <ExpandText text={cell} />) )}
                 columns={columnsData[title]}
                 options={{
-                    rowsPerPage: 3,
+                    rowsPerPage: 5,
                     rowsPerPageOptions: [3, 10, 20, 30],
-                    selectableRows: 'none'
+                    'selectableRows': 'none'
                 }}
             />
         </TableContainer>

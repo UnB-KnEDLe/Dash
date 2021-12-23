@@ -27,6 +27,7 @@ const labelReplace = {
 }
 
 export function Search() {
+	const [start, setStart] = useState(true);
 	const [filters, setFilters] = useState({});
 	const [baseUrl, setBaseUrl] = useState('');
 	const [heading, setHeading] = useState([]);
@@ -42,6 +43,8 @@ export function Search() {
 	};
 
 	const onChangeActType = (e) => {
+
+		setStart(true);
 		setContent([])
 		setFilters({})
 		if (e.target.value === '') return
@@ -60,10 +63,12 @@ export function Search() {
 	}
 
 	const setParameter = (label, value) => {
-		if(value.target.value.length >= 3) {
+		console.log(label, value.target.value)
+		if(value.target.value.length !== '') {
 			let newFilters = filters;
 			newFilters[label].data = value.target.value;
 			setFilters(newFilters);
+			console.log(filters)
 		} else {
 			let newFilters = filters;
 			delete newFilters[label];
@@ -71,7 +76,10 @@ export function Search() {
 		}
 	}
 
-	const onSubmit = () => service(filters, baseUrl, setHeading, setContent, setLoading, setError);
+	const onSubmit = () => {
+		setStart(false);
+		service(filters, baseUrl, setHeading, setContent, setLoading, setError);
+	}
 
 	return (
 		<>
@@ -128,12 +136,14 @@ export function Search() {
 							data={content.map((row) => row.map(cell => <ExpandText text={cell} />) )}
 							columns={heading.map(column => columnsReplace(column))}
 							options={{
-								rowsPerPage: 3000
+								rowsPerPage: 3000,
+								selectableRows: 'none',
 							}}
 						/>
 					</TableContainer>
 				</TableContent>
 			) }
+			{ content.length === 0 && !start && <h2>Não foram encontrados resultados com esses filtros.</h2>}
 		</>
 	);
 }
