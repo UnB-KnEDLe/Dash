@@ -8,14 +8,23 @@ import { actsData } from '../actsData';
 
 export default function Table({title, data}) {
     const labelReplace = {
-        aposentadoria: 'Aposentadoria',
-        nomeacao: 'Nomeação',
-        exoneracao: 'Exoneração',
-        abono: 'Abono',
-        substituicao: 'Substituição',
-        efetivos_exo: 'Exoneração de Efetivos',
+        abono: "Abono",
+        aposentadoria: "Aposentadoria",
+        cessao: "Cessão",
+        exoneracao_efetivos: "Exoneração Efetivos",
+        exoneracao: "Exoneração Não Efetivos",
+        nomeacao_comissionada: "Nomeação Comissionada",
+        nomeacao: "Nomeação",
+        nomeacao_efetiva: "Nomeação Efetiva",
+        retificacao: "Retificação",
+        reversao: "Reversão",
+        substituicao: "Substituição",
+        tornado_sem_efeito: "Tornada Sem Efeito a Aposentadoria",
         sem_efeito_aposentadoria: 'Tornado Sem Efeito a Aposentadoria',
     }
+
+
+    // console.log(title, data)
 
     return (
         <TableContainer color={actsData[title].color} >

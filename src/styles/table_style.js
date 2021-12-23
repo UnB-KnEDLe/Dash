@@ -56,16 +56,22 @@ export const TableContent = styled.div`
 
     th {
       background: #eee;
+
+      * {
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
     }
     
   }
 
-  .MuiTableCell-root {
-    padding: 4px 16px;
+  tr:nth-child(2n) {
+    background: #eee;
   }
 
-  .MuiTableCell-head {
-    text-align: center;
+  .MuiTableCell-root {
+    padding: 4px 16px;
   }
   
   .MuiPaper-elevation4{

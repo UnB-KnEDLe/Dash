@@ -7,7 +7,7 @@ const CHAR_LIMIT = 100;
 
 export default function ExpandText({text}) {
     var showText = typeof text === 'string' ? text : '';
-    if (typeof showText !== 'string') {
+    if (typeof showText !== 'string' || showText === 'nan') {
         showText = '';
     }
     const [expanded, setExpanded] = useState(false);
