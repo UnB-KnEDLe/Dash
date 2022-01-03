@@ -49,7 +49,7 @@ export function Entities() {
 				/>
 			</Container>
 			<Container>
-				<TableContent color={actsData}>
+				<TableContent>
 					{loading && (
 						<div className="loading-container">
 							<FontAwesomeIcon

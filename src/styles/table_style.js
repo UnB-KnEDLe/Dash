@@ -79,7 +79,7 @@ export const TableContent = styled.div`
   }
 
   .MUIDataTableHeadRow-root-34{
-    background-color: ${props => props.color ? props.color : '#eee'};
+    background-color: '#eee';
   }
 
   .MUIDataTableHeadCell-sortAction-51 > .MUIDataTableHeadCell-sortAction-51{

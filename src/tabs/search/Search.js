@@ -12,20 +12,6 @@ import service from './service';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-const labelReplace = {
-	abono: "Abono",
-	aposentadoria: "Aposentadoria",
-	cessao: "Cessão",
-	exoneracao_efetivos: "Exoneração Efetivos",
-	exoneracao: "Exoneração Não Efetivos",
-	nomeacao_comissionada: "Nomeação Comissionada",
-	nomeacao_efetiva: "Nomeação Efetiva",
-	retificacao: "Retificação",
-	reversao: "Reversão",
-	substituicao: "Substituição",
-	tornado_sem_efeito: "Tornada Sem Efeito a Aposentadoria",
-}
-
 export function Search() {
 	const [start, setStart] = useState(true);
 	const [filters, setFilters] = useState({});
@@ -132,7 +118,7 @@ export function Search() {
 					<TableContainer color={actsData[actType].color} >
 						<MUIDataTable
 							className="mui-table"
-							title={<h6 style={{fontSize: '189%', color: '#144e81', fontWeight: 'bold', textAlign: 'left'}}>{labelReplace[actType]}</h6>}
+							title={<h6 style={{fontSize: '189%', color: '#144e81', fontWeight: 'bold', textAlign: 'left'}}>{actsData[actType].title}</h6>}
 							data={content.map((row) => row.map(cell => <ExpandText text={cell} />) )}
 							columns={heading.map(column => columnsReplace(column))}
 							options={{
