@@ -5,7 +5,7 @@ export const TableContainer = styled.div`
     border-top: 4px solid ${props => props.color ? props.color : '#ccc'};
 
     h6 {
-      color: black !important;
+      color: #333 !important;
     }
   }
 

@@ -33,7 +33,9 @@ export default function Table({title, data}) {
                 options={{
                     rowsPerPage: 5,
                     rowsPerPageOptions: [3, 10, 20, 30],
-                    'selectableRows': 'none'
+                    'selectableRows': 'none',
+                    download: false,
+                    print: false,
                 }}
             />
         </TableContainer>
