@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const TableContainer = styled.div`
   .MUIDataTableToolbar-root-13 {
-    border-top: 4px solid ${props => props.color ? props.color : '#fff'};
+    border-top: 4px solid ${props => props.color ? props.color : '#ccc'};
   }
 
   * span {
