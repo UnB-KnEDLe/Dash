@@ -4,7 +4,6 @@ import { TableContent } from "../../styles/table_style";
 import Table from "../../components/Table";
 
 import { extractEntities } from "../../services/services";
-import { actsData } from "../../actsData";
 
 import { Container, UploadMessage } from "../../styles/app";
 

@@ -23,9 +23,6 @@ export default function Table({title, data}) {
         sem_efeito_aposentadoria: 'Tornado Sem Efeito a Aposentadoria',
     }
 
-    console.log(title)
-    console.log(actsData[title].color)
-
     return (
         <TableContainer color={actsData[title].color} >
             <MUIDataTable
