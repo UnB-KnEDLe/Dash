@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const TableContainer = styled.div`
-  .MUIToolbar-root {
+  .MuiToolbar-root {
     border-top: 4px solid ${props => props.color ? props.color : '#ccc'};
   }
 
