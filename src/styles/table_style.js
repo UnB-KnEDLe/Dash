@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const TableContainer = styled.div`
   .MuiToolbar-root {
     border-top: 4px solid ${props => props.color ? props.color : '#ccc'};
+
+    h6 {
+      color: black !important;
+    }
   }
 
   * span {
@@ -20,6 +24,7 @@ export const TableContainer = styled.div`
     }
     
     * h6.MUIDataTableToolbar-titleText-20 {
+
     }
   }
 `
