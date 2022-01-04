@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { InputField } from '../styles/search';
 
 import { useStart, useActType, useHeading, useContent, useLoading, useError, useFilters } from "../context/searchContext";
@@ -10,7 +10,7 @@ export default function Filters() {
     
     const { filters, setFilters } = useFilters();
     const { setStart } = useStart();
-    const { setActType } = useActType();
+    const { actType, setActType } = useActType();
     const { setHeading } = useHeading();
     const { setContent } = useContent();
     const { setLoading } = useLoading();
@@ -22,18 +22,18 @@ export default function Filters() {
 	}
 
 	const onChangeActType = async (e) => {
-        const { value } = e.target;
-
         setFilters({});
-		if (value === '') return;
+		if (e.target.value === '') return;
 
 		setStart(true);
 		setContent([])
-		setActType(value);
+		setActType(e.target.value);
 
-        setBaseUrl(actsTypes[value].base_url);
+		let newFilters = {};
+        setBaseUrl(actsTypes[e.target.value].base_url);
 		actsTypes[e.target.value].paramsKeys
-            .forEach( filter => setFilters({ ...filters, [filter.label]: '' }) )
+			.forEach( filter => newFilters[filter.label] = "" )
+		setFilters(newFilters);
 	}
 
     return (
@@ -46,9 +46,12 @@ export default function Filters() {
             </select>
             { Object.keys(filters).length === 0 && <h3>Selecione um tipo de ato para pesquisar</h3> }
             <InputField>
-                {Object.keys(filters).length > 0 && Object.keys(filters).map( (filterKey, index) => (
-                    <FilterInput key={index} label={filterKey} submitFunction={onSubmit} title={filterKey} />
-                )) }
+                {Object.keys(filters).length > 0 && Object.keys(filters).map( (filterKey, index) => {
+                    let title = actsTypes[actType].paramsKeys.find( filter => filter.label === filterKey ).title;
+                    console.log(title)
+                    return (
+                        <FilterInput key={index} label={filterKey} submitFunction={onSubmit} title={title} />
+                    )}) }
             </InputField>
             <div className="search-button">
                 <button onClick={onSubmit}>Pesquisar</button>
@@ -58,12 +61,10 @@ export default function Filters() {
 }
 
 export function FilterInput({ label, title, submitFunction }) {
-    const { filters, setParameter } = useFilters();
-    const [ value, setValue ] = useState('');
+    const { setParameter } = useFilters();
 
     const handleOnChange = (e) => {
         setParameter(label, e);
-        setValue(e.target.value);
     }
 
     const handleKeypress = e => {
@@ -71,14 +72,10 @@ export function FilterInput({ label, title, submitFunction }) {
 		submitFunction();
 	};
 
-    useEffect( () => {
-        if (filters[label] === '') setValue('');
-    }, [filters, label])
-
     return (
         <div className="filter">
             <div className="filter-input">
-                <input onKeyPress={ handleKeypress } value={value} onChange={handleOnChange} placeholder={`Filtro de ${title}`}/>
+                <input onKeyPress={ handleKeypress } name={label} onChange={handleOnChange} placeholder={`Filtro de ${title}`}/>
             </div>
         </div>
     )
