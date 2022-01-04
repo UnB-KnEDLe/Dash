@@ -2,6 +2,7 @@ export default async function service(filters, baseUrl, setHeading, setContent, 
     let url = baseUrl;
     let headingList = []
     let contentList = []
+    
     Object.keys(filters).forEach( label => {
         if (filters[label].data !== '') {
             url += `${label}=${filters[label].data}&`;
@@ -11,6 +12,8 @@ export default async function service(filters, baseUrl, setHeading, setContent, 
     setHeading([]);
     setContent({});
 
+    setLoading(true)
+
     var response = await fetch(url, {
         method: 'GET',
         timeout: 10000,
@@ -18,13 +21,17 @@ export default async function service(filters, baseUrl, setHeading, setContent, 
         .then(response => response.json())
         .catch( err => {
             console.log(err);
-            setLoading(false)
             setError('Erro ao buscar dados. Tente novamente mais tarde.')
             setTimeout( () => setError(''), 5000 )
             return;
         } )
+        .finally( () => setLoading(false) )
 
-    if(Object.keys(response).length === 0) return [];
+    if(Object.keys(response).length === 0) {
+        setError('Nenhum resultado encontrado.')
+        setTimeout( () => setError(''), 5000 )
+        return [];
+    }
 
     Array.from(Object.keys(response[0])).forEach( key => {
         let item = response[0][key]

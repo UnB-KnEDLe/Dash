@@ -5,6 +5,8 @@ import { BigCard } from '../styles/app'
 import ActsData, { Acts } from '../tabs/acts/Acts';
 import EntitiesData, { Entities } from '../tabs/entities/Entities';
 import SearchData, { Search } from '../tabs/search/Search';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAlignJustify, faSearch, faTable } from "@fortawesome/free-solid-svg-icons";
 
 export default function TabContainer() {
     const [activeTab, setActiveTab] = useState(0)
@@ -13,11 +15,15 @@ export default function TabContainer() {
     return (
         <BigCard>
             <Tabs>
-                {tabs.map((tab, index) => (
-                    <Tab active={ index === activeTab } key={index} onClick={() => setActiveTab(index)}>
-                        {tab.title}
-                    </Tab>
-                ))}
+                <Tab active={0 === activeTab} onClick={() => setActiveTab(0)}>
+                    <FontAwesomeIcon icon={faAlignJustify}/> Extrair Atos
+                </Tab>
+                <Tab active={1 === activeTab} onClick={() => setActiveTab(1)}>
+                    <FontAwesomeIcon icon={faTable}/> Extrair Entidades
+                </Tab>
+                <Tab active={2 === activeTab} onClick={() => setActiveTab(2)}>
+                    <FontAwesomeIcon icon={faSearch}/> Pesquisar
+                </Tab>
             </Tabs>            
             <div className={activeTab !== 0 ? "hidden" : ""} >
                 <Acts />

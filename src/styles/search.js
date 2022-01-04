@@ -14,11 +14,11 @@ export const Container = styled.div`
     select {
         margin: auto;
         width: 50%;
-        padding: 5px 10px;
+        padding: 7.5px 10px;
         font-weight: bold;
-        border: 1px solid #ccc;
+        border: 2px solid var(--primary);
         background: white;
-        border-radius: 2.5px;
+        border-radius: 5px;
     }
 
     button {
@@ -33,9 +33,6 @@ export const Container = styled.div`
             background: var(--primary);
             color: white;
         }
-    }
-
-    select option {
     }
 
     .tableContent {
@@ -89,8 +86,8 @@ export const InputField = styled.div`
 
 
     .filter {
-        background: var(--primary);
-        border: none;
+        background: white;
+        border: 2px solid var(--primary);
         border-radius: 5px;
         padding: 10px;
         color: white;
@@ -100,26 +97,35 @@ export const InputField = styled.div`
         gap: 5px;
         margin: 0;
 
+        :hover {
+            cursor: pointer;
+            background: #2980B933;
+
+            input{
+                background: #2980B933;
+                cursor: pointer;
+            }
+        }
+
         .filter-input {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             text-align: left;
+
             
             input {
                 border-radius: 5px;
-                color: black;
                 padding: 2px;
-                background: var(--primary);
-                color: white;
+                color: var(--primary);
                 font-weight: bold;
-
-
+                
                 ::placeholder {
-                    color: white;
+                    color: var(--primary);
                 }
                 
                 &:focus {
+                    cursor: initial;
                     background: white;
                     color: black;
                     font-weight: 600;
@@ -128,10 +134,6 @@ export const InputField = styled.div`
                     ::placeholder {
                         color: #999;
                     }
-                }
-                
-                &:hover {
-                    background: #2798e3;
                 }
             }
 

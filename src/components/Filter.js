@@ -1,5 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { InputField } from '../styles/search';
+import FilterInput from './FilterInput';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import { useStart, useActType, useHeading, useContent, useLoading, useError, useFilters } from "../context/searchContext";
 import service from '../services/searchService';
@@ -13,7 +17,7 @@ export default function Filters() {
     const { actType, setActType } = useActType();
     const { setHeading } = useHeading();
     const { setContent } = useContent();
-    const { setLoading } = useLoading();
+    const { loading, setLoading } = useLoading();
     const { setError } = useError();
 
     const onSubmit = () => {
@@ -22,16 +26,17 @@ export default function Filters() {
 	}
 
 	const onChangeActType = async (e) => {
+        const { value } = e.target
         setFilters({});
-		if (e.target.value === '') return;
+		if (value === '') return;
 
 		setStart(true);
 		setContent([])
-		setActType(e.target.value);
+		setActType(value);
 
 		let newFilters = {};
-        setBaseUrl(actsTypes[e.target.value].base_url);
-		actsTypes[e.target.value].paramsKeys
+        setBaseUrl(actsTypes[value].base_url);
+		actsTypes[value].paramsKeys
 			.forEach( filter => newFilters[filter.label] = "" )
 		setFilters(newFilters);
 	}
@@ -55,35 +60,15 @@ export default function Filters() {
             <div className="search-button">
                 <button onClick={onSubmit}>Pesquisar</button>
             </div>
+            {loading && (
+                <div className="loading-container">
+                    <FontAwesomeIcon
+                    className="loading-spinner"
+                    icon={faSpinner}
+                    size="lg"
+                    />
+                </div>
+            )}
         </>
     )
-}
-
-export function FilterInput({ label, title, submitFunction }) {
-    const { filters, setParameter } = useFilters();
-    const [ value, setValue ] = useState('');
-
-    const handleOnChange = (e) => {
-        setParameter(label, e);
-        setValue(e.target.value);
-    }
-
-    const handleKeypress = e => {
-		if (e.code !== 'Enter') return;
-		submitFunction();
-	};
-
-    useEffect(() => {
-        if(filters[label].length === 0) setValue('');
-    }, [filters, label])
-
-
-    return (
-        <div className="filter">
-            <div className="filter-input">
-                <input onKeyPress={ handleKeypress } value={value} onChange={handleOnChange} placeholder={`Filtro de ${title}`}/>
-            </div>
-        </div>
-    )
-
 }

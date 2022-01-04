@@ -7,18 +7,14 @@ import { TableContainer } from "../../styles/table_style";
 import { actsData } from "../../actsData";
 import { columnsReplace } from "../../columnsData";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-
 import Filters from '../../components/Filter';
 
-import { useStart, useActType, useHeading, useContent, useLoading, useError } from "../../context/searchContext";
+import { useStart, useActType, useHeading, useContent, useError } from "../../context/searchContext";
 
 export function Search() {
 	const { start } = useStart();
 	const { heading } = useHeading();
 	const { content } = useContent();
-	const { loading } = useLoading();
 	const { actType } = useActType();
 	const { error } = useError();
 
@@ -29,15 +25,6 @@ export function Search() {
 					<h2>Pesquisa no Diário Oficial do Distrito Federal</h2>
 				</div>
 				<Filters/>
-				{loading && (
-					<div className="loading-container">
-						<FontAwesomeIcon
-						className="loading-spinner"
-						icon={faSpinner}
-						size="lg"
-						/>
-					</div>
-				)}
 				{ error.length > 0 && <h3>{error}</h3> }
 
 			</Container>

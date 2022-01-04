@@ -9,21 +9,21 @@ export const Tabs = styled.div`
 
 export const Tab = styled.div`
     display: flex;
+    transition: .25s;
     flex: 1;
     place-items: center;
+    gap: 5px;
     justify-content: center;
     padding: .5rem 1rem;
-    border: 1px solid #cfcfcf;
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-top: ${props => props.active ? "3px solid var(--primary);" : "1px solid #cfcfcf;"};
+    border-left: 1px solid #cfcfcf;
+    border-right: 1px solid #cfcfcf;
+    border-bottom: ${props => props.active ? "none" : "1px solid #cfcfcf;"};
     background: ${props => props.active ? "white" : "#f4f4f4"};
     z-index: ${props => props.active ? 1 : 0};
     text-align: center;
     font-weight: bold;
-    color: var(--primary);
-
-    :not(:last-child) {
-        margin-right: -1rem;
-    }
+    color: ${props => props.active ? "var(--primary)" : "#666"};
 
     :hover {
         cursor: pointer;
