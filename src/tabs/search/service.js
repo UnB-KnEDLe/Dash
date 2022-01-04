@@ -8,7 +8,6 @@ export default async function service(filters, baseUrl, setHeading, setContent, 
         }
     })
 
-    console.log(url)
     setHeading([]);
     setContent({});
 
