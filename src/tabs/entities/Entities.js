@@ -23,13 +23,9 @@ export function Entities() {
 	}
 
 	const renderDragMessage = (isDragActive, isDragReject) => {
-		if (!isDragActive) {
-			return <UploadMessage>Arraste o PDF aqui</UploadMessage>;
-		}
+		if (!isDragActive) return <UploadMessage>Arraste o PDF aqui</UploadMessage>;
 
-		if (isDragReject) {
-			return <UploadMessage type="error">Arquivo não suportado</UploadMessage>;
-		}
+		if (isDragReject) return <UploadMessage type="error">Arquivo não suportado</UploadMessage>;
 
 		return <UploadMessage type="success">Solte os arquivos aqui</UploadMessage>;
 	};
@@ -61,7 +57,7 @@ export function Entities() {
 
 					{tables.map((table) => {
 						return (
-							<Table key={table.id} data={table.content} title={table.title} />
+							<Table key={table.id} data={table.content} title={table.title} columns={table.columns}/>
 						);
 					})}
 				</TableContent>

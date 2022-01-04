@@ -13,7 +13,6 @@ export const Tab = styled.div`
     place-items: center;
     justify-content: center;
     padding: .5rem 1rem;
-    margin-right: -1rem;
     border: 1px solid #cfcfcf;
     border-radius: 0.5rem 0.5rem 0 0;
     background: ${props => props.active ? "white" : "#f4f4f4"};
@@ -21,8 +20,10 @@ export const Tab = styled.div`
     text-align: center;
     font-weight: bold;
     color: var(--primary);
-    min-width: 220px;
 
+    :not(:last-child) {
+        margin-right: -1rem;
+    }
 
     :hover {
         cursor: pointer;

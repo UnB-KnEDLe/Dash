@@ -1,71 +1,26 @@
-import { useState } from "react";
-import { InputField, Container } from '../../styles/search';
-import { actsTypes } from "./actTypes";
+import { Container } from '../../styles/search';
+
 import { TableContent } from "../../styles/table_style";
 import MUIDataTable from 'mui-datatables';
 import ExpandText from "../../components/expandText";
 import { TableContainer } from "../../styles/table_style";
 import { actsData } from "../../actsData";
 import { columnsReplace } from "../../columnsData";
-import service from './service';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
+import Filters from '../../components/Filter';
+
+import { useStart, useActType, useHeading, useContent, useLoading, useError } from "../../context/searchContext";
+
 export function Search() {
-	const [start, setStart] = useState(true);
-	const [filters, setFilters] = useState({});
-	const [baseUrl, setBaseUrl] = useState('');
-	const [heading, setHeading] = useState([]);
-	const [content, setContent] = useState({});
-	const [loading, setLoading] = useState(false);
-	const [actType, setActType] = useState('');
-	const [error, setError] = useState('');
-
-	const handleKeypress = e => {
-		if (e.code === 'Enter') {
-			onSubmit();
-		}
-	};
-
-	const onChangeActType = (e) => {
-
-		setStart(true);
-		setContent([])
-		setFilters({})
-		if (e.target.value === '') return
-		let newFilters = {};
-		setActType(e.target.value);
-		actsTypes[e.target.value].paramsKeys
-			.forEach( filter => {
-				newFilters[filter.label] = {
-					label: filter.label,
-					title: filter.title,
-					data: ''
-				}
-			} )
-		setBaseUrl(actsTypes[e.target.value].base_url);
-		setFilters(newFilters);
-	}
-
-	const setParameter = (label, value) => {
-		console.log(label, value.target.value)
-		if(value.target.value.length !== '') {
-			let newFilters = filters;
-			newFilters[label].data = value.target.value;
-			setFilters(newFilters);
-			console.log(filters)
-		} else {
-			let newFilters = filters;
-			delete newFilters[label];
-			setFilters(newFilters);
-		}
-	}
-
-	const onSubmit = () => {
-		setStart(false);
-		service(filters, baseUrl, setHeading, setContent, setLoading, setError);
-	}
+	const { start } = useStart();
+	const { heading } = useHeading();
+	const { content } = useContent();
+	const { loading } = useLoading();
+	const { actType } = useActType();
+	const { error } = useError();
 
 	return (
 		<>
@@ -73,34 +28,7 @@ export function Search() {
 				<div className="search-header">
 					<h2>Pesquisa no Diário Oficial do Distrito Federal</h2>
 				</div>
-				<select onChange={onChangeActType} >
-					<option value="">Selecione o Tipo de Ato</option>
-					<option value="abono">Abono</option>
-					<option value="aposentadoria">Aposentadoria</option>
-					<option value="cessao">Cessão</option>
-					<option value="exoneracao_efetivos">Exoneração Efetivos</option>
-					<option value="exoneracao">Exoneração Não Efetivos</option>
-					<option value="nomeacao_comissionada">Nomeação Comissionada</option>
-					<option value="nomeacao_efetiva">Nomeação Efetiva</option>
-					<option value="retificacao">Retificação</option>
-					<option value="reversao">Reversão</option>
-					<option value="substituicao">Substituição</option>
-					<option value="tornado_sem_efeito">Tornada Sem Efeito a Aposentadoria</option>
-				</select>
-				{ Object.keys(filters).length === 0 && <h3>Selecione um tipo de ato para continuar</h3> }
-				<InputField>
-					{Object.keys(filters).map( filterKey => (
-						<div className="filter">
-							<div className="filter-input">
-								<input onKeyPress={ handleKeypress } onChange={ value => setParameter(filterKey, value)} placeholder={`Filtro de ${filters[filterKey].title}`}/>
-							</div>
-						</div>
-					)) }
-				</InputField>
-				<div className="search-button">
-					<button onClick={onSubmit}>Pesquisar</button>
-				</div>
-				
+				<Filters/>
 				{loading && (
 					<div className="loading-container">
 						<FontAwesomeIcon
@@ -122,8 +50,10 @@ export function Search() {
 							data={content.map((row) => row.map(cell => <ExpandText text={cell} />) )}
 							columns={heading.map(column => columnsReplace(column))}
 							options={{
-								rowsPerPage: 3000,
+								rowsPerPage: 100,
 								selectableRows: 'none',
+								download: false,
+								print: false,
 							}}
 						/>
 					</TableContainer>

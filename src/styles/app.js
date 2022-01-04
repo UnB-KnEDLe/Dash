@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { shade } from "polished";
+import headerBg from "../assets/header-bg.jpg";
 
 export const Container = styled.div`
   display: flex;
@@ -27,10 +28,24 @@ export const Container = styled.div`
     width: 100%;
     flex-direction: row;
     height: 11.5rem;
-    background: linear-gradient(to left, #2980b9, #3180b9);
+    // background: linear-gradient(to left, #2980b9, #3180b9);
+    background-image: url(${headerBg});
+    background-size: cover;
+    background-position: center 53%;
     justify-content: center;
     color: white;
+    position: relative;
     transition: .25s;
+
+    .background-header {
+      background: #0c365299;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
     
     .header-content {
       display: flex;
@@ -40,19 +55,22 @@ export const Container = styled.div`
       width: 80%;
       max-width: 1366px;
       height: 100%;
+      z-index: 1;
 
-      img {
+      .dodf-logo {
         display: flex;
-        margin: auto;
         max-width: 250px;
         width: 80%;
         height: auto;
+
+        :last-child {
+          
+        }
       }
 
       > a {
         display: flex;
         place-items: center;
-        margin: auto;
         
         img {
           padding: 5px;

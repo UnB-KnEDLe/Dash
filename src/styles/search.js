@@ -8,7 +8,7 @@ export const Container = styled.div`
     text-align: center;
 
     .search-header {
-        padding: 15px 0;
+        
     }
 
     select {

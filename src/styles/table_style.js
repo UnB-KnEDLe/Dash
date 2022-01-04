@@ -22,10 +22,6 @@ export const TableContainer = styled.div`
       justify-content: flex-start;
       display: flex;
     }
-    
-    * h6.MUIDataTableToolbar-titleText-20 {
-
-    }
   }
 `
 
