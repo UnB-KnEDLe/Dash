@@ -10,7 +10,7 @@ import { Container, UploadMessage } from "../../styles/app";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-export function Acts() {
+export default function Acts() {
   const [type, setType] = useState("regex");
   const [acts, setActs] = useState({});
   const [actsList, setActsList] = useState([]);
@@ -93,9 +93,3 @@ export function Acts() {
     </>
   );
 }
-
-const ActsData = {
-  title: "Extrair Atos"  
-};
-
-export default ActsData;

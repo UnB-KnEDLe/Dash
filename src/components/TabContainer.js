@@ -2,15 +2,14 @@ import { useState } from "react"
 import { Tabs, Tab } from '../styles/tabs'
 import { BigCard } from '../styles/app'
 
-import ActsData, { Acts } from '../tabs/acts/Acts';
-import EntitiesData, { Entities } from '../tabs/entities/Entities';
-import SearchData, { Search } from '../tabs/search/Search';
+import Acts from '../tabs/acts/Acts';
+import Entities from '../tabs/entities/Entities';
+import Search from '../tabs/search/Search';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAlignJustify, faSearch, faTable } from "@fortawesome/free-solid-svg-icons";
 
 export default function TabContainer() {
     const [activeTab, setActiveTab] = useState(0)
-    const tabs = [ActsData, EntitiesData, SearchData]
 
     return (
         <BigCard>

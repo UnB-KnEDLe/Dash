@@ -11,7 +11,7 @@ import Filters from '../../components/Filter';
 
 import { useStart, useActType, useHeading, useContent, useError } from "../../context/searchContext";
 
-export function Search() {
+export default function Search() {
 	const { start } = useStart();
 	const { heading } = useHeading();
 	const { content } = useContent();
@@ -50,9 +50,3 @@ export function Search() {
 		</>
 	);
 }
-
-const SearchData = {
-	title: "Pesquisar"
-};
-
-export default SearchData;

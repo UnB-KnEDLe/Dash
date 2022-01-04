@@ -10,7 +10,7 @@ import { Container, UploadMessage } from "../../styles/app";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-export function Entities() {
+export default function Entities() {
 	const [type, setType] = useState("regex");
 	const [tables, setTables] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -65,9 +65,3 @@ export function Entities() {
 		</>
 	);
 }
-
-const EntitesData = {
-	title: "Extrair Entidades"
-};
-
-export default EntitesData;
