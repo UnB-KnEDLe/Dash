@@ -12,6 +12,7 @@ export default function Table({title, data, columns}) {
         abono: "Abono",
         aposentadoria: "Aposentadoria",
         cessao: "Cessão",
+        cessoes: "Cessão",
         exoneracao_efetivos: "Exoneração Efetivos",
         exoneracao: "Exoneração Não Efetivos",
         nomeacao_comissionada: "Nomeação Comissionada",

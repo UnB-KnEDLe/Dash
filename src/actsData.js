@@ -2,6 +2,7 @@ export const actsData = {
     'abono': {title: 'Abono', color: "#a3218e"},
     'aposentadoria': {title: 'Aposentadoria', color: "#592f93"},
     'cessao': {title: 'Cessões', color: "#21409a"},
+    'cessoes': {title: 'Cessões', color: "#21409a"},
     'nomeacao_efetiva': {title: 'Nomeação - Efetivos', color: "#0465b2"},
     'exoneracao_efetivos': {title: 'Exoneração - Efetivos', color: "#00acac"},
     'efetivos_exo': {title: 'Exoneração - Efetivos', color: "#00acac"},

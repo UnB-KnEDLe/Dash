@@ -11,6 +11,7 @@ export const Tab = styled.div`
     display: flex;
     transition: .25s;
     flex: 1;
+    min-width: 200px;
     place-items: center;
     gap: 5px;
     justify-content: center;
@@ -26,5 +27,6 @@ export const Tab = styled.div`
 
     :hover {
         cursor: pointer;
+        color: #333;
     }
 `;
