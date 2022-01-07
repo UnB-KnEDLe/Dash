@@ -41,6 +41,8 @@ export default function Search() {
 								selectableRows: 'none',
 								download: false,
 								print: false,
+								filter: false,
+								search: false
 							}}
 						/>
 					</TableContainer>

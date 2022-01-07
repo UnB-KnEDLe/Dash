@@ -5,9 +5,11 @@ export default function FilterInput({ label, title, submitFunction }) {
     const { filters, setParameter } = useFilters();
     const [ value, setValue ] = useState('');
 
-    const handleOnChange = (e) => {
+    const handleOnChange = async (e) => {
+        const { value } = e.target;
         setParameter(label, e);
-        setValue(e.target.value);
+        setValue(value);
+        if(value.length > 3) submitFunction();
     }
 
     const handleKeypress = e => {

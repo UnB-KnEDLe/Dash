@@ -20,9 +20,11 @@ export default function Filters() {
     const { loading, setLoading } = useLoading();
     const { setError } = useError();
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
 		setStart(false);
-		service(filters, baseUrl, setHeading, setContent, setLoading, setError);
+        setLoading(true)
+		await service(filters, baseUrl, setHeading, setContent, setLoading, setError);
+        setLoading(false)
 	}
 
 	const onChangeActType = async (e) => {
@@ -39,6 +41,8 @@ export default function Filters() {
 		actsTypes[value].paramsKeys
 			.forEach( filter => newFilters[filter.label] = "" )
 		setFilters(newFilters);
+
+        onSubmit()
 	}
 
     return (
@@ -57,9 +61,6 @@ export default function Filters() {
                         <FilterInput key={index} label={filterKey} submitFunction={onSubmit} title={title} />
                     )}) }
             </InputField>
-            <div className="search-button">
-                <button onClick={onSubmit}>Pesquisar</button>
-            </div>
             {loading && (
                 <div className="loading-container">
                     <FontAwesomeIcon
