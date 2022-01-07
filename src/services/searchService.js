@@ -32,6 +32,9 @@ export default async function service(filters, baseUrl, setHeading, setContent, 
             headingList.push(key)
         } else {
             for (var itemKey in item) {
+                if(itemKey === 'nome' && key !== 'pessoa') {
+                    headingList.push(key)
+                }
                 headingList.push(itemKey)
             }
         }
