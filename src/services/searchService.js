@@ -2,6 +2,7 @@ export default async function service(filters, baseUrl, setHeading, setContent, 
     let url = baseUrl;
     let headingList = []
     let contentList = []
+    
     Object.keys(filters).forEach( label => {
         if (filters[label] !== '') {
             url += `${label}=${filters[label]}&`;

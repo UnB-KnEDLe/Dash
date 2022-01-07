@@ -33,10 +33,24 @@ var columnsLabels = {
     data_final: 'Data Final',
     simbolo_substituto: 'Símbolo do Substituto',
     processo_sei: 'Processo SEI',
+    orgao_cessionario: 'Órgão Cessionário',
+    orgao_cedente: 'Órgão Cedente',
+    cargo_orgao_cessionario: 'Cargo do Órgão Cessionário',
+    nome_substituido: 'Nome do Substituído',
+    matricula_substituido: 'Matrícula do Substituído',
+    data_dodf: 'Data do DODF',
+    numero_dodf: 'Número do DODF',
+    pagina_dodf: 'Página do DODF',
+    informacao_errada: 'Informação Errada',
+    informacao_corrigida: 'Informação Corrigida',
+    numero_documento: 'Número do Documento',
+    data_documento: 'Data do Documento',
+    tipo_edicao: 'Tipo de Edição',
+    a_pedido_ou_nao: 'A pedido ou não',
 }
 
 export const columnsReplace = columnName => {
     if (columnName.toLowerCase() in columnsLabels) {
         return columnsLabels[columnName.toLowerCase()];
-    } else return columnName
+    } else return columnName.replaceAll('_', ' ');
 }

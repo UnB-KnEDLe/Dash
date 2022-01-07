@@ -28,7 +28,6 @@ export const Container = styled.div`
     width: 100%;
     flex-direction: row;
     height: 11.5rem;
-    // background: linear-gradient(to left, #2980b9, #3180b9);
     background-image: url(${headerBg});
     background-size: cover;
     background-position: center 53%;

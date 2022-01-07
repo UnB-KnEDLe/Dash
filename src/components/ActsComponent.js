@@ -17,7 +17,7 @@ export default function ActsComponent({ actType, acts, actsSetFunction, colorSet
         <ActContainer color={color} collapsed={show}>
             <h3 onClick={toggleCollapse}>
                 {title}
-                <small><i>{acts.length} atos</i></small>
+                <small><i>{acts.length} ato{acts.length > 1 && 's'}</i></small>
             </h3>
         </ActContainer>
     )
