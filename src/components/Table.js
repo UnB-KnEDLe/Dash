@@ -40,6 +40,7 @@ export default function Table({title, data, columns}) {
                     'selectableRows': 'none',
                     download: false,
                     print: false,
+                    filter: false
                 }}
             />
         </TableContainer>
