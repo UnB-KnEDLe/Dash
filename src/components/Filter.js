@@ -20,7 +20,59 @@ export default function Filters() {
     const { loading, setLoading } = useLoading();
     const { sendError } = useError();
 
-    const onSubmit = async () => {
+    const onSubmit = async (url) => {
+        let headingList = []
+        let contentList = []
+
+        Object.keys(filters).forEach( label => {
+            if (filters[label] !== '') {
+                url += `${label}=${filters[label]}&`;
+            }
+        })
+
+        setHeading([]);
+        setContent({});
+
+        const response = await service(url)
+            .then( response => response)
+            .catch( err => {
+                console.log(err)
+                setLoading(false)
+            })
+
+        if (Object.keys(response).length === 0) return [];
+
+        Array.from(Object.keys(response[0])).forEach( key => {
+            let item = response[0][key]
+            if (typeof item === 'string') {
+                headingList.push(key)
+            } else {
+                for (var itemKey in item) {
+                    if(itemKey === 'nome' && key !== 'pessoa') {
+                        headingList.push(key)
+                    }
+                    headingList.push(itemKey)
+                }
+            }
+        })
+        
+        response.forEach( item => {
+            let row = []
+            Object.keys(item).forEach( key => {
+                if(typeof item[key] === 'string') {
+                    row.push(item[key])
+                } else {
+                    for (var itemKey in item[key]) {
+                        row.push(item[key][itemKey])
+                    }
+                }
+            })
+            contentList.push(row)
+        } )
+
+        setHeading(headingList)
+        setContent(contentList)
+        
 		setStart(false);
         setLoading(true)
 		await service(filters, baseUrl, setHeading, setContent, setLoading, sendError);
@@ -32,17 +84,19 @@ export default function Filters() {
         setFilters({});
 		if (value === '') return;
 
+        console.log()
+
+        await setBaseUrl(actsTypes[value].base_url);
 		setStart(true);
 		setContent([])
 		setActType(value);
 
 		let newFilters = {};
-        setBaseUrl(actsTypes[value].base_url);
 		actsTypes[value].paramsKeys
 			.forEach( filter => newFilters[filter.label] = "" )
 		setFilters(newFilters);
 
-        onSubmit()
+        onSubmit(actsTypes[value].base_url)
 	}
 
     return (

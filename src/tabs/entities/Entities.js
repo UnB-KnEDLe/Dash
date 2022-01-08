@@ -20,7 +20,7 @@ export default function Entities() {
 		setLoading(true);
 		await extractEntities(files[0], type)
 			.then((res) => setTables(res))
-		setLoading(false);
+			.then(() => setLoading(false));
 	}
 
 	const renderDragMessage = (isDragActive, isDragReject) => {
