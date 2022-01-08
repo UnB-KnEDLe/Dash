@@ -1,4 +1,4 @@
-export default async function service(filters, baseUrl, setHeading, setContent, setLoading, setError) {
+export default async function service(filters, baseUrl, setHeading, setContent, setLoading, sendError) {
     let url = baseUrl;
     let headingList = []
     let contentList = []
@@ -18,9 +18,9 @@ export default async function service(filters, baseUrl, setHeading, setContent, 
     })
         .then(response => response.json())
         .catch( err => {
+            console.log(err)
             setLoading(false)
-            setError('Erro ao buscar dados. Tente novamente mais tarde.')
-            setTimeout( () => setError(''), 5000 )
+            sendError('Erro ao buscar dados. Tente novamente mais tarde.')
             return;
         } )
 

@@ -17,6 +17,11 @@ export default function SearchProvider({ children }) {
         setFilters({ ...filters, [label]: value })
 	}
 
+    const sendError = (error) => {
+        setError(error)
+        setTimeout( () => setError(''), 5000)
+    }
+
     return (
         <SearchContext.Provider
             value={{
@@ -25,7 +30,7 @@ export default function SearchProvider({ children }) {
                 content, setContent,
                 loading, setLoading,
                 actType, setActType,
-                error, setError,
+                error, setError, sendError,
                 filters, setFilters, setParameter
             }}
         >
@@ -60,8 +65,8 @@ export function useActType() {
 }
 
 export function useError() {
-    const { error, setError } = useContext(SearchContext);
-    return { error, setError };
+    const { error, setError, sendError } = useContext(SearchContext);
+    return { error, setError, sendError };
 }
 
 export function useFilters() {

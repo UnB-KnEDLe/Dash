@@ -18,12 +18,12 @@ export default function Filters() {
     const { setHeading } = useHeading();
     const { setContent } = useContent();
     const { loading, setLoading } = useLoading();
-    const { setError } = useError();
+    const { sendError } = useError();
 
     const onSubmit = async () => {
 		setStart(false);
         setLoading(true)
-		await service(filters, baseUrl, setHeading, setContent, setLoading, setError);
+		await service(filters, baseUrl, setHeading, setContent, setLoading, sendError);
         setLoading(false)
 	}
 
