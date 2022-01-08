@@ -8,6 +8,8 @@ import SearchProvider from './context/searchContext';
 import knedleLogo from './assets/logo_knedle.svg';
 import dodfLogo from './assets/logo_miner.png';
 
+import './app.css';
+
 export default function App() {
   return (
     <SearchProvider>
