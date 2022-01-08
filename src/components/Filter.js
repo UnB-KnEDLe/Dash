@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { InputField } from '../styles/search';
 import FilterInput from './FilterInput';
 
@@ -9,9 +8,7 @@ import { useStart, useActType, useHeading, useContent, useLoading, useError, use
 import service from '../services/searchService';
 import { actsTypes } from "../actTypes";
 
-export default function Filters() {
-    const [ baseUrl, setBaseUrl ] = useState('');
-    
+export default function Filters() {    
     const { filters, setFilters } = useFilters();
     const { setStart } = useStart();
     const { actType, setActType } = useActType();
@@ -35,6 +32,7 @@ export default function Filters() {
             .then( response => response)
             .catch( err => {
                 console.log(err)
+                sendError("Houve um erro ao buscar os dados. Tente novamente mais tarde.")
                 setLoading(false)
             })        
 
@@ -50,9 +48,6 @@ export default function Filters() {
         setFilters({});
 		if (value === '') return;
 
-        console.log()
-
-        await setBaseUrl(actsTypes[value].base_url);
 		setStart(true);
 		setContent([])
 		setActType(value);
@@ -86,7 +81,7 @@ export default function Filters() {
                     <FontAwesomeIcon
                     className="loading-spinner"
                     icon={faSpinner}
-                    size="lg"
+                    size="2x"
                     />
                 </div>
             )}
