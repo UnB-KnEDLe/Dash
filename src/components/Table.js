@@ -4,10 +4,7 @@ import { TableContainer } from '../styles/table_style';
 import ExpandText from './expandText';
 import { columnsReplace } from '../columnsData';
 
-import { actsData } from '../actsData';
-
-export default function Table({title, data, columns}) {
-    columns = columns.map(column => columnsReplace(column));
+export default function Table({title, data, columns, color}) {
     const labelReplace = {
         abono: "Abono",
         aposentadoria: "Aposentadoria",
@@ -27,12 +24,19 @@ export default function Table({title, data, columns}) {
         sem_efeito_aposentadoria: 'Tornado Sem Efeito a Aposentadoria',
     }
 
+    columns = columns.map(column => columnsReplace(column));
+    title = labelReplace[title] ? labelReplace[title] : title;
+
+    data = data.filter(row => {
+        return row.some(el => typeof el !== 'object' && el !== null);
+    });
+
     return (
-        <TableContainer color={actsData[title].color} >
+        <TableContainer color={color} >
             <MUIDataTable
                 className="mui-table"
-                title={<h6 style={{fontSize: '189%', color: '#144e81', fontWeight: 'bold', textAlign: 'left'}}>{labelReplace[title]}</h6>}
-                data={data.map((row) => row.map((cell) => <ExpandText text={cell} />) )}
+                title={<h6 style={{fontSize: '189%', color: '#144e81', fontWeight: 'bold', textAlign: 'left'}}>{title}</h6>}
+                data={data.map((row) => row.some(el => el == null || typeof el === 'object') && row.map((cell) => <ExpandText text={cell} />)) }
                 columns={columns}
                 options={{
                     rowsPerPage: 10,

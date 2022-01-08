@@ -2,6 +2,7 @@ import { useState } from "react";
 import UploadComponent from "../../components/UploadComponent";
 import { TableContent } from "../../styles/table_style";
 import Table from "../../components/Table";
+import { actsData } from "../../actsData";
 
 import { extractEntities } from "../../services/services";
 
@@ -58,7 +59,7 @@ export default function Entities() {
 
 					{tables.map((table) => {
 						return (
-							<Table key={table.id} data={table.content} title={table.title} columns={table.columns}/>
+							<Table key={table.id} color={actsData[table.title].color} data={table.content} title={table.title} columns={table.columns}/>
 						);
 					})}
 				</TableContent>
