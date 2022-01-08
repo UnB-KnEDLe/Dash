@@ -68,7 +68,7 @@ export default function Acts() {
             <FontAwesomeIcon
               className="loading-spinner"
               icon={faSpinner}
-              size="lg"
+              size="2x"
             />
           </div>
         )}

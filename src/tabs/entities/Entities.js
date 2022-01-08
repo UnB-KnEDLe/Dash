@@ -18,7 +18,8 @@ export default function Entities() {
 	async function changeHandler(files) {
 		setTables([]);
 		setLoading(true);
-		await extractEntities(files[0], type).then((res) => setTables(res));
+		await extractEntities(files[0], type)
+			.then((res) => setTables(res))
 		setLoading(false);
 	}
 
@@ -50,7 +51,7 @@ export default function Entities() {
 							<FontAwesomeIcon
 								className="loading-spinner"
 								icon={faSpinner}
-								size="lg"
+								size="2x"
 							/>
 						</div>
 					)}

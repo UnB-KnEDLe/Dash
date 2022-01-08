@@ -235,6 +235,7 @@ export const DropContainer = styled.div.attrs({
   place-items: center;
   margin-top: 20px;
   border: 1px dashed #6c63ff;
+  border-radius: 5px;
   padding: 22px;
   width: 80%;
   max-width: 1366px;
@@ -248,7 +249,8 @@ export const DropContainer = styled.div.attrs({
     background: #2980b9;
     height: 2.5rem;
     border-radius: 1rem;
-    width: 61%;
+    width: 50%;
+    min-width: 300px;
     border: 0;
     margin: 13px !important;
     color: #fff;
