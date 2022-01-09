@@ -28,7 +28,7 @@ export default function Table({title, data, columns, color}) {
     title = labelReplace[title] ? labelReplace[title] : title;
 
     data = data.filter(row => {
-        return row.some(el => typeof el !== 'object' && el !== null);
+        return !row.some(el => typeof el === 'object') || !row.every(el => el === null);
     });
 
     return (
@@ -36,7 +36,7 @@ export default function Table({title, data, columns, color}) {
             <MUIDataTable
                 className="mui-table"
                 title={<h6 style={{fontSize: '189%', color: '#144e81', fontWeight: 'bold', textAlign: 'left'}}>{title}</h6>}
-                data={data.map((row) => row.some(el => el == null || typeof el === 'object') && row.map((cell) => <ExpandText text={cell} />)) }
+                data={data.map(row => row.map((cell) => <ExpandText text={cell} />)) }
                 columns={columns}
                 options={{
                     rowsPerPage: 10,
