@@ -12,7 +12,7 @@ export default function UploadComponent({changeHandler, type, setType, renderDra
                 isDragReject={isDragReject} //rejeitar arquivos que não são PDFs
             >
                 <input {...getInputProps()} />
-                {showImage && <img src={filesvg} alt="Arraste e solte o PDF aqui" />}
+                <img src={filesvg} alt="Arraste e solte o PDF aqui" />
                 {renderDragMessage(isDragActive, isDragReject)}
                 <button>
                 <label>Selecionar Arquivos</label>

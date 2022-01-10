@@ -17,6 +17,7 @@ export default function Acts() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [actBodyColor, setActBodyColor] = useState("#ffffff");
+  const [collapsed, setCollapsed] = useState(false);
 
   async function changeHandler(files) {
     setLoading(true);
@@ -41,7 +42,11 @@ export default function Acts() {
     }
     setActs(newActs)
     setLoading(false);
+
+    setCollapsed(true)
   }
+
+  const handleCollapse = () => setCollapsed(false);
 
   const renderDragMessage = (isDragActive, isDragReject) => {
     if (!isDragActive) return <UploadMessage>Arraste o PDF aqui</UploadMessage>
@@ -53,13 +58,19 @@ export default function Acts() {
     <>
       <Container>
         <h2>Extração de Atos do Diário Oficial do Distrito Federal</h2>
-        <UploadComponent
+        { collapsed ? (
+					<div>
+						<button class="btn" onClick={handleCollapse}>Extrair novo arquivo</button>
+					</div>
+				) : (
+          <UploadComponent
           changeHandler={changeHandler}
           type={type}
           setType={setType}
           showImage={Object.keys(acts).length === 0}
           renderDragMessage={renderDragMessage}
         />
+				)}
       </Container>
       <Container>
         {error}

@@ -15,6 +15,7 @@ export default function Entities() {
 	const [type, setType] = useState("regex");
 	const [tables, setTables] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [collapsed, setCollapsed] = useState(false);
 
 	async function changeHandler(files) {
 		setTables([]);
@@ -22,7 +23,10 @@ export default function Entities() {
 		await extractEntities(files[0], type)
 			.then((res) => setTables(res))
 			.then(() => setLoading(false));
+		setCollapsed(true)
 	}
+
+	const handleCollapse = () => setCollapsed(false);
 
 	const renderDragMessage = (isDragActive, isDragReject) => {
 		if (!isDragActive) return <UploadMessage>Arraste o PDF aqui</UploadMessage>;
@@ -36,14 +40,19 @@ export default function Entities() {
 		<>
 			<Container>
 				<h2>Extração de Entidades do Diário Oficial do Distrito Federal</h2>
+				{ collapsed ? (
+					<div>
+						<button class="btn" onClick={handleCollapse}>Extrair novo arquivo</button>
+					</div>
+				) : (
 				<UploadComponent
 					changeHandler={changeHandler}
 					type={type}
 					setType={setType}
 					renderDragMessage={renderDragMessage}
 					tables={tables}
-					showImage={tables.length === 0}
 				/>
+				)}
 			</Container>
 			<Container>
 				<TableContent>

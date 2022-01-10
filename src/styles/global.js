@@ -48,4 +48,20 @@ export const GlobalStyle = createGlobalStyle`
     from {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
   }
+
+  .btn {
+    cursor: pointer;
+    background: #2980b9;
+    height: 2.5rem;
+    border-radius: 1rem;
+    width: 50%;
+    min-width: 300px;
+    border: 0;
+    margin: 13px !important;
+    color: #fff;
+    font-weight: bold;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+  }
 `;

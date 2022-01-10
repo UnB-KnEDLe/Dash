@@ -8,7 +8,10 @@ export const Container = styled.div`
   place-items: center;
   justify-content: center;
   overflow-x: hidden;
-  padding-bottom: 40px;
+
+  :last-child {
+    padding-bottom: 20px;
+  }
   
   width: 100vw;
 
