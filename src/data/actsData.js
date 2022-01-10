@@ -124,7 +124,7 @@ export const actsData = {
         search: true,
         title: 'Exoneração de Cargo Comissionado',
         paramsKeys: [
-            {label: 'nome', title: 'Nome'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
         ],
