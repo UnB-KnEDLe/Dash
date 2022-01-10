@@ -46,7 +46,7 @@ export default function Entities() {
 			<Container>
 				<TableContent>
 					{loading && (
-						<div style={{display: "flex", placeItems: "center", gap: 15, justifyContent: "center"}}>
+						<div style={{display: "flex", placeItems: "center", gap: 15, justifyContent: "center", height: 100}}>
 							Processando {filename}
 							<div className="loading-container">
 								<FontAwesomeIcon
