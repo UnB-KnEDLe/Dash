@@ -16,7 +16,6 @@ export const Tab = styled.div`
     gap: 5px;
     justify-content: center;
     padding: .5rem 1rem;
-    padding-top: 5px;
     border: 1px solid #cfcfcf;
     border-top: ${props => props.active ? "3px solid var(--primary);" : "3px solid #f4f4f4;"};
     border-bottom: ${props => props.active ? "none" : "1px solid #cfcfcf;"};
