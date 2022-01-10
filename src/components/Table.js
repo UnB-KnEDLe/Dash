@@ -12,7 +12,7 @@ export default function Table({title, data, columns, color}) {
     data = data.filter(row => {
         let count = 0;
         row.forEach( el => {
-            if (typeof el !== 'string') {
+            if (typeof el !== 'string' && typeof el !== 'boolean') {
                 if(el !== null) count = row.lenth + 1
                 count++
             }
