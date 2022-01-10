@@ -26,6 +26,8 @@ export default async function service(url) {
         }
     })
 
+    headingList = headingList.reverse()
+
     response.forEach( item => {
         let row = []
         Object.keys(item).forEach( key => {
@@ -39,6 +41,8 @@ export default async function service(url) {
         })
         contentList.push(row)
     } )
+
+    contentList = contentList.map( row => row.reverse() )
 
     return { headingList, contentList }
 }
