@@ -2,7 +2,7 @@ import { useState } from "react";
 import UploadComponent from "../../components/UploadComponent";
 import { TableContent } from "../../styles/table_style";
 import Table from "../../components/Table";
-import { actsData } from "../../actsData";
+import { actsData } from "../../data/actsData";
 
 import { extractEntities } from "../../services/services";
 

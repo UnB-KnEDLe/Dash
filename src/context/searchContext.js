@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import { actsData } from '../actsData';
+import { actsData } from '../data/actsData';
 import service from '../services/searchService';
 
 const SearchContext = createContext();

@@ -2,8 +2,8 @@ import { Container } from '../../styles/search';
 
 import { TableContent } from "../../styles/table_style";
 import Table from "../../components/Table";
-import { actsData } from "../../actsData";
-import { columnsReplace } from "../../columnsData";
+import { actsData } from "../../data/actsData";
+import { columnsReplace } from "../../data/columnsData";
 
 import Filters from '../../components/Filter';
 

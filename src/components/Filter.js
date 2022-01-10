@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import { useStart, useActType, useHeading, useContent, useLoading, useFilters } from "../context/searchContext";
-import { actsData } from "../actsData";
+import { actsData } from "../data/actsData";
 
 export default function Filters() {    
     const { filters, setFilters, onSubmit } = useFilters();

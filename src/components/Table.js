@@ -2,7 +2,7 @@ import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import { TableContainer } from '../styles/table_style';
 import ExpandText from './expandText';
-import { columnsReplace } from '../columnsData';
+import { columnsReplace } from '../data/columnsData';
 
 export default function Table({title, data, columns, color}) {
     const labelReplace = {

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { ActContainer } from "../styles/acts";
 
-import { actsData } from "../actsData";
+import { actsData } from "../data/actsData";
 
 export default function ActsComponent({ actType, acts, actsSetFunction, colorSetFunction }) {
     const [show, setShow] = useState(true);
