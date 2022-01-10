@@ -1,3 +1,5 @@
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Dropzone from 'react-dropzone';
 import filesvg from '../assets/file.svg';
 import { DropContainer, UploadMessage } from '../styles/app'
@@ -18,7 +20,8 @@ export default function UploadComponent({changeHandler}) {
                     isDragReject={isDragReject} //rejeitar arquivos que não são PDFs
                 >
                     <input {...getInputProps()} />
-                    <img src={filesvg} alt="Arraste e solte o PDF aqui" />
+                    <FontAwesomeIcon style={{color: "var(--primary)"}} icon={faUpload} size="5x"/>
+                    {/* <img src={filesvg} alt="Arraste e solte o PDF aqui" /> */}
                     {renderDragMessage(isDragActive, isDragReject)}
                     <button>
                     <label>Selecionar Arquivos</label>
