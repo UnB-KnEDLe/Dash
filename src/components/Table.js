@@ -3,33 +3,22 @@ import MUIDataTable from 'mui-datatables';
 import { TableContainer } from '../styles/table_style';
 import ExpandText from './expandText';
 import { columnsReplace } from '../data/columnsData';
+import { actsData } from '../data/actsData';
 
 export default function Table({title, data, columns, color}) {
-    const labelReplace = {
-        abono: "Abono",
-        aposentadoria: "Aposentadoria",
-        cessao: "Cessão",
-        cessoes: "Cessão",
-        exoneracao_efetivos: "Exoneração Efetivos",
-        efetivos_exo: "Exoneração Efetivos",
-        exoneracao: "Exoneração Não Efetivos",
-        nomeacao_comissionada: "Nomeação Comissionada",
-        nomeacao: "Nomeação",
-        nomeacao_efetiva: "Nomeação Efetiva",
-        retificacao: "Retificação",
-        retificacoes: "Retificação",
-        reversao: "Reversão",
-        substituicao: "Substituição",
-        tornado_sem_efeito: "Tornada Sem Efeito a Aposentadoria",
-        sem_efeito_aposentadoria: 'Tornado Sem Efeito a Aposentadoria',
-    }
-
     columns = columns.map(column => columnsReplace(column));                
-    title = labelReplace[title] ? labelReplace[title] : title;
+    title = actsData[title] ? actsData[title].title : title;
 
     data = data.filter(row => {
-        return !row.some(el => typeof el === 'object') || !row.every(el => el === null);
-    });
+        let count = 0;
+        row.forEach( el => {
+            if (typeof el !== 'string') {
+                if(el !== null) count = row.lenth + 1
+                count++
+            }
+        } )
+        return count < row.length;
+    })
 
     data = data.map(row => row.map( cell => {
         if(typeof cell === "boolean") {
@@ -47,7 +36,7 @@ export default function Table({title, data, columns, color}) {
                 options={{
                     rowsPerPage: 10,
                     rowsPerPageOptions: [3, 10, 20, 30],
-                    'selectableRows': 'none',
+                    selectableRows: 'none',
                     download: false,
                     print: false,
                     filter: false,

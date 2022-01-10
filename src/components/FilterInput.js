@@ -6,7 +6,6 @@ export default function FilterInput({ label, title }) {
     const [ value, setValue ] = useState('');
 
     const handleOnChange = async (e) => {
-        console.log(e.target.value);
         setValue(e.target.value);
         setParameter(label, e.target.value);
     }
