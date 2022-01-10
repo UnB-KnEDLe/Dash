@@ -8,7 +8,7 @@ import { extractActs } from "../../services/services";
 import { Container, UploadMessage } from "../../styles/app";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faFile } from "@fortawesome/free-solid-svg-icons";
 
 export default function Acts() {
   const [type, setType] = useState("regex");
@@ -18,8 +18,10 @@ export default function Acts() {
   const [loading, setLoading] = useState(false);
   const [actBodyColor, setActBodyColor] = useState("#ffffff");
   const [collapsed, setCollapsed] = useState(false);
+  const [filename, setFilename] = useState("");
 
   async function changeHandler(files) {
+    setFilename(files[0].name);
     setLoading(true);
     setActs({});
     setActsList([]);
@@ -59,9 +61,11 @@ export default function Acts() {
       <Container>
         <h2>Extração de Atos do Diário Oficial do Distrito Federal</h2>
         { collapsed ? (
-					<div>
-						<button class="btn" onClick={handleCollapse}>Extrair novo arquivo</button>
-					</div>
+					<div style={{display: "flex", placeItems: "center"}}>
+            <FontAwesomeIcon icon={faFile} style={{marginRight: 10, color: "var(--primary)"}} />
+            <span>{filename}</span>
+          <button class="btn" onClick={handleCollapse}>Extrair novo arquivo</button>
+        </div>
 				) : (
           <UploadComponent
           changeHandler={changeHandler}
@@ -75,13 +79,16 @@ export default function Acts() {
       <Container>
         {error}
         {loading && (
-          <div className="loading-container">
-            <FontAwesomeIcon
-              className="loading-spinner"
-              icon={faSpinner}
-              size="2x"
-            />
-          </div>
+          <div style={{display: "flex", placeItems: "center", gap: 15, justifyContent: "center"}}>
+            Processando {filename}
+            <div className="loading-container">
+              <FontAwesomeIcon
+                className="loading-spinner"
+                icon={faSpinner}
+                size="2x"
+              />
+            </div>
+        </div>
         )}
         {Object.keys(acts).length > 0 && (
           <ActsList>
