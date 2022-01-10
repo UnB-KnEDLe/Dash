@@ -30,7 +30,7 @@ export default function Table({title, data, columns, color}) {
         <TableContainer color={color} >
             <MUIDataTable
                 className="mui-table"
-                title={<h6 style={{fontSize: '189%', color: '#144e81', fontWeight: 'bold', textAlign: 'left'}}>{title}</h6>}
+                title={<h6 style={{fontSize: '120%', color: '#144e81', fontWeight: 'bold', textAlign: 'left'}}>{title}</h6>}
                 data={data.map(row => row.map((cell) => <ExpandText text={cell} />)) }
                 columns={columns}
                 options={{
