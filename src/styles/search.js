@@ -102,7 +102,7 @@ export const InputField = styled.div`
             background: #2980B933;
 
             input{
-                background: #2980B933;
+                background: transparent;
                 cursor: pointer;
             }
         }
@@ -116,7 +116,7 @@ export const InputField = styled.div`
             
             input {
                 border-radius: 5px;
-                padding: 2px;
+                padding: 3px;
                 color: var(--primary);
                 font-weight: bold;
                 
@@ -130,6 +130,7 @@ export const InputField = styled.div`
                     color: black;
                     font-weight: 600;
                     font-style: italic;
+                    border-bottom: 1px solid var(--primary);
                     
                     ::placeholder {
                         color: #999;
