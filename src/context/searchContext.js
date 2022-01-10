@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import { actsTypes } from '../actTypes';
+import { actsData } from '../actsData';
 import service from '../services/searchService';
 
 const SearchContext = createContext();
@@ -17,7 +17,7 @@ export default function SearchProvider({ children }) {
     const onSubmit = async () => {
         if(!actType) return
 
-        var url = await actsTypes[actType].base_url
+        var url = await actsData[actType].base_url
 
         Object.keys(filters).forEach( label => {
             if (filters[label] === '') return

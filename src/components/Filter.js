@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import { useStart, useActType, useHeading, useContent, useLoading, useFilters } from "../context/searchContext";
-import { actsTypes } from "../actTypes";
+import { actsData } from "../actsData";
 
 export default function Filters() {    
     const { filters, setFilters, onSubmit } = useFilters();
@@ -27,23 +27,25 @@ export default function Filters() {
         await setActType(value);
 
 		let newFilters = {};
-		actsTypes[value].paramsKeys
+		actsData[value].paramsKeys
 			.forEach( filter => newFilters[filter.label] = "" )
 		setFilters(newFilters);
 	}
+
+    const selectOptions = Object.keys(actsData).filter(act => actsData[act].search === true)
 
     return (
         <>
             <select onChange={onChangeActType} >	
                 <option value="">Selecione o Tipo de Ato</option>
-                {Object.keys(actsTypes).map((key, index) => (
-                    <option key={index} value={key}>{actsTypes[key].title}</option>
+                {selectOptions.map((key, index) => (
+                    <option key={index} value={key}>{actsData[key].title}</option>
                 ))}
             </select>
             { Object.keys(filters).length === 0 && <h3>Selecione um tipo de ato para pesquisar</h3> }
             <InputField>
                 {Object.keys(filters).length > 0 && Object.keys(filters).map( (filterKey, index) => {
-                    let title = actsTypes[actType].paramsKeys.find( filter => filter.label === filterKey ).title;
+                    let title = actsData[actType].paramsKeys.find( filter => filter.label === filterKey ).title;
                     return (
                         <FilterInput key={index} label={filterKey} title={title} />
                 )}) }
