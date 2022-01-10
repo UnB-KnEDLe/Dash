@@ -49,6 +49,15 @@ export const GlobalStyle = createGlobalStyle`
     to {transform: rotate(360deg);}
   }
 
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
   .btn {
     cursor: pointer;
     background: #2980b9;

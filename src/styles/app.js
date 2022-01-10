@@ -243,6 +243,13 @@ export const DropContainer = styled.div.attrs({
   width: 80%;
   max-width: 1366px;
 
+  .drop-icon {
+    animation: bounce;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
   p {
     margin-top: 10px;
   }

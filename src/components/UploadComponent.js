@@ -20,7 +20,7 @@ export default function UploadComponent({changeHandler}) {
                     isDragReject={isDragReject} //rejeitar arquivos que não são PDFs
                 >
                     <input {...getInputProps()} />
-                    <FontAwesomeIcon style={{color: "var(--primary)"}} icon={faUpload} size="5x"/>
+                    <FontAwesomeIcon className="drop-icon" style={{color: "var(--primary)"}} icon={faUpload} size="5x"/>
                     {/* <img src={filesvg} alt="Arraste e solte o PDF aqui" /> */}
                     {renderDragMessage(isDragActive, isDragReject)}
                     <button>
