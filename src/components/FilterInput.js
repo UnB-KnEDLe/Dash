@@ -6,6 +6,7 @@ export default function FilterInput({ label, title }) {
     const [ value, setValue ] = useState('');
 
     const handleOnChange = async (e) => {
+        console.log(e.target.value);
         setValue(e.target.value);
         setParameter(label, e.target.value);
     }
@@ -15,8 +16,8 @@ export default function FilterInput({ label, title }) {
     }
 
     useEffect(() => {
-        if (filters[label].length === 0) setValue('');
-    }, [filters, label])
+        if (filters[label] === '') setValue('');
+    }, [filters, label, value])
 
     return (
         <div className="filter">

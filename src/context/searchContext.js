@@ -15,7 +15,7 @@ export default function SearchProvider({ children }) {
     const [error, setError] = useState('');
 
     const onSubmit = async () => {
-        if(!actType) return
+        if(actType.length === 0) return
 
         var url = await actsData[actType].base_url
 
@@ -44,7 +44,6 @@ export default function SearchProvider({ children }) {
 	}
 
     const setParameter = (label, value) => {
-        if (value.length === 0) return;
         setFilters({ ...filters, [label]: value })
 	}
 

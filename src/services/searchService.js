@@ -31,8 +31,6 @@ export default async function service(url) {
         Object.keys(item).forEach( key => {
             if(typeof item[key] === 'string') {
                 row.push(item[key])
-            } else if(typeof item[key] === 'boolean') {
-                row.push(item[key] ? 'Sim' : 'Não')
             } else {
                 for (var itemKey in item[key]) {
                     row.push(item[key][itemKey])
