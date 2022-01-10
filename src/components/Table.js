@@ -24,12 +24,18 @@ export default function Table({title, data, columns, color}) {
         sem_efeito_aposentadoria: 'Tornado Sem Efeito a Aposentadoria',
     }
 
-    columns = columns.map(column => columnsReplace(column));
+    columns = columns.map(column => columnsReplace(column));                
     title = labelReplace[title] ? labelReplace[title] : title;
 
     data = data.filter(row => {
         return !row.some(el => typeof el === 'object') || !row.every(el => el === null);
     });
+
+    data = data.map(row => row.map( cell => {
+        if(typeof cell === "boolean") {
+            return cell ? "Sim" : "Não";
+        } else return cell
+    }) )
 
     return (
         <TableContainer color={color} >
