@@ -5,7 +5,7 @@ export const actsData = {
         search: true,
         title: 'Abono de Permanência',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
         ],
@@ -18,7 +18,7 @@ export const actsData = {
         search: true,
         title: 'Aposentadoria',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
             {label: 'matricula', title: 'Matrícula'},
@@ -32,7 +32,7 @@ export const actsData = {
         search: true,
         title: 'Cessão',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'matricula', title: 'Matrícula'},
             {label: 'cargo_cedido', title: 'Cargo Cedido'},
         ],
@@ -43,7 +43,7 @@ export const actsData = {
     cessoes: {
         title: 'Cessão',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'matricula', title: 'Matrícula'},
             {label: 'cargo_cedido', title: 'Cargo Cedido'},
         ],
@@ -55,7 +55,7 @@ export const actsData = {
         search: true,
         title: 'Nomeação Comissionada',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'cargo_efetivo', title: 'Cargo Efetivo'},
             {label: 'cargo_comissionado', title: 'Cargo Comissionado'},
             {label: 'orgao', title: 'Órgão'},
@@ -69,7 +69,7 @@ export const actsData = {
     nomeacao: {
         title: 'Nomeação Comissionada',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'cargo_efetivo', title: 'Cargo Efetivo'},
             {label: 'cargo_comissionado', title: 'Cargo Comissionado'},
             {label: 'orgao', title: 'Órgão'},
@@ -84,7 +84,7 @@ export const actsData = {
         search: true,
         title: 'Nomeação Efetiva',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
             {label: 'edital', title: 'Edital'},
@@ -99,8 +99,8 @@ export const actsData = {
         search: true,
         title: 'Exoneração de Cargo Efetivo',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
-            {label: 'cargo', titTypesle: 'Cargo'},
+            {label: 'pessoa', title: 'Nome'},
+            {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
         ],
 
@@ -111,7 +111,7 @@ export const actsData = {
     efetivos_exo: {
         title: 'Exoneração de Cargo Efetivo',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
         ],
@@ -137,7 +137,7 @@ export const actsData = {
         search: true,
         title: 'Retificação',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'matricula', title: 'Matrícula'},
         ],
 
@@ -148,7 +148,7 @@ export const actsData = {
     retificacoes: {
         title: 'Retificação',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'matricula', title: 'Matrícula'},
         ],
 
@@ -160,7 +160,7 @@ export const actsData = {
         search: true,
         title: 'Reversão',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'matricula', title: 'Matrícula'},
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
@@ -172,7 +172,7 @@ export const actsData = {
     reversoes: {
         title: 'Reversão',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'matricula', title: 'Matrícula'},
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
@@ -191,21 +191,21 @@ export const actsData = {
             {label: 'cargo_substituido', title: 'Cargo do Substituído'},
         ],
         base_url: `${BASE_URL}/substituicao?`,
-        color: "#ed403c"
+        color: "#f58225"
     },
 
     tornado_sem_efeito: {
         search: true,
         title: 'Tornada Sem Efeito Atos de Aposentadoria',
         paramsKeys: [
-            {label: 'pessoa', title: 'Pessoa'},
+            {label: 'pessoa', title: 'Nome'},
             {label: 'matricula', title: 'Matrícula'},
             {label: 'cargo', title: 'Cargo'},
             {label: 'ordem_servico', title: 'Ordem de Serviço'},
             {label: 'dodf', title: 'DODF'},
         ],
         base_url: `${BASE_URL}/tornado_sea?`,
-        color: "#f58225"
+        color: "#ed403c"
     }
 
 }
