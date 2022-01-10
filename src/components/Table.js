@@ -44,7 +44,9 @@ export default function Table({title, data, columns, color}) {
                     'selectableRows': 'none',
                     download: false,
                     print: false,
-                    filter: false
+                    filter: false,
+                    sort: false,
+                    search: false
                 }}
             />
         </TableContainer>

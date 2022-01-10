@@ -1,33 +1,28 @@
 import { useEffect, useState } from 'react';
 import {  useFilters } from "../context/searchContext";
 
-export default function FilterInput({ label, title, submitFunction }) {
-    const { filters, setParameter } = useFilters();
+export default function FilterInput({ label, title }) {
+    const { filters, setParameter, onSubmit } = useFilters();
     const [ value, setValue ] = useState('');
 
     const handleOnChange = async (e) => {
-        const { value } = e.target;
-        setParameter(label, e);
-        setValue(value);
-        if(value.length > 3) submitFunction();
+        setValue(e.target.value);
+        setParameter(label, e.target.value);
     }
 
-    const handleKeypress = e => {
-		if (e.code !== 'Enter') return;
-		submitFunction();
-	};
+    const handleKeyPressed = async (e) => {
+        if (e.key === 'Enter') onSubmit();
+    }
 
     useEffect(() => {
-        setValue(filters[label]);
+        if (filters[label].length === 0) setValue('');
     }, [filters, label])
-
 
     return (
         <div className="filter">
             <div className="filter-input">
-                <input onKeyPress={ handleKeypress } value={value} onChange={handleOnChange} placeholder={`+ Filtro de ${title}`}/>
+                <input value={value} onKeyPress={handleKeyPressed} onChange={handleOnChange} placeholder={`+ Filtro de ${title}`}/>
             </div>
         </div>
     )
-
 }

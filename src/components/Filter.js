@@ -4,60 +4,32 @@ import FilterInput from './FilterInput';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-import { useStart, useActType, useHeading, useContent, useLoading, useError, useFilters } from "../context/searchContext";
-import service from '../services/searchService';
+import { useStart, useActType, useHeading, useContent, useLoading, useFilters } from "../context/searchContext";
 import { actsTypes } from "../actTypes";
 
 export default function Filters() {    
-    const { filters, setFilters } = useFilters();
+    const { filters, setFilters, onSubmit } = useFilters();
     const { setStart } = useStart();
     const { actType, setActType } = useActType();
     const { setHeading } = useHeading();
     const { setContent } = useContent();
-    const { loading, setLoading } = useLoading();
-    const { sendError } = useError();
-
-    const onSubmit = async (url) => {
-        Object.keys(filters).forEach( label => {
-            if (filters[label] !== '') {
-                url += `${label}=${filters[label]}&`;
-            }
-        })
-
-        setHeading([]);
-        setContent({});
-        setLoading(true)
-
-        const { headingList, contentList} = await service(url)
-            .then( response => response)
-            .catch( err => {
-                console.log(err)
-                sendError("Houve um erro ao buscar os dados. Tente novamente mais tarde.")
-                setLoading(false)
-            })        
-
-        setHeading(headingList)
-        setContent(contentList)
-        
-		setStart(false);
-        setLoading(false)
-	}
+    const { loading } = useLoading();
 
 	const onChangeActType = async (e) => {
         const { value } = e.target
+
         setFilters({});
 		if (value === '') return;
 
 		setStart(true);
-		setContent([])
-		setActType(value);
+		setContent({})
+        setHeading([])
+        await setActType(value);
 
 		let newFilters = {};
 		actsTypes[value].paramsKeys
 			.forEach( filter => newFilters[filter.label] = "" )
 		setFilters(newFilters);
-
-        onSubmit(actsTypes[value].base_url)
 	}
 
     return (
@@ -73,18 +45,21 @@ export default function Filters() {
                 {Object.keys(filters).length > 0 && Object.keys(filters).map( (filterKey, index) => {
                     let title = actsTypes[actType].paramsKeys.find( filter => filter.label === filterKey ).title;
                     return (
-                        <FilterInput key={index} label={filterKey} submitFunction={onSubmit} title={title} />
-                    )}) }
+                        <FilterInput key={index} label={filterKey} title={title} />
+                )}) }
             </InputField>
             {loading && (
                 <div className="loading-container">
                     <FontAwesomeIcon
-                    className="loading-spinner"
-                    icon={faSpinner}
-                    size="2x"
+                        className="loading-spinner"
+                        icon={faSpinner}
+                        size="2x"
                     />
                 </div>
             )}
+            <div>
+                <button onClick={onSubmit}>Pesquisar</button>
+            </div>
         </>
     )
 }

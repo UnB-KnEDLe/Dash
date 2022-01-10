@@ -31,7 +31,7 @@ export default function Search() {
 					<Table data={content} color={actsData[actType].color} columns={heading.map(column => columnsReplace(column))} title={actsData[actType].title}/>
 				</TableContent>
 			) }
-			{ content.length === 0 && !start && <h2>Não foram encontrados resultados com esses filtros.</h2>}
+			{ content.length === 0 && !start && <h2 style={{marginTop: 35}}>Não foram encontrados resultados com esses filtros.</h2>}
 		</>
 	);
 }

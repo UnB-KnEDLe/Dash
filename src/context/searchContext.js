@@ -1,4 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
+import { actsTypes } from '../actTypes';
+import service from '../services/searchService';
 
 const SearchContext = createContext();
 
@@ -6,13 +8,42 @@ export default function SearchProvider({ children }) {
     const [start, setStart] = useState(true);
     const [heading, setHeading] = useState([]);
     const [filters, setFilters] = useState({});
-    const [content, setContent] = useState({});
+    const [content, setContent] = useState([]);
     const [loading, setLoading] = useState(false);
     const [actType, setActType] = useState('');
+    const [baseUrl, setBaseUrl] = useState('');
     const [error, setError] = useState('');
 
-    const setParameter = (label, event) => {
-        const { value } = event.target
+    const onSubmit = async () => {
+        if(!actType) return
+
+        var url = await actsTypes[actType].base_url
+
+        Object.keys(filters).forEach( label => {
+            if (filters[label] === '') return
+            url += `${label}=${filters[label]}&`;
+        })
+
+        setHeading([]);
+        setContent({});
+        setLoading(true)
+
+        const { headingList, contentList } = await service(url)
+            .then( response => response)
+            .catch( err => {
+                console.log(err)
+                sendError("Houve um erro ao buscar os dados. Tente novamente mais tarde.")
+                setLoading(false)
+            })        
+
+        setHeading(headingList)
+        setContent(contentList)
+        
+		setStart(false);
+        setLoading(false)
+	}
+
+    const setParameter = (label, value) => {
         if (value.length === 0) return;
         setFilters({ ...filters, [label]: value })
 	}
@@ -31,7 +62,8 @@ export default function SearchProvider({ children }) {
                 loading, setLoading,
                 actType, setActType,
                 error, setError, sendError,
-                filters, setFilters, setParameter
+                baseUrl, setBaseUrl,
+                filters, setFilters, setParameter, onSubmit
             }}
         >
             {children}
@@ -70,6 +102,11 @@ export function useError() {
 }
 
 export function useFilters() {
-    const { filters, setFilters, setParameter } = useContext(SearchContext);
-    return { filters, setFilters, setParameter };
+    const { filters, setFilters, setParameter, onSubmit } = useContext(SearchContext);
+    return { filters, setFilters, setParameter, onSubmit };
+}
+
+export function useBaseUrl() {
+    const { baseUrl, setBaseUrl } = useContext(SearchContext);
+    return { baseUrl, setBaseUrl };
 }
