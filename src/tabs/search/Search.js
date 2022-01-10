@@ -3,7 +3,6 @@ import { Container } from '../../styles/search';
 import { TableContent } from "../../styles/table_style";
 import Table from "../../components/Table";
 import { actsData } from "../../data/actsData";
-import { columnsReplace } from "../../data/columnsData";
 
 import Filters from '../../components/Filter';
 
@@ -28,7 +27,7 @@ export default function Search() {
 			</Container>
 			{ content.length > 0 && (
 				<TableContent style={{width: '100%'}}>
-					<Table data={content} color={actsData[actType].color} columns={heading.map(column => columnsReplace(column))} title={actsData[actType].title}/>
+					<Table data={content} color={actsData[actType].color} columns={heading} title={actsData[actType].title}/>
 				</TableContent>
 			) }
 			{ content.length === 0 && !start && <h2 style={{marginTop: 35}}>Não foram encontrados resultados com esses filtros.</h2>}

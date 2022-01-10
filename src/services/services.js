@@ -1,9 +1,8 @@
 import axios from 'axios';
 const api_url = 'http://164.41.76.30/dash/api'
 
-export async function extractEntities(file, type){
+export async function extractEntities(file){
     const formData = new FormData();
-    formData.append('type', type);
     formData.append('file', file);
 
     const response = await axios.post(api_url + '/extract_entity', formData, {
