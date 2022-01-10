@@ -21,6 +21,8 @@ export default async function service(url) {
             for (var itemKey in item) {
                 if(itemKey === 'nome' && key !== 'pessoa') {
                     headingList.push(key)
+                } else if(itemKey === 'numero'){
+                    headingList.push(key)
                 } else headingList.push(itemKey)
             }
         }
