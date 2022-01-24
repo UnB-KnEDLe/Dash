@@ -4,6 +4,7 @@ import TabContainer from './components/TabContainer'
 import { GlobalStyle } from './styles/global';
 
 import SearchProvider from './context/searchContext';
+import ExtractProvider from './context/extractContext';
 
 import dodfLogo from './assets/logo_miner.png';
 import knedleLogo from './assets/logo_knedle.svg';
@@ -11,10 +12,11 @@ import fapdflogo from './assets/logo_fapdf.png';
 import finateclogo from './assets/logo_finatec.png';
 import unbLogo from './assets/Logo_UnB.svg';
 
-import './app.css';
+import './app.css'
 
 export default function App() {
   return (
+    <ExtractProvider>
       <SearchProvider>
         <Container>
           <header>
@@ -40,5 +42,6 @@ export default function App() {
         </Container>
         <GlobalStyle />
       </SearchProvider>
+    </ExtractProvider>
   );
 }

@@ -5,6 +5,7 @@ export const Tabs = styled.div`
     width: 100%;
     margin-bottom: 20px;
     flex-wrap: wrap;
+    max-width: 1366px;
 `;
 
 export const Tab = styled.div`

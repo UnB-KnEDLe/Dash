@@ -13,6 +13,7 @@ export default function SearchProvider({ children }) {
     const [actType, setActType] = useState('');
     const [baseUrl, setBaseUrl] = useState('');
     const [error, setError] = useState('');
+    const [modalData, setModalData] = useState({});
 
     const onSubmit = async () => {
         if(actType.length === 0) return
@@ -62,7 +63,8 @@ export default function SearchProvider({ children }) {
                 actType, setActType,
                 error, setError, sendError,
                 baseUrl, setBaseUrl,
-                filters, setFilters, setParameter, onSubmit
+                filters, setFilters, setParameter, onSubmit,
+                modalData, setModalData
             }}
         >
             {children}
@@ -108,4 +110,8 @@ export function useFilters() {
 export function useBaseUrl() {
     const { baseUrl, setBaseUrl } = useContext(SearchContext);
     return { baseUrl, setBaseUrl };
+}
+export function useModalData() {
+    const { modalData, setModalData } = useContext(SearchContext);
+    return { modalData, setModalData };
 }

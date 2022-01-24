@@ -32,7 +32,9 @@ export default function Filters() {
 		setFilters(newFilters);
 	}
 
-    const selectOptions = Object.keys(actsData).filter(act => actsData[act].search === true)
+    const selectOptions = Object.keys(actsData)
+        .filter(act => actsData[act].search === true)
+        .sort()
 
     return (
         <>
@@ -60,7 +62,7 @@ export default function Filters() {
                 </div>
             )}
             <div>
-                <button onClick={onSubmit}>Pesquisar</button>
+                <button className="btn" onClick={onSubmit}>Pesquisar</button>
             </div>
         </>
     )

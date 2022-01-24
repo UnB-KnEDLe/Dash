@@ -10,8 +10,7 @@ export const actsData = {
             {label: 'orgao', title: 'Órgão'},
         ],
 
-        base_url: `${BASE_URL}/abono?`,
-        color: "#a3218e"
+        base_url: `${BASE_URL}/abono?`
     },
 
     aposentadoria: {
@@ -24,8 +23,7 @@ export const actsData = {
             {label: 'matricula', title: 'Matrícula'},
         ],
 
-        base_url: `${BASE_URL}/aposentadoria?`,
-        color: "#592f93"
+        base_url: `${BASE_URL}/aposentadoria?`
     },
 
     cessao: {
@@ -36,8 +34,7 @@ export const actsData = {
             {label: 'matricula', title: 'Matrícula'},
             {label: 'cargo_cedido', title: 'Cargo Cedido'},
         ],
-        base_url: `${BASE_URL}/cessao?`,
-        color: "#21409a"
+        base_url: `${BASE_URL}/cessao?`
     },
 
     cessoes: {
@@ -47,8 +44,7 @@ export const actsData = {
             {label: 'matricula', title: 'Matrícula'},
             {label: 'cargo_cedido', title: 'Cargo Cedido'},
         ],
-        base_url: `${BASE_URL}/cessao?`,
-        color: "#21409a"
+        base_url: `${BASE_URL}/cessao?`
     },
 
     nomeacao_comissionada: {
@@ -62,8 +58,7 @@ export const actsData = {
             {label: 'matricula', title: 'Matrícula'},
         ],
 
-        base_url: `${BASE_URL}/nomeacao_comissionada?`,
-        color: "#72bd46"
+        base_url: `${BASE_URL}/nomeacao_comissionada?`
     },
 
     nomeacao: {
@@ -76,8 +71,7 @@ export const actsData = {
             {label: 'matricula', title: 'Matrícula'},
         ],
 
-        base_url: `${BASE_URL}/nomeacao_comissionada?`,
-        color: "#72bd46"
+        base_url: `${BASE_URL}/nomeacao_comissionada?`
     },
 
     nomeacao_efetiva: {
@@ -91,8 +85,7 @@ export const actsData = {
             {label: 'matricula', title: 'Matrícula'},
         ],
         
-        base_url: `${BASE_URL}/nomeacao_efetiva?`,
-        color: "#0465b2"
+        base_url: `${BASE_URL}/nomeacao_efetiva?`
     },
 
     exoneracao_efetivos: {
@@ -104,8 +97,7 @@ export const actsData = {
             {label: 'orgao', title: 'Órgão'},
         ],
 
-        base_url: `${BASE_URL}/exo_efetivo?`,
-        color: "#00acac"
+        base_url: `${BASE_URL}/exo_efetivo?`
     },
 
     efetivos_exo: {
@@ -116,8 +108,7 @@ export const actsData = {
             {label: 'orgao', title: 'Órgão'},
         ],
 
-        base_url: `${BASE_URL}/exo_efetivo?`,
-        color: "#00acac"
+        base_url: `${BASE_URL}/exo_efetivo?`
     },
     
     exoneracao: {
@@ -129,8 +120,7 @@ export const actsData = {
             {label: 'orgao', title: 'Órgão'},
         ],
 
-        base_url: `${BASE_URL}/exoneracao?`,
-        color: "#03a45e"
+        base_url: `${BASE_URL}/exoneracao?`
     },
 
     retificacao: {
@@ -141,8 +131,7 @@ export const actsData = {
             {label: 'matricula', title: 'Matrícula'},
         ],
 
-        base_url: `${BASE_URL}/retificacao?`,
-        color: "#fef102"
+        base_url: `${BASE_URL}/retificacao?`
     },
 
     retificacoes: {
@@ -152,8 +141,7 @@ export const actsData = {
             {label: 'matricula', title: 'Matrícula'},
         ],
 
-        base_url: `${BASE_URL}/retificacao?`,
-        color: "#fef102"
+        base_url: `${BASE_URL}/retificacao?`
     },
 
     reversao: {
@@ -165,8 +153,7 @@ export const actsData = {
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
         ],
-        base_url: `${BASE_URL}/reversao?`,
-        color: "#f8a51b"
+        base_url: `${BASE_URL}/reversao?`
     },
 
     reversoes: {
@@ -177,8 +164,7 @@ export const actsData = {
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
         ],
-        base_url: `${BASE_URL}/reversao?`,
-        color: "#f8a51b"
+        base_url: `${BASE_URL}/reversao?`
     },
 
     substituicao: {
@@ -190,8 +176,7 @@ export const actsData = {
             {label: 'substituido', title: 'Nome do Substituído'},
             {label: 'cargo_substituido', title: 'Cargo do Substituído'},
         ],
-        base_url: `${BASE_URL}/substituicao?`,
-        color: "#f58225"
+        base_url: `${BASE_URL}/substituicao?`
     },
 
     tornado_sem_efeito: {
@@ -204,8 +189,7 @@ export const actsData = {
             {label: 'ordem_servico', title: 'Ordem de Serviço'},
             {label: 'dodf', title: 'DODF'},
         ],
-        base_url: `${BASE_URL}/tornado_sea?`,
-        color: "#ed403c"
+        base_url: `${BASE_URL}/tornado_sea?`
     }
 
 }
