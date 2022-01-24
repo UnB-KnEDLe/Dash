@@ -2,35 +2,28 @@ import { useState } from "react"
 import { Tabs, Tab } from '../styles/tabs'
 import { BigCard } from '../styles/app'
 
-import Acts from '../tabs/acts/Acts';
-import Entities from '../tabs/entities/Entities';
 import Search from '../tabs/search/Search';
+import Extract from '../tabs/extract/Extract';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAlignJustify, faSearch, faTable } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUpload } from "@fortawesome/free-solid-svg-icons";
 
 export default function TabContainer() {
     const [activeTab, setActiveTab] = useState(0)
 
     return (
-        <BigCard>
-            <Tabs>
-                <Tab active={0 === activeTab} onClick={() => setActiveTab(0)}>
-                    <FontAwesomeIcon icon={faAlignJustify}/> Extrair Atos
+        <BigCard style={{overflowX: 'hidden'}}>
+            <Tabs className="tabs">
+                <Tab className="extraction" active={0 === activeTab} onClick={() => setActiveTab(0)}>
+                    <FontAwesomeIcon icon={faUpload}/> Extração
                 </Tab>
-                <Tab active={1 === activeTab} onClick={() => setActiveTab(1)}>
-                    <FontAwesomeIcon icon={faTable}/> Extrair Entidades
+                <Tab className="search" active={1 === activeTab} onClick={() => setActiveTab(1)}>
+                    <FontAwesomeIcon icon={faSearch}/> Pesquisa
                 </Tab>
-                <Tab active={2 === activeTab} onClick={() => setActiveTab(2)}>
-                    <FontAwesomeIcon icon={faSearch}/> Pesquisar
-                </Tab>
-            </Tabs>            
+            </Tabs>
             <div className={activeTab !== 0 ? "hidden" : ""} >
-                <Acts />
+                <Extract />
             </div>
-            <div className={activeTab !== 1 ? "hidden" : ""}>
-                <Entities />
-            </div>
-            <div className={activeTab !== 2 ? "hidden" : ""} >
+            <div className={activeTab !== 1 ? "hidden" : ""} >
                 <Search />
             </div>
         </BigCard>

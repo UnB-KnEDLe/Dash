@@ -30,7 +30,7 @@ export const Container = styled.div`
     display: flex;
     width: 100%;
     flex-direction: row;
-    height: 11.5rem;
+    height: 8rem;
     background-image: url(${headerBg});
     background-size: cover;
     background-position: center 53%;
@@ -62,7 +62,7 @@ export const Container = styled.div`
       .dodf-logo {
         display: flex;
         max-width: 250px;
-        width: 80%;
+        width: 70%;
         height: auto;
 
         :last-child {
@@ -110,14 +110,13 @@ export const Container = styled.div`
 `;
 
 export const BigCard = styled.div`
-
   display: flex;
   margin-top: 15px;
   place-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 80%;
-  max-width: 1366px;
+  width: calc(80% + 15px);  
+  max-width: 1390px;
   border-radius: 10px;
 
   .hidden {
@@ -294,4 +293,33 @@ export const UploadMessage = styled.p`
   justify-content: center;
   align-items: center;
   padding: 15px 0;
+`;
+
+export const Card = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  max-width: 1366px;
+  ${(props) => props.colorUp && "border-up: 5px solid" + props.colorUp};
+  ${(props) => props.colorLeft && "border-left: 5px solid" + props.colorLeft};
+  ${(props) => props.colorBottom && "border-bottom: 5px solid" + props.colorBottom};
+  ${(props) => props.colorRight && "border-right: 5px solid" + props.colorRight};
+  width: 100%;
+  box-shadow: ${(props) => {
+    switch (props.shadow) {
+      case 0:
+        return "none";
+      case 1:
+        return "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);"
+      case 2: 
+        return "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);"
+      case 3:
+        return "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);"
+      case 4:
+        return "0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);"
+      case 5:
+        return "0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);"
+      default:
+        return "none";
+  }}};
 `;

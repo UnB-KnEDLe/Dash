@@ -1,19 +1,16 @@
 import { Container } from '../../styles/search';
 
-import { TableContent } from "../../styles/table_style";
-import Table from "../../components/Table";
-import { actsData } from "../../data/actsData";
-
+import Table from "./Table";
 import Filters from '../../components/Filter';
 
-import { useStart, useActType, useHeading, useContent, useError } from "../../context/searchContext";
+import { useStart, useHeading, useContent, useError, useModalData } from "../../context/searchContext";
 
 export default function Search() {
 	const { start } = useStart();
 	const { heading } = useHeading();
 	const { content } = useContent();
-	const { actType } = useActType();
 	const { error } = useError();
+	const { modalData, setModalData } = useModalData();
 
 	return (
 		<>
@@ -26,9 +23,13 @@ export default function Search() {
 
 			</Container>
 			{ content.length > 0 && (
-				<TableContent style={{width: '100%'}}>
-					<Table data={content} color={actsData[actType].color} columns={heading} title={actsData[actType].title}/>
-				</TableContent>
+				<Table
+					data={content}
+					columns={heading}
+					showEntities={true}
+					modalData={modalData}
+					setModalData={setModalData}
+				/>
 			) }
 			{ content.length === 0 && !start && <h2 style={{marginTop: 35}}>Não foram encontrados resultados com esses filtros.</h2>}
 		</>
