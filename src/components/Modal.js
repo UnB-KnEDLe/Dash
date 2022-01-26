@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { ModalComp } from '../styles/modal';
+import { Container } from '../styles/modal';
 
 import { columnsReplace } from '../data/columnsData';
 
@@ -12,7 +12,7 @@ export default function Modal({data, columns, setModalData}){
     const closeModal = () => setModalData({});
 
     return (
-        <ModalComp>
+        <Container>
             <div className="modal-content">
                 <div className="modal-body">
                     <div className="modal-header">
@@ -20,10 +20,10 @@ export default function Modal({data, columns, setModalData}){
                             <FontAwesomeIcon size="2x" icon={faTimes}/>
                         </button>
                     </div>
-                    <div className="modal-section">
+                    { text && <div className="modal-section">
                         <h3>Ato</h3>
                         <p>{text}</p>
-                    </div>
+                    </div> }
                     <div className="modal-section">
                         <h3>Entidades</h3>
                         <div className="entities-list">
@@ -37,11 +37,11 @@ export default function Modal({data, columns, setModalData}){
                             )}
                         </div>
                     </div>
-                    <div className="modal-section">
+                    { file && <div className="modal-section">
                         <h4><FontAwesomeIcon icon={faFile} /> {file}</h4>
-                    </div>
+                    </div> }
                 </div>
             </div>
-        </ModalComp>
+        </Container>
     )
 }

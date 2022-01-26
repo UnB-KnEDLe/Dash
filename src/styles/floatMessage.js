@@ -3,8 +3,10 @@ import styled from "styled-components"
 export const Container = styled.div`
     position: fixed;
     display: flex;
+    max-width: 500px;
     flex-direction: column;
     place-items: flex-start center;
+    text-align: left;
     padding: 15px;
     border-radius: 10px;
     border-top: 2px solid var(--primary);
@@ -14,7 +16,7 @@ export const Container = styled.div`
     transition: .25s;
 
     bottom: 120px;
-    right: ${props => props.visible ? "20px" : "-100px"};
+    right: ${props => props.visible ? "200px" : "-100px"};
 
     .float-header {
         margin-bottom: 5px;

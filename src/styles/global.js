@@ -54,23 +54,28 @@ export const GlobalStyle = createGlobalStyle`
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-10px);
+      transform: translateY(15px);
     }
   }
 
   .btn {
     cursor: pointer;
-    background: #2980b9;
+    border: 2px solid #2980b9;
+    background: white;
     height: 2.5rem;
     border-radius: 1rem;
     width: 50%;
     min-width: 300px;
-    border: 0;
-    margin: 13px !important;
-    color: #fff;
+    color: #2980b9;
     font-weight: bold;
     -webkit-transition: background-color 0.2s;
     transition: background-color 0.2s;
     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    
+    :hover {
+      color: white;
+      background: #2980b9;
+      cursor: pointer;
+    }
   }
 `;

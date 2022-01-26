@@ -5,9 +5,9 @@ import Table from '../../components/table/Table';
 import ModeSwitch from '../../components/table/ModeSwitch';
 import Pagination from "../../components/table/Pagination";
 
-import { Extract } from "../../styles/extract";
+import { TableContainer } from "../../styles/table";
 
-import { useActs, useSelectedFile, useShowEntities, useModalData, useItemsPerPage, useCurrentPage } from "../../context/extractContext";
+import { useActs, useSelectedFile, useShowEntities, useModalData, useItemsPerPage, useCurrentPage, useActsTypes } from "../../context/extractContext";
 
 export default function Content(){
     const { acts } = useActs();
@@ -16,20 +16,15 @@ export default function Content(){
     const { modalData, setModalData } = useModalData();
     const { itemsPerPage, setItemsPerPage } = useItemsPerPage();
     const { currentPage, setCurrentPage } = useCurrentPage();
+    const { actsTypes } = useActsTypes();
     
-    var actsTypes = Object.keys(acts);
-    actsTypes = actsTypes.filter(act => acts[act].content.length > 0);
     var startPage = (currentPage - 1) * itemsPerPage;
     
     const [selectedAct, setSelectedAct] = useState(actsTypes[0]);
     const [columns, setColumns] = useState(acts[selectedAct].columns);
     const [content, setContent] = useState(acts[selectedAct].content.slice(startPage, startPage + itemsPerPage));
     
-    var totalPages = Math.ceil(acts[selectedAct].content.length / itemsPerPage);
-    totalPages = totalPages < 0 ? 1 : totalPages;
-
-    if (selectedFile !== '') 
-        setContent(content.filter(item => item.file === selectedFile))
+    const contentCount = acts[selectedAct].content.length;
     
     const handleActChange = async e => {
         const { value } = e.target;
@@ -39,19 +34,17 @@ export default function Content(){
     }
 
     useEffect( () => {
-        if(itemsPerPage !== -1){
-            setContent(acts[selectedAct].content.slice(startPage, startPage + itemsPerPage))
-        }
-        else setContent(acts[selectedAct].content)
-    }, [selectedAct, itemsPerPage, acts, setCurrentPage, startPage]);
+        var newContent = acts[selectedAct].content.filter(item => selectedFile.includes(item.file))
+        setContent(newContent.slice(startPage, startPage + itemsPerPage))
+    }, [selectedAct, itemsPerPage, acts, setCurrentPage, startPage, selectedFile, actsTypes]);
 
     return (
-        <Extract>
+        <TableContainer>
             <div className="toolbar">
                 <div className="selector">
                     <select onChange={handleActChange} value={selectedAct}>
                         {actsTypes.map((key, index) => (
-                            <option key={index} value={key}>{actsData[key].title}</option>
+                            <option key={index} value={key}>{actsData[key].title || key.replace('_', ' ')}</option>
                         ))}
                     </select>
                 </div>
@@ -61,7 +54,7 @@ export default function Content(){
                     </div>
                     <div className="pagination">
                         <Pagination
-                            totalPages={totalPages}
+                            contentCount={contentCount}
                             currentPage={currentPage}
                             setCurrentPage={setCurrentPage}
                             itemsPerPage={itemsPerPage}
@@ -80,6 +73,6 @@ export default function Content(){
                     setModalData={setModalData}
                 />
             </div>
-        </Extract>
+        </TableContainer>
     )
 }

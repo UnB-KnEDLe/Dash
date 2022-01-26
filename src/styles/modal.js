@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ModalComp = styled.div`
+export const Container = styled.div`
     background: rgba(0,0,0, 0.4);
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     position: fixed;
@@ -12,11 +12,6 @@ export const ModalComp = styled.div`
     display: flex;
     justify-content: center;
     place-items: center;
-
-    .highlight {
-        background: #0c365299;
-        display: inline-block;
-    }
     
     .modal-content {
         z-index: 60;

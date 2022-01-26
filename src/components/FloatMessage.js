@@ -14,7 +14,7 @@ export default function FloatMessage({message, setMessage, duration, title}) {
     }, [duration, message, setMessage])
 
     return (
-        <Container visible={message.length > 0}>
+        <Container visible={message.length > 0} onClick={ () => setMessage('') }>
             { title && <div className="float-header">
                 <h3>{title}</h3>
                 <hr/>

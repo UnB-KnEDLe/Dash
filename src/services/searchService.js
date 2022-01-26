@@ -48,3 +48,8 @@ export default async function service(url) {
 
     return { headingList, contentList }
 }
+
+export async function count(url) {
+    const response = await fetch(url).then(response => response.json())
+    return response
+}
