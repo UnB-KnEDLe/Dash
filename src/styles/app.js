@@ -114,7 +114,6 @@ export const BigCard = styled.div`
   flex-direction: column;
   width: calc(80% + 15px);  
   max-width: 1390px;
-  border-radius: 10px;
 
   .hidden {
     display: none !important;
@@ -232,15 +231,12 @@ export const DropContainer = styled.div.attrs({
   flex-direction: column;
   justify-content: center;
   place-items: center;
-  margin-top: 20px;
-  border: 1px dashed #6c63ff;
   border-radius: 5px;
   padding: 22px;
-  width: 80%;
   max-width: 1366px;
 
   .drop-icon {
-    animation: bounce;
+    margin-bottom: 15px;
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
@@ -250,21 +246,6 @@ export const DropContainer = styled.div.attrs({
     margin-top: 10px;
   }
 
-  button {
-    cursor: pointer;
-    background: #2980b9;
-    height: 2.5rem;
-    border-radius: 1rem;
-    width: 50%;
-    min-width: 300px;
-    border: 0;
-    margin: 13px !important;
-    color: #fff;
-    font-weight: bold;
-    -webkit-transition: background-color 0.2s;
-    transition: background-color 0.2s;
-    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-  }
   label {
     cursor: pointer;
   }

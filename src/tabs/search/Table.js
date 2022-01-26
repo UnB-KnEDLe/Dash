@@ -13,12 +13,12 @@ export default function Table({data, columns, showEntities, modalData, setModalD
     const [ sortPattern, setSortPattern ] = useState(1);
 
     if(sortColumn !== '') data = data.sort((a, b) => {
-        if(a.entities[sortColumn] > b.entities[sortColumn]) return sortPattern;
-        if(a.entities[sortColumn] < b.entities[sortColumn]) return sortPattern * -1;
+        if(a[sortColumn] > b[sortColumn]) return sortPattern;
+        if(a[sortColumn] < b[sortColumn]) return sortPattern * -1;
         return 0
     });
 
-    const shrinkText = text => {
+    const shrinkText = (text) => {
         if(typeof text !== "string" || text.length <= CHAR_LIMIT) return text
         return text.slice(0, CHAR_LIMIT) + '...'
     }
@@ -28,6 +28,8 @@ export default function Table({data, columns, showEntities, modalData, setModalD
         else setSortColumn(1)
         setSortColumn(column)
     }
+
+    const handleData = (data) => setModalData({entities: data})
 
     return (
         <Container>
@@ -39,7 +41,7 @@ export default function Table({data, columns, showEntities, modalData, setModalD
                                 <span>
                                     { columnsReplace(column) }
                                     { columns[sortColumn] === column &&
-                                        <FontAwesomeIcon style={{transform: `rotate(${sortPattern === 1 ? '0' : '90deg'}`}}icon={faSortUp}/> 
+                                        <FontAwesomeIcon className="sort-icon" style={{transform: sortPattern === 1 ? "rotate(180deg)" : "none"}} icon={faSortUp}/> 
                                     }
                                 </span>
                             </th>
@@ -49,15 +51,16 @@ export default function Table({data, columns, showEntities, modalData, setModalD
             ) }
             <tbody>
                 {data.map((item, index) => (
-                    <tr key={index} onClick={() => setModalData(item)}>
-                        {item.map( entity => (
-                                <td key={index}>{shrinkText(entity)}</td>
+                    <tr key={index} onClick={() => handleData(item)}>
+                        {item.map( (entity, i) => (
+                                <td key={i}>{shrinkText(entity)}</td>
                             ))
                         }
                     </tr>
                 ))}
             </tbody>
-            {Object.keys(modalData).length > 0 && <Modal columns={columns} data={modalData}/>}
+            {Object.keys(modalData).length > 0 &&
+                <Modal columns={columns} data={modalData} setModalData={setModalData} />}
         </Container>
     )
 }

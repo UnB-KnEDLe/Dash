@@ -5,7 +5,9 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 
 import { Container } from '../../styles/pagination';
 
-export default function Pagination({totalPages, currentPage, setCurrentPage, itemsPerPage, setItemsPerPage, showAll}){
+export default function Pagination({contentCount, currentPage, setCurrentPage, itemsPerPage, setItemsPerPage, showAll}){
+    var totalPages = parseInt(Math.ceil(contentCount/itemsPerPage))
+
     const [showInput, setShowInput] = useState(false);
     const optionsCount = [10, 25, 50];
 
@@ -34,7 +36,7 @@ export default function Pagination({totalPages, currentPage, setCurrentPage, ite
                     { optionsCount.map((count, index) => (
                         <option key={index} value={count}>{count}</option>
                     ))}
-                    { showAll && <option value="-1">∞</option> }
+                    { showAll && <option value={totalPages}>∞</option> }
                 </select> 
                 {itemsPerPage > 0 && <span>itens por pág.</span>}
             </div>
@@ -53,7 +55,7 @@ export default function Pagination({totalPages, currentPage, setCurrentPage, ite
                     />
                 ) : (
                     <div className="page-display" onClick={handleShowInput}>
-                        {totalPages === 1 ? 'Página única' : 
+                        {itemsPerPage === totalPages ? 'Página única' : 
                             <>Pág. {currentPage} de {totalPages}</>
                         }
                     </div>

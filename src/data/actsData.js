@@ -47,6 +47,10 @@ export const actsData = {
         base_url: `${BASE_URL}/cessao?`
     },
 
+    contrato: {
+        title: 'Contrato',
+    },
+
     nomeacao_comissionada: {
         search: true,
         title: 'Nomeação Comissionada',
@@ -76,6 +80,19 @@ export const actsData = {
 
     nomeacao_efetiva: {
         search: true,
+        title: 'Nomeação Efetiva',
+        paramsKeys: [
+            {label: 'pessoa', title: 'Nome'},
+            {label: 'cargo', title: 'Cargo'},
+            {label: 'orgao', title: 'Órgão'},
+            {label: 'edital', title: 'Edital'},
+            {label: 'matricula', title: 'Matrícula'},
+        ],
+        
+        base_url: `${BASE_URL}/nomeacao_efetiva?`
+    },
+
+    efetivos_nome: {
         title: 'Nomeação Efetiva',
         paramsKeys: [
             {label: 'pessoa', title: 'Nome'},
@@ -181,7 +198,7 @@ export const actsData = {
 
     tornado_sem_efeito: {
         search: true,
-        title: 'Tornada Sem Efeito Atos de Aposentadoria',
+        title: 'Tornado Sem Efeito Atos de Aposentadoria',
         paramsKeys: [
             {label: 'pessoa', title: 'Nome'},
             {label: 'matricula', title: 'Matrícula'},
@@ -190,6 +207,11 @@ export const actsData = {
             {label: 'dodf', title: 'DODF'},
         ],
         base_url: `${BASE_URL}/tornado_sea?`
-    }
+    },
+
+    sem_efeito_aposentadoria: {
+        title: 'Tornado Sem Efeito Atos de Aposentadoria',
+        base_url: `${BASE_URL}/tornado_sea?`
+    },
 
 }

@@ -21,20 +21,6 @@ export const Container = styled.div`
         border-radius: 5px;
     }
 
-    button {
-        color: var(--primary);
-        background: white;
-        border: 1px solid var(--primary);
-        padding: 5px;
-        border-radius: 5px;
-        font-weight: bold;
-
-        &:hover {
-            background: var(--primary);
-            color: white;
-        }
-    }
-
     .tableContent {
         display: flex;
         flex-direction: column;
@@ -72,7 +58,7 @@ export const InputField = styled.div`
     justify-content: center;
     gap: 10px;
 
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 5px 10px;
     border-radius: 2.5px;
 

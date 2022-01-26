@@ -19,11 +19,10 @@ export default function UploadComponent({changeHandler}) {
                     isDragReject={isDragReject}
                 >
                     <input {...getInputProps()} />
-                    <FontAwesomeIcon className="drop-icon" style={{color: "var(--primary)"}} icon={faUpload} size="5x"/>
+                    <FontAwesomeIcon className="drop-icon" style={{color: "var(--primary)"}} icon={faUpload} size="4x"/>
+                    <button className="btn">Adicionar Arquivos</button>
                     {renderDragMessage(isDragActive, isDragReject)}
-                    <button>
-                    <label>Selecionar Arquivos</label>
-                    </button>
+
                 </DropContainer>
             )}
         </Dropzone>

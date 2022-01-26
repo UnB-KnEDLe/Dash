@@ -48,10 +48,11 @@ export default function Table({data, columns, showEntities, modalData, setModalD
                 </thead>
             ) }
             <tbody>
-                {data.map((item, index) => (
+                { () => console.log(data) }
+                {data.map((item, index) =>  (
                     <tr key={index} onClick={() => setModalData(item)}>
-                        {showEntities ? item.entities.map( entity => (
-                                <td key={index}>{shrinkText(entity)}</td>
+                        {showEntities ? item.entities.map( (entity, i) => (
+                                <td key={i}>{shrinkText(entity)}</td>
                             )) : <td style={{padding: 10}}>{item.text}</td>
                         }
                     </tr>

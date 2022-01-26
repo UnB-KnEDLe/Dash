@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import { actsData } from '../data/actsData';
-import service from '../services/searchService';
+import service, { count } from '../services/searchService';
 
 const SearchContext = createContext();
 
@@ -14,16 +14,22 @@ export default function SearchProvider({ children }) {
     const [baseUrl, setBaseUrl] = useState('');
     const [error, setError] = useState('');
     const [modalData, setModalData] = useState({});
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [contentCount, setContentCount] = useState(0);
 
     const onSubmit = async () => {
         if(actType.length === 0) return
 
         var url = await actsData[actType].base_url
-
+        var count_url = url.length
+        
         Object.keys(filters).forEach( label => {
             if (filters[label] === '') return
             url += `${label}=${filters[label]}&`;
         })
+
+        url = url + 'page=' + currentPage + '&per_page=' + itemsPerPage
 
         setHeading([]);
         setContent({});
@@ -35,7 +41,11 @@ export default function SearchProvider({ children }) {
                 console.log(err)
                 sendError("Houve um erro ao buscar os dados. Tente novamente mais tarde.")
                 setLoading(false)
-            })        
+            })
+            
+
+        await count(url.replace('?','/count?', count_url))
+            .then( res => setContentCount(res) )
 
         setHeading(headingList)
         setContent(contentList)
@@ -64,7 +74,10 @@ export default function SearchProvider({ children }) {
                 error, setError, sendError,
                 baseUrl, setBaseUrl,
                 filters, setFilters, setParameter, onSubmit,
-                modalData, setModalData
+                modalData, setModalData,
+                itemsPerPage, setItemsPerPage,
+                currentPage, setCurrentPage,
+                contentCount, setContentCount
             }}
         >
             {children}
@@ -111,7 +124,23 @@ export function useBaseUrl() {
     const { baseUrl, setBaseUrl } = useContext(SearchContext);
     return { baseUrl, setBaseUrl };
 }
+
 export function useModalData() {
     const { modalData, setModalData } = useContext(SearchContext);
     return { modalData, setModalData };
+}
+
+export function useItemsPerPage() {
+    const { itemsPerPage, setItemsPerPage } = useContext(SearchContext);
+    return { itemsPerPage, setItemsPerPage };
+}
+
+export function useCurrentPage() {
+    const { currentPage, setCurrentPage } = useContext(SearchContext);
+    return { currentPage, setCurrentPage };
+}
+
+export function useContentCount() {
+    const { contentCount, setContentCount } = useContext(SearchContext);
+    return { contentCount, setContentCount };
 }
