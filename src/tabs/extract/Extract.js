@@ -14,7 +14,6 @@ export default function Extract() {
 
     async function changeHandler(files){
         files.forEach( async file => {
-            console.log(file.name);
             if (filenames.includes(file.name)) return
 
             setFilenames([...filenames, file.name])

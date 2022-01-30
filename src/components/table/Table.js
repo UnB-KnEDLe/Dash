@@ -30,35 +30,40 @@ export default function Table({data, columns, showEntities, modalData, setModalD
     }
 
     return (
-        <Container>
-            { showEntities && (
-                <thead>
-                    <tr>
-                        {columns.map((column, index) => (
-                            <th key={index} onClick={ () => handleSort(index) } >
-                                <span>
-                                    { columnsReplace(column) }
-                                    { columns[sortColumn] === column &&
-                                        <FontAwesomeIcon className="sort-icon" style={{transform: sortPattern === 1 ? "rotate(180deg)" : "none"}} icon={faSortUp}/> 
-                                    }
-                                </span>
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-            ) }
-            <tbody>
-                { () => console.log(data) }
-                {data.map((item, index) =>  (
-                    <tr key={index} onClick={() => setModalData(item)}>
-                        {showEntities ? item.entities.map( (entity, i) => (
-                                <td key={i}>{shrinkText(entity)}</td>
-                            )) : <td style={{padding: 10}}>{item.text}</td>
-                        }
-                    </tr>
-                ))}
-            </tbody>
+        <>
+            <Container>
+                { showEntities && (
+                    <thead>
+                        <tr>
+                            {columns.map((column, index) => (
+                                <th key={index} onClick={ () => handleSort(index) } >
+                                    <span>
+                                        { columnsReplace(column) }
+                                        { columns[sortColumn] === column &&
+                                            <FontAwesomeIcon
+                                                className="sort-icon"
+                                                style={{transform: sortPattern === 1 ? "rotate(180deg)" : "none"}}
+                                                icon={faSortUp}
+                                            /> 
+                                        }
+                                    </span>
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                ) }
+                <tbody>
+                    {data.map((item, index) =>  (
+                        <tr key={index} onClick={() => setModalData(item)}>
+                            {showEntities ? item.entities.map( (entity, i) => (
+                                    <td key={i}>{shrinkText(entity)}</td>
+                                )) : <td style={{padding: 10}}>{item.text}</td>
+                            }
+                        </tr>
+                    ))}
+                </tbody>
+            </Container>
             {Object.keys(modalData).length > 0 && <Modal columns={columns} data={modalData} setModalData={setModalData} />}
-        </Container>
+        </>
     )
 }

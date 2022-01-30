@@ -17,6 +17,7 @@ export default function FileManager({changeHandler}){
 
     const handleFileChange = (filename) => {
         if(loadingList.includes(filename)) return;
+        
         if(selectedFile.includes(filename)){
             if (selectedFile.length === 1) return;
             setSelectedFile(selectedFile.filter(file => file !== filename))
