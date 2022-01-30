@@ -10,7 +10,7 @@ import { TableContainer } from "../../styles/table";
 import { useActs, useSelectedFile, useShowEntities, useModalData, useItemsPerPage, useCurrentPage, useActsTypes } from "../../context/extractContext";
 
 export default function Content(){
-    const { acts } = useActs();
+    const { acts, removeActs, addActs } = useActs();
     const { selectedFile } = useSelectedFile();
     const { showEntities, setShowEntities } = useShowEntities();
     const { modalData, setModalData } = useModalData();
@@ -36,7 +36,7 @@ export default function Content(){
     useEffect( () => {
         var newContent = acts[selectedAct].content.filter(item => selectedFile.includes(item.file))
         setContent(newContent.slice(startPage, startPage + itemsPerPage))
-    }, [selectedAct, itemsPerPage, acts, setCurrentPage, startPage, selectedFile, actsTypes]);
+    }, [selectedAct, itemsPerPage, acts, setCurrentPage, startPage, selectedFile, actsTypes, removeActs, addActs]);
 
     return (
         <TableContainer>
@@ -65,6 +65,7 @@ export default function Content(){
                 </div>
             </div>
             <div className="table-container">
+                { content.length === 0 && <h3>Não há atos deste tipo nos arquivos selecionados.</h3> }
                 <Table
                     data={content}
                     columns={columns}

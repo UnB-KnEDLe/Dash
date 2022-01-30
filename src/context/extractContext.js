@@ -35,10 +35,11 @@ export default function ExtractProvider({ children }) {
                 delete newActs[actType]
             }
         }
-
-        setFilenames(filenames.splice(filenames.indexOf(filename), 1))
         setActs(newActs)
-        setSelectedFile(selectedFile => selectedFile.filter(file => file !== filename))
+
+        if(filenames.length === 1) setFilenames([])
+        else setFilenames(filenames.splice(filenames.indexOf(filename), 1))
+        setSelectedFile(selectedFile.filter(file => file !== filename))
     }
 
     return (

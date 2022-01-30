@@ -55,6 +55,7 @@ var columnsLabels = {
 }
 
 export const columnsReplace = columnName => {
+    if(typeof columnName !== 'string') return columnName;
     if (columnName.toLowerCase() in columnsLabels) {
         return columnsLabels[columnName.toLowerCase()];
     } else return columnName.replaceAll('_', ' ');
