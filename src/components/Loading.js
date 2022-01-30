@@ -7,7 +7,7 @@ export default function Loading({state, size}) {
     return (
         <>
             { state && (
-                <div style={{display: 'flex', placeItems: 'center'}}>
+                <div style={{display: 'flex', placeItems: 'center', justifyContent: 'center'}}>
                     <FontAwesomeIcon icon={faSpinner} spin={state} style={{color: "var(--primary)"}} size={size} />
                 </div>
             )}

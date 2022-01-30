@@ -11,8 +11,8 @@ export default function Pagination({contentCount, currentPage, setCurrentPage, i
     const [showInput, setShowInput] = useState(false);
     const optionsCount = [10, 25, 50];
 
-    const nextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
-    const prevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+    const nextPage = () => currentPage < totalPages && setCurrentPage(page => page + 1);
+    const prevPage = () => currentPage > 1 && setCurrentPage(page => page - 1);
 
     const handleShowInput = () => setShowInput(!showInput);
 
