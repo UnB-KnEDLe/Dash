@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from './styles/app'
+import { Main } from './styles/app'
 import TabContainer from './components/TabContainer'
 import { GlobalStyle } from './styles/global';
 
@@ -18,7 +18,7 @@ export default function App() {
   return (
     <ExtractProvider>
       <SearchProvider>
-        <Container>
+        <Main>
           <header>
             <div className="header-content">
               <img className="dodf-logo" src={dodfLogo} alt="Dodf" />
@@ -39,7 +39,7 @@ export default function App() {
             </div>
           </header>
           <TabContainer />
-        </Container>
+        </Main>
         <GlobalStyle />
       </SearchProvider>
     </ExtractProvider>

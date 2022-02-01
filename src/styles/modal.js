@@ -10,8 +10,8 @@ export const Container = styled.div`
     left: 0;
     z-index: 50;
     display: flex;
-    justify-content: center;
     place-items: center;
+    justify-content: center;
     
     .modal-content {
         z-index: 60;
@@ -56,6 +56,7 @@ export const Container = styled.div`
             .modal-section {
                 padding: 5px o;
                 padding-bottom: 5px;
+                text-align: left;
 
                 &:not(:last-child) {
                     border-bottom: 1px solid #eee;
@@ -80,6 +81,7 @@ export const Container = styled.div`
                     display: flex;
                     justify-content: space-between;
                     flex-wrap: wrap;
+                    text-align: left;
                     gap: 10px;
                     padding-bottom: 10px;
                 }

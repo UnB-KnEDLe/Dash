@@ -1,7 +1,7 @@
 import { useActs, useFilenames, useSelectedFile, useLoadingList, useActsTypes } from '../../context/extractContext';
 
 import { service } from "./service";
-import { Container } from "../../styles/app";
+import { Main } from "../../styles/app";
 import Content from "./Content";
 import FileManager from '../../components/FileManager';
 
@@ -12,12 +12,15 @@ export default function Extract() {
     const {setLoadingList} = useLoadingList();
     const {setActsTypes} = useActsTypes();
 
-    async function changeHandler(files){
-        files.forEach( async file => {
+    function changeHandler(files){
+        files.forEach ( file => {
             if (filenames.includes(file.name)) return
 
-            setFilenames([...filenames, file.name])
+            setFilenames(filenames => [...filenames, file.name]);
             setLoadingList(loadingList => [...loadingList, file.name]);
+        } )
+
+        files.forEach( file => {
             service(file)
                 .then(res => {
                     addAct(res)
@@ -33,10 +36,10 @@ export default function Extract() {
 
     return (
         <>
-            <Container className="Extract" style={{overflowY: "hidden"}}>
+            <Main className="Extract" style={{overflowY: "hidden"}}>
                 <h2>Extração de Atos e Entidades do Diário Oficial do Distrito Federal</h2>
                 <FileManager changeHandler={changeHandler}/>
-            </Container>
+            </Main>
             {Object.keys(acts).length > 0 && <Content/>}
         </>
     )

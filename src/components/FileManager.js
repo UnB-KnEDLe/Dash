@@ -7,9 +7,10 @@ import Loading from "./Loading";
 import UploadComponent from "./UploadComponent";
 
 import { useFilenames, useActs, useSelectedFile, useLoadingList, useActsTypes } from "../context/extractContext"
+import { useEffect } from "react";
 
 export default function FileManager({changeHandler}){
-    const { filenames } = useFilenames();
+    const { filenames, setFilenames } = useFilenames();
     const { acts, removeAct } = useActs();
     const { selectedFile, setSelectedFile } = useSelectedFile();
     const { loadingList } = useLoadingList();
@@ -24,8 +25,12 @@ export default function FileManager({changeHandler}){
         } else {
             setSelectedFile([...selectedFile, filename])
         }
-        setActsTypes(Object.keys(acts).filter(act => acts[act].content.length > 0));
     }
+
+    useEffect( () => {
+        setActsTypes(Object.keys(acts).filter(act => acts[act].content.length > 0));
+        setFilenames( filenames => filenames.sort( (a, b) => loadingList.includes(a)) );
+    }, [acts, filenames, loadingList, setActsTypes, setFilenames] )
 
     return (
         <Container>
@@ -36,7 +41,12 @@ export default function FileManager({changeHandler}){
                         { filenames.map( (filename, index) => (
                             <Card key={index} className="card" shadow={1}>
                                 <div>
-                                    {(filenames.length > 1 && !loadingList.includes(filename)) && <input name={filename} type="checkbox" id={filename} checked={selectedFile.includes(filename)} onChange={() => handleFileChange(filename)}/>}
+                                    {(filenames.length > 1 && !loadingList.includes(filename)) &&
+                                        <input name={filename}
+                                        type="checkbox"
+                                        id={filename}
+                                        checked={selectedFile.includes(filename)}
+                                        onChange={() => handleFileChange(filename)}/>}
                                     <Loading size="1x" state={loadingList.includes(filename)} />
                                     <label htmlFor={filename}>{filename}</label>
                                 </div>

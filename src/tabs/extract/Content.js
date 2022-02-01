@@ -18,11 +18,10 @@ export default function Content(){
     const { currentPage, setCurrentPage } = useCurrentPage();
     const { actsTypes } = useActsTypes();
     
-    var startPage = (currentPage - 1) * itemsPerPage;
-    
+    const startPage = (currentPage - 1) * itemsPerPage;
     const [selectedAct, setSelectedAct] = useState(actsTypes[0]);
-    const [columns, setColumns] = useState(acts[selectedAct].columns);
-    const [content, setContent] = useState(acts[selectedAct].content.slice(startPage, startPage + itemsPerPage));
+    const [columns, setColumns] = useState(acts[selectedAct].columns || []);
+    const [content, setContent] = useState(acts[selectedAct].content.slice(startPage, startPage + itemsPerPage) || []);
     
     const contentCount = acts[selectedAct].content.length;
     

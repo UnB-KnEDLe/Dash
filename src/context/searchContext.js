@@ -38,7 +38,6 @@ export default function SearchProvider({ children }) {
         const { headingList, contentList } = await service(url)
             .then( response => response)
             .catch( err => {
-                console.log(err)
                 sendError("Houve um erro ao buscar os dados. Tente novamente mais tarde.")
                 setLoading(false)
             })
@@ -50,7 +49,7 @@ export default function SearchProvider({ children }) {
         setHeading(headingList)
         setContent(contentList)
         
-		setStart(false);
+        setStart(false);
         setLoading(false)
 	}
 

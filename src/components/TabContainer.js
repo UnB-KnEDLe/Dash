@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Tabs, Tab } from '../styles/tabs'
-import { BigCard } from '../styles/app'
+import { Container } from '../styles/app'
 
 import Search from '../tabs/search/Search';
 import Extract from '../tabs/extract/Extract';
@@ -11,7 +11,7 @@ export default function TabContainer() {
     const [activeTab, setActiveTab] = useState(0)
 
     return (
-        <BigCard style={{overflowX: 'hidden'}}>
+        <Container style={{overflowX: 'hidden'}}>
             <Tabs className="tabs">
                 <Tab className="extraction" active={0 === activeTab} onClick={() => setActiveTab(0)}>
                     <FontAwesomeIcon icon={faUpload}/> Extração
@@ -26,6 +26,6 @@ export default function TabContainer() {
             <div className={activeTab !== 1 ? "hidden" : ""} >
                 <Search />
             </div>
-        </BigCard>
+        </Container>
     );
 }
