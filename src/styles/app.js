@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { shade } from "polished";
 import headerBg from "../assets/header-bg.jpg";
 
-export const Container = styled.div`
+export const Main = styled.div`
   display: flex;
   flex-direction: column;
   place-items: center;
@@ -16,15 +16,6 @@ export const Container = styled.div`
   width: 100vw;
 
   text-align: -webkit-center;
-
-  .loading-spinner {
-    color: #3180b9;
-    animation-name: rotation;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    margin: 15px 0;
-  }
 
   header{
     display: flex;
@@ -83,33 +74,9 @@ export const Container = styled.div`
       }
     }
   }
-
-  span{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-
-    div {
-      display: flex;
-      flex-direction: column;
-      padding-right: 8rem;
-      padding-top: 8rem;
-
-      h2 {
-        font-size: 3rem;
-        font-weight: bold;
-        color: var(--primary);
-      }
-      
-      p  {
-        font-size: 2rem;
-        max-width: 50rem;
-      }
-    }
-  }
 `;
 
-export const BigCard = styled.div`
+export const Container = styled.div`
   display: flex;
   margin-top: 15px;
   place-items: center;
@@ -121,50 +88,6 @@ export const BigCard = styled.div`
   .hidden {
     display: none !important;
   } 
-
-  .bigcard-header {
-    display: flex;
-    justify-content: center;
-    place-items: center;
-    gap: 1rem;
-    user-select: none;
-    cursor: pointer;
-  }
-
-  .bigcard-header-button {
-    display: flex;
-    place-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    color: #3180b9;
-    padding: 10px;
-    border-radius: 20px;
-  }
-
-  .bigcard-header-icon {
-    transition: 0.35s;
-  }
-
-  .bigcard-header-icon.hide {
-    transform: rotate(180deg);
-  }
-
-  .bigcard-header-button:hover {
-    color: white;
-    background: #3180b9;
-  }
-
-  h1 {
-    color: #3180b9;
-    font-weight: bold;
-    font-size: 55px;
-    margin-bottom: 10px;
-  }
-
-  h2 {
-    margin-bottom: 2px;
-  }
 `;
 
 export const ButtonExtract = styled.button`

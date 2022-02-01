@@ -5,10 +5,13 @@ import Table from "./Table";
 import Filters from '../../components/Filter';
 import Pagination from '../../components/table/Pagination';
 
-import { useStart, useHeading, useContent, useError, useModalData, useCurrentPage, useItemsPerPage, useFilters, useContentCount } from "../../context/searchContext";
+import { useHeading, useContent,
+	useError, useModalData,
+	useCurrentPage, useItemsPerPage,
+	useFilters, useContentCount } from "../../context/searchContext";
+import { useEffect } from 'react';
 
 export default function Search() {
-	const { start } = useStart();
 	const { heading } = useHeading();
 	const { content } = useContent();
 	const { error } = useError();
@@ -18,16 +21,8 @@ export default function Search() {
 	const { onSubmit } = useFilters();
 	const { contentCount } = useContentCount();
 
-	const handleCurrentPage = (page) => {
-		setCurrentPage(page);
-		onSubmit();
-	}
-
-	const handleItemsPerPage = (items) => {
-		setItemsPerPage(items);
-		onSubmit();
-	}
-
+	useEffect( () => onSubmit(), [currentPage, itemsPerPage])
+	
 	return (
 		<>
 			<Container>
@@ -36,7 +31,6 @@ export default function Search() {
 				</div>
 				<Filters/>
 				{ error.length > 0 && <h3>{error}</h3> }
-
 			</Container>
 			
 			{ content.length > 0 && (
@@ -48,9 +42,9 @@ export default function Search() {
 								<Pagination
 									contentCount={contentCount}
 									currentPage={currentPage}
-									setCurrentPage={handleCurrentPage}
+									setCurrentPage={setCurrentPage}
 									itemsPerPage={itemsPerPage}
-									setItemsPerPage={handleItemsPerPage}
+									setItemsPerPage={setItemsPerPage}
 									showAll
 								/>
 							</div>
@@ -67,7 +61,6 @@ export default function Search() {
 					</div>
 				</TableContainer>
 			) }
-			{ content.length === 0 && !start && <h2 style={{marginTop: 35}}>Não foram encontrados resultados com esses filtros.</h2>}
 		</>
 	);
 }
