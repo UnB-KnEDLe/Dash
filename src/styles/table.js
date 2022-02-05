@@ -7,6 +7,16 @@ export const TableContainer = styled.div`
     margin-bottom: 15px;
     width: 80%;
     overflow-x: hidden;
+    
+    .btn {
+        display: flex;
+        min-width: 0;
+        border: none;
+        place-items: center;
+        justify-content: center;
+        color: #999;
+        margin: 0;
+    }
 
     .toolbar {
         display: flex;
@@ -35,6 +45,10 @@ export const TableContainer = styled.div`
                     border-right: 1px solid #ddd;
                 }
             }
+
+            .export {
+                align-self: center;
+            }
         }
 
         select {
@@ -49,6 +63,10 @@ export const TableContainer = styled.div`
 
     .table-container {
         overflow-x: auto;
+
+        h3 {
+            margin: 3rem 0;
+        }
     }
 `
 
