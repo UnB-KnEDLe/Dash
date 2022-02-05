@@ -13,6 +13,7 @@ export default function Extract() {
     const {setActsTypes} = useActsTypes();
 
     function changeHandler(files){
+        files = files.sort();
         files.forEach ( file => {
             if (filenames.includes(file.name)) return
 

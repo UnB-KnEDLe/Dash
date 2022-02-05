@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { actsData } from "../../data/actsData";
 import Table from '../../components/table/Table';
 
-import ModeSwitch from '../../components/table/ModeSwitch';
+import ModeSwitch from "../../components/table/ModeSwitch";
 import Pagination from "../../components/table/Pagination";
+import Export from "../../components/table/Export";
 
 import { TableContainer } from "../../styles/table";
 
@@ -34,6 +35,12 @@ export default function Content(){
 
     useEffect( () => {
         var newContent = acts[selectedAct].content.filter(item => selectedFile.includes(item.file))
+        if(newContent != null) newContent = newContent.filter( item => {
+            if( item.entities.every( entity => entity === null ) ) return false
+            return !item.entities.some( entity => {
+                return typeof entity === 'object' && entity !== null
+            })
+        } )
         setContent(newContent.slice(startPage, startPage + itemsPerPage))
     }, [selectedAct, itemsPerPage, acts, setCurrentPage, startPage, selectedFile, actsTypes, removeActs, addActs]);
 
@@ -50,6 +57,9 @@ export default function Content(){
                 <div className="right-toolbar">
                     <div className="switch">
                         <ModeSwitch state={showEntities} onClick={setShowEntities} />
+                    </div>
+                    <div className="export">
+                        <Export content={content} columns={columns} title={selectedAct} />
                     </div>
                     <div className="pagination">
                         <Pagination
