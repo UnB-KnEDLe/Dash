@@ -35,12 +35,6 @@ export default function Content(){
 
     useEffect( () => {
         var newContent = acts[selectedAct].content.filter(item => selectedFile.includes(item.file))
-        if(newContent != null) newContent = newContent.filter( item => {
-            if( item.entities.every( entity => entity === null ) ) return false
-            return !item.entities.some( entity => {
-                return typeof entity === 'object' && entity !== null
-            })
-        } )
         setContent(newContent.slice(startPage, startPage + itemsPerPage))
     }, [selectedAct, itemsPerPage, acts, setCurrentPage, startPage, selectedFile, actsTypes, removeActs, addActs]);
 

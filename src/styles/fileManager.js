@@ -29,10 +29,9 @@ export const Container = styled.div`
         }
 
         .list {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            padding: 0 5px;
+            display: grid;
+            grid-gap: 1rem;
+            padding: 0 1rem;
         }
 
         .card {

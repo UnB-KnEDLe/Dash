@@ -52,6 +52,7 @@ var columnsLabels = {
     data_documento: 'Data do Documento',
     tipo_edicao: 'Tipo de Edição',
     a_pedido_ou_nao: 'A pedido ou não',
+    onus: 'Onus',
 }
 
 export const columnsReplace = columnName => {
