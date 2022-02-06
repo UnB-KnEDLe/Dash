@@ -27,7 +27,7 @@ export default function Extract() {
                     addAct(res)
                     setActsTypes(Object.keys(acts).filter(act => acts[act].content.length > 0));
                 })
-                .catch(err => console.log(err))
+                .catch(() => setFilenames(filenames.filter(file => file !== file.name)))
                 .finally(() => {
                     setSelectedFile(selectedFile => [...selectedFile, file.name])
                     setLoadingList(loadingList => loadingList.filter(name => name !== file.name))

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { columnsReplace } from '../../data/columnsData';
-import Modal from '../../components/Modal'
+import TableModal from '../../components/table/TableModal';
 
 import { Container } from '../../styles/table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -60,7 +60,8 @@ export default function Table({data, columns, showEntities, modalData, setModalD
                 ))}
             </tbody>
             {Object.keys(modalData).length > 0 &&
-                <Modal columns={columns} data={modalData} setModalData={setModalData} />}
+                <TableModal columns={columns} data={modalData} onClose={() => setModalData({})} />
+            }
         </Container>
     )
 }
