@@ -11,7 +11,6 @@ export const Container = styled.div`
     margin: 15px 0;
     height: 220px;
     max-height: 220px;
-    gap: 25px;
     
     .filelist {
         overflow-y: auto;
