@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+    hr {
+        margin-bottom: 1rem;
+    }
+    
     .btn {
         &.main {
             width: 2rem;

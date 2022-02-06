@@ -70,6 +70,7 @@ export default function Export({content, columns}) {
                             </li>
                         </ul>
                     </div>
+                    <hr/>
                     <CSVLink
                         data={downloadContent}
                         target="_blank"
@@ -80,7 +81,6 @@ export default function Export({content, columns}) {
                     </CSVLink>
                 </Modal>
             )}
-
         </Container>
     )
 }
