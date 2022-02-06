@@ -7,6 +7,7 @@ import Pagination from "../../components/table/Pagination";
 import Export from "../../components/table/Export";
 
 import { TableContainer } from "../../styles/table";
+import { Toolbar } from "../../styles/toolbar";
 
 import { useActs, useSelectedFile, useShowEntities, useModalData, useItemsPerPage, useCurrentPage, useActsTypes } from "../../context/extractContext";
 
@@ -41,7 +42,7 @@ export default function Content(){
 
     return (
         <TableContainer>
-            <div className="toolbar">
+            <Toolbar>
                 <div className="selector">
                     <select onChange={handleActChange} value={selectedAct}>
                         {actsTypes.map((key, index) => (
@@ -67,7 +68,7 @@ export default function Content(){
                         />
                     </div>
                 </div>
-            </div>
+            </Toolbar>
             <div className="table-container">
                 { content.length === 0 && <h3>Não há atos deste tipo nos arquivos selecionados.</h3> }
                 <Table

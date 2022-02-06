@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { faDownload } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Container } from "../../styles/export"
 import { CSVLink } from "react-csv"
 import Modal from "../Modal"
 import { columnsReplace } from "../../data/columnsData"
@@ -35,7 +34,7 @@ export default function Export({content, columns}) {
     }, [columns, content, downloadColumns] )
 
     return (
-        <Container>
+        <div class="content">
             <button className="btn main" onClick={handleShowModal}>
                 <FontAwesomeIcon icon={faDownload} size="lg"/>
             </button>
@@ -81,6 +80,6 @@ export default function Export({content, columns}) {
                     </CSVLink>
                 </Modal>
             )}
-        </Container>
+        </div>
     )
 }
