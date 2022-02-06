@@ -13,6 +13,9 @@ export default function Extract() {
     const {setActsTypes} = useActsTypes();
 
     function changeHandler(files){
+        files = files.filter(file => !filenames.includes(file.name));
+        if(files.length === 0) return;
+
         files = files.sort();
         files.forEach ( file => {
             if (filenames.includes(file.name)) return
@@ -25,7 +28,7 @@ export default function Extract() {
             service(file)
                 .then(res => {
                     addAct(res)
-                    setActsTypes(Object.keys(acts).filter(act => acts[act].content.length > 0));
+                    setActsTypes(Object.keys(acts));
                 })
                 .catch(() => setFilenames(filenames.filter(file => file !== file.name)))
                 .finally(() => {
