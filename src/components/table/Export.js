@@ -24,7 +24,7 @@ export default function Export({content, columns}) {
     useEffect( () => {
         setDownloadContent( content.map( (item) => {
             const obj = {}
-            item.entities.forEach(
+            item.forEach(
                 (subitem, i) => {
                     if(downloadColumns[i]) obj[columnsReplace(columns[i])] = subitem
                 }

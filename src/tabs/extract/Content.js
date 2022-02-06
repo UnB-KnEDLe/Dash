@@ -25,6 +25,7 @@ export default function Content(){
     const [content, setContent] = useState(acts[selectedAct].content.slice(startPage, startPage + itemsPerPage) || []);
     
     const contentCount = acts[selectedAct].content.length;
+    const exportContent = [...content.entities, content.text];
     
     const handleActChange = async e => {
         const { value } = e.target;
@@ -48,7 +49,7 @@ export default function Content(){
                         ))}
                     </select>
                     <div className="export">
-                        <Export content={content} columns={columns} title={selectedAct} />
+                        <Export content={exportContent} columns={columns} />
                     </div>
                 </div>
                 <div className="right-toolbar">

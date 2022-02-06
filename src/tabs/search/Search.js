@@ -4,6 +4,7 @@ import { TableContainer } from '../../styles/table';
 import Table from "./Table";
 import Filters from '../../components/Filter';
 import Pagination from '../../components/table/Pagination';
+import Export from '../../components/table/Export';
 
 import { useHeading, useContent,
 	useError, useModalData,
@@ -37,7 +38,13 @@ export default function Search() {
 			{ content.length > 0 && (
 				<TableContainer>
 					<div className="toolbar">
-						<h2>Resultado</h2>
+						<div className="left-toolbar">
+							<h2>Resultado</h2>
+							<div className="export">
+								<Export content={content} columns={heading} />
+							</div>
+						</div>
+
 						<div className="right-toolbar">
 							<div className="pagination">
 								<Pagination
