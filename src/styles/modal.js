@@ -15,77 +15,97 @@ export const Container = styled.div`
     
     .modal-content {
         z-index: 60;
-        position: fixed;
-        overflow-y: auto;
-        width: 80%;
         min-width: 500px;
         max-width: 1366px;
-        height: 80%;
+        ${props => props.size === 'lg' && 'width: 80%'};
+        ${props => props.size === 'md' && 'width: 60%'};
+        ${props => props.size === 'sm' && 'width: 40%'};
 
-        background: #fff;
-        padding: 20px;
+        ${props => props.size === 'lg' && 'max-height: 90%'};
+        ${props => props.size === 'md' && 'max-height: 80%'};
+        ${props => props.size === 'sm' && 'max-height: 70%'};
+        
+        display: grid;
+        position: fixed;
+        place-items: center;
 
+        grid-template-rows: 3rem calc(100% - 3rem);
+        
+        padding: 1rem 2rem;
+        background: white;
+        
         .modal-body {
-            position: relative;
-            display: grid;
-            grid-gap: 15px;
-
-            p {
-                padding: 0;
-                border-bottom: none;
-            }
-
-            .modal-header {
-                width: 100%;
-                display: flex;
-                justify-content: flex-end;
-
-                .close-btn {
-                    display: flex;
-                    place-items: center;
-                    justify-content: center;
-                    position: fixed;
-                    width: 30px;
-                    height: 30px;
-                    padding: 0;
-                    margin: 0 !important;
-                    min-width: 0;
-                }
-            } 
-
-            .modal-section {
-                padding: 5px o;
-                padding-bottom: 5px;
-                text-align: left;
-
-                &:not(:last-child) {
-                    border-bottom: 1px solid #eee;
-                    margin-bottom: 15px;
-                }
-
-                & > *:not(:first-child) {
-                    padding-left: 15px;
-                }
-
-                h3 {
-                    margin-bottom: 15px;
-                }
-                
-                &.file {
-                    display: flex;
-                    place-items: center;
-                    gap: 5px;
-                }
-
-                .entities-list {
-                    display: flex;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                    text-align: left;
-                    gap: 10px;
-                    padding-bottom: 10px;
-                }
-            }
+            background: white;
+            width: 100%;
+            max-height: 100%;
+            overflow-y: auto;
+            padding-bottom: 1rem;
         }
+
+        .modal-header {
+            height: 2.5rem;
+
+            width: 100%;
+            display: flex;
+            place-items: center;
+            justify-content: space-between;
+
+            h3 {
+                margin: 0;
+            }
+
+            .close-btn {
+                display: flex;
+                place-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                padding: 0;
+                margin: 0 !important;
+                min-width: 0;
+            }
+        } 
     }
 `;
+
+
+export const ModalContainer = styled.div`
+    p {
+        padding: 0;
+        border-bottom: none;
+    }
+
+    .modal-section {
+        padding: 5px o;
+        padding-bottom: 5px;
+        text-align: left;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+
+        & > *:not(:first-child) {
+            padding-left: 15px;
+        }
+
+        h3 {
+            margin-bottom: 15px;
+        }
+        
+        &.file {
+            display: flex;
+            place-items: center;
+            gap: 5px;
+        }
+
+        .entities-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            text-align: left;
+            gap: 10px;
+            padding-bottom: 10px;
+        }
+    }
+`
