@@ -13,6 +13,7 @@ export default function Table({data, columns, showEntities, modalData, setModalD
     const [ sortPattern, setSortPattern ] = useState(1);
 
     if(sortColumn !== '') data = data.sort((a, b) => {
+        if(Object.keys(a).length === 0 || Object.keys(b).length === 0) return 1;
         if(a.entities[sortColumn] > b.entities[sortColumn]) return sortPattern;
         if(a.entities[sortColumn] < b.entities[sortColumn]) return sortPattern * -1;
         return 0
