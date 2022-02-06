@@ -1,6 +1,6 @@
 import { useActs, useFilenames, useSelectedFile, useLoadingList, useActsTypes } from '../../context/extractContext';
 
-import { service } from "./service";
+import { service } from "../../services/extractService";
 import { Main } from "../../styles/app";
 import Content from "./Content";
 import FileManager from '../../components/FileManager';
