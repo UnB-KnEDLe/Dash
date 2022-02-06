@@ -25,7 +25,7 @@ export default function Content(){
     const [content, setContent] = useState(acts[selectedAct].content.slice(startPage, startPage + itemsPerPage) || []);
     
     const contentCount = acts[selectedAct].content.length;
-    const exportContent = [...content.entities, content.text];
+    const exportContent = content.map(item => [...item.entities, content.text]);
     
     const handleActChange = async e => {
         const { value } = e.target;
