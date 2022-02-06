@@ -54,7 +54,7 @@ export const Toolbar = styled.div`
             
                 :hover {
                     background: white;
-                    color: #333;
+                    color: var(--primary);
                     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
                 }
             }
