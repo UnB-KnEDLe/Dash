@@ -18,12 +18,13 @@ export const Container = styled.div`
         min-width: 500px;
         max-width: 1366px;
         ${props => props.size === 'lg' && 'width: 80%'};
-        ${props => props.size === 'md' && 'width: 60%'};
-        ${props => props.size === 'sm' && 'width: 40%'};
+        ${props => props.size === 'md' && 'width: 50%'};
+        ${props => props.size === 'sm' && 'width: 30%'};
+        ${props => props.size === 'fit' && 'width: fit-content'};
 
         ${props => props.size === 'lg' && 'max-height: 90%'};
-        ${props => props.size === 'md' && 'max-height: 80%'};
-        ${props => props.size === 'sm' && 'max-height: 70%'};
+        ${props => props.size === 'md' && 'max-height: 75%'};
+        ${props => props.size === 'sm' && 'max-height: 60%'};
         
         display: grid;
         position: fixed;

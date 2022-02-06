@@ -24,7 +24,7 @@ export const Main = styled.div`
     height: 8rem;
     background-image: url(${headerBg});
     background-size: cover;
-    background-position: center 53%;
+    background-position: center 48%;
     justify-content: center;
     color: white;
     position: relative;

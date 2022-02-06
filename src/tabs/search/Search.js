@@ -21,6 +21,7 @@ export default function Search() {
 	const { onSubmit } = useFilters();
 	const { contentCount } = useContentCount();
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect( () => onSubmit(), [currentPage, itemsPerPage])
 	
 	return (
