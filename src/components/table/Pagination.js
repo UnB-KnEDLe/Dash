@@ -3,8 +3,6 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-import { Container } from '../../styles/pagination';
-
 export default function Pagination({contentCount, currentPage, setCurrentPage, itemsPerPage, setItemsPerPage, showAll}){
     var totalPages = parseInt(Math.ceil(contentCount/itemsPerPage))
 
@@ -30,7 +28,7 @@ export default function Pagination({contentCount, currentPage, setCurrentPage, i
     }
 
     return (
-        <Container>
+        <div className="content">
             <div className="per-page">
                 <select style={{width: 55}} onChange={handleItemsPerPage} value={itemsPerPage}>
                     { optionsCount.map((count, index) => (
@@ -64,6 +62,6 @@ export default function Pagination({contentCount, currentPage, setCurrentPage, i
                     <FontAwesomeIcon icon={faChevronRight}/>
                 </button>
             </div>
-        </Container>
+        </div>
     )
 }

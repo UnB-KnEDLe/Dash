@@ -18,55 +18,6 @@ export const TableContainer = styled.div`
         margin: 0;
     }
 
-    .toolbar {
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
-        place-items: center;
-        margin-bottom: 25px;
-        padding: 0 15px;
-
-        & > *:not(:last-child) {
-            margin-right: 15px;
-        }
-
-        .selector, .left-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-
-        }
-
-        .right-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            place-items: center;
-            gap: 15px;
-
-            & > * {
-                min-width: 80px;
-            
-                :not(:last-child) {
-                    padding-right: 10px;
-                    border-right: 1px solid #ddd;
-                }
-            }
-
-            .export {
-                align-self: center;
-            }
-        }
-
-        select {
-            font-size: 18px;
-            font-weight: bold;
-            padding: 5px;
-            border-radius: 5px;
-            background: white;
-        }
-    }
-
-
     .table-container {
         overflow-x: auto;
 
