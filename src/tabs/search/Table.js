@@ -6,7 +6,7 @@ import { Container } from '../../styles/table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortUp } from '@fortawesome/free-solid-svg-icons';
 
-const CHAR_LIMIT = 47;
+const CHAR_LIMIT = 50;
 
 export default function Table({data, columns, showEntities, modalData, setModalData}) {
     const [ sortColumn, setSortColumn ] = useState(0);
@@ -20,7 +20,7 @@ export default function Table({data, columns, showEntities, modalData, setModalD
 
     const shrinkText = (text) => {
         if(typeof text !== "string" || text.length <= CHAR_LIMIT) return text
-        return text.slice(0, CHAR_LIMIT) + '...'
+        return text.slice(0, CHAR_LIMIT - 3) + '...'
     }
 
     const handleSort = (column) => {

@@ -30,6 +30,12 @@ export const TableContainer = styled.div`
             margin-right: 15px;
         }
 
+        .selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+
+        }
 
         .right-toolbar {
             display: flex;

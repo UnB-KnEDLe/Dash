@@ -47,13 +47,13 @@ export default function Content(){
                             <option key={index} value={key}>{actsData[key].title || key.replace('_', ' ')}</option>
                         ))}
                     </select>
+                    <div className="export">
+                        <Export content={content} columns={columns} title={selectedAct} />
+                    </div>
                 </div>
                 <div className="right-toolbar">
                     <div className="switch">
                         <ModeSwitch state={showEntities} onClick={setShowEntities} />
-                    </div>
-                    <div className="export">
-                        <Export content={content} columns={columns} title={selectedAct} />
                     </div>
                     <div className="pagination">
                         <Pagination
