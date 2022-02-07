@@ -11,6 +11,7 @@ import { useHeading, useContent,
 	useCurrentPage, useItemsPerPage,
 	useFilters, useContentCount } from "../../context/searchContext";
 import { useEffect } from 'react';
+import { Toolbar } from '../../styles/toolbar';
 
 export default function Search() {
 	const { heading } = useHeading();
@@ -37,7 +38,7 @@ export default function Search() {
 			
 			{ content.length > 0 && (
 				<TableContainer>
-					<div className="toolbar">
+					<Toolbar>
 						<div className="left-toolbar">
 							<h2>Resultado</h2>
 							<div className="export">
@@ -57,7 +58,7 @@ export default function Search() {
 								/>
 							</div>
 						</div>
-					</div>
+					</Toolbar>
 					<div className="table-container">
 						<Table
 							data={content}
