@@ -34,7 +34,7 @@ export default function Export({content, columns}) {
     }, [columns, content, downloadColumns] )
 
     return (
-        <div class="content">
+        <div className="content">
             <button className="btn main" onClick={handleShowModal}>
                 <FontAwesomeIcon icon={faDownload} size="lg"/>
             </button>

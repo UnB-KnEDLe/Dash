@@ -6,6 +6,7 @@ export const TableContainer = styled.div`
     max-width: 1366px;
     margin-bottom: 15px;
     width: 80%;
+    margin: auto;
     overflow-x: hidden;
     
     .btn {
