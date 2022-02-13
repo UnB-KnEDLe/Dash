@@ -4,7 +4,7 @@ export const TableContainer = styled.div`
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     padding: 15px 0;
     max-width: 1366px;
-    width: 97%;
+    width: 99%;
     margin: auto;
     overflow-x: hidden;
     

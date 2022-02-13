@@ -80,7 +80,7 @@ export const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   max-width: 1390px;
-  width: 100%;
+  width: 95%;
   padding-bottom: 15px;
 
   .hidden {
