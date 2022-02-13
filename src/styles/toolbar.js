@@ -61,6 +61,15 @@ export const Toolbar = styled.div`
                     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
                 }
             }
+
+            .inline {
+                display: flex;
+                justify-content: center;
+
+                & > *:not(:last-child) {
+                    border-right: 1px solid #eee;
+                }
+            }
         
             .form-group {
                 width: fit-content;
@@ -68,6 +77,64 @@ export const Toolbar = styled.div`
                 display: grid;
                 grid-gap: 1rem;
                 padding: 1rem;
+
+                &.download-type {
+                    display: grid;
+                    place-items: center;
+
+                    & > div {
+                        display: flex;
+                        gap: .5rem;
+                    }
+
+                    button {
+                        padding: 0 1rem;
+                        background: white;
+                        color: var(--primary);
+
+                        &.active {
+                            background: var(--primary);
+                            color: white;
+                        }
+                    }
+                }
+
+                &.pdf-orientation {
+                    display: grid;
+                    place-items: center;
+
+                    & > div {
+                        display: flex;
+                        place-items: center;
+                        gap: 1rem;
+                    }
+
+                    button {
+                        transition: .5s;
+                        min-width: 0;
+                        width: 60px;
+                        height: 60px;
+                        border: none;
+                        color: var(--primary);
+                        background: white;
+                        border-radius: 50%;
+
+                        &.active {
+                            transform: rotate(-90deg);
+                            
+                            &:hover {
+                                transform: rotate(-75deg);
+                            }
+                        }
+
+                        &:hover {
+                            background: var(--primary);
+                            color: white;
+
+                            transform: rotate(-15deg);
+                        }
+                    }
+                }
             }
         
             ul {

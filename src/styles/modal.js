@@ -23,10 +23,11 @@ export const Container = styled.div`
         ${props => props.size === 'sm' && 'width: 30%'};
         ${props => props.size === 'fit' && 'width: fit-content'};
 
-        ${props => props.size === 'lg' && 'max-height: 90%'};
-        ${props => props.size === 'md' && 'max-height: 75%'};
-        ${props => props.size === 'sm' && 'max-height: 60%'};
-        
+        ${props => props.size === 'lg' && 'height: 90%'};
+        ${props => props.size === 'md' && 'height: 75%'};
+        ${props => props.size === 'sm' && 'height: 60%'};
+        ${props => props.size === 'fit' && 'height: fit-content'};
+
         display: grid;
         position: fixed;
         place-items: center;
