@@ -4,7 +4,7 @@ import TableModal from './TableModal';
 
 import { Container } from '../../styles/table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortUp } from '@fortawesome/free-solid-svg-icons';
+import { faSortAlphaUpAlt } from '@fortawesome/free-solid-svg-icons';
 
 const CHAR_LIMIT = 50;
 
@@ -44,7 +44,7 @@ export default function Table({data, columns, showEntities, modalData, setModalD
                                             <FontAwesomeIcon
                                                 className="sort-icon"
                                                 style={{transform: sortPattern === 1 ? "rotate(180deg)" : "none"}}
-                                                icon={faSortUp}
+                                                icon={faSortAlphaUpAlt}
                                             /> 
                                         }
                                     </span>
