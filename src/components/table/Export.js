@@ -36,7 +36,7 @@ export default function Export({content, columns}) {
     return (
         <div className="content">
             <button className="btn main" onClick={handleShowModal}>
-                <FontAwesomeIcon icon={faDownload} size="lg"/>
+                <FontAwesomeIcon icon={faDownload} size="md"/>
             </button>
             {showModal && (
                 <Modal size="fit" className="export-modal" onClose={handleShowModal} title="Exportar Tabela">

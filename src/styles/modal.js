@@ -17,6 +17,7 @@ export const Container = styled.div`
         z-index: 60;
         min-width: 500px;
         max-width: 1366px;
+        height: 100%;
         ${props => props.size === 'lg' && 'width: 80%'};
         ${props => props.size === 'md' && 'width: 50%'};
         ${props => props.size === 'sm' && 'width: 30%'};

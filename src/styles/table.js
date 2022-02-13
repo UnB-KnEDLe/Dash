@@ -4,8 +4,7 @@ export const TableContainer = styled.div`
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     padding: 15px 0;
     max-width: 1366px;
-    margin-bottom: 15px;
-    width: 80%;
+    width: 97%;
     margin: auto;
     overflow-x: hidden;
     
@@ -50,7 +49,6 @@ export const Container = styled.table`
             transition: .5s;
             text-align: left;
             padding: 5px;
-            border-bottom: 2px solid #ccc;
             place-items: center;
             
             &:first-child {
@@ -67,9 +65,10 @@ export const Container = styled.table`
             
             span {
                 display: flex;
-                flex-direction: column;
+                justify-content: space-between;
                 place-items: flex-start center;
                 gap: 4px;
+                color: #999;
 
                 .sort-icon {
                     transition: .25s;
@@ -85,17 +84,14 @@ export const Container = styled.table`
 
     tbody {
         tr {
-            :nth-child(2n-1) {
-                background: #eee;
-            }
-
             :hover {
-                background: #ddd;
+                background: #e1edf5;
             }
         }
         
         td {
-            padding: 0 5px;
+            border-top: 1px solid #eee;
+            padding: 8px 5px;
 
             &:first-child {
                 padding-left: 15px;

@@ -5,7 +5,7 @@ export const Extract = styled.div`
     padding: 15px 0;
     max-width: 1366px;
     margin-bottom: 15px;
-    width: 80%;
+    width: max-content;
     overflow-x: hidden;
 
     .toolbar {
@@ -15,11 +15,11 @@ export const Extract = styled.div`
         place-items: center;
         margin-bottom: 25px;
         padding: 0 15px;
+        width: 100%;
 
         & > *:not(:last-child) {
             margin-right: 15px;
         }
-
 
         .right-toolbar {
             display: flex;

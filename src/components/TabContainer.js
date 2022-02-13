@@ -20,10 +20,10 @@ export default function TabContainer() {
                     <FontAwesomeIcon icon={faSearch}/> Pesquisa
                 </Tab>
             </Tabs>
-            <div className={activeTab !== 0 ? "hidden" : ""} >
+            <div className={activeTab !== 0 && "hidden"} >
                 <Extract />
             </div>
-            <div className={activeTab !== 1 ? "hidden" : ""} >
+            <div className={activeTab !== 1 && "hidden"} >
                 <Search />
             </div>
         </Container>

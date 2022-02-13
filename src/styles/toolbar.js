@@ -34,11 +34,15 @@ export const Toolbar = styled.div`
         gap: 1rem;
 
         .export {
+            // padding: .5rem;
+            
             hr {
                 margin-bottom: 1rem;
             }
             
             .btn {
+                background: var(--primary);
+
                 &.main {
                     width: 2rem;
                     height: 2rem;
@@ -51,10 +55,9 @@ export const Toolbar = styled.div`
                 place-items: center;
                 text-decoration: none;
                 min-width: 0;
-            
+                color: white;
+                
                 :hover {
-                    background: white;
-                    color: var(--primary);
                     box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
                 }
             }
@@ -123,7 +126,11 @@ export const Toolbar = styled.div`
                     background: white;
                     border-radius: 50%;
                     transition: .35s;
-                    ${props => props.state &&'margin-left: 10px'};
+
+                    &.active {
+                        margin-left: 10px;
+                    }
+
                 }
             }
         }

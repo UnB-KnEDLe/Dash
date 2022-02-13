@@ -12,8 +12,8 @@ export const Main = styled.div`
   :last-child {
     padding-bottom: 20px;
   }
-  
-  width: 100vw;
+
+  width: 100%;
 
   text-align: -webkit-center;
 
@@ -79,8 +79,9 @@ export const Container = styled.div`
   place-items: center;
   justify-content: center;
   flex-direction: column;
-  width: calc(80% + 15px);  
   max-width: 1390px;
+  width: 100%;
+  padding-bottom: 15px;
 
   .hidden {
     display: none !important;
