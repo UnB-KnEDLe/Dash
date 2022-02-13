@@ -5,7 +5,7 @@ import { Container } from '../styles/modal';
 export default function Modal({children, onClose, title, size}){
     return (
         <Container size={size || 'lg'}>
-            <div className="modal-content">
+            <div className="modal-content fade-up">
                 <div className="modal-header">
                     <h3>{title}</h3>
                     <button className="close-btn btn" onClick={onClose}>
