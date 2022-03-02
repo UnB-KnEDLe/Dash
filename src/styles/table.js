@@ -84,6 +84,8 @@ export const Container = styled.table`
 
     tbody {
         tr {
+            max-height: 3rem;
+
             :hover {
                 background: #e1edf5;
             }
@@ -91,7 +93,9 @@ export const Container = styled.table`
         
         td {
             border-top: 1px solid #eee;
-            padding: 8px 5px;
+            padding: .5rem;
+            wrap-text: everywhere;
+
 
             &:first-child {
                 padding-left: 15px;

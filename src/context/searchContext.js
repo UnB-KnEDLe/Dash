@@ -36,12 +36,15 @@ export default function SearchProvider({ children }) {
         setLoading(true)
 
         const { headingList, contentList } = await service(url)
-            .then( response => response)
-            .catch( err => {
+            .then( response => {
+                let { headingList, contentList } = response;
+                contentList = contentList.map( item => ({ entities: item }) )
+                return { headingList, contentList }
+            })
+            .catch( () => {
                 sendError("Houve um erro ao buscar os dados. Tente novamente mais tarde.")
                 setLoading(false)
             })
-            
 
         await count(url.replace('?','/count?', count_url))
             .then( res => setContentCount(res) )

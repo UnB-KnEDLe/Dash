@@ -43,6 +43,13 @@ export const Container = styled.div`
             max-height: 100%;
             overflow-y: auto;
             padding-bottom: 1rem;
+            align-self: flex-start;
+
+            h1, h2, h3, h4, h5, h6 {
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
         }
 
         .modal-header {
@@ -76,6 +83,7 @@ export const ModalContainer = styled.div`
     p {
         padding: 0;
         border-bottom: none;
+        line-height: 1.5rem;
     }
 
     .modal-section {
