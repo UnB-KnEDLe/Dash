@@ -1,7 +1,7 @@
 import { Container } from '../../styles/search';
 import { TableContainer } from '../../styles/table';
 
-import Table from "./Table";
+import Table from "../../components/table/Table";
 import Filters from '../../components/Filter';
 import Pagination from '../../components/table/Pagination';
 import Export from '../../components/table/Export';
@@ -42,7 +42,7 @@ export default function Search() {
 						<div className="left-toolbar">
 							<h2>Resultado</h2>
 							<div className="export">
-								<Export content={content} columns={heading} />
+								<Export content={content.map(item => item.entities)} columns={heading} />
 							</div>
 						</div>
 

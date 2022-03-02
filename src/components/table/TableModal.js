@@ -26,7 +26,7 @@ export default function TableModal({data, columns, onClose}){
             return text
         }
         
-        textEl.current.innerHTML = colorizeText(textEl.current.innerText)
+        if(text) textEl.current.innerHTML = colorizeText(textEl.current.innerText)
     }, [text, entities, columns, hoverColumn])
 
     return (
@@ -41,7 +41,7 @@ export default function TableModal({data, columns, onClose}){
                     <div className="entities-list">
                         {entities?.map((entity, index) => 
                             entity !== null && (
-                                <Card shadow={1} onMouseOver={() => setHoverColumn(index)} onMouseLeave={() => setHoverColumn(-1)} colorLeft={colors[index]} key={index}>
+                                <Card shadow={1} hover onMouseOver={() => setHoverColumn(index)} onMouseLeave={() => setHoverColumn(-1)} colorLeft={colors[index]} key={index}>
                                     <h4>{columnsReplace(columns[index])}</h4>
                                     <p>{entity}</p>
                                 </Card>
