@@ -39,7 +39,7 @@ export default function Filters() {
 
     return (
         <>
-            <select onChange={onChangeActType} >	
+            <select className="filter-select" onChange={onChangeActType} >	
                 <option value="">Selecione o Tipo de Ato</option>
                 { selectOptions.map((key, index) => (
                     <option key={index} value={key}>{actsData[key].title}</option>
