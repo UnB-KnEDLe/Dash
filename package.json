@@ -14,7 +14,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.4",
     "base-64": "^1.0.0",
-    "cypress": "^9.2.1",
+    "cypress": "^9.5.1",
     "eslint": "^7.32.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.23",
