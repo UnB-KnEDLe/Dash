@@ -1,4 +1,4 @@
-import {actsData} from '../src/data/actsData';
+import {actsData} from '../../src/data/actsData';
 
 describe('Search Tests', () => {
     it('Check filters placeholders and length', () => {
