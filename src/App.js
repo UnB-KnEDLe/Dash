@@ -26,14 +26,14 @@ export default function App() {
                 <a href="http://nido.unb.br/">
                   <img src={knedleLogo} alt="Knedle" />
                 </a>
-                <a href="http://unb.br/">
-                  <img src={unbLogo} alt="UnB" />
-                </a>
                 <a href="https://www.fap.df.gov.br/">
                   <img src={fapdflogo} alt="FAP DF" />
                 </a>
                 <a href="https://www.finatec.org.br/">
                   <img src={finateclogo} alt="Finatec" />
+                </a>
+                <a href="http://unb.br/">
+                  <img src={unbLogo} alt="UnB" />
                 </a>
               </div>
             </div>
