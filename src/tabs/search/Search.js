@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Container } from '../../styles/search';
 import { TableContainer } from '../../styles/table';
 
@@ -12,6 +13,8 @@ import { useHeading, useContent,
 	useFilters, useContentCount } from "../../context/searchContext";
 import { useEffect } from 'react';
 import { Toolbar } from '../../styles/toolbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 export default function Search() {
 	const { heading } = useHeading();
@@ -22,6 +25,8 @@ export default function Search() {
 	const { itemsPerPage, setItemsPerPage } = useItemsPerPage();
 	const { onSubmit } = useFilters();
 	const { contentCount } = useContentCount();
+
+	const [ showColumnFilter, setShowColumnFilter ] = useState(false);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	useEffect( () => onSubmit(), [currentPage, itemsPerPage])
@@ -47,6 +52,9 @@ export default function Search() {
 						</div>
 
 						<div className="right-toolbar">
+							<div className="column-filter">
+								<button onClick={() => setShowColumnFilter(i => !i)}><FontAwesomeIcon icon={faFilter}/></button>
+							</div>
 							<div className="pagination">
 								<Pagination
 									contentCount={contentCount}
@@ -66,6 +74,7 @@ export default function Search() {
 							showEntities={true}
 							modalData={modalData}
 							setModalData={setModalData}
+							showColumnFilter={showColumnFilter}
 						/>
 					</div>
 				</TableContainer>

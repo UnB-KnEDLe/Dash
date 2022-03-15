@@ -9,6 +9,9 @@ import Export from "../../components/table/Export";
 import { TableContainer } from "../../styles/table";
 import { Toolbar } from "../../styles/toolbar";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
+
 import { useActs, useSelectedFile, useShowEntities, useModalData, useItemsPerPage, useCurrentPage, useActsTypes } from "../../context/extractContext";
 
 export default function Content(){
@@ -24,6 +27,7 @@ export default function Content(){
     const [selectedAct, setSelectedAct] = useState(actsTypes[0]);
     const [columns, setColumns] = useState(acts[selectedAct].columns || []);
     const [content, setContent] = useState(acts[selectedAct].content.slice(startPage, startPage + itemsPerPage) || []);
+    const [showColumnFilter, setShowColumnFilter] = useState(false);
     
     const contentCount = acts[selectedAct].content.length;
     const exportContent = content.map(item => [...item.entities, content.text]);
@@ -54,6 +58,9 @@ export default function Content(){
                     </div>
                 </div>
                 <div className="right-toolbar">
+                    <div className="column-filter">
+                        <button onClick={() => setShowColumnFilter(i => !i)}><FontAwesomeIcon icon={faFilter}/></button>
+                    </div>
                     <div className="switch">
                         <ModeSwitch state={showEntities} onClick={setShowEntities} />
                     </div>
@@ -77,6 +84,7 @@ export default function Content(){
                     showEntities={showEntities}
                     modalData={modalData}
                     setModalData={setModalData}
+                    showColumnFilter={showColumnFilter}
                 />
             </div>
         </TableContainer>

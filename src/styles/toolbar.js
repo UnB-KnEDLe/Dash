@@ -164,6 +164,15 @@ export const Toolbar = styled.div`
             }
         }
 
+        .column-filter {
+            button {
+                background: white;
+                padding: 8px;
+                border-width: 1px;
+                border-radius: 25%;
+            }
+        }
+
         .switch {
             .content {
                 display: flex;

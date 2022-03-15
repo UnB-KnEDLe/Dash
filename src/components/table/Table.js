@@ -8,9 +8,20 @@ import { faSortAlphaUpAlt } from '@fortawesome/free-solid-svg-icons';
 
 const CHAR_LIMIT = 50;
 
-export default function Table({data, columns, showEntities, modalData, setModalData}) {
+export default function Table({data, columns, showEntities, modalData, setModalData, showColumnFilter}) {
     const [ sortColumn, setSortColumn ] = useState(0);
     const [ sortPattern, setSortPattern ] = useState(1);
+    const [ filterColumn, setFilterColumn ] = useState({});
+
+    if (Object.keys(filterColumn).length > 0) data = data.filter(row => {
+        const newRow = {...row.entities};
+        var result = true
+        Object.keys(filterColumn).forEach(key => {
+            var filterValue = filterColumn[key].toLowerCase();
+            if(newRow[key].toLowerCase().search(filterValue) === -1) result = false;
+        });
+        return result;
+    })
 
     if(sortColumn !== '') data = data.sort((a, b) => {
         if(Object.keys(a).length === 0 || Object.keys(b).length === 0) return 1;
@@ -29,11 +40,25 @@ export default function Table({data, columns, showEntities, modalData, setModalD
         setSortColumn(column)
     }
 
+    const handleFilter = (e, index) => {
+        const { value } = e.target;
+        setFilterColumn({...filterColumn, [index]: value})
+    }
+
     return (
         <>
             <Container>
-                { (showEntities && data.length > 0) && (
+                { (showEntities) && (
                     <thead>
+                        {showColumnFilter && (
+                            <tr>
+                                { columns.map((column, index) => (
+                                    <th>
+                                        <input type="text" placeholder="Filtro da coluna" onChange={(e) => handleFilter(e, index)}/>
+                                    </th>
+                                ))}
+                            </tr>
+                        )}
                         <tr>
                             {columns.map((column, index) => (
                                 <th key={index} onClick={ () => handleSort(index) } >
@@ -53,6 +78,7 @@ export default function Table({data, columns, showEntities, modalData, setModalD
                     </thead>
                 ) }
                 <tbody>
+                    { data.length === 0 && Object.keys(filterColumn).length > 0 && (<h3 style={{position: "absolute", width: "100%", maxWidth: 1366, textAlign: "center"}}>Sem resultados para esses filtros.</h3>) }
                     {data.map((item, index) =>  (
                         <tr key={index} onClick={() => setModalData(item)}>
                             {showEntities ? item.entities.map( (entity, i) => (
