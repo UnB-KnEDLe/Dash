@@ -30,24 +30,16 @@ export const Container = styled.div`
     display: flex;
     width: 100%;
     flex-direction: row;
-    height: 11.5rem;
+    height: 8rem;
     background-image: url(${headerBg});
     background-size: cover;
-    background-position: center 53%;
+    background-position: center 48%;
+    background-color: #0c3652bd;
+    background-blend-mode: multiply;
     justify-content: center;
     color: white;
     position: relative;
     transition: .25s;
-
-    .background-header {
-      background: #0c365299;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      top: 0;
-      left: 0;
-    }
     
     .header-content {
       display: flex;
@@ -62,7 +54,7 @@ export const Container = styled.div`
       .dodf-logo {
         display: flex;
         max-width: 250px;
-        width: 80%;
+        width: 70%;
         height: auto;
 
         :last-child {
@@ -70,15 +62,20 @@ export const Container = styled.div`
         }
       }
 
-      > a {
+      .header-logos {
         display: flex;
-        place-items: center;
-        
-        img {
-          padding: 5px;
-          max-width: 95px;
-          width: 100%;
-          height: auto;
+        gap: 1rem;
+
+        a {
+          display: flex;
+          place-items: center;
+          
+          img {
+            padding: 5px;
+            max-width: 95px;
+            width: 100%;
+            height: auto;
+          }
         }
       }
     }

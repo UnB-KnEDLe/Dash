@@ -1432,7 +1432,7 @@
     "@types/yargs" "^16.0.0"
     "chalk" "^4.0.0"
 
-"@material-ui/core@^4.0.0", "@material-ui/core@^4.12.2":
+"@material-ui/core@^4.0.0", "@material-ui/core@^4.12.0", "@material-ui/core@^4.12.2":
   "integrity" "sha512-Q1npB8V73IC+eV2X6as+g71MpEGQwqKHUI2iujY62npk35V8nMx/bUXAHjv5kKG1BZ8s8XUWoG6s/VkjYPjjQA=="
   "resolved" "https://registry.npmjs.org/@material-ui/core/-/core-4.12.2.tgz"
   "version" "4.12.2"
@@ -1450,7 +1450,7 @@
     "react-is" "^16.8.0 || ^17.0.0"
     "react-transition-group" "^4.4.0"
 
-"@material-ui/icons@^4.0.0", "@material-ui/icons@^4.11.2":
+"@material-ui/icons@^4.11.0", "@material-ui/icons@^4.11.2":
   "integrity" "sha512-fQNsKX2TxBmqIGJCSi3tGTO/gZ+eJgWmMJkgDiOfyNaunNaxcklJQFaFogYcFl0qFuaEz1qaXYXboa/bUXVSOQ=="
   "resolved" "https://registry.npmjs.org/@material-ui/icons/-/icons-4.11.2.tgz"
   "version" "4.11.2"
@@ -7786,10 +7786,10 @@
   "resolved" "https://registry.npmjs.org/ms/-/ms-2.1.1.tgz"
   "version" "2.1.1"
 
-"mui-datatables@^3.7.7":
-  "integrity" "sha512-IHK6snQybKdyZET2G1ODN3cCrFE6u2TUk/wIGUMq7+vANXAALYjh7EXeJtesYmzR/7R7ctv4/V8uARraSQMKPg=="
-  "resolved" "https://registry.npmjs.org/mui-datatables/-/mui-datatables-3.7.7.tgz"
-  "version" "3.7.7"
+"mui-datatables@^3.8.5":
+  "integrity" "sha512-VS54Xkm5eXsPOUvzG3vXVjgSd2/nswwvhMK2D4PiHpV5MRJwfc6mdyuskh3s3jUi3NC8N+u7NsxX4pY14qaoKQ=="
+  "resolved" "https://registry.npmjs.org/mui-datatables/-/mui-datatables-3.8.5.tgz"
+  "version" "3.8.5"
   dependencies:
     "@babel/runtime-corejs3" "^7.12.1"
     "clsx" "^1.1.1"
