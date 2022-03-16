@@ -8238,7 +8238,7 @@
   "resolved" "https://registry.npmjs.org/ms/-/ms-2.1.1.tgz"
   "version" "2.1.1"
 
-"mui-datatables@^3.8.5":
+"mui-datatables@^3.7.7":
   "integrity" "sha512-VS54Xkm5eXsPOUvzG3vXVjgSd2/nswwvhMK2D4PiHpV5MRJwfc6mdyuskh3s3jUi3NC8N+u7NsxX4pY14qaoKQ=="
   "resolved" "https://registry.npmjs.org/mui-datatables/-/mui-datatables-3.8.5.tgz"
   "version" "3.8.5"
