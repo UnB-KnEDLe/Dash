@@ -4,7 +4,7 @@ import { Container } from '../styles/app'
 
 import Search from '../tabs/search/Search';
 import Extract from '../tabs/extract/Extract';
-import Neo4j from "../tabs/neo4j/neo4j";
+import NeoGraph from "../tabs/neo4j/neo4j";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faUpload, faHatCowboySide } from "@fortawesome/free-solid-svg-icons";
 
@@ -31,7 +31,7 @@ export default function TabContainer() {
                 <Search />
             </div>
             <div className={activeTab !== 2 ? "hidden" : ""} >
-                <Neo4j/>
+                <NeoGraph/>
             </div>
         </Container>
     );

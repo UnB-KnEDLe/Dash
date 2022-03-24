@@ -1,59 +1,29 @@
-import { useReadCypher } from "use-neo4j";
-import { useEffect, useRef } from "react";
-import NeoVis from "neovis.js";
 
-export default function Neo4j() {
-    const vizRef = useRef();
-    const query = `match (p:Pessoa) where p.nome contains('MARIA') return p limit 10`
-    const { loading, error, records, first } = useReadCypher(query);
+import React, { useEffect, useRef } from "react";
+import Neovis from "neovis.js/dist/neovis.js";
 
-    const HOST="164.41.76.30"
-    const PORT=8080
-    const USER="neo4j"
-    const PASSWORD="nido@CIC2021"
-    // const VERSION=4
-    const DATABASE="neo4j"
+const NeoGraph = (props) => {
+  const visRef = useRef();
 
-    useEffect(() => {
-        const config = {
-            container_id: vizRef.current.id,
-            server_url: "neo4j://"+HOST+":"+PORT,
-            server_user: USER,
-            server_password: PASSWORD,
-            server_scheme: DATABASE,
-            labels: {
-                Troll: {
-                    caption: "user_key",
-                    size: "pagerank",
-                    community: "community",
-                },
-            },
-            relationships: {
-                RETWEETS: {
-                    caption: false,
-                    thickness: "count",
-                },
-            },
-            initial_cypher: query
-        };
-        const vis = new NeoVis(config);
-        vis.render();
-    })
-    
+  useEffect(() => {
+    const config = {
+      container_id: visRef.current.id,
+      server_url: "neo4j://164.41.76.30:8080",
+      server_user: "neo4j",
+      server_password: "nido@CIC2021",
+      initial_cypher:
+        "match (p:Pessoa) where p.nome contains('MARIA') return p limit 10",
+    };
+    const vis = new Neovis(config);
+    vis.render();
+  }, []);
 
-    if(!error) console.log(error)
+  return (
+    <div
+      id={"hehe"}
+      ref={visRef}
+    />
+  );
+};
 
-
-    return (
-        <div>
-            <div ref={vizRef}/>
-        </div>
-    );
-}
-
-// function drawGraph() {
-//     var viz;
-
-//     viz = new NeoVis.default(config);
-//     viz.render();
-// }
+export default NeoGraph;
