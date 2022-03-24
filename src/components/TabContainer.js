@@ -4,11 +4,12 @@ import { Container } from '../styles/app'
 
 import Search from '../tabs/search/Search';
 import Extract from '../tabs/extract/Extract';
+import Neo4j from "../tabs/neo4j/neo4j";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUpload, faHatCowboySide } from "@fortawesome/free-solid-svg-icons";
 
 export default function TabContainer() {
-    const [activeTab, setActiveTab] = useState(0)
+    const [activeTab, setActiveTab] = useState(2)
 
     return (
         <Container style={{overflowX: 'hidden'}}>
@@ -19,12 +20,18 @@ export default function TabContainer() {
                 <Tab className="search" active={1 === activeTab} onClick={() => setActiveTab(1)}>
                     <FontAwesomeIcon icon={faSearch}/> Pesquisa
                 </Tab>
+                <Tab className="search" active={2 === activeTab} onClick={() => setActiveTab(2)}>
+                    <FontAwesomeIcon icon={faHatCowboySide}/> Neo4J
+                </Tab>
             </Tabs>
             <div className={activeTab !== 0 ? "hidden" : ""} >
                 <Extract />
             </div>
             <div className={activeTab !== 1 ? "hidden" : ""} >
                 <Search />
+            </div>
+            <div className={activeTab !== 2 ? "hidden" : ""} >
+                <Neo4j/>
             </div>
         </Container>
     );
