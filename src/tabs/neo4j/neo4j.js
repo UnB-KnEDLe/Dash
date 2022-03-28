@@ -1,37 +1,71 @@
 import React, { useEffect, useState, useRef } from "react";
-import Neovis from "neovis.js/dist/neovis.js";
+import NeoVis from "neovis.js/dist/neovis.js";
+import Loading from "../../components/Loading";
 
-import "./style.css"
+import "./style.css";
 
 const NeoGraph = () => {
-    const visRef = useRef();
-    const [cypherText, setCypherText] = useState("match (p:Pessoa) where p.nome contains('MARIA') return p limit 10");
-    const [cypher, setCypher] = useState(cypherText);
+  const visRef = useRef();
 
-    const onRunCypher = () => setCypher(cypherText);
+  const [error, setError] = useState("");
+  const [completed, setCompleted] = useState(false);
 
-    useEffect(() => {
-        const config = {
-            container_id: visRef.current.id,
-            server_url: "neo4j://164.41.76.30:8080",
-            server_user: "neo4j",
-            server_password: "nido@CIC2021",
-            initial_cypher: cypher,
-        };
-        const vis = new Neovis(config);
-        vis.render();
-    }, [cypher]);
+  const [cypherText, setCypherText] = useState("");
+  const [cypher, setCypher] = useState(cypherText);
 
-    return (
-        <div className="container">
-            <div className="vis-input">
-                <label>Query: </label>
-                <input className="search_input" value={cypherText} onChange={(e) => setCypherText(e.target.value)} />
-                <button class="btn" onClick={onRunCypher}>Executar</button>
-            </div>
-            <div id="graph" ref={visRef} />
-        </div>
-    );
+  const onRunCypher = () => setCypher(cypherText);
+
+  useEffect(() => {
+    let vis;
+
+    if (cypher) {
+      const config = {
+        container_id: visRef.current.id,
+        server_url: "neo4j://164.41.76.30:8080",
+        server_user: "neo4j",
+        server_password: "nido@CIC2021",
+        initial_cypher: cypher,
+      };
+
+      setError("");
+      setCompleted(false);
+
+      vis = new NeoVis(config);
+      vis.render();
+
+      vis.registerOnEvent("error", handleNeoError);
+      vis.registerOnEvent("completed", handleNeoCompleted);
+    }
+  }, [cypher]);
+
+  const handleNeoError = (e) => {
+    setError(JSON.stringify(e.error_msg));
+  };
+
+  const handleNeoCompleted = () => {
+    setCompleted(true);
+  };
+
+  return (
+    <div className="container">
+      <div className="vis-input">
+        <label>Query: </label>
+        <input
+          className="search_input"
+          value={cypherText}
+          onChange={(e) => setCypherText(e.target.value)}
+        />
+        <button className="btn" onClick={onRunCypher}>
+          Executar
+        </button>
+      </div>
+      {cypher && !completed && !error && <Loading state={!completed} />}
+      <h2 id="neo-error" className={!error && "hidden"}>
+        {error}
+      </h2>
+      <div id="graph" className={error && "hidden"} ref={visRef} />
+    </div>
+  );
 };
 
 export default NeoGraph;
