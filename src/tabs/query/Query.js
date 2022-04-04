@@ -12,7 +12,7 @@ const NeoGraph = () => {
   const visRef = useRef();
 
   const [user, setUser] = useState({});
-  const [showUser, setShowUser] = useState(false);
+  const [showUser, setShowUser] = useState(true);
   
   const [error, setError] = useState("");
   const [completed, setCompleted] = useState(false);
@@ -32,7 +32,7 @@ const NeoGraph = () => {
   useEffect(() => {
     let vis;
 
-    if (cypher && showUser) {
+    if (cypher) {
       const config = {
         container_id: visRef.current.id,
         server_url: "neo4j://164.41.76.30:8080",
@@ -60,8 +60,8 @@ const NeoGraph = () => {
 
   return (
     <Container>
-      { showUser ? <QueryUser user={user} setUser={setUser} setShowUser={setShowUser} /> : (
-      <>
+      <QueryUser className={showUser ? "" : "hidden"} user={user} setUser={setUser} setShowUser={setShowUser} />
+      <div className={showUser ? "hidden" : ""}>
         <Header showHistoryBtn={history.length}>
           { history.length > 0 && (
             <button className="btn" onClick={onShowHistory}>
@@ -86,13 +86,13 @@ const NeoGraph = () => {
           </button>
         </Header>
         { error && (
-          <h2 id="neo-error" className={!error && "hidden"}>
+          <h2 id="neo-error" className={!error ? "hidden" : ""}>
             {error}
           </h2> 
         )}
         <Graph id="graph" ref={visRef} className={error && "hidden"}/>
         { showHistory && <QueryModal history={history} setCypher={setCypher} onClose={onShowHistory}/> }
-      </> )}
+      </div>
     </Container>
   );
 };
