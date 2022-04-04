@@ -17,7 +17,7 @@ export const Graph = styled.div`
 export const Header = styled.div`
     display: grid;
     grid-gap: 1rem;
-    grid-template-columns: ${props => props.showHistoryBtn ? '2rem auto 8rem' : 'auto 8rem'};
+    grid-template-columns: ${props => props.showHistoryBtn ? '2rem auto 8rem 2rem' : 'auto 8rem 2rem'};
 
     align-items: center;
     margin-bottom: 1rem;
