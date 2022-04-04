@@ -4,9 +4,9 @@ import { Container } from '../styles/app'
 
 import Search from '../tabs/search/Search';
 import Extract from '../tabs/extract/Extract';
-import NeoGraph from "../tabs/neo4j/neo4j";
+import NeoGraph from "../tabs/query/Query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faUpload, faHatCowboySide } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUpload, faTerminal } from "@fortawesome/free-solid-svg-icons";
 
 export default function TabContainer() {
     const [activeTab, setActiveTab] = useState(2)
@@ -21,7 +21,7 @@ export default function TabContainer() {
                     <FontAwesomeIcon icon={faSearch}/> Pesquisa
                 </Tab>
                 <Tab className="search" active={2 === activeTab} onClick={() => setActiveTab(2)}>
-                    <FontAwesomeIcon icon={faHatCowboySide}/> Neo4J
+                    <FontAwesomeIcon icon={faTerminal}/> Consulta
                 </Tab>
             </Tabs>
             <div className={activeTab !== 0 ? "hidden" : ""} >
