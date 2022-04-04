@@ -42,12 +42,16 @@ const NeoGraph = () => {
       };
 
       setError("");
-      setCompleted(false);
+      setCompleted(false);  
 
+      
       vis = new NeoVis(config);
       vis.render();
+
       vis.registerOnEvent("error", handleNeoError);
-      vis.registerOnEvent("completed", handleNeoCompleted);
+      vis.registerOnEvent("completed",(e) => {
+        vis["_network"].on("afterDrawing", handleNeoCompleted);
+      });
     }
   }, [cypher, showUser, user.password, user.username]);
 
@@ -86,7 +90,7 @@ const NeoGraph = () => {
             {error}
           </h2> 
         )}
-        { !error && <Graph id="graph" ref={visRef} />}
+        <Graph id="graph" ref={visRef} className={error && "hidden"}/>
         { showHistory && <QueryModal history={history} setCypher={setCypher} onClose={onShowHistory}/> }
       </> )}
     </Container>
