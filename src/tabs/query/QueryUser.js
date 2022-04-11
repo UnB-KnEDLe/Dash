@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import Loading from "../../components/Loading";
 import {createDriver} from "use-neo4j";
 import { Form, FormControl, FormGroup, SubmitButton } from "../../styles/form";
 
@@ -11,30 +12,37 @@ const DEFAULT_DB_SETTINGS = {
     password: '',
 };
 
-export default function QueryUser({user, setUser, setShowUser, className}) {
+export default function QueryUser({user, setUser, setShowUser}) {
     const [username, setUsername] = useState(user.username);
     const [password, setPassword] = useState(user.password);
+    const [loading, setLoading] = useState(false);
     const [authError, setAuthError] = useState(false);
+
+    const onKeyPress = (e) => {
+        if(e.key !== "Enter") return
+        onLogin();
+    }
 
     const onLogin = () => {
         const {scheme, host, port} = DEFAULT_DB_SETTINGS;
+        setAuthError(false);
+        setLoading(true);
 
         createDriver(scheme, host, port, username, password)
-        .verifyConnectivity()
-        .then(() => {
-            setUser({username: username, password: password})
-            setShowUser(false)
-        }).catch((e) => {
-            setAuthError(true);
-            console.log(e);
-        });
+            .verifyConnectivity()
+            .then(() => {
+                setUser({username: username, password: password})
+                setShowUser(false)
+            })
+            .catch((e) => setAuthError(true))
+            .finally(() => setLoading(false));
     }
 
     // server_user: "neo4j",
     // server_password: "nido@CIC2021",
 
     return (
-        <Form className={className}>
+        <Form className="Form">
             <h2>Login</h2>
             { Object.keys(user).length > 0 && (
                 <h4>Você está logado como {user.username}</h4>
@@ -45,6 +53,8 @@ export default function QueryUser({user, setUser, setShowUser, className}) {
                     type="text"
                     value={username}
                     onChange={e => setUsername(e.target.value)}
+                    onSubmit={onLogin}
+                    onKeyPress={onKeyPress}
                 />
             </FormGroup>
             <FormGroup>
@@ -54,10 +64,16 @@ export default function QueryUser({user, setUser, setShowUser, className}) {
                     className="form-control"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
+                    onSubmit={onLogin}
+                    onKeyPress={onKeyPress}
                 />
             </FormGroup>
-            {authError && (<h4>Erro de autenticação! Por favor, tente novamente.</h4>)}
-            <SubmitButton onClick={onLogin}>Entrar</SubmitButton>
+            { loading
+                ? <Loading state={loading}  />
+                : <SubmitButton onClick={onLogin}>Entrar</SubmitButton>
+            }
+            {authError && (<h4 className="error-text">Erro de autenticação! Por favor, tente novamente.</h4>)}
+            
         </Form>
     )
 }

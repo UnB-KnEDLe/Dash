@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const Form = styled.div`
+    display: grid;
+    place-items: center;
     padding: 1rem;
 
     h2, h4 {
@@ -8,6 +10,11 @@ export const Form = styled.div`
         margin: auto;
         padding: 1rem;
         text-align: left;
+    }
+
+    .error-text {
+        text-align: center;
+        margin-top: 1rem;
     }
 
     h4 {font-style: italic}
@@ -25,7 +32,7 @@ export const FormGroup = styled.div`
     text-align: left;
     padding: 1rem;
 
-    label {font-size: .825rem;}
+    label {margin-bottom: .5rem;}
 `;
 
 export const SubmitButton = styled.button`

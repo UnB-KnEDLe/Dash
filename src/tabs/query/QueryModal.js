@@ -1,9 +1,9 @@
 import Modal from "../../components/Modal"
 import {Card} from "../../styles/Card"
 
-export default function QueryModal({history, setCypher, onClose}) {
+export default function QueryModal({history, setCypherText, onClose}) {
     const onSetCypher = (cypher) => {
-        setCypher(cypher)
+        setCypherText(cypher)
         onClose()
     }
 
@@ -14,8 +14,8 @@ export default function QueryModal({history, setCypher, onClose}) {
 
     return (
         <Modal title="Histórico" size="sm" onClose={onClose}>
-            { history.map( item => (
-                <Card onClick={() => onSetCypher(item)} style={style}>
+            { history.map( (item, index) => (
+                <Card key={index} onClick={() => onSetCypher(item)} style={style}>
                     {item}
                 </Card>
             ) ) }

@@ -5,13 +5,9 @@ import headerBg from "../assets/header-bg.jpg";
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
-  place-items: center;
-  justify-content: center;
   overflow-x: hidden;
-
-  :last-child {
-    padding-bottom: 20px;
-  }
+  height: 100vh;
+  background: white;
 
   width: 100%;
 
@@ -47,10 +43,6 @@ export const Main = styled.div`
         max-width: 250px;
         width: 70%;
         height: auto;
-
-        :last-child {
-          
-        }
       }
 
       .header-logos {
@@ -74,18 +66,8 @@ export const Main = styled.div`
 `;
 
 export const Container = styled.div`
-  display: flex;
-  margin-top: 15px;
-  place-items: center;
-  justify-content: center;
-  flex-direction: column;
-  max-width: 1390px;
-  width: 95%;
-  padding-bottom: 15px;
-
-  .hidden {
-    display: none !important;
-  } 
+  width: 80%;
+  max-width: 1366px;
 `;
 
 export const ButtonExtract = styled.button`

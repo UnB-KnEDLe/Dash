@@ -1,10 +1,9 @@
 import { useState } from "react"
-import { Tabs, Tab } from '../styles/tabs'
-import { Container } from '../styles/app'
+import { TabsContainer, Tabs, Tab, TabContent } from '../styles/tabs'
 
 import Search from '../tabs/search/Search';
 import Extract from '../tabs/extract/Extract';
-import NeoGraph from "../tabs/query/Query";
+import Query from "../tabs/query/Query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faUpload, faTerminal } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,7 +11,7 @@ export default function TabContainer() {
     const [activeTab, setActiveTab] = useState(2)
 
     return (
-        <Container style={{overflowX: 'hidden'}}>
+        <TabsContainer>
             <Tabs className="tabs">
                 <Tab className="extraction" active={0 === activeTab} onClick={() => setActiveTab(0)}>
                     <FontAwesomeIcon icon={faUpload}/> Extração
@@ -24,15 +23,15 @@ export default function TabContainer() {
                     <FontAwesomeIcon icon={faTerminal}/> Consulta
                 </Tab>
             </Tabs>
-            <div className={activeTab !== 0 ? "hidden" : ""} >
+            <TabContent active={activeTab === 0}>
                 <Extract />
-            </div>
-            <div className={activeTab !== 1 ? "hidden" : ""} >
+            </TabContent>
+            <TabContent active={activeTab === 1}>
                 <Search />
-            </div>
-            <div className={activeTab !== 2 ? "hidden" : ""} >
-                <NeoGraph/>
-            </div>
-        </Container>
+            </TabContent>
+            <TabContent active={activeTab === 2}>
+                <Query/>
+            </TabContent>
+        </TabsContainer>
     );
 }

@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const Tabs = styled.div`
     display: flex;
-    width: 100%;
+    width: 80%;
     margin-bottom: 20px;
     flex-wrap: wrap;
     max-width: 1366px;
-`;
-
+    `;
+    
 export const Tab = styled.div`
     display: flex;
     transition: .25s;
@@ -25,9 +25,27 @@ export const Tab = styled.div`
     text-align: center;
     font-weight: bold;
     color: ${props => props.active ? "var(--primary)" : "#666"};
-
+    
     :hover {
         cursor: pointer;
         color: #333;
     }
 `;
+
+export const TabsContainer = styled.div`
+    display: flex;
+    margin-top: 15px;
+    place-items: center;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+    height: 100%;
+    padding-bottom: 0 !important;
+
+    .hidden {display: none;}
+`;
+
+export const TabContent = styled.div`
+    height: 100%;
+    display: ${props => props.active ? "block" : "none"};
+`

@@ -1,7 +1,7 @@
 import { useActs, useFilenames, useSelectedFile, useLoadingList, useActsTypes } from '../../context/extractContext';
 
 import { service } from "../../services/extractService";
-import { Main } from "../../styles/app";
+import { Container } from "../../styles/app";
 import Content from "./Content";
 import FileManager from '../../components/FileManager';
 
@@ -40,10 +40,10 @@ export default function Extract() {
 
     return (
         <>
-            <Main className="Extract" style={{overflowY: "hidden"}}>
+            <Container className="Extract" style={{overflowY: "hidden"}}>
                 <h2>Extração de Atos e Entidades do Diário Oficial do Distrito Federal</h2>
                 <FileManager changeHandler={changeHandler}/>
-            </Main>
+            </Container>
             {Object.keys(acts).length > 0 && <Content/>}
         </>
     )
