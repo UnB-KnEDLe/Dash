@@ -29,8 +29,8 @@ const NeoGraph = () => {
 
   const onRunCypher = () => {
     setCypher(cypherText);
-    if (history.includes(cypherText) || cypherText === "") return;
-    setHistory([cypherText, ...history]);
+    if (cypherText === "") return;
+    setHistory([cypherText, ...history.filter(item => item !== cypherText && item !== "")]);
   }
 
   const onShowHistory = () => setShowHistory(!showHistory);
@@ -97,27 +97,29 @@ const NeoGraph = () => {
         ) : (
           <>
             <Header showHistoryBtn={history.length} visible={cypherText.length === 0 || (cypher && !completed && !error)}>
-              { history.length > 0 && (
-                <button className="btn" onClick={onShowHistory}>
-                  <FontAwesomeIcon icon={faHistory} />
+              <div className="header-content">
+                { history.length > 0 && (
+                  <button className="btn" onClick={onShowHistory}>
+                    <FontAwesomeIcon icon={faHistory} />
+                  </button>
+                )}
+                <InputContainer>
+                  <FontAwesomeIcon className="input-icon" icon={faTerminal}/>
+                  <input
+                    className="search_input"
+                    value={cypherText}
+                    placeholder="Digite sua consulta"
+                    onChange={(e) => setCypherText(e.target.value)}
+                  />
+                  {cypher && !completed && !error && <Loading size="lg" state={!completed} />}
+                </InputContainer>
+                <button className="btn" onClick={onRunCypher}>
+                  Consultar
                 </button>
-              )}
-              <InputContainer>
-                <FontAwesomeIcon className="input-icon" icon={faTerminal}/>
-                <input
-                  className="search_input"
-                  value={cypherText}
-                  placeholder="Digite sua consulta"
-                  onChange={(e) => setCypherText(e.target.value)}
-                />
-                {cypher && !completed && !error && <Loading size="lg" state={!completed} />}
-              </InputContainer>
-              <button className="btn" onClick={onRunCypher}>
-                Consultar
-              </button>
-              <button className="btn" onClick={() => setShowUser(true)}>
-                <FontAwesomeIcon icon={faUser} />
-              </button>
+                <button className="btn" onClick={() => setShowUser(true)}>
+                  <FontAwesomeIcon icon={faUser} />
+                </button>
+              </div>
             </Header>
             { error && <h2 id="neo-error">{error}</h2>}
           </>

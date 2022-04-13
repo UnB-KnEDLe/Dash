@@ -4,9 +4,11 @@ export const Container = styled.div`
     width: 100vw;
     height: 100%;
     position: relative;
+    display: flex;
     
     .fullscreen {
         height: 100%;
+        width: 100%;
         background: white;
         box-shadow: inset 0px 10px 5px -2px rgba(0,0,0,0.05);
     }
@@ -20,6 +22,7 @@ export const FullscreenBtn = styled.button`
     color: #2980b9;
     border: none;
     cursor: pointer;
+    z-index: 700;
 `
 
 export const Graph = styled.div`
@@ -28,25 +31,31 @@ export const Graph = styled.div`
     canvas {
         height: 100%;
         background: white;
+        box-shadow: inset 0px 10px 5px -2px rgba(0,0,0,0.05);
     }
 `;
 
 export const Header = styled.div`
     position: absolute;
-    display: grid;
-    grid-gap: 1rem;
+    
+    height: 3rem;
+    width: 100%;
+    top: 1rem;
+    z-index: 500;
+    padding-top: 1rem;
+    
     transition: .35s;
     transition-delay: .5s;
-    border-radius: 1rem;
-    width: 70%;
-    left: 15%;
-    max-width: 1366px;
-    z-index: 500;
-    top: 1rem;
-    grid-template-columns: ${props => props.showHistoryBtn ? '2rem auto 8rem 2rem' : 'auto 8rem 2rem'};
     
-    align-items: center;
-    margin-bottom: 1rem;
+    .header-content {
+        align-items: center;
+        display: grid;
+        grid-template-columns: ${props => props.showHistoryBtn ? '2rem auto 8rem 2rem' : 'auto 8rem 2rem'};
+        grid-gap: 1rem;
+        
+        max-width: 1366px;
+        width: 70%;
+    }
     
     opacity: ${props => props.visible ? "1" : ".25"};
     
