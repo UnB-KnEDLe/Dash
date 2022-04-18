@@ -4,6 +4,8 @@ import Loading from "../../components/Loading";
 
 import Popup from "../../components/Popup";
 
+import { Dots } from "../../assets/dots/dots";
+
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 
 import { Container, InputContainer, Header, Graph, FullscreenBtn } from "../../styles/queries";
@@ -50,15 +52,76 @@ const NeoGraph = () => {
         server_user: user.username,
         server_password: user.password,
         initial_cypher: cypher,
-
+        
         labels: {
-          "Orgao": {
-            "caption": () => "",
-          },
           "Pessoa": {
             "caption": () => "",
+            "image": Dots.dot,
+          },
+          "Orgao": {
+            "caption": () => "",
+            "image": Dots.dot_1,
+          },
+          "Cargo": {
+            "caption": () => "",
+            "image": Dots.dot_2,
+          },
+          "Dodf": {
+            "caption": () => "",
+            "image": Dots.dot_3,
+          },
+          "Documento": {
+            "caption": () => "",
+            "image": Dots.dot_4,
+          },
+          "EditalNormativo": {
+            "caption": () => "",
+            "image": Dots.dot_5,
           }
         },
+
+        relationships: {
+          "EH_EXONERADA": {
+            "caption": () => "",
+
+          },
+          "PERTENCE_AO": {
+            "caption" : () => "",
+          },
+          "RECEBE_ABONO_DO": {
+            "caption" : () => "",
+          },
+          "EXERCE": {
+            "caption" : () => "",
+          },
+          "APOSENTA_DE": {
+            "caption" : () => "",
+          },
+          "CEDIDO_A": {
+            "caption" : () => "",
+          },
+          "APOSENTADORIA_RETIFICADA_NA": {
+            "caption" : () => "",
+          },
+          "PUBLICADO_NO": {
+            "caption" : () => "",
+          },
+          "APROVADO_NO": {
+            "caption" : () => "",
+          },
+          "NOMEADO_PARA": {
+            "caption" : () => "",
+          },
+          "EXERCIA": {
+            "caption" : () => "",
+          },
+          "SUBSTITUI": {
+            "caption" : () => "",
+          },
+          "REVERTE_AO": {
+            "caption" : () => "",
+          },
+        }
       };
 
       setError("");

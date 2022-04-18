@@ -9,7 +9,7 @@ export default function Popup({children, onChange}) {
     return (
         <Container>
             <p><i>{group || label}</i></p>
-            { Object.keys(properties).map( item => <div><b>{columnsReplace(item)}</b>: {properties[item]} </div> ) }
+            { Object.keys(properties).map( item => <div><b>{columnsReplace(item)}</b>: {properties[item].toString()} </div> ) }
         </Container>
     )
 }
