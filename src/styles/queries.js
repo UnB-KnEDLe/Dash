@@ -27,9 +27,15 @@ export const FullscreenBtn = styled.button`
 
 export const Graph = styled.div`
     border-radius: 1rem;
+    border-width: 0;
     height: 100%;
+
+    .vis-network {
+        .vis-tooltip {display: none}
+    }
+
     canvas {
-        height: 100%;
+        height: calc(100% - 4px) !important;
         background: white;
         box-shadow: inset 0px 10px 5px -2px rgba(0,0,0,0.05);
     }

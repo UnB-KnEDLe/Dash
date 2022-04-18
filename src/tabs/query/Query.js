@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import NeoVis from "neovis.js/dist/neovis.js";
 import Loading from "../../components/Loading";
 
+import Popup from "../../components/Popup";
+
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 
 import { Container, InputContainer, Header, Graph, FullscreenBtn } from "../../styles/queries";
@@ -13,6 +15,8 @@ import QueryUser from "./QueryUser";
 const NeoGraph = () => {
   const handleFullscreen = useFullScreenHandle();
   const visRef = useRef();
+
+  const [popupContent, setPopupContent] = useState({});
 
   const [user, setUser] = useState({});
   const [showUser, setShowUser] = useState(true);
@@ -29,15 +33,12 @@ const NeoGraph = () => {
 
   const onRunCypher = () => {
     setCypher(cypherText);
+    setPopupContent({});
     if (cypherText === "") return;
     setHistory([cypherText, ...history.filter(item => item !== cypherText && item !== "")]);
   }
 
   const onShowHistory = () => setShowHistory(!showHistory);
-
-  const fixCaption = (caption) => {
-    return "";
-  }
 
   useEffect(() => {
     let vis;
@@ -51,15 +52,12 @@ const NeoGraph = () => {
         initial_cypher: cypher,
 
         labels: {
-          "Pessoa": {
-            "caption": fixCaption,
-          },
-          "Cargo": {
-            "caption": fixCaption,
-          },
           "Orgao": {
-            "caption": fixCaption,
+            "caption": () => "",
           },
+          "Pessoa": {
+            "caption": () => "",
+          }
         },
       };
 
@@ -68,6 +66,14 @@ const NeoGraph = () => {
 
       
       vis = new NeoVis(config);
+      vis.registerOnEvent("clickNode", (data) => { 
+        setPopupContent(data.node);
+      });
+
+      vis.registerOnEvent("clickEdge", (data) => {
+        setPopupContent(data.edge);
+      });
+        
       vis.render();
 
       vis.registerOnEvent("error", handleNeoError);
@@ -75,6 +81,7 @@ const NeoGraph = () => {
         vis["_network"].on("afterDrawing", handleNeoCompleted);
       });
     }
+    
   }, [cypher, showUser, user.password, user.username]);
 
   useEffect(() => localStorage.setItem("history", JSON.stringify(history)), [history]);
@@ -86,9 +93,11 @@ const NeoGraph = () => {
     handleFullscreen.active ? handleFullscreen.exit() : handleFullscreen.enter();
   }
 
+
   return (
     <Container className="QueryContainer">
       <FullScreen style={{height: "100%"}} handle={handleFullscreen}>
+        {Object.keys(popupContent).length > 0 && <Popup onChange={setPopupContent}>{popupContent}</Popup>}
         <FullscreenBtn onClick={onFullscreen}>
           <FontAwesomeIcon size="2x" icon={handleFullscreen.active ? faCompress : faExpand} />
         </FullscreenBtn>

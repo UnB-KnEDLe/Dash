@@ -5,7 +5,7 @@ export const actsData = {
         search: true,
         title: 'Abono de Permanência',
         paramsKeys: [
-            {label: 'pessoa', title: 'Nome'},
+            {label: 'pessoa', title: 'Nome',},
             {label: 'cargo', title: 'Cargo'},
             {label: 'orgao', title: 'Órgão'},
         ],
