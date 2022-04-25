@@ -4,12 +4,12 @@ export const Form = styled.div`
     display: grid;
     place-items: center;
     padding: 1rem;
-
+    
     h2, h4 {
         width: 50%;
         margin: auto;
         padding: 1rem;
-        text-align: left;
+        text-align: center;
     }
 
     .error-text {
@@ -30,6 +30,7 @@ export const FormGroup = styled.div`
     display: grid;
     width: 50%;
     text-align: left;
+    max-width: 25rem;
     padding: 1rem;
 
     label {margin-bottom: .5rem;}

@@ -72,7 +72,7 @@ export default function QueryUser({user, setUser, setShowUser}) {
                 ? <Loading state={loading}  />
                 : <SubmitButton onClick={onLogin}>Entrar</SubmitButton>
             }
-            {authError && (<h4 className="error-text">Erro de autenticação! Por favor, tente novamente.</h4>)}
+            {authError && (<h4 className="error-text">Erro de autenticação!<br /> Por favor, tente novamente.</h4>)}
             
         </Form>
     )
