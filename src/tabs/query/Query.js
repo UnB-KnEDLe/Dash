@@ -82,44 +82,44 @@ const NeoGraph = () => {
 
         relationships: {
           "EH_EXONERADA": {
-            "caption": () => "",
+            "caption": false,
 
           },
           "PERTENCE_AO": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "RECEBE_ABONO_DO": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "EXERCE": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "APOSENTA_DE": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "CEDIDO_A": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "APOSENTADORIA_RETIFICADA_NA": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "PUBLICADO_NO": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "APROVADO_NO": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "NOMEADO_PARA": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "EXERCIA": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "SUBSTITUI": {
-            "caption" : () => "",
+            "caption" : false,
           },
           "REVERTE_AO": {
-            "caption" : () => "",
+            "caption" : false,
           },
         }
       };

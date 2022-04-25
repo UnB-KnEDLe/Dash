@@ -58,6 +58,7 @@ export const Header = styled.div`
         display: grid;
         grid-template-columns: ${props => props.showHistoryBtn ? '2rem auto 8rem 2rem' : 'auto 8rem 2rem'};
         grid-gap: 1rem;
+        margin-inline: auto;
         
         max-width: 1366px;
         width: 70%;
