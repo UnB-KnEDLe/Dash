@@ -68,6 +68,8 @@ export const Main = styled.div`
 export const Container = styled.div`
   width: 80%;
   max-width: 1366px;
+
+  h2 {text-align: center;}
 `;
 
 export const ButtonExtract = styled.button`

@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faUpload, faTerminal } from "@fortawesome/free-solid-svg-icons";
 
 export default function TabContainer() {
-    const [activeTab, setActiveTab] = useState(2)
+    const [activeTab, setActiveTab] = useState(0)
 
     return (
         <TabsContainer>
