@@ -72,7 +72,7 @@ export const Header = styled.div`
     }
 
     :focus-within {
-        &, input { background: white; }
+        &, input, .header-content { background: white; }
     }
 
     .btn {
