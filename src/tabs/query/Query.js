@@ -19,6 +19,7 @@ const NeoGraph = () => {
   const visRef = useRef();
 
   const [popupContent, setPopupContent] = useState({});
+  const [showPopup, setShowPopup] = useState(false);
 
   const [user, setUser] = useState({});
   const [showUser, setShowUser] = useState(true);
@@ -35,9 +36,21 @@ const NeoGraph = () => {
 
   const onRunCypher = () => {
     setCypher(cypherText);
+    setShowPopup(false);
     setPopupContent({});
     if (cypherText === "") return;
     setHistory([cypherText, ...history.filter(item => item !== cypherText && item !== "")]);
+  }
+
+  const handleShowPopup = (content) => {
+    setPopupContent(content);
+    setShowPopup(true);
+  }
+
+  const onError = (err) => {
+    if(err.length === 0) return
+    setError(err);
+    handleShowPopup({error: error})
   }
 
   const onShowHistory = () => setShowHistory(!showHistory);
@@ -124,17 +137,17 @@ const NeoGraph = () => {
         }
       };
 
-      setError("");
+      onError("");
       setCompleted(false);  
 
       
       vis = new NeoVis(config);
       vis.registerOnEvent("clickNode", (data) => { 
-        setPopupContent(data.node);
+        handleShowPopup(data.node);
       });
-
+      
       vis.registerOnEvent("clickEdge", (data) => {
-        setPopupContent(data.edge);
+        handleShowPopup(data.edge);
       });
         
       vis.render();
@@ -160,7 +173,7 @@ const NeoGraph = () => {
   return (
     <Container className="QueryContainer">
       <FullScreen style={{height: "100%"}} handle={handleFullscreen}>
-        {Object.keys(popupContent).length > 0 && <Popup onChange={setPopupContent}>{popupContent}</Popup>}
+      <Popup show={showPopup} onChange={setShowPopup}>{popupContent}</Popup>
         <FullscreenBtn onClick={onFullscreen}>
           <FontAwesomeIcon size="2x" icon={handleFullscreen.active ? faCompress : faExpand} />
         </FullscreenBtn>
@@ -193,7 +206,6 @@ const NeoGraph = () => {
                 </button>
               </div>
             </Header>
-            { error && <h2 id="neo-error">{error}</h2>}
           </>
         )}
         <Graph id="graph" ref={visRef} className={(error || showUser) && "hidden"}/>
