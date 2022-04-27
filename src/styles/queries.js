@@ -66,9 +66,13 @@ export const Header = styled.div`
     
     opacity: ${props => props.visible ? "1" : ".25"};
     
-    :hover {
+    :hover, :focus-within {
         opacity: 1 !important;
-        transition-delay: 0s;
+        transition-delay: 0s !important;
+    }
+
+    :focus-within {
+        &, input { background: white; }
     }
 
     .btn {
