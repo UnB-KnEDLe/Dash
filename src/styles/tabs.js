@@ -47,5 +47,6 @@ export const TabsContainer = styled.div`
 
 export const TabContent = styled.div`
     height: 100%;
+    width: 100%;
     display: ${props => props.active ? "block" : "none"};
 `

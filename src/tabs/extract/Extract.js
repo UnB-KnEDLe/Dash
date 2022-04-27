@@ -39,12 +39,10 @@ export default function Extract() {
     }
 
     return (
-        <>
-            <Container className="Extract" style={{overflowY: "hidden"}}>
-                <h2>Extração de Atos e Entidades do Diário Oficial do Distrito Federal</h2>
-                <FileManager changeHandler={changeHandler}/>
-            </Container>
+        <Container className="Extract">
+            <h2>Extração de Atos e Entidades do Diário Oficial do Distrito Federal</h2>
+            <FileManager changeHandler={changeHandler}/>
             {Object.keys(acts).length > 0 && <Content/>}
-        </>
+        </Container>
     )
 }
