@@ -2,7 +2,7 @@ import { InputField } from '../styles/search';
 import FilterInput from './FilterInput';
 import Loading from './Loading';
 
-import { useStart, useActType, useHeading, useContent, useLoading, useFilters } from "../context/searchContext";
+import { useStart, useActType, useHeading, useContent, useLoading, useFilters, useCurrentPage } from "../context/searchContext";
 import { actsData } from "../data/actsData";
 
 export default function Filters() {    
@@ -12,6 +12,7 @@ export default function Filters() {
     const { setHeading } = useHeading();
     const { setContent } = useContent();
     const { loading } = useLoading();
+    const { setCurrentPage } = useCurrentPage();
 
 	const onChangeActType = async (e) => {
         const { value } = e.target
@@ -22,6 +23,8 @@ export default function Filters() {
 		setStart(true);
 		setContent({})
         setHeading([])
+        setCurrentPage(0);
+        
         await setActType(value);
 
         setFilters( () => {

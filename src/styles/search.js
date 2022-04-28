@@ -14,6 +14,7 @@ export const Container = styled.div`
     select {
         margin: auto;
         width: 50%;
+        max-width: 25rem;
         padding: 7.5px 10px;
         font-weight: bold;
         border: 2px solid var(--primary);
@@ -98,7 +99,6 @@ export const InputField = styled.div`
             flex-direction: column;
             justify-content: flex-start;
             text-align: left;
-
             
             input {
                 border-radius: 5px;
@@ -118,9 +118,7 @@ export const InputField = styled.div`
                     font-style: italic;
                     border-bottom: 1px solid var(--primary);
                     
-                    ::placeholder {
-                        color: #999;
-                    }
+                    ::placeholder {color: #999;}
                 }
             }
 
