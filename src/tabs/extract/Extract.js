@@ -43,6 +43,7 @@ export default function Extract() {
             <h2>Extração de Atos e Entidades do Diário Oficial do Distrito Federal</h2>
             <FileManager changeHandler={changeHandler}/>
             {Object.keys(acts).length > 0 && <Content/>}
+            {(Object.keys(acts).length === 0 && filenames.length > 0) && <h3>Nenhum ato foi extraído.</h3>}
         </Container>
     )
 }
