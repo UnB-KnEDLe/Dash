@@ -7,9 +7,6 @@ export default async function service(url) {
         timeout: 10000,
     })
         .then(response => response.json())
-        .catch( err => {
-            console.log(err)
-        } )
 
     if (Object.keys(response).length === 0) return { headingList, contentList }
 

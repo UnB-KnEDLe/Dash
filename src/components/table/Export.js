@@ -37,7 +37,6 @@ export default function Export({content, columns}) {
     }
 
     const onChangeFileType = (value) => {
-        console.log(value, downloadType)
         if(value !== downloadType) setDownloadType(value)
     }
 

@@ -13,6 +13,5 @@ export async function service(file){
         })
         .then( response => response.data )
 
-    console.log(response)
     return response;
 }
