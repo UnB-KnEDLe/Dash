@@ -87,6 +87,7 @@ const NeoGraph = () => {
       });
     }
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cypher, showUser, user.password, user.username]);
 
   useEffect(() => localStorage.setItem("history", JSON.stringify(history)), [history]);
