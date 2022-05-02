@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export const Container = styled.div`
     width: 100%;
     overflow-y: hidden;
+    display: grid;
+    text-align: center;
 `
 
 export const Extract = styled.div`

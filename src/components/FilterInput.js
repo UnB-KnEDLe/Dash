@@ -21,7 +21,7 @@ export default function FilterInput({ label, title }) {
     return (
         <div className="filter">
             <div className="filter-input">
-                <input value={value} onKeyPress={handleKeyPressed} onChange={handleOnChange} placeholder={`+ Filtro de ${title}`}/>
+                <input value={value} onKeyPress={handleKeyPressed} onChange={handleOnChange} placeholder={`+ ${title}`}/>
             </div>
         </div>
     )

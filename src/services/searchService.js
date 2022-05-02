@@ -47,6 +47,11 @@ export default async function service(url) {
 }
 
 export async function count(url) {
-    const response = await fetch(url).then(response => response.json())
-    return response
+    var timeoutValue = 5000;
+    var actsCountDefault = 515;
+
+    let timeout = new Promise( resolve => setTimeout(() => resolve(actsCountDefault), timeoutValue) );
+    let response = fetch(url).then(response => response.json())
+
+    return Promise.race([timeout, response])
 }

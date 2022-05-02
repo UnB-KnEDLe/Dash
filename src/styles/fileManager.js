@@ -5,12 +5,14 @@ export const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    place-items: center;
     padding: 0;
     width: 80%;
     max-width: 1366px;
     margin: 15px 0;
     height: 220px;
     max-height: 220px;
+    justify-self: center;
     
     .filelist {
         overflow-y: auto;
