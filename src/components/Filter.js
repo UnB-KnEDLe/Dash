@@ -23,7 +23,7 @@ export default function Filters() {
 		setStart(true);
 		setContent({})
         setHeading([])
-        setCurrentPage(0);
+        setCurrentPage(1);
         
         await setActType(value);
 
