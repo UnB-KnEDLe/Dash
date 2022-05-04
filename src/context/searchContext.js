@@ -8,7 +8,7 @@ export default function SearchProvider({ children }) {
     const [start, setStart] = useState(true);
     const [heading, setHeading] = useState([]);
     const [filters, setFilters] = useState({});
-    const [content, setContent] = useState([]);
+    const [content, setContent] = useState({});
     const [loading, setLoading] = useState(false);
     const [actType, setActType] = useState('');
     const [baseUrl, setBaseUrl] = useState('');
@@ -22,7 +22,9 @@ export default function SearchProvider({ children }) {
         if(actType.length === 0) return
 
         var url = await actsData[actType].base_url
-        var count_url = url.length
+
+        await count(url.replace('?','/count', url.length))
+            .then( res => setContentCount(res) )
         
         Object.keys(filters).forEach( label => {
             if (filters[label] === '') return
@@ -37,6 +39,7 @@ export default function SearchProvider({ children }) {
 
         const { headingList, contentList } = await service(url)
             .then( response => {
+                console.log(response)
                 let { headingList, contentList } = response;
                 contentList = contentList.map( item => ({ entities: item }) )
                 return { headingList, contentList }
@@ -45,9 +48,6 @@ export default function SearchProvider({ children }) {
                 sendError("Houve um erro ao buscar os dados. Tente novamente mais tarde.")
                 setLoading(false)
             })
-
-        await count(url.replace('?','/count?', count_url))
-            .then( res => setContentCount(res) )
 
         setHeading(headingList)
         setContent(contentList)

@@ -5,7 +5,7 @@ import Search from '../tabs/search/Search';
 import Extract from '../tabs/extract/Extract';
 import Query from "../tabs/query/Query";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faUpload, faTerminal } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUpload, faDatabase } from "@fortawesome/free-solid-svg-icons";
 
 export default function TabContainer() {
     const [activeTab, setActiveTab] = useState(0)
@@ -20,7 +20,7 @@ export default function TabContainer() {
                     <FontAwesomeIcon icon={faSearch}/> Pesquisa
                 </Tab>
                 <Tab className="search" active={2 === activeTab} onClick={() => setActiveTab(2)}>
-                    <FontAwesomeIcon icon={faTerminal}/> Consulta
+                    <FontAwesomeIcon icon={faDatabase}/> Consulta
                 </Tab>
             </Tabs>
             <TabContent active={activeTab === 0}>
