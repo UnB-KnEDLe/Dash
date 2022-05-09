@@ -39,7 +39,6 @@ export default function SearchProvider({ children }) {
 
         const { headingList, contentList } = await service(url)
             .then( response => {
-                console.log(response)
                 let { headingList, contentList } = response;
                 contentList = contentList.map( item => ({ entities: item }) )
                 return { headingList, contentList }
