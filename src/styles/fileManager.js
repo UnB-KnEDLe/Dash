@@ -9,9 +9,9 @@ export const Container = styled.div`
     padding: 0;
     width: 80%;
     max-width: 1366px;
-    margin: 15px 0;
-    height: 220px;
-    max-height: 220px;
+    margin: 1rem 0;
+    height: 14rem;
+    max-height: 14rem;
     justify-self: center;
     
     .filelist {
@@ -20,14 +20,12 @@ export const Container = styled.div`
         flex-direction: column;
         width: 50%;
         flex: 1;
-        height: 220px;
+        height: 14rem;
 
         border-right: 1px solid #2980b955;
-        padding: 0 25px;
+        padding: 0 1.5rem;
 
-        h3{
-            margin: 10px 0;
-        }
+        h3{margin: .625rem 0;}
 
         .list {
             display: grid;
@@ -41,21 +39,17 @@ export const Container = styled.div`
             justify-content: space-between;
             place-items: center;
 
-            label, input{ 
-                :hover {
-                    cursor: pointer;
-                }
-            }
+            label, input{cursor: pointer;}
 
             div {
                 display: flex;
-                gap: 5px;
+                gap: .25rem;
                 place-items: center;
             }
 
             button {
-                width: 40px;
-                height: 25px;
+                width: 2.5rem;
+                height: 1.5rem;
                 min-width: 0 !important;
             }
         }

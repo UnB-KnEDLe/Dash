@@ -2,11 +2,10 @@ import styled from 'styled-components';
 
 export const TableContainer = styled.div`
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    padding: 15px 0;
+    padding: 1rem 0;
     max-width: 1366px;
     width: calc(100% - 3.5rem);
     margin: auto;
-    overflow-x: hidden;
     
     .btn {
         display: flex;
@@ -20,10 +19,9 @@ export const TableContainer = styled.div`
 
     .table-container {
         overflow-x: auto;
+        height: 100%;
 
-        h3 {
-            margin: 3rem 0;
-        }
+        h3 {margin: 3rem 0;}
     }
 `
 
@@ -31,16 +29,12 @@ export const Container = styled.table`
     border-spacing: 0;
     overflow-x: auto;
     
-    td, p {
-        min-width: 100px;
-    }
+    td, p {min-width: 6.25rem;}
 
     p {
-        padding: 10px;
+        padding: .75rem;
 
-        :hover {
-            cursor: pointer;
-        }
+        :hover {cursor: pointer;}
     }
 
     thead {
@@ -48,31 +42,21 @@ export const Container = styled.table`
             user-select: none;
             transition: .5s;
             text-align: left;
-            padding: 5px;
+            padding: .5rem;
             place-items: center;
+            cursor: pointer;
             
-            &:first-child {
-                padding-left: 15px;
-            }
-
-            &:last-child {
-                padding-right: 15px;
-            }
-            
-            :hover {
-                cursor: pointer;
-            }
+            &:first-child {padding-left: 1rem;}
+            &:last-child {padding-right: 1rem;}
             
             span {
                 display: flex;
                 justify-content: space-between;
                 place-items: flex-start center;
-                gap: 4px;
+                gap: .25rem;
                 color: #999;
 
-                .sort-icon {
-                    transition: .25s;
-                }
+                .sort-icon {transition: .25s;}
             }
         }
         
@@ -86,28 +70,17 @@ export const Container = styled.table`
         tr {
             max-height: 3rem;
 
-            :hover {
-                background: #e1edf5;
-            }
+            :hover {background: #e1edf5;}
         }
         
         td {
             border-top: 1px solid #eee;
             padding: .5rem;
             wrap-text: everywhere;
+            cursor: pointer;
 
-
-            &:first-child {
-                padding-left: 15px;
-            }
-
-            &:last-child {
-                padding-right: 15px;
-            }
-
-            :hover {
-                cursor: pointer;
-            }
+            &:first-child {padding-left: 1rem;}
+            &:last-child {padding-right: 1rem;}
         }
 
     }

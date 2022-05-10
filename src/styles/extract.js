@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     width: 100%;
-    overflow-y: hidden;
+    margin-bottom: 1rem;
     display: grid;
     text-align: center;
 `
@@ -24,9 +24,7 @@ export const Extract = styled.div`
         padding: 0 15px;
         width: 100%;
 
-        & > *:not(:last-child) {
-            margin-right: 15px;
-        }
+        & > *:not(:last-child) {margin-right: 15px;}
 
         .right-toolbar {
             display: flex;
@@ -53,8 +51,5 @@ export const Extract = styled.div`
         }
     }
 
-
-    .table-container {
-        overflow-x: auto;
-    }
+    .table-container {overflow-x: auto;}
 `

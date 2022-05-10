@@ -3,13 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 15px;
-
+    gap: 1rem;
     text-align: center;
-
-    .search-header {
-        
-    }
 
     select {
         margin: auto;
@@ -28,12 +23,9 @@ export const Container = styled.div`
         width: 100%;
         overflow-x: auto;
 
-        h2 { 
-            margin-top: 15px;
-        }
+        h2 {margin-top: 15px;}
 
         table {
-
             border-collapse: collapse;
 
             td {
@@ -106,9 +98,7 @@ export const InputField = styled.div`
                 color: var(--primary);
                 font-weight: bold;
                 
-                ::placeholder {
-                    color: var(--primary);
-                }
+                ::placeholder {color: var(--primary);}
                 
                 &:focus {
                     cursor: initial;

@@ -34,13 +34,13 @@ export const Main = styled.div`
       justify-content: space-between;
       place-items: center;
       width: 80%;
-      max-width: 1366px;
+      max-width: 85rem;
       height: 100%;
       z-index: 1;
 
       .dodf-logo {
         display: flex;
-        max-width: 250px;
+        max-width: 15.5rem;
         width: 70%;
         height: auto;
       }
@@ -67,7 +67,7 @@ export const Main = styled.div`
 
 export const Container = styled.div`
   width: 80%;
-  max-width: 1366px;
+  max-width: 85rem;
 
   h2 {text-align: center;}
 `;
@@ -79,7 +79,7 @@ export const ButtonExtract = styled.button`
   width: 11.125rem;
   border: 0;
   border: 1px #2980b9 solid !important;
-  font-size: 18px;
+  font-size: 1.125rem;
   color: black;
   font-weight: bold;
   -webkit-transition: background-color 0.2s;
@@ -104,24 +104,18 @@ export const ButtonUpload = styled.button`
   border-radius: 1rem;
   width: 61%;
   border: 0;
-  margin: 13px !important;
+  margin: 1rem !important;
   color: #fff;
   font-weight: bold;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
 
-  input {
-    display: none;
-  }
+  input {display: none;}
 
-  label {
-    cursor: pointer;
-  }
+  label {cursor: pointer;}
 
-  &:hover {
-    background: ${shade(0.2, "#2980B9")};
-  }
+  &:hover {background: ${shade(0.2, "#2980B9")};}
 `;
 
 const dragActive = css`
@@ -150,13 +144,9 @@ export const DropContainer = styled.div.attrs({
     animation-timing-function: ease-in-out;
   }
 
-  p {
-    margin-top: 10px;
-  }
+  p {margin-top: 10px;}
 
-  label {
-    cursor: pointer;
-  }
+  label {cursor: pointer;}
 
   img {
     width: 90px;

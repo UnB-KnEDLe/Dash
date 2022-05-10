@@ -5,16 +5,16 @@ export const Tabs = styled.div`
     width: 80%;
     margin-bottom: 20px;
     flex-wrap: wrap;
-    max-width: 1366px;
+    max-width: 85rem;
     `;
     
 export const Tab = styled.div`
     display: flex;
     transition: .25s;
     flex: 1;
-    min-width: 200px;
+    min-width: 12.5rem;
     place-items: center;
-    gap: 5px;
+    gap: .25rem;
     justify-content: center;
     padding: .5rem 1rem;
     border: 1px solid #cfcfcf;
@@ -34,7 +34,7 @@ export const Tab = styled.div`
 
 export const TabsContainer = styled.div`
     display: flex;
-    margin-top: 15px;
+    margin-top: 1rem;
     place-items: center;
     flex-direction: column;
     width: 100%;

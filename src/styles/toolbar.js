@@ -23,9 +23,7 @@ export const Toolbar = styled.div`
     margin-bottom: 25px;
     padding: 0 15px;
 
-    & > *:not(:last-child) {
-        margin-right: 15px;
-    }
+    & > *:not(:last-child) {margin-right: 15px;}
 
     .selector,
     .left-toolbar {
@@ -34,11 +32,7 @@ export const Toolbar = styled.div`
         gap: 1rem;
 
         .export {
-            // padding: .5rem;
-            
-            hr {
-                margin-bottom: 1rem;
-            }
+            hr {margin-bottom: 1rem;}
             
             .btn {
                 background: var(--primary);
@@ -57,18 +51,14 @@ export const Toolbar = styled.div`
                 min-width: 0;
                 color: white;
                 
-                :hover {
-                    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
-                }
+                :hover {box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);}
             }
 
             .inline {
                 display: flex;
                 justify-content: center;
 
-                & > *:not(:last-child) {
-                    border-right: 1px solid #eee;
-                }
+                & > *:not(:last-child) {border-right: 1px solid #eee;}
             }
         
             .form-group {
@@ -122,9 +112,7 @@ export const Toolbar = styled.div`
                         &.active {
                             transform: rotate(-90deg);
                             
-                            &:hover {
-                                transform: rotate(-75deg);
-                            }
+                            &:hover {transform: rotate(-75deg);}
                         }
 
                         &:hover {
@@ -185,14 +173,11 @@ export const Toolbar = styled.div`
                     padding: 0 2px;
                     width: 30px;
                     border-radius: 50px;
+                    cursor: pointer;
             
-                    :hover {
-                        cursor: pointer;
-            
-                        .switch-trigger {
-                            opacity: .7;
-                            background: var(--primary);
-                        }
+                    :hover .switch-trigger {
+                        opacity: .7;
+                        background: var(--primary);
                     }
                 }
             
@@ -203,10 +188,7 @@ export const Toolbar = styled.div`
                     border-radius: 50%;
                     transition: .35s;
 
-                    &.active {
-                        margin-left: 10px;
-                    }
-
+                    &.active {margin-left: 10px;}
                 }
             }
         }
@@ -227,9 +209,7 @@ export const Toolbar = styled.div`
                     place-items: center;
                     gap: 10px;
 
-                    input {
-                        width: 60px;
-                    }
+                    input {width: 60px;}
 
                     button {
                         width: 25px;
@@ -243,9 +223,7 @@ export const Toolbar = styled.div`
                             background: #ccc;
                         }
 
-                        :disabled {
-                            opacity: .5;
-                        }
+                        :disabled {opacity: .5;}
                     }
                 }
             }

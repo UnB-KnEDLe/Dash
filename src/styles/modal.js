@@ -15,8 +15,8 @@ export const Container = styled.div`
     
     .modal-content {
         z-index: 60;
-        min-width: 500px;
-        max-width: 1366px;
+        min-width: 31.25rem;
+        max-width: 65rem;
         height: 100%;
         ${props => props.size === 'lg' && 'width: 80%'};
         ${props => props.size === 'md' && 'width: 50%'};
@@ -46,9 +46,7 @@ export const Container = styled.div`
             align-self: flex-start;
 
             h1, h2, h3, h4, h5, h6 {
-                &:first-child {
-                    margin-top: 0;
-                }
+                &:first-child {margin-top: 0;}
             }
         }
 
@@ -60,16 +58,14 @@ export const Container = styled.div`
             place-items: center;
             justify-content: space-between;
 
-            h3 {
-                margin: 0;
-            }
+            h3 {margin: 0;}
 
             .close-btn {
                 display: flex;
                 place-items: center;
                 justify-content: center;
-                width: 30px;
-                height: 30px;
+                width: 2rem;
+                height: 2rem;
                 padding: 0;
                 margin: 0 !important;
                 min-width: 0;
@@ -87,27 +83,23 @@ export const ModalContainer = styled.div`
     }
 
     .modal-section {
-        padding: 5px o;
+        padding: .25rem 0;
         padding-bottom: 5px;
         text-align: left;
 
         &:not(:last-child) {
             border-bottom: 1px solid #eee;
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
         }
 
-        & > *:not(:first-child) {
-            padding-left: 15px;
-        }
+        & > *:not(:first-child) {padding-left: 1rem;}
 
-        h3 {
-            margin-bottom: 15px;
-        }
+        h3 {margin-bottom: 1rem;}
         
         &.file {
             display: flex;
             place-items: center;
-            gap: 5px;
+            gap: 0.3125rem;
         }
 
         .entities-list {
@@ -115,8 +107,8 @@ export const ModalContainer = styled.div`
             justify-content: space-between;
             flex-wrap: wrap;
             text-align: left;
-            gap: 10px;
-            padding-bottom: 10px;
+            gap: 0.625rem;
+            padding-bottom: 0.625rem;
         }
     }
 `

@@ -60,7 +60,7 @@ export const Header = styled.div`
         grid-gap: 1rem;
         margin-inline: auto;
         
-        max-width: 1366px;
+        max-width: 85rem;
         width: 70%;
     }
     
