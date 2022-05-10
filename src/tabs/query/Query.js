@@ -5,6 +5,8 @@ import { cypherConfig } from "./queryConfig";
 
 import Popup from "../../components/Popup";
 
+import { usePopupContent, useUser, useError, useCompleted, useHistory, useCypher } from "../../context/queryContext";
+
 import { FullScreen, useFullScreenHandle } from 'react-full-screen'
 
 import { Container, InputContainer, Header, Graph, FullscreenBtn } from "../../styles/queries";
@@ -17,29 +19,12 @@ const NeoGraph = () => {
   const handleFullscreen = useFullScreenHandle();
   const visRef = useRef();
 
-  const [popupContent, setPopupContent] = useState({});
-  const [showPopup, setShowPopup] = useState(false);
-
-  const [user, setUser] = useState({});
-  const [showUser, setShowUser] = useState(true);
-  
-  const [error, setError] = useState("");
-  const [completed, setCompleted] = useState(false);
-
-  const localStorageHistory = localStorage.getItem("history");
-  const [history, setHistory] = useState([...new Set(JSON.parse(localStorageHistory))]);
-  const [showHistory, setShowHistory] = useState(false);
-
-  const [cypherText, setCypherText] = useState("");
-  const [cypher, setCypher] = useState(cypherText);
-
-  const onRunCypher = () => {
-    setCypher(cypherText);
-    setShowPopup(false);
-    setPopupContent({});
-    if (cypherText === "") return;
-    setHistory([cypherText, ...history.filter(item => item !== cypherText && item !== "")]);
-  }
+  const { popupContent, setPopupContent, showPopup, setShowPopup } = usePopupContent();
+  const { user, setUser, showUser, setShowUser } = useUser();
+  const { error, setError } = useError();
+  const { completed, setCompleted } = useCompleted();
+  const { history, showHistory, setShowHistory } = useHistory();
+  const { cypher, cypherText, setCypherText, onRunCypher } = useCypher();
 
   const handleShowPopup = (content) => {
     setPopupContent(content);
@@ -98,7 +83,6 @@ const NeoGraph = () => {
   const onFullscreen = () => {
     handleFullscreen.active ? handleFullscreen.exit() : handleFullscreen.enter();
   }
-
 
   return (
     <Container className="QueryContainer">

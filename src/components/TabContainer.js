@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TabsContainer, Tabs, Tab, TabContent } from '../styles/tabs'
+import { TabsContainer, Tabs, Tab } from '../styles/tabs'
 
 import Search from '../tabs/search/Search';
 import Extract from '../tabs/extract/Extract';
@@ -23,15 +23,9 @@ export default function TabContainer() {
                     <FontAwesomeIcon icon={faDatabase}/> Consulta
                 </Tab>
             </Tabs>
-            <TabContent active={activeTab === 0}>
-                <Extract />
-            </TabContent>
-            <TabContent active={activeTab === 1}>
-                <Search />
-            </TabContent>
-            <TabContent active={activeTab === 2}>
-                <Query/>
-            </TabContent>
+            { activeTab === 0 && <Extract /> }
+            { activeTab === 1 && <Search /> }
+            { activeTab === 2 && <Query/> }
         </TabsContainer>
     );
 }
