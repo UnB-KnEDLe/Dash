@@ -7,7 +7,7 @@ export default function Pagination({contentCount, currentPage, setCurrentPage, i
     var totalPages = parseInt(Math.ceil(contentCount/itemsPerPage))
 
     const [showInput, setShowInput] = useState(false);
-    const optionsCount = [10, 25, 50];
+    const optionsCount = [10, 25, 50, 100, 200, 500, 1000];
 
     const nextPage = () => currentPage < totalPages && setCurrentPage(page => page + 1);
     const prevPage = () => currentPage > 1 && setCurrentPage(page => page - 1);
@@ -30,11 +30,12 @@ export default function Pagination({contentCount, currentPage, setCurrentPage, i
     return (
         <div className="content">
             <div className="per-page">
-                <select style={{width: 55}} onChange={handleItemsPerPage} value={itemsPerPage}>
-                    { optionsCount.map((count, index) => (
+                <select style={{width: 65}} onChange={handleItemsPerPage} value={itemsPerPage}>
+                    { optionsCount
+                        .map((count, index) => (
                         <option key={index} value={count}>{count}</option>
                     ))}
-                    { showAll && <option value={totalPages}>∞</option> }
+                    {/* { showAll && <option value={totalPages}>∞</option> } */}
                 </select> 
                 {itemsPerPage > 0 && <span>itens por pág.</span>}
             </div>

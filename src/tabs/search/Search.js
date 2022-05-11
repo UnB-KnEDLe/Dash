@@ -40,7 +40,8 @@ export default function Search() {
 				<Filters/>
 				{ error.length > 0 && <h3>{error}</h3> }
 			</Container>
-			
+
+			{ content.length === 0 && <h3>Nenhum resultado obtido.</h3> }
 			{ content.length > 0 && (
 				<TableContainer>
 					<Toolbar>

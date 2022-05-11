@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import NeoVis from "neovis.js/dist/neovis.js";
 import Loading from "../../components/Loading";
 import { cypherConfig } from "./queryConfig";

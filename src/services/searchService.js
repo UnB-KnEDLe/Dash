@@ -34,6 +34,8 @@ export default async function service(url) {
                 row.push(item[key])
             } else {
                 for (var itemKey in item[key]) {
+                    if (typeof item[key][itemKey] === 'object')
+                        item[key][itemKey] = null
                     row.push(item[key][itemKey])
                 }
             }

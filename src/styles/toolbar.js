@@ -30,20 +30,20 @@ export const Toolbar = styled.div`
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
-
+        
         .export {
             hr {margin-bottom: 1rem;}
             
             .btn {
                 background: var(--primary);
-
+                
                 &.main {
                     width: 2rem;
                     height: 2rem;
                 }
-        
+                
+                margin: auto;
                 box-shadow: none;
-                margin: 0;
                 display: flex;
                 gap: 1rem;
                 place-items: center;
