@@ -1,0 +1,1 @@
+import SearchIconSVG  from './sidebarIcons/searchIconSVG.svg';
