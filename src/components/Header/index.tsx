@@ -1,13 +1,13 @@
-import { Text, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import HeadingTwo from '../Typography/HeadingTwo';
+import SmallText from '../Typography/SmallText';
 
-type HeaderProps = {
+interface HeaderProps {
     title: string;
     description?: string;
 }
 
-export default function Header(props: HeaderProps) {
-    const {title, description} = props;
-
+export default function Header({ title, description}: HeaderProps) {
     return (
         <Flex
             as='header'
@@ -15,12 +15,8 @@ export default function Header(props: HeaderProps) {
             gap='6'
             marginBottom={4}
         >
-            <Text fontWeight='medium' fontSize='xx-large'>
-                {title}
-            </Text>
-            <Text fontSize='sm'>
-                {description}
-            </Text>
+            <HeadingTwo headingTwoText={title}/>
+            <SmallText smallText={description} />
         </Flex>
     );
 }
