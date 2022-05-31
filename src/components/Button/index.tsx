@@ -11,6 +11,7 @@ interface ButtonProps extends ButtonPropsChakraUI {
 export default function Header({ buttonText, icon, ...rest }: ButtonProps) {
     return (
       <Button
+        display='flex'
         flexDirection='row'
         padding='1.25rem'
         bgColor='pallete.primary' 
@@ -20,8 +21,8 @@ export default function Header({ buttonText, icon, ...rest }: ButtonProps) {
         gap='0.5rem'
         {...rest}
       >
-        <AiOutlinePlus/>
-        <InteractiveText color='pallete.background' interactiveText={buttonText}/>
+        <AiOutlinePlus size={20} color='#FCFCFC'/>
+        <InteractiveText color='pallete.background'  interactiveText={buttonText}/>
       </Button>
     );
 }

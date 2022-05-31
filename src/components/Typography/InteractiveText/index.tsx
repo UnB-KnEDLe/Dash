@@ -7,9 +7,12 @@ interface InteractiveTextProps extends TextProps {
 export default function InteractiveText({ interactiveText, ...rest }: InteractiveTextProps) {
     return (
         <Text
+          display='flex'
+          marginBlockEnd='0'
+          marginBlockStart='0'
           fontWeight={700}
           fontSize='1rem'
-          color='pallete.primary'
+          variant='unstyled'
           {...rest}
         >
             {interactiveText}
