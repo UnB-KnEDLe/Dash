@@ -1,5 +1,5 @@
 import axios from 'axios';
-const api_url = 'http://164.41.76.30/dodfminner/api/extract/all'
+const api_url = 'http://164.41.76.30/dodfminner/api/extracao/all'
 // const api_url = 'http://localhost:5000/dash/api'
 
 export async function service(file){
