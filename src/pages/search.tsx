@@ -1,7 +1,10 @@
 import { Sidebar } from "../components/Sidebar";
+import { Input } from "../components/Input";
 import Header from "../components/Header";
 import { Flex } from "@chakra-ui/react";
 import Button from "../components/Button";
+import { RiSearchLine } from 'react-icons/ri'; 
+
 
 export default function Search(){
   return(
@@ -15,11 +18,13 @@ export default function Search(){
         h='100%'
         padding='6.25rem'
       >
-        <Header
-            title="Pesquisar"
-            description="Pesquise por informações sobre os mais diversos atos."
+        <Input
+          icon={RiSearchLine}
+          type="password"
+          name="password"
+          label="Senha"
+          placeholder="Ex: 1202328"
         />
-        <Button buttonText="Entrar"/>
       </Flex>
       
     </Flex>

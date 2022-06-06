@@ -17,7 +17,6 @@ export default function Header({ buttonText, icon, ...rest }: ButtonProps) {
         bgColor='pallete.primary' 
         align='center'
         justify='center'
-        variant='unstyled'
         gap='0.5rem'
         {...rest}
       >
