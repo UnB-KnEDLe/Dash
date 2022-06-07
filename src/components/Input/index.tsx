@@ -1,5 +1,4 @@
 import { FormControl, Icon, InputLeftElement, InputLeftAddon, FormLabel, InputGroupProps, InputGroup, Input as ChakraInput, InputProps as ChakraInputProps } from "@chakra-ui/react";
-import { truncateSync } from "fs";
 import { useCallback, useState } from "react";
 import { IconType } from "react-icons";
 
@@ -21,7 +20,7 @@ export function Input({ name, label, placeholder, type, icon, ...rest }: InputPr
   }, [])
   return (
     <FormControl>
-    {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+    {!!label && <FormLabel marginBottom='0.5rem' htmlFor={name}>{label}</FormLabel>}
 
     <InputGroup
       display='flex' 

@@ -22,8 +22,8 @@ export default function Search(){
           icon={RiSearchLine}
           type="password"
           name="password"
-          label="Senha"
-          placeholder="Ex: 1202328"
+          label="Email"
+          placeholder="Ex: john@example.com"
         />
       </Flex>
       
