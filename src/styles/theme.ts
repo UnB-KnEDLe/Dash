@@ -11,7 +11,8 @@ export const theme = extendTheme({
       "primaryLight50": "#A2C2E5",
       "secondaryLight50": "#D8DEFB",
       "secondaryLight100": "#EDF4F6",
-      "background": "#FCFCFC",
+      "background": "#F7F8FA",
+      "sidebarBackground": '#ffffff'
     }
   },
   fonts:{

@@ -2,7 +2,6 @@ import { Sidebar } from "../components/Sidebar";
 import { Input } from "../components/Input";
 import Header from "../components/Header";
 import { Flex } from "@chakra-ui/react";
-import Button from "../components/Button";
 import { RiSearchLine } from 'react-icons/ri'; 
 
 
@@ -12,7 +11,6 @@ export default function Search(){
       w='100vw'
       h='100vh'
     >  
-      <Sidebar />
       <Flex
         w='100%'
         h='100%'
@@ -22,8 +20,8 @@ export default function Search(){
           icon={RiSearchLine}
           type="password"
           name="password"
-          label="Senha"
-          placeholder="Ex: 1202328"
+          label="Email"
+          placeholder="Ex: john@example.com"
         />
       </Flex>
       

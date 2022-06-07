@@ -1,36 +1,48 @@
-import { useState } from 'react';
-import { Flex, Image } from '@chakra-ui/react';
-import { SidebarIcon, IconKey } from './SidebarIcon';
+import { Children, useCallback, useState } from 'react';
+import { Flex, IconProps, Image } from '@chakra-ui/react';
+import { SidebarIcon } from './SidebarIcon';
 
 import Logo from '../../assets/logo_miner_obj.png.png';
+import { SIDEBAR_ICON_TYPES, TypeProps } from '../../constants/search.constants';
 
-const dashItems: IconKey[] = ['search', 'extraction', 'query', 'timeline']
+export function Sidebar({children}){
+  const [selectType, setSelecType] = useState('search');
 
-export function Sidebar(){
-  const [selected, setSelected] = useState<IconKey>('search');
-
+  const handleSelectType = useCallback((type: string) => {
+    setSelecType(type)
+    console.log(selectType)
+  }, [selectType])
+  
   return(
-    <Flex
-      as='div'
-      w='20'
-      h='100vh'
-      direction='column'
-      align='center'
-      background="pallete.secondaryLight100"
-    >
-    <Image
-      src={Logo.src}
-      w='50%'
-      paddingBlock="12"
-    />
-    { dashItems.map( (item, index) => (
-      <SidebarIcon
-        key={index}
-        item={item}
-        selected={selected === item}
-        onClick={setSelected}
+    <Flex>
+      <Flex
+        as='div'
+        w='20'
+        h='100vh'
+        direction='column'
+        align='center'
+        background="pallete.sidebarBackground"
+      >
+      <Image
+        src={Logo.src}
+        w='50%'
+        paddingBlock="12"
       />
-    )) }
-  </Flex>
+      {
+        Object.entries(SIDEBAR_ICON_TYPES).map(
+          (item) => (
+            <SidebarIcon
+              key={item[1].key}
+              item={item[1]}
+              selectType={selectType}
+              onClick={() => handleSelectType(item[1].label)}
+            />
+          )
+        )
+      }
+      </Flex>
+      {children}
+    </Flex>
+    
   )
 }
