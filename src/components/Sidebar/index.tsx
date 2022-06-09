@@ -1,48 +1,39 @@
-import { Children, useCallback, useState } from 'react';
-import { Flex, IconProps, Image } from '@chakra-ui/react';
-import { SidebarIcon } from './SidebarIcon';
+import { Box, Stack, Text, Link, Icon } from "@chakra-ui/react";
+import { RiArchiveLine, RiSearchLine, RiDatabase2Line } from "react-icons/ri";
 
-import Logo from '../../assets/logo_miner_obj.png.png';
-import { SIDEBAR_ICON_TYPES, TypeProps } from '../../constants/search.constants';
+import { FcTimeline } from "react-icons/fc";
 
-export function Sidebar({children}){
-  const [selectType, setSelecType] = useState('search');
-
-  const handleSelectType = useCallback((type: string) => {
-    setSelecType(type)
-    console.log(selectType)
-  }, [selectType])
-  
-  return(
-    <Flex>
-      <Flex
-        as='div'
-        w='20'
-        h='100vh'
-        direction='column'
-        align='center'
-        background="pallete.sidebarBackground"
-      >
-      <Image
-        src={Logo.src}
-        w='50%'
-        paddingBlock="12"
-      />
-      {
-        Object.entries(SIDEBAR_ICON_TYPES).map(
-          (item) => (
-            <SidebarIcon
-              key={item[1].key}
-              item={item[1]}
-              selectType={selectType}
-              onClick={() => handleSelectType(item[1].label)}
-            />
-          )
-        )
-      }
-      </Flex>
-      {children}
-    </Flex>
-    
-  )
+export function Sidebar() {
+  return (
+    <Box as="aside" w="64" mr="8">
+      <Stack spacing="12" align="flex-start">
+        <Box>
+          <Text fontWeight="bold" color="gray.400" fontSize="small">GERAL</Text>
+          <Stack spacing="4" mt="8" align="stretch">
+            <Link display="flex" alignItems="center">
+              <Icon as={RiSearchLine} fontSize={22}/>
+              <Text ml="4" fontWeight="medium">Pesquisa</Text>
+            </Link>
+            <Link display="flex" alignItems="center">
+              <Icon as={RiArchiveLine} fontSize={22}/>
+              <Text ml="4" fontWeight="medium">Extração</Text>
+            </Link>
+            <Link display="flex" alignItems="center">
+              <Icon as={RiDatabase2Line} fontSize={22}/>
+              <Text ml="4" fontWeight="medium">Consulta</Text>
+            </Link>
+          </Stack>
+        </Box>
+        <Box>
+          <Text fontWeight="bold" color="gray.400" fontSize="small">TIMELINE</Text>
+          <Stack spacing="4" mt="8" align="stretch">
+            <Link display="flex" alignItems="center">
+              <Icon as={FcTimeline} fontSize={22} filter="grayscale(100%)" color="gray.400"/>
+              <Text ml="4" fontWeight="medium">Contratos</Text>
+            </Link>
+          </Stack>
+        </Box>
+      </Stack>
+    </Box>
+  );
 }

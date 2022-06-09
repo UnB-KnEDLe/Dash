@@ -8,7 +8,7 @@ export default function SmallText({ smallText, ...rest }: SmallTextProps) {
     return (
         <Text
           fontWeight={500}
-          fontSize='1.25rem'
+          fontSize='lg'
           {...rest}
         >
             {smallText}

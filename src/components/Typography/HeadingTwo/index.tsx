@@ -8,7 +8,7 @@ export default function HeadingTwo({ headingTwoText,...rest }: HeadingTwoProps) 
     return (
         <Text
           fontWeight={500}
-          fontSize='2rem'
+          fontSize='2xl'
           {...rest}
         >
             {headingTwoText}

@@ -1,21 +1,37 @@
-import { Flex } from '@chakra-ui/react';
-import HeadingOne from '../Typography/HeadingOne';
-import SmallText from '../Typography/SmallText';
+import { Flex, Text, Input, Icon, HStack, Box, Avatar } from '@chakra-ui/react';
+import { RiSearchLine, RiNotificationLine, RiUserAddLine } from 'react-icons/ri'
 
-interface HeaderProps {
-    title: string;
-    description?: string;
-}
+export function Header(){
+  return(
+    <Flex
+      as='header'
+      w="100%"
+      maxWidth={1480}
+      h="20"
+      mx="auto"
+      mt="4"
+      px="6"
+      align="center"
+    >
+      <Text
+        fontSize='3xl'
+        fontWeight='bold'
+        letterSpacing='tight'
+        w="64"
+      > 
+        knedash
+        <Text as="span" ml='1' color="pallete.primary">.</Text>
+      </Text>
 
-export function Header({ title, description}: HeaderProps) {
-    return (
-        <Flex
-            as='header'
-            gap='2rem'
-            align='center'
-        >
-            <HeadingOne headingOneText={title}/>
-            <SmallText smallText={description} />
-        </Flex>
-    );
+      <Text
+        py="4"
+        px="8"
+        fontSize="3xl"
+        fontWeight="bold"
+        maxWidth={400}
+      >
+        Pesquisa
+      </Text>
+    </Flex>
+  )
 }

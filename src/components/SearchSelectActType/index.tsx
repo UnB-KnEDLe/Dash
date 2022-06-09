@@ -7,14 +7,6 @@ import SmallText from "../Typography/SmallText";
 
 export default function SearchSelectActType(){
   return(
-    
-    <Flex
-      as='div'
-      padding='3rem'
-      borderRadius='0.25rem'
-      bgColor='pallete.cardBackground'
-      flexDirection='column'
-    > 
     <Stack spacing='2rem'>
       <Flex
         flexDirection='column'
@@ -52,7 +44,5 @@ export default function SearchSelectActType(){
           </Flex>
         </Flex>
       </Stack> 
-    </Flex>
-
   )
 }
