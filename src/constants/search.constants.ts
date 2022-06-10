@@ -1,36 +1,57 @@
-import { IconType } from "react-icons";
-import { AiFillDatabase } from "react-icons/ai";
-import { HiDocumentSearch } from "react-icons/hi";
-import { IoDocumentAttachSharp } from "react-icons/io5";
-
-
-
-export type IconProps = 'extraction' | 'query' | 'search';
-
-export interface TypeProps {
-  label: string;
-  key: number;
-  icon: IconType;
+export enum AllTypeActs {
+  permanenceSubscriptionAct = 'Abono de Permanência',
+  retiramentAct = 'Aposentadoria',
+  assignmentAct = 'Cessão'
 }
 
-interface IconTypeProps {
-  [key: string]: TypeProps;
+interface AllActsProps {
+  permanenceSubscriptionAct: {
+    name: string;
+    charge: string;
+    department: string;
+  },
+  retiramentAct: {
+    name: string;
+    charge: string;
+    department: string;
+    registration: string;
+  },
+  assignmentAct: {
+    name: string;
+    charge: string;
+    registration: string;
+  },
+
 }
 
-export const SIDEBAR_ICON_TYPES: IconTypeProps = {
-  search: {
-    label: 'search',
-    key: 1,
-    icon: HiDocumentSearch,
+export const ALL_ACTS: AllActsProps = {
+  permanenceSubscriptionAct: {
+    name: 'Nome',
+    charge: 'Cargo',
+    department: 'Órgão',
   },
-  extraction: {
-    label: 'extraction',
-    key: 2,
-    icon: IoDocumentAttachSharp,
+  retiramentAct: {
+    name: 'Nome',
+    charge: 'Cargo',
+    department: 'Órgão',
+    registration: 'Matrícula',
   },
-  query: {
-    label: 'query',
-    key: 3,
-    icon: AiFillDatabase,
-  }
+  assignmentAct: {
+    name: 'Nome',
+    charge: 'Matrícula',
+    registration: 'Cargo Cedido'
+  },
+}
+interface RetirementActFilterProps {
+  name: string;
+  charge: string;
+  department: string;
+  registration: string;
+}
+
+export const RETIREMENT_ACT_FILTER: RetirementActFilterProps = {
+  name: 'Nome',
+  charge: 'Cargo',
+  department: 'Órgão',
+  registration: 'Matrícula'
 }

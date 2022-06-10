@@ -18,16 +18,19 @@ export default function Search(){
         <SimpleGrid flex="1" gap="4" minChildWidth="320px" alignItems="flex-start">
           <Box
             as='div'
-            padding='3rem'
+            padding='2rem'
             borderRadius='0.25rem'
             bgColor='pallete.cardBackground'
             flexDirection='column'
+            height="435px"
           >
             <SearchSelectActType />
           </Box>
           <Box
-            as='div'
+            flex={1}
             padding='3rem'
+            height="394px"
+            h="100%"
             borderRadius='0.25rem'
             bgColor='pallete.cardBackground'
             flexDirection='column'

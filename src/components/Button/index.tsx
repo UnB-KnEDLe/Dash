@@ -1,6 +1,6 @@
 import { Icon, Flex, Button as ButtonChakra, ButtonProps as ButtonPropsChakraUI} from '@chakra-ui/react';
 import { useCallback, useState } from 'react';
-import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import InteractiveText from '../Typography/InteractiveText';
 
 
@@ -19,11 +19,10 @@ export default function Button({ buttonText, icon, ...rest }: ButtonProps) {
     return (
       <ButtonChakra
         display='flex'
-        flex={1}
         alignItems='center'
         justify='center'
         flexDirection='row'
-        leftIcon={<Icon as={AiOutlinePlus} _hover={{color: 'pallete.background'}} />}
+        leftIcon={searchButton ? <Icon as={AiOutlineMinus}/> : <Icon as={AiOutlinePlus} />}
         bgColor={searchButton ? 'pallete.darkPrimary' : 'pallete.background'}
         color={searchButton ? 'pallete.background' : 'pallete.text'}
         boxShadow="0px 1px 5px rgba(0, 0, 0, 0.25)"
