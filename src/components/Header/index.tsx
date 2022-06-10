@@ -20,7 +20,7 @@ export function Header(){
         w="64"
       > 
         knedash
-        <Text as="span" ml='1' color="pallete.primary">.</Text>
+        <Text as="span" ml='0.5' color="pallete.primary">.</Text>
       </Text>
 
       <Text
@@ -32,6 +32,16 @@ export function Header(){
       >
         Pesquisa
       </Text>
+
+      <Text
+        py="4"
+        px="8"
+        fontSize="lg"
+        fontWeight="bold"
+      >
+        Pesquise por informações sobre os mais diversos atos.
+      </Text>
+
     </Flex>
   )
 }

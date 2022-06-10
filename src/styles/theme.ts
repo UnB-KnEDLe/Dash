@@ -13,7 +13,8 @@ export const theme = extendTheme({
       "secondaryLight100": "#EDF4F6",
       "background": "#F7F8FA",
       "sidebarBackground": '#ffffff',
-      "cardBackground": "#EDEFF5"
+      "cardBackground": "#EDEFF5",
+      "backgroundButton": "#E3E3E3"
     }
   },
   fonts:{

@@ -10,7 +10,7 @@ export default function InteractiveText({ interactiveText, ...rest }: Interactiv
           display='flex'
           marginBlockEnd='0'
           marginBlockStart='0'
-          fontWeight={700}
+          fontWeight={600}
           fontSize='1rem'
           variant='unstyled'
           {...rest}
