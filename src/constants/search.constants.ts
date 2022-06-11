@@ -4,42 +4,46 @@ export enum AllTypeActs {
   assignmentAct = 'Cessão'
 }
 
-interface AllActsProps {
+export interface ItemActsProps {
+  label: string;
+  status: boolean;
+}
+export interface AllActsProps {
   permanenceSubscriptionAct: {
-    name: string;
-    charge: string;
-    department: string;
+    name: ItemActsProps;
+    charge: ItemActsProps;
+    department: ItemActsProps;
   },
   retiramentAct: {
-    name: string;
-    charge: string;
-    department: string;
-    registration: string;
+    name: ItemActsProps;
+    charge: ItemActsProps;
+    department: ItemActsProps;
+    registration: ItemActsProps;
   },
   assignmentAct: {
-    name: string;
-    charge: string;
-    registration: string;
+    name: ItemActsProps;
+    charge: ItemActsProps;
+    registration: ItemActsProps;
   },
 
 }
 
 export const ALL_ACTS: AllActsProps = {
   permanenceSubscriptionAct: {
-    name: 'Nome',
-    charge: 'Cargo',
-    department: 'Órgão',
+    name: {label:'Nome', status: false},
+    charge: {label:'Cargo', status: false},
+    department: {label:'Órgão', status: false},
   },
   retiramentAct: {
-    name: 'Nome',
-    charge: 'Cargo',
-    department: 'Órgão',
-    registration: 'Matrícula',
+    name: {label:'Nome', status: false},
+    charge: {label:'Cargo', status: false},
+    department: {label:'Órgão', status: false},
+    registration: {label:'Matrícula', status: false},
   },
   assignmentAct: {
-    name: 'Nome',
-    charge: 'Matrícula',
-    registration: 'Cargo Cedido'
+    name: {label:'Nome', status: false},
+    charge: {label:'Matrícula', status: false},
+    registration: {label:'Cargo Cedido', status: false},
   },
 }
 interface RetirementActFilterProps {

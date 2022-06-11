@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import api from '../services/api';
 
 interface RetirementAct {
@@ -24,7 +24,6 @@ interface RetirementAct {
 
 interface ActContextData {
   retiramentActs: RetirementAct[];
-  getRetirementActs(): void;
 }
 
 const ActContext = createContext<ActContextData>({} as ActContextData);
@@ -40,9 +39,13 @@ function ActProvider({ children }: ActProviderProps ): JSX.Element {
       setRetiramentActs(response.data); 
   }, []);
 
+  useEffect(() => {
+    getRetirementActs();
+  }, [])
+
   return (
     <ActContext.Provider
-      value={{ retiramentActs, getRetirementActs }}
+      value={{ retiramentActs }}
     >
       {children}
     </ActContext.Provider>

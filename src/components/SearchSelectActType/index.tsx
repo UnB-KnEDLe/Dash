@@ -1,14 +1,39 @@
-import { Flex, SimpleGrid, Select, Stack, Text, Icon } from "@chakra-ui/react";
-import { useCallback, useState, FormEvent, useEffect } from "react";
-import { AllTypeActs, RETIREMENT_ACT_FILTER, ALL_ACTS } from "../../constants/search.constants";
-import { useAct } from "../../hooks/act";
+import { Flex, SimpleGrid, Select, Stack } from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
+import { AllTypeActs, ALL_ACTS } from "../../constants/search.constants";
 import Button from "../Button";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 import { BoxLoading } from 'react-loadingg';
 
 export default function SearchSelectActType(){
-  const [selectedAct, setSelectedAct] = useState('');
+  const [selectedAct, setSelectedAct] = useState<any>();
+  const [allActs, setAllActs] = useState(ALL_ACTS);
+
+  // <RadioButtonGroup
+  // onChange={(event) => { 
+  //   setStyle(prevStyle => ({
+  //       ...prevStyle,
+  //       font: { ...prevStyle.font, align: event.target.value }
+  //   }));
+  //   console.log(style);
+  // }}
+// />
+
+  const handleActiveButton = useCallback((recentStatus: any) => {
+    if(!!selectedAct && !!recentStatus){
+      setAllActs(prevStyle => ({...prevStyle, [selectedAct]: {
+        ...prevStyle[selectedAct], [recentStatus]: {
+          ...prevStyle[selectedAct][recentStatus], status: !allActs[selectedAct][recentStatus]?.status}
+        }
+      }
+    ))
+    }
+}, [selectedAct, allActs]);
+
+useEffect(() => {
+  console.log(allActs);
+}, [allActs])
 
   return(
     <Stack spacing='2rem' flex={1}>
@@ -40,10 +65,15 @@ export default function SearchSelectActType(){
           flexDirection='column'
         >
           <HeadingTwo headingTwoText="Filtros"/>
-          <SmallText mb='1rem' smallText="Selecione os campos que deseja filtrar." />
-          {!!selectedAct ? <SimpleGrid columns={2} spacing={2} flexDirection='row' alignItems="flex-start">
-            {Object.keys(ALL_ACTS[selectedAct]).map(function(key) {
-                return <Button key={key} buttonText={ALL_ACTS[selectedAct][key]}/>
+          <SmallText mb='1rem' smallText={
+            !!selectedAct 
+            ? "Selecione os campos que deseja filtrar." 
+            : "Escolha um tipo de ato para ativar a opção de filtro."} 
+          />
+          {!!selectedAct 
+          ? <SimpleGrid columns={2} spacing={2} flexDirection='row' alignItems="flex-start">
+            {Object.keys(allActs[selectedAct]).map(function(key) {
+                return <Button active={allActs[selectedAct][key]?.status} onClick={() => handleActiveButton(key)} key={key} buttonText={allActs[selectedAct][key]?.label}/>
               })}
             </SimpleGrid>
           : <BoxLoading speed="1.5" color="#99A8F4" style={{alignSelf: 'center', transform:'scale(2.3)', marginTop: '2.5rem'}}/>}

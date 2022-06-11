@@ -2,8 +2,7 @@ import { Flex, Stack, Icon , chakra, keyframes} from "@chakra-ui/react";
 import Button from "../Button";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
-import { TbError404 } from "react-icons/tb";
-import NotFound from "../../assets/not-found.svg";
+import NotFound from "../../assets/not-refund.svg";
 import { motion, isValidMotionProp } from 'framer-motion'
 import Image from 'next/image';
 
