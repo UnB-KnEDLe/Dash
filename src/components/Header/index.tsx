@@ -18,10 +18,10 @@ export function Header(){
         fontWeight='bold'
         letterSpacing='tight'
         w="64"
-        color="pallete.secondary"
+        color="pallete.primary"
       > 
         knedash
-        <Text as="span" ml='0.5' color="pallete.primary">.</Text>
+        <Text as="span" ml='0.5' color="pallete.secondary">.</Text>
       </Text>
 
       <Text

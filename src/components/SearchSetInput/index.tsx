@@ -5,6 +5,7 @@ import SmallText from "../Typography/SmallText";
 import NotFound from "../../assets/not-refund.svg";
 import { motion, isValidMotionProp } from 'framer-motion'
 import Image from 'next/image';
+import { useEffect } from "react";
 
 const animationKeyframes = keyframes`
   0% { transform: scale(1) rotate(0)}
@@ -14,9 +15,17 @@ const animationKeyframes = keyframes`
   100% { transform: scale(1) rotate(0) }
 `;
 
+interface SearchSetInputProps {
+  showInputElements: string[];
+}
+
 const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
-export default function SearchSetInput(){
+export default function SearchSetInput({ showInputElements }: SearchSetInputProps){
+  useEffect(() => {
+    console.log(showInputElements)
+  }, [showInputElements])
+
   return(
     <Stack spacing='1rem'>
       <Flex

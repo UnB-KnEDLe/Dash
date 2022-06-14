@@ -1,7 +1,7 @@
 export enum AllTypeActs {
   permanenceSubscriptionAct = 'Abono de Permanência',
   retiramentAct = 'Aposentadoria',
-  assignmentAct = 'Cessão'
+  assignmentAct = 'Cessão',
 }
 
 export interface ItemActsProps {

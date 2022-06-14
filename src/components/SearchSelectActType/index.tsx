@@ -1,26 +1,28 @@
 import { Flex, SimpleGrid, Select, Stack } from "@chakra-ui/react";
-import { useCallback, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { AllTypeActs, ALL_ACTS } from "../../constants/search.constants";
 import Button from "../Button";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 import { BoxLoading } from 'react-loadingg';
 
-export default function SearchSelectActType(){
-  const [selectedAct, setSelectedAct] = useState<any>();
+interface SearchSelectActTypeProps {
+  setShowInputElements: Dispatch<SetStateAction<any[]>>
+  showInputElements: string[];
+}
+
+export default function SearchSelectActType({ setShowInputElements, showInputElements }: SearchSelectActTypeProps){
+  const [selectedAct, setSelectedAct] = useState<string>('');
   const [allActs, setAllActs] = useState(ALL_ACTS);
 
-  // <RadioButtonGroup
-  // onChange={(event) => { 
-  //   setStyle(prevStyle => ({
-  //       ...prevStyle,
-  //       font: { ...prevStyle.font, align: event.target.value }
-  //   }));
-  //   console.log(style);
-  // }}
-// />
+  const handleOncChange = useCallback((value: string) => {
+    setSelectedAct(value);
+    setAllActs(ALL_ACTS);
+    setShowInputElements([])
+  }, []);
 
   const handleActiveButton = useCallback((recentStatus: any) => {
+    
     if(!!selectedAct && !!recentStatus){
       setAllActs(prevStyle => ({...prevStyle, [selectedAct]: {
         ...prevStyle[selectedAct], [recentStatus]: {
@@ -29,11 +31,18 @@ export default function SearchSelectActType(){
       }
     ))
     }
-}, [selectedAct, allActs]);
+    if(showInputElements.includes(allActs[selectedAct][recentStatus].label) === false){
+      setShowInputElements([...showInputElements, allActs[selectedAct][recentStatus].label]);
+    }
+      
+    else{
+      setShowInputElements(showInputElements.filter(item => item !== allActs[selectedAct][recentStatus].label));
+      
+    }
+      
+    
 
-useEffect(() => {
-  console.log(allActs);
-}, [allActs])
+}, [selectedAct, allActs, showInputElements]);
 
   return(
     <Stack spacing='2rem' flex={1}>
@@ -46,7 +55,7 @@ useEffect(() => {
             _hover={{bg:'pallete.primaryLight50'}}
             borderRadius='0.25rem'
             fontWeight='500'
-            onChange={e => setSelectedAct(e.target.value)}
+            onChange={e => handleOncChange(e.target.value)}
             value={selectedAct} 
             color='pallete.text' 
             bg='pallete.secondaryLight100'

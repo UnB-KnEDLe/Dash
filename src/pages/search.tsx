@@ -1,4 +1,5 @@
 import { Flex, SimpleGrid, Box, Text } from '@chakra-ui/react';
+import { useState } from 'react';
 import { Header } from "../components/Header";
 import SearchSelectActType from '../components/SearchSelectActType';
 import SearchSetInput from '../components/SearchSetInput';
@@ -7,6 +8,7 @@ import { Sidebar } from "../components/Sidebar";
 
 
 export default function Search(){
+  const [showInputElements, setShowInputElements] = useState<string[]>([]);
 
   return(
     <Flex direction="column" h="100vh">
@@ -24,7 +26,7 @@ export default function Search(){
             flexDirection='column'
             height="435px"
           >
-            <SearchSelectActType />
+            <SearchSelectActType showInputElements={showInputElements} setShowInputElements={setShowInputElements} />
           </Box>
           <Box
             flex={1}
@@ -35,7 +37,7 @@ export default function Search(){
             bgColor='pallete.cardBackground'
             flexDirection='column'
           >
-            <SearchSetInput />
+            <SearchSetInput showInputElements={showInputElements}/>
           </Box>
 
         </SimpleGrid>
