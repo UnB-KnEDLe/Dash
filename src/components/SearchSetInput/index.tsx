@@ -1,11 +1,13 @@
-import { Flex, Stack, Icon , chakra, keyframes} from "@chakra-ui/react";
-import Button from "../Button";
-import HeadingTwo from "../Typography/HeadingTwo";
-import SmallText from "../Typography/SmallText";
-import NotFound from "../../assets/not-refund.svg";
-import { motion, isValidMotionProp } from 'framer-motion'
+import { Flex, Stack, Icon, chakra, keyframes } from '@chakra-ui/react';
+import Button from '../Button';
+import { Input } from '../Input';
+import HeadingTwo from '../Typography/HeadingTwo';
+import SmallText from '../Typography/SmallText';
+import NotFound from '../../assets/not-refund.svg';
+import { motion, isValidMotionProp } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect } from "react";
+import { FaSearch } from "react-icons/fa";
+import { useEffect, useState, useCallback } from 'react';
 
 const animationKeyframes = keyframes`
   0% { transform: scale(1) rotate(0)}
@@ -21,31 +23,44 @@ interface SearchSetInputProps {
 
 const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
-export default function SearchSetInput({ showInputElements }: SearchSetInputProps){
+export default function SearchSetInput({ showInputElements }: SearchSetInputProps) {
+  const [ active, setActive ] = useState(false);
+
   useEffect(() => {
-    console.log(showInputElements)
-  }, [showInputElements])
+    console.log(showInputElements);
+  }, [showInputElements]);
 
-  return(
-    <Stack spacing='1rem'>
-      <Flex
-        flexDirection='column'
+  const handleSubmit = useCallback(() => {
+    setActive(true);
+  }, []);
 
-      >
-        <HeadingTwo headingTwoText="Campos."/>
-        <SmallText mb='2.5rem' smallText="Não existem campos a serem preenchidos." />
-          
+  return (
+    <Stack spacing="1rem">
+      <Flex flexDirection="column">
+        <HeadingTwo headingTwoText="Campos." />
+        <SmallText
+          mb="2rem"
+          smallText={
+            showInputElements?.length
+              ? 'Insira os dados dos campos escolhidos'
+              : 'Não existem campos a serem preenchidos.'
+          }
+        />
       </Flex>
-      <Flex
-        as={motion.div}
-        flex="1"
-        direction="column"
-        animation={animation}
-        align="center"
-      >
-        <Image src={NotFound} alt="Not-Found" width="200" height="200"/>
-      </Flex>
-        
-      </Stack> 
-  )
+      {showInputElements?.length ? (
+        <Stack>
+          {showInputElements.map(function(label) {
+            return <Input name={label} label={label} placeholder={label} type='text' icon={null}/>
+          })}
+          <Flex justify="flex-end">
+            <Button buttonText='Pesquisar' icon={FaSearch} active={active} width="100" mt="10" onClick={handleSubmit}/>
+          </Flex>
+        </Stack>)
+       : (
+        <Flex as={motion.div} flex="1" direction="column" animation={animation} align="center">
+          <Image src={NotFound} alt="Not-Found" width="200" height="200" />
+        </Flex>
+      )}
+    </Stack>
+  );
 }
