@@ -1,7 +1,12 @@
 import { Flex, Text, Input, Icon, HStack, Box, Avatar } from '@chakra-ui/react';
 import { RiSearchLine, RiNotificationLine, RiUserAddLine } from 'react-icons/ri'
 
-export function Header(){
+interface HeaderProps {
+  title: string;
+  description: string;
+}
+
+export function Header({ title, description } : HeaderProps){
   return(
     <Flex
       as='header'
@@ -31,7 +36,7 @@ export function Header(){
         fontWeight="bold"
         maxWidth={400}
       >
-        Pesquisa
+        {title}
       </Text>
 
       <Text
@@ -40,7 +45,7 @@ export function Header(){
         fontSize="lg"
         fontWeight="bold"
       >
-        Pesquise por informações sobre os mais diversos atos.
+        {description}
       </Text>
 
     </Flex>
