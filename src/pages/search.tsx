@@ -12,8 +12,10 @@ export default function Search(){
 
   return(
     <Flex direction="column" h="100vh">
-      <Header />
-
+      <Header 
+        title="Pesquisar"
+        description="Pesquise por informações sobre os mais diversos atos."
+      />
       <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
         <Sidebar />
 
