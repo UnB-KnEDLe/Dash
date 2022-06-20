@@ -2,9 +2,6 @@ import { Flex, Text, Image, Divider } from '@chakra-ui/react';
 import Button from '../components/Button';
 import HomeMenu from '../components/HomeMenu';
 
-import fapdfLogo from '../assets/companyLogos/fapdf.png';
-import finatecLogo from '../assets/companyLogos/finatec.svg';
-import unbLogo from '../assets/companyLogos/unb.svg';
 import frontImage from '../assets/homepage.png';
 
 export default function Home() {
@@ -19,7 +16,7 @@ export default function Home() {
         <Divider orientation="horizontal" />
         <Flex
           gap='4rem'
-          height='82vh'
+          height='80vh'
           minHeight='36rem'
           paddingBlockStart='4rem'
         >
@@ -55,15 +52,6 @@ export default function Home() {
               alignSelf="flex-end"
             />
           </Flex>
-        </Flex>
-        <Divider
-          marginBlockStart='4rem'
-          orientation="horizontal"
-        />
-        <Flex justifyContent='center' paddingBlock='2rem' alignItems='center' gap='4rem'>
-          <Image width='auto' height='2.5rem' src={unbLogo.src} />
-          <Image width='auto' height='2.5rem' src={finatecLogo.src} />
-          <Image width='auto' height='2.5rem' src={fapdfLogo.src} />
         </Flex>
       </Flex>
     </Flex>
