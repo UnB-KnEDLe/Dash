@@ -1,5 +1,4 @@
-import { Flex, Text, Input, Icon, HStack, Box, Avatar } from '@chakra-ui/react';
-import { RiSearchLine, RiNotificationLine, RiUserAddLine } from 'react-icons/ri'
+import { Flex, Text } from "@chakra-ui/react";
 
 interface HeaderProps {
   title: string;
