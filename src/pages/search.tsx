@@ -1,6 +1,5 @@
 import { Flex, SimpleGrid, Box, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react';
 import { useState } from 'react';
-import { RiPencilLine } from 'react-icons/ri';
 import { Divider } from '../components/Divider';
 import { Header } from "../components/Header";
 import SearchSelectActType from '../components/SearchSelectActType';
