@@ -5,27 +5,25 @@ import InteractiveText from '../Typography/InteractiveText';
 
 interface ButtonProps extends ButtonPropsChakraUI {
     buttonText: string;
-    icon: any;
+    icon?: any;
+    active: boolean;
 }
 
-export default function Button({ buttonText, icon, ...rest }: ButtonProps) {
+export default function FilterButton({ buttonText, icon, active, ...rest }: ButtonProps) {
     return (
       <ButtonChakra
         display='flex'
         alignItems='center'
         justify='center'
         flexDirection='row'
-        leftIcon={<Icon as={icon} />}
-        bgColor={'pallete.background' }
-        color={'pallete.text' }
+        leftIcon={active ?  <Icon as={AiOutlineMinus} /> : <Icon as={AiOutlinePlus} />}
+        bgColor={active ? 'pallete.primary': 'pallete.background' }
+        color={active ? 'pallete.background' : 'pallete.text' }
         boxShadow="0px 1px 5px rgba(0, 0, 0, 0.25)"
-        _active={{
-          bgColor: 'pallete.primary',
-          color: 'pallete.background',
-        }}
         _hover={
           {
-            bgColor: 'pallete.cardBackground',
+            bgColor: active ? 'pallete.primaryLight100' : 'pallete.cardBackground',
+            color: active ? 'pallete.background' : 'pallete.text',
           }
         }
         px="4"

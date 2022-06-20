@@ -1,7 +1,7 @@
-import { FormControl, Icon, InputLeftElement, InputLeftAddon, FormLabel, InputGroupProps, InputGroup, Input as ChakraInput, InputProps as ChakraInputProps } from "@chakra-ui/react";
-import { useCallback, useState } from "react";
+import { FormControl, Icon, InputLeftElement, FormLabel, InputGroupProps, InputGroup, Input as ChakraInput, InputProps as ChakraInputProps, FormErrorMessage } from "@chakra-ui/react";
+import { forwardRef, useCallback, ForwardRefRenderFunction, useState } from "react";
 import { IconType } from "react-icons";
-
+import { FieldError } from 'react-hook-form';
 
 interface InputProps extends InputGroupProps {
   name: string;
@@ -9,18 +9,21 @@ interface InputProps extends InputGroupProps {
   placeholder: string;
   type: string;
   icon: IconType;
+  error?: FieldError;
 }
 
-export function Input({ name, label, placeholder, type, icon, ...rest }: InputProps){
-  const [iconColor, setIconColor] = useState('pallete.primaryLight50');
+const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> 
+  = ({ name, label, error = null, placeholder, type, icon, ...rest }, ref) => {
+  const [iconColor, setIconColor] = useState('pallete.secondary');
   const [value, setValue] = useState('');
 
   const handleChange = useCallback((event) => {
     setValue(event.target.value)
-  }, [])
+  }, []);
+
   return (
-    <FormControl>
-    {!!label && <FormLabel marginBottom='0.5rem' htmlFor={name}>{label}</FormLabel>}
+    <FormControl isInvalid={!!error}>
+    {!!label && <FormLabel marginBottom='0.1rem' htmlFor={name}>{label}</FormLabel>}
 
     <InputGroup
       display='flex' 
@@ -41,23 +44,33 @@ export function Input({ name, label, placeholder, type, icon, ...rest }: InputPr
       <ChakraInput 
         name={name}
         id={name}
+        ref={ref}
         type={type}
         onFocus={() => setIconColor('pallete.primary')}
-        onBlur={() => !value ? setIconColor('pallete.primaryLight50') : setIconColor('pallete.primary')}
+        onBlur={() => !value ? setIconColor('pallete.secondary') : setIconColor('pallete.primary')}
         focusBorderColor="pallete.primary"
-        borderColor='pallete.primaryLight50'
         bgColor="pallete.background"
+        borderColor={iconColor}
         variant="filled"
         onChange={handleChange}
         placeholder={placeholder}
         _placeholder={{ color: "gray.400" }}
         _hover={{
-          bgColor: '#F8F8F8'
+          bgColor: 'pallete.sidebarBackground'
+        }}
+        _focus={{
+          bgColor: 'pallete.sidebarBackground'
         }}
         size='lg'
       />
     </InputGroup>
-
+    {!! error && (
+      <FormErrorMessage>
+        {error.message}
+      </FormErrorMessage>
+    )}
   </FormControl>
   );
 }
+
+export const Input = forwardRef(InputBase)

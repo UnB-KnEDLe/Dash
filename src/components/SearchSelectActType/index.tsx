@@ -1,7 +1,7 @@
 import { Flex, SimpleGrid, Select, Stack } from "@chakra-ui/react";
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { AllTypeActs, ALL_ACTS } from "../../constants/search.constants";
-import Button from "../Button";
+import FilterButton from "../FilterButton";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 import { BoxLoading } from 'react-loadingg';
@@ -82,7 +82,7 @@ export default function SearchSelectActType({ setShowInputElements, showInputEle
           {!!selectedAct 
           ? <SimpleGrid columns={2} spacing={2} flexDirection='row' alignItems="flex-start">
             {Object.keys(allActs[selectedAct]).map(function(key) {
-                return <Button active={allActs[selectedAct][key]?.status} onClick={() => handleActiveButton(key)} key={key} buttonText={allActs[selectedAct][key]?.label}/>
+                return <FilterButton active={allActs[selectedAct][key]?.status} onClick={() => handleActiveButton(key)} key={key} buttonText={allActs[selectedAct][key]?.label}/>
               })}
             </SimpleGrid>
           : <BoxLoading speed="1.5" color="#99A8F4" style={{alignSelf: 'center', transform:'scale(2.3)', marginTop: '2.5rem'}}/>}
