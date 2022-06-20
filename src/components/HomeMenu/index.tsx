@@ -14,7 +14,7 @@ export default function HomeMenu() {
                 fontSize="2rem"
                 fontWeight={700}
             >
-                Knedash
+                Knedash.
             </Text>
             <Flex gap='4rem'>
                 <a href="#">

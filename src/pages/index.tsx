@@ -2,6 +2,10 @@ import { Flex, Text, Image } from '@chakra-ui/react';
 import Button from '../components/Button';
 import HomeMenu from '../components/HomeMenu';
 
+import fapdfLogo from '../assets/companyLogos/fapdf.png';
+import finatecLogo from '../assets/companyLogos/finatec.svg';
+import unbLogo from '../assets/companyLogos/unb.svg';
+
 export default function Home() {
   return (
     <Flex justifyContent="center">
@@ -15,6 +19,7 @@ export default function Home() {
         <Flex
           gap='4rem'
           height='70vh'
+          minHeight='36rem'
           paddingBlockStart='4rem'
         >
           <Flex
@@ -52,10 +57,10 @@ export default function Home() {
             />
           </Flex>
         </Flex>
-        <Flex justifyContent='center' gap='4rem'>
-          <Image />
-          <Image />
-          <Image />
+        <Flex justifyContent='center' height='20vh' alignItems='center' gap='4rem'>
+          <Image width='auto' height='3.5rem' src={unbLogo.src} />
+          <Image width='auto' height='3.5rem' src={finatecLogo.src} />
+          <Image width='auto' height='3.5rem' src={fapdfLogo.src} />
         </Flex>
       </Flex>
     </Flex>
