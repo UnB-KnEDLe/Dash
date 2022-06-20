@@ -12,12 +12,10 @@ export function Header({ title, description } : HeaderProps){
       w="100%"
       maxWidth={1480}
       h="20"
-      mx="auto"
       mt="4"
-      px="6"
       align="center"
     >
-      <Text
+      {/* <Text
         fontSize='3xl'
         fontWeight='bold'
         letterSpacing='tight'
@@ -26,11 +24,11 @@ export function Header({ title, description } : HeaderProps){
       > 
         knedash
         <Text as="span" ml='0.5' color="pallete.secondary">.</Text>
-      </Text>
+      </Text> */}
 
       <Text
         py="4"
-        px="8"
+        paddingRight="8"
         fontSize="3xl"
         fontWeight="bold"
         maxWidth={400}

@@ -7,6 +7,17 @@ export function Sidebar() {
   return (
     <Box as="aside" w="64" mr="8">
       <Stack spacing="12" align="flex-start">
+        <Text
+          mt="33px"
+          fontSize='3xl'
+          fontWeight='bold'
+          letterSpacing='tight'
+          w="64"
+          color="pallete.primary"
+        > 
+          knedash
+          <Text as="span" ml='0.5' color="pallete.secondary">.</Text>
+        </Text>
         <Box>
           <Text fontWeight="bold" color="gray.400" fontSize="small">GERAL</Text>
           <Stack spacing="4" mt="8" align="stretch">

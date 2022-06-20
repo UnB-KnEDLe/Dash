@@ -12,13 +12,14 @@ export default function Search(){
 
   return(
     <Flex direction="column" h="100vh">
-      <Header 
-        title="Pesquisar"
-        description="Pesquise por informações sobre os mais diversos atos."
-      />
+      
       <Flex direction="row" w="100%" my="6" maxWidth={1480} mx="auto" px="6">
         <Sidebar />
         <Flex direction="column" w="100%">
+            <Header 
+              title="Pesquisar"
+              description="Pesquise por informações sobre os mais diversos atos."
+            />
             <SimpleGrid flex="1" gap="4" minChildWidth="320px" alignItems="flex-start">
               <Box
                 as='div'
