@@ -1,4 +1,4 @@
-import { Flex, Text, Image } from '@chakra-ui/react';
+import { Flex, Text, Image, Divider } from '@chakra-ui/react';
 import Button from '../components/Button';
 import HomeMenu from '../components/HomeMenu';
 
@@ -16,10 +16,10 @@ export default function Home() {
         direction='column'
       >
         <HomeMenu />
-        <hr />
+        <Divider orientation="horizontal" />
         <Flex
           gap='4rem'
-          height='70vh'
+          height='82vh'
           minHeight='36rem'
           paddingBlockStart='4rem'
         >
@@ -56,10 +56,14 @@ export default function Home() {
             />
           </Flex>
         </Flex>
-        <Flex justifyContent='center' height='20vh' alignItems='center' gap='4rem'>
-          <Image width='auto' height='3.5rem' src={unbLogo.src} />
-          <Image width='auto' height='3.5rem' src={finatecLogo.src} />
-          <Image width='auto' height='3.5rem' src={fapdfLogo.src} />
+        <Divider
+          marginBlockStart='4rem'
+          orientation="horizontal"
+        />
+        <Flex justifyContent='center' paddingBlock='2rem' alignItems='center' gap='4rem'>
+          <Image width='auto' height='2.5rem' src={unbLogo.src} />
+          <Image width='auto' height='2.5rem' src={finatecLogo.src} />
+          <Image width='auto' height='2.5rem' src={fapdfLogo.src} />
         </Flex>
       </Flex>
     </Flex>
