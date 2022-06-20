@@ -25,14 +25,12 @@ export default function Home() {
         >
           <Image
             src={frontImage.src}
-            width='50%'
-            height='auto'
+            height='100%'
           />
           <Flex
             direction="column"
             justifyContent="space-between"
             alignItems='stretch'
-            width='50%'
           >
             <Flex direction="column" gap='3rem'>
               <Text
