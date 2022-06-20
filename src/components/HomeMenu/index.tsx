@@ -11,7 +11,7 @@ export default function HomeMenu() {
         >
             <Text
                 color='pallete.primary'
-                fontSize="2rem"
+                fontSize="1.5rem"
                 fontWeight={700}
             >
                 Knedash.

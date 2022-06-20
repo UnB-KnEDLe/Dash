@@ -5,6 +5,7 @@ import HomeMenu from '../components/HomeMenu';
 import fapdfLogo from '../assets/companyLogos/fapdf.png';
 import finatecLogo from '../assets/companyLogos/finatec.svg';
 import unbLogo from '../assets/companyLogos/unb.svg';
+import frontImage from '../assets/homepage.png';
 
 export default function Home() {
   return (
@@ -22,9 +23,10 @@ export default function Home() {
           minHeight='36rem'
           paddingBlockStart='4rem'
         >
-          <Flex
+          <Image
+            src={frontImage.src}
             width='50%'
-            height='100%'
+            height='auto'
           />
           <Flex
             direction="column"
@@ -51,9 +53,8 @@ export default function Home() {
               </Text>
             </Flex>
             <Button
-              active={true}
-              alignSelf="flex-end"
               buttonText="Começar"
+              alignSelf="flex-end"
             />
           </Flex>
         </Flex>

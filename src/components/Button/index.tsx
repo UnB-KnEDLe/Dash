@@ -5,7 +5,7 @@ import InteractiveText from '../Typography/InteractiveText';
 
 interface ButtonProps extends ButtonPropsChakraUI {
     buttonText: string;
-    icon: any;
+    icon?: any;
 }
 
 export default function Button({ buttonText, icon, ...rest }: ButtonProps) {
@@ -15,7 +15,7 @@ export default function Button({ buttonText, icon, ...rest }: ButtonProps) {
         alignItems='center'
         justify='center'
         flexDirection='row'
-        leftIcon={<Icon as={icon} />}
+        leftIcon={icon ? <Icon as={icon} />: null}
         bgColor={'pallete.background' }
         color={'pallete.text' }
         boxShadow="0px 1px 5px rgba(0, 0, 0, 0.25)"

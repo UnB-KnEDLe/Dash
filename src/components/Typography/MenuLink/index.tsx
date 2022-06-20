@@ -9,7 +9,7 @@ export default function MenuLink({ menuLinkText, ...rest }: MenuLinkProps) {
         <Text
           marginBlock='0'
           fontWeight={500}
-          fontSize='1.25rem'
+          fontSize='1rem'
           variant='unstyled'
           {...rest}
         >
