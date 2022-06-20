@@ -39,7 +39,7 @@ export default function Home() {
                 fontSize="4.5rem"
                 lineHeight={1}
               >
-                O Diário Oficial da União de uma forma simples
+                O Diário Oficial do Distrito Federal de uma forma simples
               </Text>
               <Text
                 color="black"
