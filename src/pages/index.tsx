@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Text, Image } from '@chakra-ui/react';
 import Button from '../components/Button';
 import HomeMenu from '../components/HomeMenu';
 
@@ -51,6 +51,11 @@ export default function Home() {
               buttonText="Começar"
             />
           </Flex>
+        </Flex>
+        <Flex justifyContent='center' gap='4rem'>
+          <Image />
+          <Image />
+          <Image />
         </Flex>
       </Flex>
     </Flex>

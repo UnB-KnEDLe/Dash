@@ -1,4 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
+import MenuLink from '../Typography/MenuLink';
 
 export default function HomeMenu() {
     return (
@@ -16,23 +17,24 @@ export default function HomeMenu() {
                 Knedash
             </Text>
             <Flex gap='4rem'>
-                <Text
-                    color='pallete.primary'
-                    fontSize="1.25rem"
-                >Workshop
-                </Text>
-                <Text
-                    color='pallete.primary'
-                    fontSize="1.25rem"
-                >
-                    Equipe
-                </Text>
-                <Text
-                    color='pallete.primary'
-                    fontSize="1.25rem"
-                >
-                    Ajuda
-                </Text>
+                <a href="#">
+                    <MenuLink
+                        color='pallete.primary'
+                        menuLinkText='Workshop'
+                    />
+                </a>
+                <a href="#">
+                    <MenuLink
+                        color='pallete.primary'
+                        menuLinkText='Equipe'
+                    />
+                </a>
+                <a href="#">
+                    <MenuLink
+                        color='pallete.primary'
+                        menuLinkText='Ajuda'
+                    />
+                </a>
             </Flex>
         </Flex>
     )
