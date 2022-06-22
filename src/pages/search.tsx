@@ -1,14 +1,21 @@
 import { Flex, SimpleGrid, Box, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import Button from '../components/Button';
 import { Divider } from '../components/Divider';
 import { Header } from "../components/Header";
 import SearchSelectActType from '../components/SearchSelectActType';
 import SearchSetInput from '../components/SearchSetInput';
 import { Sidebar } from "../components/Sidebar";
 import HeadingTwo from '../components/Typography/HeadingTwo';
+import { RiDownload2Fill } from 'react-icons/ri';
+import { Input } from '../components/Input';
+import { FaSearch } from "react-icons/fa";
+import api from '../services/api';
+import { useAct } from '../hooks/act';
 
 export default function Search(){
   const [showInputElements, setShowInputElements] = useState<string[]>([]);
+  const { allActsName } = useAct()
 
   return(
     <Flex direction="column" h="100vh">
@@ -27,9 +34,9 @@ export default function Search(){
                 borderRadius='0.25rem'
                 bgColor='pallete.cardBackground'
                 flexDirection='column'
-                height="435px"
+                height="455px"
               >
-                <SearchSelectActType showInputElements={showInputElements} setShowInputElements={setShowInputElements} />
+                <SearchSelectActType allActsName={allActsName} showInputElements={showInputElements} setShowInputElements={setShowInputElements} />
               </Box>
               <Box
                 flex={1}
@@ -45,9 +52,16 @@ export default function Search(){
 
             </SimpleGrid>
             <Divider text="resultados"/>
+
             <Box bgColor="pallete.cardBackground" borderRadius='0.25rem' padding="3rem"> 
-              <HeadingTwo marginBottom="1.5rem" headingTwoText='Atos de Aposentadoria'/>
-            
+            <Flex justify="space-between" width="100%" direction="row">
+              <Flex width="100%">
+                <HeadingTwo marginBottom="1.5rem" mr="1rem" headingTwoText='Atos de Aposentadoria'/>
+                <Button icon={RiDownload2Fill}/>
+              </Flex>
+              <Input margin="0 auto" w="100%" name='table-search' placeholder='Ex: Joao da Silva' type='text' icon={FaSearch} />
+            </Flex>
+    
               <Box
                 bgColor="pallete.cardBackground"
                 border="1px solid" 

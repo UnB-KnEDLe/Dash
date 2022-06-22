@@ -1,23 +1,34 @@
 import { Flex, SimpleGrid, Select, Stack } from "@chakra-ui/react";
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
-import { AllTypeActs, ALL_ACTS } from "../../constants/search.constants";
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
+import { ALL_ACTS } from "../../constants/search.constants";
 import FilterButton from "../FilterButton";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 import { BoxLoading } from 'react-loadingg';
+import { AllInitialActsProps, useAct } from "../../hooks/act";
 
 interface SearchSelectActTypeProps {
   setShowInputElements: Dispatch<SetStateAction<any[]>>
   showInputElements: string[];
+  allActsName: {
+    [key: string]: string;
+  }
 }
 
-export default function SearchSelectActType({ setShowInputElements, showInputElements }: SearchSelectActTypeProps){
+export default function SearchSelectActType({ setShowInputElements, showInputElements, allActsName  }: SearchSelectActTypeProps){
+  const { allInitialActs } = useAct();
+
   const [selectedAct, setSelectedAct] = useState<string>('');
-  const [allActs, setAllActs] = useState(ALL_ACTS);
+  const [allActs, setAllActs] = useState<Object>(allInitialActs as Object);
+
+  useEffect(() => {
+    console.log(allInitialActs);
+    console.log(allActsName)
+  },[allInitialActs, allActsName])
 
   const handleOncChange = useCallback((value: string) => {
     setSelectedAct(value);
-    setAllActs(ALL_ACTS);
+    setAllActs(allInitialActs);
     setShowInputElements([])
   }, []);
 
@@ -31,12 +42,12 @@ export default function SearchSelectActType({ setShowInputElements, showInputEle
       }
     ))
     }
-    if(showInputElements.includes(allActs[selectedAct][recentStatus].label) === false){
-      setShowInputElements([...showInputElements, allActs[selectedAct][recentStatus].label]);
+    if(showInputElements.includes(allActs[selectedAct][recentStatus]?.label) === false){
+      setShowInputElements([...showInputElements, allActs[selectedAct][recentStatus]?.label]);
     }
       
     else{
-      setShowInputElements(showInputElements.filter(item => item !== allActs[selectedAct][recentStatus].label));
+      setShowInputElements(showInputElements.filter(item => item !== allActs[selectedAct][recentStatus]?.label));
       
     }
       
@@ -65,8 +76,8 @@ export default function SearchSelectActType({ setShowInputElements, showInputEle
             boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25);'
             size='lg'
           >
-            {Object.keys(AllTypeActs).map(function(key) {
-                return <option key={key} value={key}>{AllTypeActs[key]}</option>
+            {Object.entries(allActsName).map(function(actName) {
+                return <option key={actName[0]} value={actName[0]}>{actName[1]}</option>
               })}
           </Select>
         </Flex>
@@ -81,7 +92,7 @@ export default function SearchSelectActType({ setShowInputElements, showInputEle
           />
           {!!selectedAct 
           ? <SimpleGrid columns={2} spacing={2} flexDirection='row' alignItems="flex-start">
-            {Object.keys(allActs[selectedAct]).map(function(key) {
+            {Object.keys(allActs[selectedAct])?.map(key => {
                 return <FilterButton active={allActs[selectedAct][key]?.status} onClick={() => handleActiveButton(key)} key={key} buttonText={allActs[selectedAct][key]?.label}/>
               })}
             </SimpleGrid>

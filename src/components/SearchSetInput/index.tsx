@@ -70,7 +70,7 @@ export default function SearchSetInput({ showInputElements }: SearchSetInputProp
             buttonText='Pesquisar'
             type="submit"
             icon={FaSearch} 
-            bottom={showInputElements.length <= 2 ? "-166px" : "-85px"}
+            bottom={showInputElements.length <= 2 ? "-181.5px" : (showInputElements.length === 5 ? "-18px" : "-100px")}
           />
         </Flex> )
        : (

@@ -5,7 +5,7 @@ import { FieldError } from 'react-hook-form';
 
 interface InputProps extends InputGroupProps {
   name: string;
-  label: string;
+  label?: string;
   placeholder: string;
   type: string;
   icon: IconType;
@@ -54,6 +54,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
         variant="filled"
         onChange={handleChange}
         placeholder={placeholder}
+        
         _placeholder={{ color: "gray.400" }}
         _hover={{
           bgColor: 'pallete.sidebarBackground'

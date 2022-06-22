@@ -46,16 +46,3 @@ export const ALL_ACTS: AllActsProps = {
     registration: {label:'Cargo Cedido', status: false},
   },
 }
-interface RetirementActFilterProps {
-  name: string;
-  charge: string;
-  department: string;
-  registration: string;
-}
-
-export const RETIREMENT_ACT_FILTER: RetirementActFilterProps = {
-  name: 'Nome',
-  charge: 'Cargo',
-  department: 'Órgão',
-  registration: 'Matrícula'
-}

@@ -1,30 +1,27 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import api from '../services/api';
 
-interface RetirementAct {
-  cargo: {
-    classe: string | null;
-    efetivo: string | null;
-    nome: string | null;
-    padrao: string | null;
-    quadro: string | null;
-  },
-  dodf_data: string | null;
-  dodf_nome: string | null;
-  dodf_numero: number | null;
-  orgao: {
-    nome: string | null;
-  },
-  pessoa: {
-    matricula: string | null;
-    nome: string | null;
-  },
-  sei: string | null;
+export interface FilterActProps {
+  [key: string]: {
+    label: string;
+    status: boolean;
+  }
+}
+
+export interface AllInitialActsProps {
+  [key: string]: {
+    [key: string]: FilterActProps[];
+  }
 }
 
 interface ActContextData {
-  retiramentActs: RetirementAct[];
+  allActsName: {
+    [key: string]: string;
+  }
+  allInitialActs: Object | null | undefined;
 }
+
+
 
 const ActContext = createContext<ActContextData>({} as ActContextData);
 
@@ -32,20 +29,28 @@ type ActProviderProps = {
   children: React.ReactNode;
 }
 function ActProvider({ children }: ActProviderProps ): JSX.Element {
-  const [retiramentActs, setRetiramentActs] = useState<RetirementAct[]>([]);
+  const [allActsName, setAllActsName] = useState({})
+  const [allInitialActs, setAllInitialActs] = useState<Object | null | undefined>({} as null);
 
-  const getRetirementActs = useCallback(async () => {
-    const response = await api.get('aposentadoria');
-      setRetiramentActs(response.data); 
+
+  const getAllName = useCallback(async () => {
+    const response = await api.get('all/act_types');
+    setAllActsName(response.data);
+  }, []);
+
+  const getAllActs = useCallback(async () => {
+    const response = await api.get('all/fields_by_act');
+    setAllInitialActs(response.data);
   }, []);
 
   useEffect(() => {
-    getRetirementActs();
-  }, [])
+    getAllName();
+    getAllActs();
+  }, [getAllName, getAllActs]);
 
   return (
     <ActContext.Provider
-      value={{ retiramentActs }}
+      value={{ allActsName, allInitialActs }}
     >
       {children}
     </ActContext.Provider>

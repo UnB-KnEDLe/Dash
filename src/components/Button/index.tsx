@@ -4,7 +4,7 @@ import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import InteractiveText from '../Typography/InteractiveText';
 
 interface ButtonProps extends ButtonPropsChakraUI {
-    buttonText: string;
+    buttonText?: string;
     icon?: any;
 }
 
@@ -15,6 +15,7 @@ export default function Button({ buttonText, icon, ...rest }: ButtonProps) {
         alignItems='center'
         justify='center'
         flexDirection='row'
+        iconSpacing={buttonText ? "0.5rem" : "0"}
         leftIcon={icon ? <Icon as={icon} />: null}
         bgColor={'pallete.background' }
         color={'pallete.text' }
@@ -33,7 +34,7 @@ export default function Button({ buttonText, icon, ...rest }: ButtonProps) {
         borderRadius='0.125rem'
         {...rest}
       >
-          <InteractiveText position="relative" top="1.5px" interactiveText={buttonText} />
+          {!!buttonText && <InteractiveText position="relative" top="1.5px" interactiveText={buttonText} />}
       </ButtonChakra>
     );
 }

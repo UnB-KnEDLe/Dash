@@ -10,11 +10,18 @@ export default function HomeMenu() {
             paddingBlock='1rem'
         >
             <Text
-                color='pallete.primary'
-                fontSize="1.5rem"
-                fontWeight={700}
-            >
-                Knedash.
+                fontSize='3xl'
+                fontWeight='bold'
+                letterSpacing='tight'
+                w="64"
+                color="pallete.primary"
+                > 
+                knedash
+                <Text
+                    as="span"
+                    ml='0.5'
+                    color="pallete.secondary">.
+                </Text>
             </Text>
             <Flex gap='4rem'>
                 <a href="#">
