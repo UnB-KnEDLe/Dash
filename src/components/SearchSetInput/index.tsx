@@ -30,7 +30,7 @@ export default function SearchSetInput({ showInputElements }: SearchSetInputProp
   const { register, handleSubmit, formState } = useForm();
 
   const handleSearchAct = useCallback(async (values) => {
-    console.log(Object.entries(values).filter(field => showInputElements.includes(field[1] as any)));
+    console.log(values);
   }, [showInputElements]);
 
   return (

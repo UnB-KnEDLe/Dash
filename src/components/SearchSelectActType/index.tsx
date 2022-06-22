@@ -19,18 +19,14 @@ export default function SearchSelectActType({ setShowInputElements, showInputEle
   const { allInitialActs } = useAct();
 
   const [selectedAct, setSelectedAct] = useState<string>('');
-  const [allActs, setAllActs] = useState<Object>(allInitialActs as Object);
+  const [allActs, setAllActs] = useState<Object>(allInitialActs);
 
-  useEffect(() => {
-    console.log(allInitialActs);
-    console.log(allActsName)
-  },[allInitialActs, allActsName])
 
   const handleOncChange = useCallback((value: string) => {
     setSelectedAct(value);
     setAllActs(allInitialActs);
     setShowInputElements([])
-  }, []);
+  }, [allInitialActs]);
 
   const handleActiveButton = useCallback((recentStatus: any) => {
     
@@ -92,7 +88,7 @@ export default function SearchSelectActType({ setShowInputElements, showInputEle
           />
           {!!selectedAct 
           ? <SimpleGrid columns={2} spacing={2} flexDirection='row' alignItems="flex-start">
-            {Object.keys(allActs[selectedAct])?.map(key => {
+            {Object.keys(allActs[selectedAct]).map(key => {
                 return <FilterButton active={allActs[selectedAct][key]?.status} onClick={() => handleActiveButton(key)} key={key} buttonText={allActs[selectedAct][key]?.label}/>
               })}
             </SimpleGrid>
