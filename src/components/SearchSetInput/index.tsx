@@ -54,17 +54,17 @@ export default function SearchSetInput({ showInputElements }: SearchSetInputProp
             spacing={2} 
             flexDirection='row' 
             alignItems="flex-start">
-            {showInputElements.map(label => {
-              return <Input
-                        key={label} 
-                        name={label} 
-                        label={label} 
-                        placeholder={label} 
-                        type='text' 
-                        icon={RiMarkPenLine}
-                        {...register(label)}
-                      />
-            })}
+            {showInputElements.map(label => (
+              <Input
+                key={label} 
+                name={label} 
+                label={label} 
+                placeholder={label} 
+                type='text' 
+                icon={RiMarkPenLine}
+                {...register(label)}
+              />
+            ))}
           </SimpleGrid>
           <Button 
             buttonText='Pesquisar'
