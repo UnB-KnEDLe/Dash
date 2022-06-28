@@ -1,5 +1,5 @@
 import { Flex, SimpleGrid, Box, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Button from '../components/Button';
 import { Divider } from '../components/Divider';
 import { Header } from "../components/Header";
@@ -10,12 +10,22 @@ import HeadingTwo from '../components/Typography/HeadingTwo';
 import { RiDownload2Fill } from 'react-icons/ri';
 import { Input } from '../components/Input';
 import { FaSearch } from "react-icons/fa";
-import api from '../services/api';
 import { useAct } from '../hooks/act';
 
 export default function Search(){
-  const [showInputElements, setShowInputElements] = useState<string[]>([]);
   const { allActsName } = useAct()
+
+  const [showInputElements, setShowInputElements] = useState<string[]>([]);
+  const [selectedAct, setSelectedAct] = useState<string>('');
+  const [filterActs, setFilterActs] = useState([]);
+
+  const handleSelectAct = useCallback((nameActs: string) => {
+    setSelectedAct(nameActs);
+  }, []) 
+
+  const handleFilterActs = useCallback((acts: any) => {
+    setFilterActs(acts);
+  }, []) 
 
   return(
     <Flex direction="column" h="100vh">
@@ -36,7 +46,7 @@ export default function Search(){
                 flexDirection='column'
                 height="455px"
               >
-                <SearchSelectActType allActsName={allActsName} showInputElements={showInputElements} setShowInputElements={setShowInputElements} />
+                <SearchSelectActType handleSelectAct={handleSelectAct} selectedAct={selectedAct} allActsName={allActsName} showInputElements={showInputElements} setShowInputElements={setShowInputElements} />
               </Box>
               <Box
                 flex={1}
@@ -47,7 +57,7 @@ export default function Search(){
                 bgColor='pallete.cardBackground'
                 flexDirection='column'
               >
-                <SearchSetInput showInputElements={showInputElements}/>
+                <SearchSetInput handleFilterActs={handleFilterActs}  selectedAct={selectedAct} showInputElements={showInputElements}/>
               </Box>
 
             </SimpleGrid>

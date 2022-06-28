@@ -1,24 +1,13 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { ENDPOINT_ACTS } from '../constants/search.constants';
 import api from '../services/api';
-
-export interface FilterActProps {
-  [key: string]: {
-    label: string;
-    status: boolean;
-  }
-}
-
-export interface AllInitialActsProps {
-  [key: string]: {
-    [key: string]: FilterActProps[];
-  }
-}
 
 interface ActContextData {
   allActsName: {
     [key: string]: string;
   }
   allInitialActs: Object | null | undefined;
+  getFieldActs: (act: string, data: Object) => Promise<void>
 }
 
 
@@ -43,6 +32,14 @@ function ActProvider({ children }: ActProviderProps ): JSX.Element {
     setAllInitialActs(response.data);
   }, []);
 
+
+  const getFieldActs = useCallback(async (act: string, data: Object) => {
+    const response = await api.get(`${ENDPOINT_ACTS[act]}`, {
+      data
+    });
+    return response.data;
+  }, [allInitialActs])
+
   useEffect(() => {
     getAllName();
     getAllActs();
@@ -50,7 +47,11 @@ function ActProvider({ children }: ActProviderProps ): JSX.Element {
 
   return (
     <ActContext.Provider
-      value={{ allActsName, allInitialActs }}
+      value={{ 
+        allActsName, 
+        allInitialActs, 
+        getFieldActs 
+      }}
     >
       {children}
     </ActContext.Provider>

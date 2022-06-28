@@ -1,11 +1,10 @@
 import { Flex, SimpleGrid, Select, Stack } from "@chakra-ui/react";
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
-import { ALL_ACTS } from "../../constants/search.constants";
 import FilterButton from "../FilterButton";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 import { BoxLoading } from 'react-loadingg';
-import { AllInitialActsProps, useAct } from "../../hooks/act";
+import { useAct } from "../../hooks/act";
 
 interface SearchSelectActTypeProps {
   setShowInputElements: Dispatch<SetStateAction<any[]>>
@@ -13,17 +12,25 @@ interface SearchSelectActTypeProps {
   allActsName: {
     [key: string]: string;
   }
+  handleSelectAct: (nameActs: string) => void;
+  selectedAct: string;
 }
 
-export default function SearchSelectActType({ setShowInputElements, showInputElements, allActsName  }: SearchSelectActTypeProps){
+export default function SearchSelectActType({ 
+  setShowInputElements, 
+  showInputElements, 
+  allActsName, 
+  selectedAct,
+  handleSelectAct  
+}: SearchSelectActTypeProps){
   const { allInitialActs } = useAct();
 
-  const [selectedAct, setSelectedAct] = useState<string>('');
+  
   const [allActs, setAllActs] = useState<Object>(allInitialActs);
 
 
   const handleOncChange = useCallback((value: string) => {
-    setSelectedAct(value);
+    handleSelectAct(value);
     setAllActs(allInitialActs);
     setShowInputElements([])
   }, [allInitialActs]);

@@ -7,9 +7,11 @@ import NotFound from '../../assets/not-refund.svg';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FaSearch } from "react-icons/fa";
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { RiMarkPenLine } from "react-icons/ri";
 import Button from '../Button';
+import api from '../../services/api';
+import { useAct } from '../../hooks/act';
 
 const animationKeyframes = keyframes`
   0% { transform: scale(1) rotate(0)}
@@ -21,17 +23,27 @@ const animationKeyframes = keyframes`
 
 interface SearchSetInputProps {
   showInputElements: string[];
+  selectedAct: string;
+  handleFilterActs: (acts: any) => void;
 }
 
 
 const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
-export default function SearchSetInput({ showInputElements }: SearchSetInputProps) {
+export default function SearchSetInput({ showInputElements, selectedAct, handleFilterActs }: SearchSetInputProps) {
   const { register, handleSubmit, formState } = useForm();
+  const { getFieldActs } = useAct();
+
+  
 
   const handleSearchAct = useCallback(async (values) => {
-    console.log(Object.entries(values).filter(field => showInputElements.includes(field[0])));
-  }, [showInputElements]);
+    // console.log(Object.entries(values).filter(field => showInputElements.includes(field[0])));
+    handleFilterActs(getFieldActs(selectedAct, {
+      pessoa: 'Daniel',
+      per_page: 5,
+      page: 1
+    }))
+  }, [handleFilterActs, selectedAct]);
 
   return (
     <Stack spacing="1rem">

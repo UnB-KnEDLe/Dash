@@ -1,48 +1,83 @@
-export enum AllTypeActs {
-  permanenceSubscriptionAct = 'Abono de Permanência',
-  retiramentAct = 'Aposentadoria',
-  assignmentAct = 'Cessão',
+export const ENDPOINT_ACTS = {
+  cessionAct: "cessao",
+  commissionedAppointmentAct: "nomeacao_comissionada",
+  effectiveAppointmentAct: "nomeacao_efetiva",
+  effectiveDischargeAct: "exo_efetivo",
+  nonEffectiveDischargeAct: "exoneracao",
+  permanenceSubscriptionAct: "abono",
+  rectificationAct: "retificacao",
+  retirementAct: "aposentadoria",
+  retirementNullificationAct: "tornado_sea",
+  reversionAct: "reversao",
+  substitutionAct: "substituicao"
 }
 
-export interface ItemActsProps {
-  label: string;
-  status: boolean;
-}
-export interface AllActsProps {
+export interface FilterFieldsProps {
+  cessionAct: {
+    pessoa: string;
+    matricula: string;
+    cargo_cedido: string;
+  }
+  commissionedAppointmentAct: {
+    pessoa: string;
+    cargo_efetivo: string;
+    cargo_comissionado: string;
+    orgao: string;
+    matricula: string;
+  }
+  effectiveAppointmentAct: {
+    pessoa: string;
+    cargo: string;
+    orgao: string;
+    edital: string;
+    matricula: string;
+  }
+  effectiveDischargeAct: {
+    pessoa: string;
+    cargo: string;
+    orgao: string;
+  }
+  nonEffectiveDischargeAct: {
+    pessoa: string;
+    cargo: string;
+    orgao: string;
+  }
   permanenceSubscriptionAct: {
-    name: ItemActsProps;
-    charge: ItemActsProps;
-    department: ItemActsProps;
-  },
-  retiramentAct: {
-    name: ItemActsProps;
-    charge: ItemActsProps;
-    department: ItemActsProps;
-    registration: ItemActsProps;
-  },
-  assignmentAct: {
-    name: ItemActsProps;
-    charge: ItemActsProps;
-    registration: ItemActsProps;
-  },
-
-}
-
-export const ALL_ACTS: AllActsProps = {
-  permanenceSubscriptionAct: {
-    name: {label:'Nome', status: false},
-    charge: {label:'Cargo', status: false},
-    department: {label:'Órgão', status: false},
-  },
-  retiramentAct: {
-    name: {label:'Nome', status: false},
-    charge: {label:'Cargo', status: false},
-    department: {label:'Órgão', status: false},
-    registration: {label:'Matrícula', status: false},
-  },
-  assignmentAct: {
-    name: {label:'Nome', status: false},
-    charge: {label:'Matrícula', status: false},
-    registration: {label:'Cargo Cedido', status: false},
-  },
+    pessoa: string;
+    cargo: string;
+    orgao: string;
+  }
+  rectificationAct: {
+    pessoa: string;
+    matricula: string;
+  }
+  retirementAct: {
+    pessoa: string;
+    cargo: string;
+    orgao: string;
+    matricula: string;
+  }
+  retirementNullificationAct: {
+    pessoa: string;
+    matricula: string;
+    cargo: string;
+    tipo_fonte_data: string;
+    dodf_data: string;
+    tipo_fonte_numero: string;
+    dodf_numero: string;
+  }
+  reversionAct: {
+    pessoa: string;
+    matricula: string;
+    cargo: string;
+    orgao: string;
+  }
+  substitutionAct: {
+    substituto: string;
+    cargo_substituto: string;
+    matricula_substituto: string;
+    substituido: string;
+    cargo_substituido: string
+    matricula_substituido: string
+  }
 }
