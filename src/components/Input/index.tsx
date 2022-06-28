@@ -54,7 +54,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
         variant="filled"
         onChange={handleChange}
         placeholder={placeholder}
-        
         _placeholder={{ color: "gray.400" }}
         _hover={{
           bgColor: 'pallete.sidebarBackground'

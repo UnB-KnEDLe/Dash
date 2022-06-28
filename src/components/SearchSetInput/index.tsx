@@ -7,11 +7,12 @@ import NotFound from '../../assets/not-refund.svg';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FaSearch } from "react-icons/fa";
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { RiMarkPenLine } from "react-icons/ri";
 import Button from '../Button';
 import api from '../../services/api';
 import { useAct } from '../../hooks/act';
+import { BOTTOM_SEARCH, FIELDS, FilterFieldsProps } from '../../constants/search.constants';
 
 const animationKeyframes = keyframes`
   0% { transform: scale(1) rotate(0)}
@@ -27,24 +28,28 @@ interface SearchSetInputProps {
   handleFilterActs: (acts: any) => void;
 }
 
-
 const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
 export default function SearchSetInput({ showInputElements, selectedAct, handleFilterActs }: SearchSetInputProps) {
-  const { register, handleSubmit, formState } = useForm();
+  const { register, handleSubmit } = useForm();
   const { getFieldActs } = useAct();
 
-  
-
   const handleSearchAct = useCallback(async (values) => {
-    // console.log(Object.entries(values).filter(field => showInputElements.includes(field[0])));
+    const labelShowInputElements = showInputElements.map(item => item["label"])
+    let fieldFilled = Object.entries(values)
+    .filter(field => labelShowInputElements
+    .includes(field[0]))
+    .map(item => item[0] === FIELDS[item[0]] ? item : [item[0] = FIELDS[item[0]], item[1]]);
+    
+    const reduceActs = fieldFilled.reduce((reduceActs, fieldAtual) => {
+      reduceActs[fieldAtual[0]] = fieldAtual[1]
+      
+      return reduceActs;
+  },{})
     handleFilterActs(getFieldActs(selectedAct, {
-      pessoa: 'Daniel',
-      per_page: 5,
-      page: 1
+      ...reduceActs
     }))
-  }, [handleFilterActs, selectedAct]);
-
+  }, [handleFilterActs, selectedAct, showInputElements]);
   return (
     <Stack spacing="1rem">
       <Flex flexDirection="column">
@@ -66,23 +71,23 @@ export default function SearchSetInput({ showInputElements, selectedAct, handleF
             spacing={2} 
             flexDirection='row' 
             alignItems="flex-start">
-            {showInputElements.map(label => {
-              return <Input
-                        key={label} 
-                        name={label} 
-                        label={label} 
-                        placeholder={label} 
-                        type='text' 
-                        icon={RiMarkPenLine}
-                        {...register(label)}
-                      />
-            })}
+            {showInputElements.map((elem) => elem["label"]).map(label => (
+              <Input
+                key={label} 
+                name={label} 
+                label={label} 
+                placeholder={label} 
+                type='text' 
+                icon={RiMarkPenLine}
+                {...register(label)}
+              />
+            ))}
           </SimpleGrid>
           <Button 
             buttonText='Pesquisar'
             type="submit"
             icon={FaSearch} 
-            bottom={showInputElements.length <= 2 ? "-181.5px" : (showInputElements.length === 5 ? "-18px" : "-100px")}
+            bottom={BOTTOM_SEARCH[selectedAct][showInputElements?.length]}
           />
         </Flex> )
        : (

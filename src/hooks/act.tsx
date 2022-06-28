@@ -1,5 +1,4 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { ENDPOINT_ACTS } from '../constants/search.constants';
 import api from '../services/api';
 
 interface ActContextData {
@@ -34,8 +33,10 @@ function ActProvider({ children }: ActProviderProps ): JSX.Element {
 
 
   const getFieldActs = useCallback(async (act: string, data: Object) => {
-    const response = await api.get(`${ENDPOINT_ACTS[act]}`, {
-      data
+    const response = await api.get(`${act}`, {
+      params: {
+        ...data
+      }
     });
     return response.data;
   }, [allInitialActs])
