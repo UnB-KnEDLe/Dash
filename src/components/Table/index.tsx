@@ -1,27 +1,25 @@
 import { Table as Tb, Thead, Tbody, Tr, Th, Td, Box, Flex } from '@chakra-ui/react';
 import HeadingTwo from '../Typography/HeadingTwo';
 import Button from '../Button';
+import { Input } from '../Input';
 import { RiDownload2Fill } from 'react-icons/ri';
-import { useEffect } from 'react';
+import { FaSearch } from "react-icons/fa";
 
 interface TableProps {
 	heading: {name: string, key: string}[];
 	data: any[];
 	title: string;
-	filterActs: any[];
 }
 
-export default function Table({heading, data, title, filterActs}: TableProps) {
-	useEffect(() => {
-		console.log(filterActs);
-	}, [filterActs])
-  return (
+export default function Table({heading, data, title}: TableProps) {
+	return (
 		<Box bgColor="pallete.cardBackground" borderRadius='0.25rem' padding="3rem"> 
 			<Flex justify="space-between" width="100%" direction="row">
 				<Flex width="100%">
 					<HeadingTwo marginBottom="1.5rem" mr="1rem" headingTwoText={title}/>
 					<Button icon={RiDownload2Fill}/>
 				</Flex>
+				<Input margin="0 auto" w="100%" name='table-search' placeholder='Ex: Joao da Silva' type='text' icon={FaSearch} />
 			</Flex>
 
 			<Tb variant="striped" colorScheme="facebook">
@@ -54,6 +52,6 @@ export default function Table({heading, data, title, filterActs}: TableProps) {
 				</Tbody>
 			</Tb>
 		</Box>
-  );
+	);
 }
 
