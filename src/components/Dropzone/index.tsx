@@ -1,8 +1,17 @@
-import { Flex, Image } from '@chakra-ui/react';
+import { Flex, Image, keyframes } from '@chakra-ui/react';
 import { default as DropEl } from 'react-dropzone'
 import SmallText from '../Typography/SmallText';
 import uploadImage from '../../assets/cloud-upload.svg'
 import Button from '../Button';
+import { motion } from 'framer-motion';
+
+const animationKeyFrames = keyframes`
+    0% {margin-top: 0;}
+    50% {margin-top: -.75rem; margin-bottom: .75rem}
+    1000% {margin-top: 0;}
+`
+
+const animation = `${animationKeyFrames} 3s ease-in-out infinite`;
 
 interface DropzoneProps {
     onDrop: () => void
@@ -22,10 +31,12 @@ export default function Dropzone({onDrop}: DropzoneProps) {
                     padding='2rem'
                 >
                     <Image
+                        as={motion.img}
                         src={uploadImage.src}
                         alt="upload"
                         w='auto'
                         h='6rem'
+                        animation={animation}
                     />
                     <SmallText
                         smallText="Arraste e solte o arquivo"

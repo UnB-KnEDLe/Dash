@@ -1,4 +1,4 @@
-import { Stack, Flex, Input } from "@chakra-ui/react";
+import { Stack, Flex } from "@chakra-ui/react";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 import Dropzone from "../Dropzone";
