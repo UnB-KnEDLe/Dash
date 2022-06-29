@@ -7,7 +7,6 @@ import { useAct } from '../../hooks/act';
 import { TdTable } from './TdTable';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import SmallText from '../Typography/SmallText';
-import { CSVLink } from 'react-csv';
 import { Loading } from './loading';
 
 interface TableProps {
@@ -107,12 +106,12 @@ export default function Table({ title }: TableProps) {
 						<HeadingTwo color="pallete.background" ml="2rem" mr="1rem" headingTwoText={title} padding="1rem 0"/>
 
 						<Button loading={dowloadReady} onClick={downloadReport} icon={dowloadReady ? Loading	: RiDownload2Fill } />
-						<CSVLink
+						{/* <CSVLink
 							headers={headerDownloadLink}
 							filename="resultado-pesquisa.csv"
 							data={dataDownloadLink}
 							ref={csvLinkEl}
-						/>
+						/> */}
 
 					</Flex>
 					<Flex alignItems="center" mr="2rem">
