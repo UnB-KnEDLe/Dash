@@ -30,7 +30,7 @@ const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
 export default function SearchSetInput({ showInputElements, handleLoadingResults }: SearchSetInputProps) {
   const { register, handleSubmit, reset } = useForm();
-  const { getFieldActs, selectedAct, handleSearchActs, resectAllFilterFields } = useAct();
+  const { getFieldActs, selectedAct, handleSearchActs, resectAllFilterFields, getTotalSearchActs } = useAct();
 
   useEffect(() => {
     !!showInputElements && reset();

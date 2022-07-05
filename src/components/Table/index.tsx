@@ -8,7 +8,7 @@ import { TdTable } from './TdTable';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import SmallText from '../Typography/SmallText';
 import { CSVLink } from 'react-csv';
-import { TouchBallLoading } from 'react-loadingg';
+import { Loading } from './loading';
 
 interface TableProps {
 	title: string;
@@ -23,7 +23,7 @@ export default function Table({ title }: TableProps) {
 	const [actualPage, setActualPage] = useState(1);
 	const [headerDownloadLink, setHeaderDownloadLink] = useState([]);
 	const [dataDownloadLink, setDataDownloadLink] = useState([]);
-	const [dowloadReady, setDowloadReady] = useState(true);
+	const [dowloadReady, setDowloadReady] = useState(false);
 
 	const { getTableSearchFieldNames, getFieldActsPerPage, selectedAct, searchActs, numberOfSearchActs, getFieldActsWithoutPage } = useAct();
 	const csvLinkEl = useRef<any>();
@@ -36,7 +36,8 @@ export default function Table({ title }: TableProps) {
 					key
 			})
 		}
-		setDataDownloadLink(await getFieldActsWithoutPage())
+		let acts = await getFieldActsWithoutPage();
+		setDataDownloadLink(acts);
 		setHeaderDownloadLink(headers);
 	}, [headTableFields, getFieldActsWithoutPage])
 
@@ -55,23 +56,42 @@ export default function Table({ title }: TableProps) {
 	}, [actualPage])
 
 	const downloadReport = useCallback(async() => {
-		setDowloadReady(false);
-    await csvLinkEl?.current?.link.click();
+		try {
+			setDowloadReady(true);
+			let headers = [];
+			for (const [key, value] of headTableFields) {
+				headers.push({
+						label: value,
+						key
+				})
+			}
+			let acts = await getFieldActsWithoutPage();
+
+			setDataDownloadLink(acts);
+			setHeaderDownloadLink(headers);
+
+		}catch (e) {
+			setDowloadReady(false);
+			console.log(e);
+		}
 		
-		setDowloadReady(true);
-	}, [csvLinkEl]);
+		
+	}, [headTableFields, getFieldActsWithoutPage]);
 
 	useEffect(() => {
 		headTable()
 	}, [headTable])
 
 	useEffect(() => {
-		headTableDownload();
-	}, [headTableDownload])
-
-	useEffect(() => {
 		changePage();
 	}, [changePage])
+
+	useEffect(() => {
+		if(dataDownloadLink.length !== 0 && headerDownloadLink.length !== 0) {			
+			csvLinkEl?.current?.link.click();
+		}
+		setDowloadReady(false);
+	}, [dataDownloadLink, headerDownloadLink, csvLinkEl])
 
   return (
 		<>
@@ -83,25 +103,16 @@ export default function Table({ title }: TableProps) {
 				direction="row"
 				justifyContent="space-between"
 			>
-					<Flex alignItems="center">
+					<Flex alignItems="center"> 
 						<HeadingTwo color="pallete.background" ml="2rem" mr="1rem" headingTwoText={title} padding="1rem 0"/>
-						
-						{dataDownloadLink.length !== 0 && headerDownloadLink.length !== 0
-							? (<>
-									<Button onClick={downloadReport} icon={RiDownload2Fill} />
-									<CSVLink
-										headers={headerDownloadLink}
-										filename="resultado-pesquisa.csv"
-										data={dataDownloadLink}
-										ref={csvLinkEl}
-									/>
-								</>) 
-							: (<TouchBallLoading
-								  speed="1.5"
-								  color="#99A8F4"
-								  style={{transform:'scale(0.5)'}} 
-									/>
-								)} 
+
+						<Button loading={dowloadReady} onClick={downloadReport} icon={dowloadReady ? Loading	: RiDownload2Fill } />
+						<CSVLink
+							headers={headerDownloadLink}
+							filename="resultado-pesquisa.csv"
+							data={dataDownloadLink}
+							ref={csvLinkEl}
+						/>
 
 					</Flex>
 					<Flex alignItems="center" mr="2rem">

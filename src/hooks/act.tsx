@@ -20,6 +20,7 @@ interface ActContextData {
   selectedAct: string;
   numberOfSearchActs: number;
   getFieldActsWithoutPage: () => Promise<any>;
+  getTotalSearchActs: (act: string, data: Object) => Promise<void>
 
 }
 
@@ -46,15 +47,7 @@ function ActProvider({ children }: ActProviderProps ): JSX.Element {
     setAllInitialActs(response.data);
   }, []);
 
-
-  const getFieldActs = useCallback(async (act: string, data: Object) => {
-    const response = await api.get(`${act}/flat`, {
-      params: {
-        ...data,
-        per_page: 5,
-      }
-    });
-
+  const getTotalSearchActs = useCallback(async(act: string, data: Object) => {
     let numberOfActs = await api.get(`${act}/count`, {
       params: {
         ...data,
@@ -64,10 +57,19 @@ function ActProvider({ children }: ActProviderProps ): JSX.Element {
 
     if(numberOfActsValue === 0) setNumberOfSearchActs(1);
     else setNumberOfSearchActs(numberOfActsValue);
-    
+  }, []);
+
+  const getFieldActs = useCallback(async (act: string, data: Object) => {
+    const response = await api.get(`${act}/flat`, {
+      params: {
+        ...data,
+        per_page: 5,
+      }
+    });
+    await getTotalSearchActs(act, data);    
     setFilterData(data);
     return response.data;
-  }, [])
+  }, [getTotalSearchActs])
 
   const getFieldActsPerPage = useCallback(async (page: number) => {
     const response = await api.get(`${selectedAct}/flat`, {
@@ -81,10 +83,9 @@ function ActProvider({ children }: ActProviderProps ): JSX.Element {
   }, [selectedAct, filterData]);
 
   const getFieldActsWithoutPage = useCallback(async () => {
-    const response = await api.get(`${selectedAct}/flat`, {
+    const response = await api.get(`${selectedAct}/no_pag`, {
       params: {
         ...filterData,
-        per_page: numberOfSearchActs * 5,
       }
     });
     return response.data;
@@ -127,7 +128,8 @@ function ActProvider({ children }: ActProviderProps ): JSX.Element {
         searchActs,
         selectedAct,
         numberOfSearchActs,
-        getFieldActsWithoutPage
+        getFieldActsWithoutPage,
+        getTotalSearchActs
       }}
     >
       {children}

@@ -6,9 +6,10 @@ import InteractiveText from '../Typography/InteractiveText';
 interface ButtonProps extends ButtonPropsChakraUI {
     buttonText?: string;
     icon?: any;
+    loading?: boolean;
 }
 
-export default function Button({ buttonText, icon, ...rest }: ButtonProps) {
+export default function Button({ buttonText, icon, loading, ...rest }: ButtonProps) {
     return (
       <ButtonChakra
         display='flex'
@@ -17,14 +18,14 @@ export default function Button({ buttonText, icon, ...rest }: ButtonProps) {
         flexDirection='row'
         iconSpacing={buttonText ? "0.5rem" : "0"}
         leftIcon={icon ? <Icon as={icon} />: null}
-        bgColor={'pallete.background' }
+        bgColor={loading ? "transparent" :'pallete.background' }
         color={'pallete.text' }
-        boxShadow="0px 1px 5px rgba(0, 0, 0, 0.25)"
-        _active={{
+        boxShadow={!loading && "0px 1px 5px rgba(0, 0, 0, 0.25)"}
+        _active={!loading && {
           bgColor: 'pallete.primary',
           color: 'pallete.background',
         }}
-        _hover={
+        _hover={!loading &&
           {
             bgColor: 'pallete.cardBackground',
           }
