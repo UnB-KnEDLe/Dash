@@ -5,14 +5,13 @@ import { FcTimeline } from "react-icons/fc";
 
 export function Sidebar() {
   return (
-    <Box as="aside" w="64" mr="8">
+    <Box as="aside" w="64">
       <Stack spacing="12" align="flex-start">
         <Text
           mt="33px"
           fontSize='3xl'
           fontWeight='bold'
           letterSpacing='tight'
-          w="64"
           color="pallete.primary"
         > 
           knedash

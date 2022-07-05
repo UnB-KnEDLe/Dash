@@ -7,6 +7,7 @@ export const theme = extendTheme({
       "darkPrimary": "#17385E",
       "primary": "#2980B9",
       "secondary": "#99A8F4",
+      "darkSecondary": "#7A88D0",
       "primaryLight100": "#7FABDA",
       "primaryLight50": "#A2C2E5",
       "secondaryLight50": "#D8DEFB",

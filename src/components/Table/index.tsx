@@ -1,59 +1,154 @@
-import { Table as Tb, Thead, Tbody, Tr, Th, Td, Box, Flex } from '@chakra-ui/react';
+import { Table as Tb, Thead, Tbody, Tr, Th, Td, Box, Flex, Icon } from '@chakra-ui/react';
 import HeadingTwo from '../Typography/HeadingTwo';
 import Button from '../Button';
-import { RiDownload2Fill } from 'react-icons/ri';
-import { useEffect } from 'react';
+import { RiDownload2Fill, RiH1 } from 'react-icons/ri';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useAct } from '../../hooks/act';
+import { TdTable } from './TdTable';
+import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
+import SmallText from '../Typography/SmallText';
+import { CSVLink } from 'react-csv';
+import { TouchBallLoading } from 'react-loadingg';
 
 interface TableProps {
-	heading: {name: string, key: string}[];
-	data: any[];
 	title: string;
-	filterActs: any[];
 }
 
-export default function Table({heading, data, title, filterActs}: TableProps) {
+interface FilterActsProps {
+  [key: string]: string | boolean | null | number;
+}
+
+export default function Table({ title }: TableProps) {
+	const [headTableFields, setHeadTableFields] = useState<string[][]>([]);
+	const [actualPage, setActualPage] = useState(1);
+	const [headerDownloadLink, setHeaderDownloadLink] = useState([]);
+	const [dataDownloadLink, setDataDownloadLink] = useState([]);
+	const [dowloadReady, setDowloadReady] = useState(true);
+
+	const { getTableSearchFieldNames, getFieldActsPerPage, selectedAct, searchActs, numberOfSearchActs, getFieldActsWithoutPage } = useAct();
+	const csvLinkEl = useRef<any>();
+
+	const headTableDownload = useCallback(async () => {
+		let headers = [];
+		for (const [key, value] of headTableFields) {
+			headers.push({
+					label: value,
+					key
+			})
+		}
+		setDataDownloadLink(await getFieldActsWithoutPage())
+		setHeaderDownloadLink(headers);
+	}, [headTableFields, getFieldActsWithoutPage])
+
+
+	const headTable = useCallback(async() => {
+		const headFields = await getTableSearchFieldNames(selectedAct);
+		setHeadTableFields(Object.entries(headFields));
+	},[selectedAct]);
+
+	const handlePage = useCallback(async(valueAdd: number) => {
+		setActualPage(prevState => prevState + valueAdd);
+	}, [getFieldActsPerPage, actualPage]);
+	
+	const changePage = useCallback(async() => {
+		await getFieldActsPerPage(actualPage);
+	}, [actualPage])
+
+	const downloadReport = useCallback(async() => {
+		setDowloadReady(false);
+    await csvLinkEl?.current?.link.click();
+		
+		setDowloadReady(true);
+	}, [csvLinkEl]);
+
 	useEffect(() => {
-		console.log(filterActs);
-	}, [filterActs])
+		headTable()
+	}, [headTable])
+
+	useEffect(() => {
+		headTableDownload();
+	}, [headTableDownload])
+
+	useEffect(() => {
+		changePage();
+	}, [changePage])
+
   return (
-		<Box bgColor="pallete.cardBackground" borderRadius='0.25rem' padding="3rem"> 
-			<Flex justify="space-between" width="100%" direction="row">
-				<Flex width="100%">
-					<HeadingTwo marginBottom="1.5rem" mr="1rem" headingTwoText={title}/>
-					<Button icon={RiDownload2Fill}/>
-				</Flex>
+		<>
+			<Flex
+				mb="1rem"
+				align="center"
+				bgColor="pallete.darkSecondary"
+				borderRadius='0.25rem'
+				direction="row"
+				justifyContent="space-between"
+			>
+					<Flex alignItems="center">
+						<HeadingTwo color="pallete.background" ml="2rem" mr="1rem" headingTwoText={title} padding="1rem 0"/>
+						
+						{dataDownloadLink.length !== 0 && headerDownloadLink.length !== 0
+							? (<>
+									<Button onClick={downloadReport} icon={RiDownload2Fill} />
+									<CSVLink
+										headers={headerDownloadLink}
+										filename="resultado-pesquisa.csv"
+										data={dataDownloadLink}
+										ref={csvLinkEl}
+									/>
+								</>) 
+							: (<TouchBallLoading
+								  speed="1.5"
+								  color="#99A8F4"
+								  style={{transform:'scale(0.5)'}} 
+									/>
+								)} 
+
+					</Flex>
+					<Flex alignItems="center" mr="2rem">
+						<Icon pointerEvents={actualPage === 1 ? "none" : "auto"} onClick={() => handlePage(-1)} cursor="pointer" color={actualPage !== 1 ? "pallete.background" : "pallete.text"} as={AiFillLeftCircle} mr="1rem" transform="scale(1.8)"/>
+						<SmallText color="pallete.background" smallText={`Página ${actualPage} de ${numberOfSearchActs}`}/>
+						<Icon pointerEvents={actualPage === numberOfSearchActs ? "none" : "auto"} onClick={() => handlePage(+1)} cursor="pointer" color={actualPage !== numberOfSearchActs ? "pallete.background" : "pallete.text"} as={AiFillRightCircle} ml="1rem" transform="scale(1.8)"/>
+					</Flex>
 			</Flex>
-
-			<Tb variant="striped" colorScheme="facebook">
-				<Thead bgColor="pallete.secondary">
-					<Tr>
-						{heading.map((item, index) => {
-							var thProps = index <= 1 ? ({px: ".25rem", maxWidth: "5rem", pl: "1.75rem"}) : ({px: null, maxWidth: null, pl: null});
-							return (
-								<Th fontWeight="bold" color="pallete.background" {...thProps}>
-									{item.name}
-								</Th>
-							)
-						})}
-					</Tr>
-				</Thead>
-
-				<Tbody fontWeight="500">
-					{data.map((dataItem, dataIndex) => (
-						<Tr key={dataIndex}>
-							{heading.map((headingItem, headingIndex) => {
-								var tdProps = headingIndex <= 1 ? ({px: ".25rem", maxWidth: "5rem", pl: "1.75rem"}) : ({px: null, maxWidth: null, pl: null});
+			<Box mb="4rem" overflowY="auto" maxHeight={800} width={1200} bgColor="pallete.cardBackground" borderRadius='0.25rem'> 
+				<Tb variant="striped" colorScheme="facebook">
+					<Thead bgColor="pallete.secondary">
+						<Tr>
+							{headTableFields.map((item, index) => {
+								var thProps = { width: "5rem", height: "2rem", px: "0.75rem"};
 								return (
-									<Td  key={headingIndex} {...tdProps}>
-										{dataItem[headingItem.key]}
-									</Td>
+									<Th key={index} fontWeight="bold" color="pallete.background" {...thProps}>
+										{item[1]}
+									</Th>
 								)
 							})}
 						</Tr>
-					))}
-				</Tbody>
-			</Tb>
-		</Box>
+					</Thead>
+
+					<Tbody fontWeight="500">
+						{searchActs.map((dataItem, dataIndex) => (
+							<Tr key={dataIndex}>
+								{headTableFields.map((headingItem, headingIndex) => {
+									var thProps = {width: "5rem", height:"2rem", px: "0.75rem"};
+									return (
+										<TdTable
+											index={headingIndex}
+											lineValue={typeof(dataItem[headingItem[0]]) !== typeof(true) 
+												&& typeof(dataItem[headingItem[0]]) !== typeof(null)
+												&& typeof(dataItem[headingItem[0]]) !== typeof(undefined)
+												? String(dataItem[headingItem[0]]) 
+												: ''} 
+											{...thProps}
+										/>
+									)
+								})}
+							</Tr>
+						))}
+					</Tbody>
+				</Tb>
+				
+			</Box>
+		</>
   );
 }
 
