@@ -15,17 +15,6 @@ export function Header({ title, description } : HeaderProps){
       mt="4"
       align="center"
     >
-      {/* <Text
-        fontSize='3xl'
-        fontWeight='bold'
-        letterSpacing='tight'
-        w="64"
-        color="pallete.primary"
-      > 
-        knedash
-        <Text as="span" ml='0.5' color="pallete.secondary">.</Text>
-      </Text> */}
-
       <Text
         py="4"
         paddingRight="8"

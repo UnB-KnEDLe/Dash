@@ -1,5 +1,5 @@
 import { Flex, SimpleGrid, Select, Stack } from "@chakra-ui/react";
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import FilterButton from "../FilterButton";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
@@ -12,27 +12,27 @@ interface SearchSelectActTypeProps {
   allActsName: {
     [key: string]: string;
   }
-  handleSelectAct: (nameActs: string) => void;
-  selectedAct: string;
+  handleLoadingResults: (value: boolean) => void;
 }
 
 export default function SearchSelectActType({ 
   setShowInputElements, 
   showInputElements, 
   allActsName, 
-  selectedAct,
-  handleSelectAct  
+  handleLoadingResults
 }: SearchSelectActTypeProps){
-  const { allInitialActs } = useAct();
+  const { allInitialActs, resectAllFilterFields, selectedAct, handleSelectAct } = useAct();
 
   
-  const [allActs, setAllActs] = useState<Object>(allInitialActs);
+  const [allActs, setAllActs] = useState<Object>(JSON.parse(JSON.stringify(allInitialActs)));
 
   const handleOncChange = useCallback((value: string) => {
     handleSelectAct(value);
     setAllActs(allInitialActs);
-    setShowInputElements([])
-  }, [allInitialActs]);
+    setShowInputElements([]);
+    handleLoadingResults(true);
+    resectAllFilterFields();
+  }, [allInitialActs, handleSelectAct, handleLoadingResults, resectAllFilterFields]);
 
   const handleActiveButton = useCallback(
     (recentStatus: any) => {

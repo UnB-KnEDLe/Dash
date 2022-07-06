@@ -10,10 +10,11 @@ interface InputProps extends InputGroupProps {
   type: string;
   icon: IconType;
   error?: FieldError;
+  hasValue?: boolean;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> 
-  = ({ name, label, error = null, placeholder, type, icon, ...rest }, ref) => {
+  = ({ name, label, error = null, placeholder, type, icon, hasValue, ...rest }, ref) => {
   const [iconColor, setIconColor] = useState('pallete.secondary');
   const [value, setValue] = useState('');
 

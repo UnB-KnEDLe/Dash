@@ -1,5 +1,5 @@
-import { Flex, SimpleGrid, Box } from '@chakra-ui/react';
-import { useCallback, useState } from 'react';
+import { Flex, SimpleGrid, Box, Image } from '@chakra-ui/react';
+import { useCallback, useEffect, useState } from 'react';
 import { Divider } from '../components/Divider';
 import { Header } from "../components/Header";
 import SearchSelectActType from '../components/SearchSelectActType';
@@ -7,27 +7,23 @@ import SearchSetInput from '../components/SearchSetInput';
 import { Sidebar } from "../components/Sidebar";
 import { useAct } from '../hooks/act';
 import Table from '../components/Table';
-import { searchTable } from '../mocks';
+import { TouchBallLoading } from 'react-loadingg';
+import { NotFound } from '../components/NotFound';
 
 export default function Search(){
-  const { allActsName } = useAct()
-  const { heading, data } = searchTable;
+  const { allActsName, selectedAct, searchActs } = useAct()
 
   const [showInputElements, setShowInputElements] = useState([]);
-  const [selectedAct, setSelectedAct] = useState<string>('');
-  const [filterActs, setFilterActs] = useState([]);
 
-  const handleSelectAct = useCallback((nameActs: string) => {
-    setSelectedAct(nameActs);
-  }, []) 
-
-  const handleFilterActs = useCallback((acts: any) => {
-    setFilterActs(acts);
-  }, []) 
+  const [showResults, setShowResults] = useState(true);
+  
+  const handleLoadingResults = useCallback((value: boolean) => {
+    setShowResults(value);
+  }, [])
 
   return(
     <Flex direction="column" h="100vh">
-      <Flex direction="row" w="100%" my="6" maxWidth={1480} mx="auto" px="6">
+      <Flex direction="row" w="100%" my="6" maxWidth={1480} mx="auto" px="12">
         <Sidebar />
         <Flex direction="column" w="100%">
             <Header 
@@ -42,8 +38,14 @@ export default function Search(){
                 bgColor='pallete.cardBackground'
                 flexDirection='column'
                 h='100%'
+                filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05))"
               >
-                <SearchSelectActType handleSelectAct={handleSelectAct} selectedAct={selectedAct} allActsName={allActsName} showInputElements={showInputElements} setShowInputElements={setShowInputElements} />
+                <SearchSelectActType 
+                  allActsName={allActsName} 
+                  showInputElements={showInputElements} 
+                  setShowInputElements={setShowInputElements}
+                  handleLoadingResults={handleLoadingResults} 
+                />
               </Box>
               <Box
                 flex={1}
@@ -52,14 +54,28 @@ export default function Search(){
                 bgColor='pallete.cardBackground'
                 flexDirection='column'
                 h='100%'
+                filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05))"
               >
-                <SearchSetInput handleFilterActs={handleFilterActs}  selectedAct={selectedAct} showInputElements={showInputElements}/>
+                <SearchSetInput 
+                  showInputElements={showInputElements}
+                  handleLoadingResults={handleLoadingResults}
+                />
               </Box>
 
             </SimpleGrid>
             <Divider text="resultados"/>
 
-            <Table data={data} heading={heading} filterActs={filterActs} title="Atos de Aposentadoria"/>
+            {searchActs.length === 0 && showResults
+            ? <NotFound
+                title={"Atos não foram encontrados"} 
+                subtitle={"Verifique a pesquisa"}
+              />
+            : (showResults 
+              ? <Table title={`Atos de ${allActsName[selectedAct]}`}/>
+              : <TouchBallLoading speed="1.5" color="#99A8F4" style={{ alignSelf: 'center', transform: 'scale(2.3)', marginTop: '2.5rem' }}/>
+              )
+            }
+
         </Flex>
       </Flex>
     </Flex>

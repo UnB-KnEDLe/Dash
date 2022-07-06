@@ -3,16 +3,15 @@ import { Input } from '../Input';
 import { useForm } from 'react-hook-form';
 import HeadingTwo from '../Typography/HeadingTwo';
 import SmallText from '../Typography/SmallText';
-import NotFound from '../../assets/not-refund.svg';
+import NotFound from '../../assets/not-found-field.svg';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FaSearch } from "react-icons/fa";
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { RiMarkPenLine } from "react-icons/ri";
 import Button from '../Button';
-import api from '../../services/api';
 import { useAct } from '../../hooks/act';
-import { BOTTOM_SEARCH, FIELDS, FilterFieldsProps } from '../../constants/search.constants';
+import { BOTTOM_SEARCH, FIELDS } from '../../constants/search.constants';
 
 const animationKeyframes = keyframes`
   0% { transform: scale(1) rotate(0)}
@@ -24,17 +23,22 @@ const animationKeyframes = keyframes`
 
 interface SearchSetInputProps {
   showInputElements: string[];
-  selectedAct: string;
-  handleFilterActs: (acts: any) => void;
+  handleLoadingResults: (value: boolean) => void;
 }
 
 const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
-export default function SearchSetInput({ showInputElements, selectedAct, handleFilterActs }: SearchSetInputProps) {
-  const { register, handleSubmit } = useForm();
-  const { getFieldActs } = useAct();
+export default function SearchSetInput({ showInputElements, handleLoadingResults }: SearchSetInputProps) {
+  const { register, handleSubmit, reset } = useForm();
+  const { getFieldActs, selectedAct, handleSearchActs, resectAllFilterFields, getTotalSearchActs } = useAct();
+
+  useEffect(() => {
+    !!showInputElements && reset();
+  }, [showInputElements, reset])
 
   const handleSearchAct = useCallback(async (values) => {
+    handleLoadingResults(false);
+    resectAllFilterFields();
     const labelShowInputElements = showInputElements.map(item => item["label"])
     let fieldFilled = Object.entries(values)
     .filter(field => labelShowInputElements
@@ -43,13 +47,14 @@ export default function SearchSetInput({ showInputElements, selectedAct, handleF
     
     const reduceActs = fieldFilled.reduce((reduceActs, fieldAtual) => {
       reduceActs[fieldAtual[0]] = fieldAtual[1]
-      
       return reduceActs;
   },{})
-    handleFilterActs(getFieldActs(selectedAct, {
-      ...reduceActs
-    }))
-  }, [handleFilterActs, selectedAct, showInputElements]);
+    const fieldActs: any = await getFieldActs(selectedAct, {
+      ...reduceActs,
+    });
+    handleSearchActs(fieldActs);
+    handleLoadingResults(true);
+  }, [handleSearchActs, selectedAct, showInputElements, getFieldActs, handleLoadingResults]);
   return (
     <Stack spacing="1rem">
       <Flex flexDirection="column">
@@ -73,6 +78,7 @@ export default function SearchSetInput({ showInputElements, selectedAct, handleF
             alignItems="flex-start">
             {showInputElements.map((elem) => elem["label"]).map(label => (
               <Input
+                hasValue={!!showInputElements}
                 key={label} 
                 name={label} 
                 label={label} 
@@ -92,7 +98,7 @@ export default function SearchSetInput({ showInputElements, selectedAct, handleF
         </Flex> )
        : (
         <Flex as={motion.div} flex="1" direction="column" animation={animation} align="center">
-          <Image src={NotFound} alt="Not-Found" width="200" height="200" />
+          <Image src={NotFound} color="pallete.secondary" alt="Not-Found" width="200" height="200" />
         </Flex>
       )}
     </Stack>
