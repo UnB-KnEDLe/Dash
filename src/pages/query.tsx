@@ -8,19 +8,12 @@ import { Input } from '../components/Input';
 import Button from '../components/Button';
 import GraphContainer from '../components/GraphContainer';
 import { SiNeo4J } from 'react-icons/si';
-import { useUser } from '../hooks/user';
+import { useUser, Status } from '../hooks/user';
 import { AiOutlineUser, AiOutlineLogout } from 'react-icons/ai';
 
 export default function Query() {
-  const { isLoggedIn, user, logout } = useUser();
-  const [cypher, setCypher] = useState('match p=(Pessoa)-[r]->() return p limit 10');
-  const [finalCypher, setFinalCypher] = useState('match p=(Pessoa)-[r]->() return p limit 10');
-
-  const handleCypherChange = useCallback(
-    e => {
-      setCypher(e.target.value);
-    }, [cypher],
-  );
+  const { connectStatus, user, logout, cypher, setCypher } = useUser();
+  const [] = useState('');
 
   return (
     <Flex direction="column" h="100vh">
@@ -29,7 +22,7 @@ export default function Query() {
         <SimpleGrid
           columns={1}
           w="100%"
-          gridTemplateRows="6rem 13rem calc(100% - 19rem)"
+          gridTemplateRows="auto auto calc(100% - 19rem)"
           alignContent="baseline"
           minHeight="100vh"
           h="100vh"
@@ -37,7 +30,7 @@ export default function Query() {
         >
           <Header title="Consulta" description="Crie consultas na ferramenta." />
           <Flex flex="1" gap="4" mb="1rem" alignItems="flex-start">
-            {isLoggedIn() && (
+            {connectStatus === Status.Connected && (
               <Box
                 as="div"
                 padding="2rem"
@@ -74,7 +67,7 @@ export default function Query() {
               gap="1rem"
             >
               <HeadingTwo headingTwoText="Consulta" />
-              {isLoggedIn() ? (
+              {connectStatus === Status.Connected ? (
                 <Flex gap="1rem" direction="column">
                   <SmallText smallText="Escreva sua consulta." />
                   <Flex gap='1rem' alignItems='center'>
@@ -86,9 +79,9 @@ export default function Query() {
                       type="text"
                       icon={SiNeo4J}
                       value={cypher}
-                      onChange={handleCypherChange}
+                      onChange={(e) => setCypher(e.target.value)}
                     />
-                    <Button buttonText="Consultar" onClick={() => setFinalCypher(cypher)} />
+                    <Button buttonText="Consultar" onClick={() => setCypher(cypher)} />
                   </Flex>
                 </Flex>
               ) : (
@@ -96,7 +89,7 @@ export default function Query() {
               )}
             </Box>
           </Flex>
-          <GraphContainer cypher={finalCypher} />
+          <GraphContainer />
         </SimpleGrid>
       </Flex>
     </Flex>
