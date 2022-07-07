@@ -16,11 +16,12 @@ type userType = {
 
 interface UserContextData {
     handleLogin: (user: userType) => any;
-    isLoggedIn: () => boolean;
     logout: () => void;
     user: userType | null;
     setUser: (user: userType) => void;
     connectStatus: Status;
+    cypher: string;
+    setCypher: (cypher: string) => void;
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -32,9 +33,7 @@ type UserProviderProps = {
 function UserProvider({children}: UserProviderProps ): JSX.Element {
   const [user, setUser] = useState<userType | undefined>();
   const [connectStatus, setConnectStatus] = useState<Status>(Status.Unconnected);
-
-  const isLoading = connectStatus === Status.Loading;
-  const isLoggedIn = () => !(!user) && connectStatus === Status.Connected;
+  const [cypher, setCypher] = useState<string>('match p=(Pessoa)-[r]->() return p limit 10');
 
   const logout = () => {
     setConnectStatus(Status.Unconnected)
@@ -59,11 +58,12 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
     <UserContext.Provider
       value={{
         handleLogin,
-        isLoggedIn,
         logout,
         setUser,
         user,
         connectStatus,
+        cypher,
+        setCypher,
       }}
     >
       {children}
