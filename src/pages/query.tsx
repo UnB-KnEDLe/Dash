@@ -37,7 +37,7 @@ export default function Query() {
         >
           <Header title="Consulta" description="Crie consultas na ferramenta." />
           <Flex flex="1" gap="4" mb="1rem" alignItems="flex-start">
-            {isLoggedIn && (
+            {isLoggedIn() && (
               <Box
                 as="div"
                 padding="2rem"
@@ -74,7 +74,7 @@ export default function Query() {
               gap="1rem"
             >
               <HeadingTwo headingTwoText="Consulta" />
-              {isLoggedIn ? (
+              {isLoggedIn() ? (
                 <Flex gap="1rem" direction="column">
                   <SmallText smallText="Escreva sua consulta." />
                   <Flex gap='1rem' alignItems='center'>
