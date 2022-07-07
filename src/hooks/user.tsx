@@ -19,8 +19,8 @@ interface UserContextData {
     isLoggedIn: () => boolean;
     logout: () => void;
     user: userType | null;
+    setUser: (user: userType) => void;
     connectStatus: Status;
-    isLoading: boolean;
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -30,32 +30,30 @@ type UserProviderProps = {
 };
 
 function UserProvider({children}: UserProviderProps ): JSX.Element {
-  const [user, setUser] = useState<userType>();
+  const [user, setUser] = useState<userType | undefined>();
   const [connectStatus, setConnectStatus] = useState<Status>(Status.Unconnected);
 
   const isLoading = connectStatus === Status.Loading;
-  const isLoggedIn = () => user !== null;
-  const logout = () => setUser(null);
+  const isLoggedIn = () => !(!user) && connectStatus === Status.Connected;
 
-  const handleLogin = useCallback((userEntry: userType) => {
-    setUser(userEntry);
+  const logout = () => {
+    setConnectStatus(Status.Unconnected)
+    setUser(null)
+  };
 
+  const handleLogin = (userEntry: userType) => {
     const { host, port } = DEFAULT_DB_SETTINGS;
+    setUser(userEntry)
     setConnectStatus(Status.Loading);
 
-    createDriver('neo4j', host, port, user?.username, user?.password)
+    createDriver('neo4j', host, port, userEntry?.username, userEntry?.password)
       .verifyConnectivity()
       .then(() => {
-        setUser({ username: user?.username, password: user?.password });
-        setConnectStatus(Status.Connected);
+        setConnectStatus(Status.Connected)
       })
-      .catch(e => {console.log(e); setConnectStatus(Status.Failed) })
-      .finally(() => setConnectStatus(Status.Unconnected));
+      .catch((e) => {setConnectStatus(Status.Failed)})
 
-  }, [user]);
-
-
-  console.log(user)
+  };
 
   return (
     <UserContext.Provider
@@ -63,9 +61,9 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
         handleLogin,
         isLoggedIn,
         logout,
+        setUser,
         user,
         connectStatus,
-        isLoading,
       }}
     >
       {children}

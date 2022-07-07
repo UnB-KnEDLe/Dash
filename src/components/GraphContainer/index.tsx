@@ -31,14 +31,16 @@ export default function GraphContainer({cypher } : GraphContainer) {
       borderWidth='.125rem'
       bg='pallete.background'
     >
-      <Button
-        icon={AiOutlineExpand}
-        position='absolute'
-        zIndex='10000'
-        right='0'
-        onClick={onHandleFullScreen}
-      />
-      {connectStatus !== Status.Connected ? (
+      {connectStatus === Status.Connected && (
+        <Button
+          icon={AiOutlineExpand}
+          position='absolute'
+          zIndex='10000'
+          right='0'
+          onClick={onHandleFullScreen}
+        />
+      )}
+      {connectStatus === Status.Connected ? (
         <Graph cypher={cypher}/>
       ) : (
         <Login />

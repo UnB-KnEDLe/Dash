@@ -16,7 +16,8 @@ export const theme = extendTheme({
       "background": "#F7F8FA",
       "sidebarBackground": '#ffffff',
       "cardBackground": "#EDEFF5",
-      "backgroundButton": "#E3E3E3"
+      "backgroundButton": "#E3E3E3",
+      "error": "#DD0000",
     }
   },
   fonts:{
