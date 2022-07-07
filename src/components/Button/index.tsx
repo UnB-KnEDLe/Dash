@@ -1,6 +1,4 @@
-import { Icon, Flex, Button as ButtonChakra, ButtonProps as ButtonPropsChakraUI} from '@chakra-ui/react';
-import { useCallback, useState } from 'react';
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import { Icon, Button as ButtonChakra, ButtonProps as ButtonPropsChakraUI} from '@chakra-ui/react';
 import InteractiveText from '../Typography/InteractiveText';
 
 interface ButtonProps extends ButtonPropsChakraUI {

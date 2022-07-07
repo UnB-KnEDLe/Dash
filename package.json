@@ -24,6 +24,7 @@
     "react-csv": "^2.2.2",
     "react-dom": "18.0.0",
     "react-dropzone": "^14.2.2",
+    "react-full-screen": "^1.1.1",
     "react-hook-form": "^7.32.2",
     "react-icons": "^4.4.0",
     "react-loadingg": "^1.7.2",

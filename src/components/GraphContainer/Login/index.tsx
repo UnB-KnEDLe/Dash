@@ -1,45 +1,16 @@
-import { useState, useCallback, Dispatch, SetStateAction } from 'react';
-import { createDriver } from 'use-neo4j';
-import { Flex, Box, Stack } from '@chakra-ui/react';
-import { DEFAULT_DB_SETTINGS } from '../../../constants/db.constants';
+import { useState } from 'react';
+import { Flex,  Stack } from '@chakra-ui/react';
 import { Input } from '../../Input';
 import Button from '../../Button';
 import { AiOutlineUser } from 'react-icons/ai';
 import { RiLockPasswordLine } from 'react-icons/ri';
+import { useUser, Status } from '../../../hooks/user';
 
-export type userType = {
-  username: string;
-  password: string;
-};
+export function Login() {
+  const { connectStatus, handleLogin } = useUser();
+  const [user, setUser] = useState<{username: string, password: string}>();
 
-export enum Status {
-  Connected = 1,
-  Unconnected,
-  Failed,
-  Loading,
-}
-
-interface LoginProps {
-  connectStatus: Status;
-  setConnectStatus: Dispatch<SetStateAction<Status>>;
-}
-
-export function Login({ connectStatus, setConnectStatus }: LoginProps) {
-  const [user, setUser] = useState<userType>();
-
-  const handleLogin = useCallback(() => {
-    const { host, port } = DEFAULT_DB_SETTINGS;
-    setConnectStatus(Status.Loading);
-
-    createDriver('neo4j', host, port, user?.username, user?.password)
-      .verifyConnectivity()
-      .then(() => {
-        setUser({ username: user?.username, password: user?.password });
-        setConnectStatus(Status.Connected);
-      })
-      .catch(e => {console.log(e);setConnectStatus(Status.Failed) })
-      .finally(() => setConnectStatus(Status.Unconnected));
-  }, [user]);
+  const onHandleLogin = () => handleLogin(user)
 
   return (
     <Flex justifyContent="center" bgColor="pallete.cardBackground" w="100%" padding="2rem">
@@ -64,7 +35,7 @@ export function Login({ connectStatus, setConnectStatus }: LoginProps) {
           <Button
             isLoading={connectStatus == Status.Loading}
             buttonText={`Entrar ${connectStatus}`}
-            onClick={handleLogin}
+            onClick={onHandleLogin}
             marginTop="2rem"
           />
         </Flex>
