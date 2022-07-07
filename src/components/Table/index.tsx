@@ -15,7 +15,7 @@ interface TableProps {
 }
 
 interface FilterActsProps {
-  [key: string]: string | boolean | null | number;
+	[key: string]: string | boolean | null | number;
 }
 
 export default function Table({ title }: TableProps) {

@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from "react";
 import { Flex } from '@chakra-ui/react';
 import NeoVis, { NEOVIS_DEFAULT_CONFIG, NeoVisEvents } from "neovis.js";
+import { useUser } from '../../../hooks/user';
 
 interface GraphProps {
   username?: string;
@@ -8,8 +9,9 @@ interface GraphProps {
   cypher: string;
 }
 
-function Graph({ username, password, cypher} : GraphProps) {
+function Graph({cypher} : GraphProps) {
   const visRef = useRef<HTMLDivElement>();
+  const { user } = useUser();
 
   const handleCompleted = (vis: any) => {
     console.log(vis.nodes);
@@ -19,11 +21,11 @@ function Graph({ username, password, cypher} : GraphProps) {
       const config = {
         containerId: visRef?.current?.id,
         neo4j: {
-          serverUser: "neo4j",
-          serverPassword: "nido@CIC2021",
+          serverUser: user?.username || "neo4j",
+          serverPassword: user?.password || "nido@CIC2021",
           serverUrl: "neo4j://164.41.76.30:8080"
         },
-        initialCypher: "match (a) return a limit 10",
+        initialCypher: cypher,
         [NEOVIS_DEFAULT_CONFIG]: {
           title: 'nome'
         }
