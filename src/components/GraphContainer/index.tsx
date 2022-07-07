@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Login } from './Login';
 import dynamic from 'next/dynamic'
