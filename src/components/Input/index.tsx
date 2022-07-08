@@ -8,21 +8,19 @@ interface InputProps extends InputGroupProps {
   label?: string;
   placeholder: string;
   type: string;
-  value: string,
   icon: IconType;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: FieldError;
   hasValue?: boolean;
+  value?: string;
 }
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> 
-  = ({ name, label, error = null, placeholder, value, type, icon, onChange, hasValue, ...rest }, ref) => {
+  = ({ name, label, error = null, placeholder, type, icon, hasValue, value, ...rest }, ref) => {
   const [iconColor, setIconColor] = useState('pallete.secondary');
   const [textValue, setTextValue] = useState(value);
 
   const handleChange = useCallback((event) => {
     setTextValue(event.target.value)
-    onChange(event);
   }, []);
 
   return (
@@ -50,9 +48,8 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps>
         id={name}
         ref={ref}
         type={type}
-        value={textValue}
         onFocus={() => setIconColor('pallete.primary')}
-        onBlur={() => !value ? setIconColor('pallete.secondary') : setIconColor('pallete.primary')}
+        onBlur={() => !textValue ? setIconColor('pallete.secondary') : setIconColor('pallete.primary')}
         focusBorderColor="pallete.primary"
         bgColor="pallete.background"
         borderColor={iconColor}
