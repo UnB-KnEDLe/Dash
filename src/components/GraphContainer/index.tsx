@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Login } from './Login';
 import dynamic from 'next/dynamic';
@@ -7,15 +8,22 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import { useUser, Status } from '../../hooks/user';
 import { Input } from '../Input';
 import { SiNeo4J } from 'react-icons/si';
+import { useForm } from 'react-hook-form';
 
 export default function GraphContainer() {
   const handle = useFullScreenHandle();
-  const { connectStatus, cypher, setCypher } = useUser();
+  const { register, handleSubmit, reset } = useForm();
+  const { connectStatus, cypher, handleCypher } = useUser();
   const Graph = dynamic(() => import('./Graph'), {
     ssr: false,
   });
 
   const onHandleFullScreen = () => (handle.active ? handle.exit() : handle.enter());
+
+  const onHandleCypher = useCallback( values => {
+    const {query} = values;
+    handleCypher(query)
+  }, []);
 
   return (
     <Flex
@@ -34,6 +42,8 @@ export default function GraphContainer() {
       )}
       {handle.active && (
         <Flex
+          as='form'
+          onSubmit={handleSubmit(onHandleCypher)}
           gap="1rem"
           position="absolute"
           w="80%"
@@ -50,10 +60,9 @@ export default function GraphContainer() {
             placeholder=""
             type="text"
             icon={SiNeo4J}
-            value={cypher}
-            onChange={() => setCypher(cypher)}
+            {...register('query')}
           />
-          <Button buttonText="Consultar" onClick={() => setCypher(cypher)} />
+          <Button type="submit" buttonText="Consultar" />
         </Flex>
       )}
       {connectStatus === Status.Connected ? <Graph cypher={cypher} /> : <Login />}

@@ -10,10 +10,17 @@ import GraphContainer from '../components/GraphContainer';
 import { SiNeo4J } from 'react-icons/si';
 import { useUser, Status } from '../hooks/user';
 import { AiOutlineUser, AiOutlineLogout } from 'react-icons/ai';
+import { useForm } from 'react-hook-form';
+import QueryHistory from '../components/QueryHistory';
 
 export default function Query() {
-  const { connectStatus, user, logout, cypher, setCypher } = useUser();
-  const [] = useState('');
+  const { connectStatus, user, logout, cypher, handleCypher } = useUser();
+  const { register, handleSubmit } = useForm();
+
+  const onHandleCypher = useCallback( values => {
+    const {query} = values;
+    handleCypher(query)
+  }, []);
 
   return (
     <Flex direction="column" h="100vh">
@@ -68,20 +75,21 @@ export default function Query() {
             >
               <HeadingTwo headingTwoText="Consulta" />
               {connectStatus === Status.Connected ? (
-                <Flex gap="1rem" direction="column">
+                <Flex as="form" onSubmit={handleSubmit(onHandleCypher)} gap="1rem" direction="column">
                   <SmallText smallText="Escreva sua consulta." />
                   <Flex gap='1rem' alignItems='center'>
+                    <QueryHistory />
                     <Input
                       key={'query'}
+                      value={cypher}
                       name=''
                       label=''
                       placeholder=''
                       type="text"
                       icon={SiNeo4J}
-                      value={cypher}
-                      onChange={(e) => setCypher(e.target.value)}
+                      {...register('query')}
                     />
-                    <Button buttonText="Consultar" onClick={() => setCypher(cypher)} />
+                    <Button type="submit" buttonText="Consultar" />
                   </Flex>
                 </Flex>
               ) : (

@@ -21,7 +21,9 @@ interface UserContextData {
     setUser: (user: userType) => void;
     connectStatus: Status;
     cypher: string;
-    setCypher: (cypher: string) => void;
+    handleCypher: (cypher: string) => void;
+    history: string[];
+    setHistory: (history: string[]) => void;
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -34,6 +36,17 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
   const [user, setUser] = useState<userType | undefined>();
   const [connectStatus, setConnectStatus] = useState<Status>(Status.Unconnected);
   const [cypher, setCypher] = useState<string>('match p=(Pessoa)-[r]->() return p limit 10');
+  const localStorageHistory = typeof window !== "undefined" ? localStorage.getItem("history") : '[]';
+  const [history, setHistory] = useState<string[]>([...JSON.parse(localStorageHistory)].slice(0, 10));
+
+  console.log(history)
+
+  const handleCypher = useCallback((cypher: string) => {
+    setCypher(cypher);
+    if(connectStatus !== Status.Connected) return;
+    if(history.includes(cypher) || cypher === '') return;
+    setHistory([...history, cypher]);
+  }, []);
 
   const logout = () => {
     setConnectStatus(Status.Unconnected)
@@ -63,7 +76,9 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
         user,
         connectStatus,
         cypher,
-        setCypher,
+        handleCypher,
+        history,
+        setHistory,
       }}
     >
       {children}
