@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useState, useEffect } from 'react';
 import { createDriver } from 'use-neo4j';
 import { DEFAULT_DB_SETTINGS } from '../constants/db.constants';
 
@@ -42,8 +42,14 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
   const handleCypher = useCallback((cypher: string) => {
     setCypher(cypher);
     if(connectStatus !== Status.Connected) return;
-    if(history.includes(cypher) || cypher === '') return;
-    setHistory([...history, cypher]);
+    if(cypher === '') return;
+    setHistory( (history) => {
+      if (history.includes(cypher))
+        history.splice(history.indexOf(cypher), 1);
+    
+      return [cypher, ...history];
+
+    });
   }, []);
 
   const logout = () => {
@@ -61,9 +67,11 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
       .then(() => {
         setConnectStatus(Status.Connected)
       })
-      .catch((e) => {setConnectStatus(Status.Failed)})
+      .catch(() => setConnectStatus(Status.Failed))
 
   };
+
+  useEffect(() => localStorage.setItem("history", JSON.stringify(history)), [history]);
 
   return (
     <UserContext.Provider
