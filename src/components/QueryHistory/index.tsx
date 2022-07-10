@@ -14,7 +14,7 @@ import { useUser } from '../../hooks/user';
 
 export default function QueryHistory() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { history, setHistory, handleCypher } = useUser();
+    const { history, handleCypher } = useUser();
 
     return (
         <>

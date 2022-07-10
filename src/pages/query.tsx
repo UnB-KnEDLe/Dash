@@ -19,6 +19,7 @@ export default function Query() {
 
   const onHandleCypher = useCallback( values => {
     const {query} = values;
+    if(!query) return;
     handleCypher(query)
   }, []);
 
@@ -81,7 +82,6 @@ export default function Query() {
                     <QueryHistory />
                     <Input
                       key={'query'}
-                      value={cypher}
                       name=''
                       label=''
                       placeholder=''
