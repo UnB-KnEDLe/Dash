@@ -3,7 +3,7 @@ import { Flex } from '@chakra-ui/react';
 import { Login } from './Login';
 import dynamic from 'next/dynamic';
 import Button from '../Button';
-import { AiOutlineExpand } from 'react-icons/ai';
+import { AiOutlineExpandAlt, AiOutlineShrink } from 'react-icons/ai';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import { useUser, Status } from '../../hooks/user';
 import { Input } from '../Input';
@@ -38,7 +38,7 @@ export default function GraphContainer() {
       bg="pallete.background"
     >
       {connectStatus === Status.Connected && (
-        <Button icon={AiOutlineExpand} position="absolute" zIndex="1300" right="0" onClick={onHandleFullScreen} />
+        <Button icon={handle.active ? AiOutlineShrink : AiOutlineExpandAlt} position="absolute" zIndex="1300" right="0" onClick={onHandleFullScreen} />
       )}
       {handle.active && (
         <Flex
