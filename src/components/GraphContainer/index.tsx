@@ -1,6 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Login } from './Login';
+import { GraphPopup, PopupContentType } from './GraphPopup';
 import dynamic from 'next/dynamic';
 import Button from '../Button';
 import { AiOutlineExpand } from 'react-icons/ai';
@@ -14,6 +15,10 @@ export default function GraphContainer() {
   const handle = useFullScreenHandle();
   const { register, handleSubmit, reset } = useForm();
   const { connectStatus, cypher, handleCypher } = useUser();
+
+  const [popupContent, setPopupContent] = useState<PopupContentType>();
+  const [openPopup, setOpenPopup] = useState(false);
+
   const Graph = dynamic(() => import('./Graph'), {
     ssr: false,
   });
@@ -65,7 +70,8 @@ export default function GraphContainer() {
           <Button type="submit" buttonText="Consultar" />
         </Flex>
       )}
-      {connectStatus === Status.Connected ? <Graph cypher={cypher} /> : <Login />}
+      {connectStatus === Status.Connected ? <Graph cypher={cypher} setPopupContent={setPopupContent} setOpenPopup={setOpenPopup}/> : <Login />}
+      <GraphPopup content={popupContent} isOpen={openPopup} setOpenPopup={setOpenPopup}/>
     </Flex>
   );
 }
