@@ -38,7 +38,7 @@ export default function GraphContainer() {
       bg="pallete.background"
     >
       {connectStatus === Status.Connected && (
-        <Button icon={AiOutlineExpand} position="absolute" zIndex="10000" right="0" onClick={onHandleFullScreen} />
+        <Button icon={AiOutlineExpand} position="absolute" zIndex="1300" right="0" onClick={onHandleFullScreen} />
       )}
       {handle.active && (
         <Flex

@@ -9,12 +9,13 @@ import {
     Flex
 } from '@chakra-ui/react'
 import Button from '../Button';
-import { AiOutlineHistory } from 'react-icons/ai';
+import { AiOutlineHistory, AiOutlineCheckCircle } from 'react-icons/ai';
 import { useUser } from '../../hooks/user';
+import SmallText from '../Typography/SmallText';
 
 export default function QueryHistory() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { history, handleCypher } = useUser();
+    const { history, cypher, handleCypher } = useUser();
 
     return (
         <>
@@ -37,9 +38,11 @@ export default function QueryHistory() {
                         bgColor='pallete.background'
                         boxShadow='0px 1px 5px rgba(0, 0, 0, 0.25)'
                         p='4'
+                        gap='.5rem'
                         _hover={{cursor:'pointer', bgColor:'pallete.cardBackground'}}
                       >
-                        {query}
+                        { cypher == query && <AiOutlineCheckCircle size='1.5rem' /> }
+                        <SmallText smallText={query} />
                       </Flex>
                   ))}
               </ModalBody>
