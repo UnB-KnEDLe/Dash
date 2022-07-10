@@ -11,7 +11,7 @@ interface GraphProps {
 
 function Graph({ cypher }: GraphProps) {
   const visRef = useRef<HTMLDivElement>();
-  const { user } = useUser();
+  const { user} = useUser();
 
   const handleCompleted = (vis: any) => {
     console.log(vis.nodes);
@@ -35,7 +35,7 @@ function Graph({ cypher }: GraphProps) {
     vis.registerOnEvent(NeoVisEvents.ClickNodeEvent, () => handleCompleted(vis));
   }, [cypher]);
 
-  return <Flex ref={visRef} id="viz" w="100%"></Flex>;
+  return <Flex ref={visRef} id="viz" w="100%" />;
 }
 
 export default Graph;

@@ -39,8 +39,6 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
   const localStorageHistory = typeof window !== "undefined" ? localStorage.getItem("history") : '[]';
   const [history, setHistory] = useState<string[]>([...JSON.parse(localStorageHistory)].slice(0, 10));
 
-  console.log(history)
-
   const handleCypher = useCallback((cypher: string) => {
     setCypher(cypher);
     if(connectStatus !== Status.Connected) return;
