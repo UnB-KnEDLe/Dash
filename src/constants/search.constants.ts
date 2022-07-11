@@ -1,73 +1,3 @@
-export interface FilterFieldsProps {
-  cessao?: {
-    pessoa?: string;
-    matricula?: string;
-    cargo_cedido?: string;
-  }
-  nomeacao_comissionada?: {
-    pessoa?: string;
-    cargo_efetivo?: string;
-    cargo_comissionado?: string;
-    orgao?: string;
-    matricula?: string;
-  }
-  nomeacao_efetiva?: {
-    pessoa?: string;
-    edital?: string;
-    cargo?: string;
-    orgao?: string;
-    matricula?: string;
-  }
-  exo_efetivo?: {
-    pessoa?: string;
-    cargo?: string;
-    orgao?: string;
-  }
-  exoneracao?: {
-    pessoa?: string;
-    cargo?: string;
-    orgao?: string;
-  }
-  abono?: {
-    pessoa?: string;
-    cargo?: string;
-    orgao?: string;
-  }
-  retificacao?: {
-    pessoa?: string;
-    matricula?: string;
-  }
-  aposentadoria?: {
-    pessoa?: string;
-    cargo?: string;
-    orgao?: string;
-    matricula?: string;
-  }
-  tornado_sea?: {
-    pessoa?: string;
-    matricula?: string;
-    cargo?: string;
-    tipo_fonte_data?: string;
-    dodf_data?: string;
-    tipo_fonte_numero?: string;
-    dodf_numero?: string;
-  }
-  reversao?: {
-    pessoa?: string;
-    matricula?: string;
-    cargo?: string;
-    orgao?: string;
-  }
-  substituicao?: {
-    substituto?: string;
-    cargo_substituto?: string;
-    matricula_substituto?: string;
-    substituido?: string;
-    cargo_substituido?: string
-    matricula_substituido?: string
-  }
-}
-
 export enum FIELDS {
   "Cargo" = "cargo",
   "Órgão" = "orgao",
@@ -83,6 +13,13 @@ export enum FIELDS {
   "Matrícula do Substituto" = "matricula_substituto",
   "Nome do Substituto" = "substituido",
   "Nome do Substituído" = "substituto" ,
+  "Contratante" = "contratante",
+  "Contrato" = "contrato",
+  "Objeto aditamento Contratual" = "objeto_aditamento_contratual",
+  "Responsável" = "responsavel_ato",
+  "Licitação" = "licitacao",
+  "Objeto" = "objeto",
+  "Sistema de Compras" = "sistema_compras",
 }
 
 export const SAME_BOTTOM_MAX_2 = {
@@ -141,4 +78,6 @@ export const BOTTOM_SEARCH = {
   retificacao: SAME_BOTTOM_MAX_2,
   nomeacao_comissionada: SAME_BOTTOM_MAX_6,
   nomeacao_efetiva: SAME_BOTTOM_MAX_6,
+  licitacao: SAME_BOTTOM_MAX_4,
+  aditamento_contratual: SAME_BOTTOM_MAX_6
 } 

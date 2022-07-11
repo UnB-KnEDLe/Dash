@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActProvider } from './act';
+import { ExtractActProvider } from './extract';
 
 type AppProviderProps = {
   children: React.ReactNode;
@@ -7,8 +8,10 @@ type AppProviderProps = {
 
 function AppProvider({ children }: AppProviderProps): JSX.Element {
   return(
-    <ActProvider>  
-      {children}
+    <ActProvider>
+      <ExtractActProvider>
+        {children}
+      </ExtractActProvider>
     </ActProvider>
   )
    

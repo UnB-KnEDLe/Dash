@@ -16,7 +16,9 @@ export const theme = extendTheme({
       "background": "#F7F8FA",
       "sidebarBackground": '#ffffff',
       "cardBackground": "#EDEFF5",
-      "backgroundButton": "#E3E3E3"
+      "backgroundButton": "#E3E3E3",
+      "deactivated": "#212121",
+      "deactivatedText": "#454545",
     }
   },
   fonts:{
