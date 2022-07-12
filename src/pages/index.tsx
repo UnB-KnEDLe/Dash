@@ -1,4 +1,4 @@
-import { Flex, Text, Image, Divider } from '@chakra-ui/react';
+import { Flex, Text, Image, Divider, Link } from '@chakra-ui/react';
 import Button from '../components/Button';
 import HomeMenu from '../components/HomeMenu';
 
@@ -50,10 +50,14 @@ export default function Home() {
                 Lorem Ipsum is simply dummy text of print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
               </Text>
             </Flex>
-            <Button
-              buttonText="Começar"
-              alignSelf="flex-end"
-            />
+            <Link
+              href='/search'
+              alignSelf='flex-end'
+            >
+              <Button
+                buttonText="Começar"
+              />
+            </Link>
           </Flex>
         </Flex>
         <Divider
