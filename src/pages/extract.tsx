@@ -75,7 +75,7 @@ export default function Extract() {
           {loadingFile !== 100 || selectedExtractAct.length === 0
             ? <NotFound
                 title={"Atos não foram encontrados"} 
-                subtitle={"Adicione um arquivo e deixe o resto para a gente"}
+                subtitle={"Adicione um arquivo e deixe o resto com a gente"}
               />
             : <TableExtract title='Atos Extraídos'/>
 
