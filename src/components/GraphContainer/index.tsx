@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Login } from './Login';
-import { GraphPopup, PopupContentType } from './GraphPopup';
+import { GraphPopup } from './GraphPopup';
 import dynamic from 'next/dynamic';
 import Button from '../Button';
 import { AiOutlineExpandAlt, AiOutlineShrink } from 'react-icons/ai';
@@ -14,10 +14,7 @@ import { useForm } from 'react-hook-form';
 export default function GraphContainer() {
   const handle = useFullScreenHandle();
   const { register, handleSubmit, reset } = useForm();
-  const { connectStatus, cypher, handleCypher } = useUser();
-
-  const [popupContent, setPopupContent] = useState<PopupContentType>();
-  const [openPopup, setOpenPopup] = useState(false);
+  const { connectStatus, cypher, handleCypher, setPopupContent, closePopup } = useUser();
 
   const Graph = dynamic(() => import('./Graph'), {
     ssr: false,
@@ -28,6 +25,8 @@ export default function GraphContainer() {
   const onHandleCypher = useCallback( values => {
     const {query} = values;
     handleCypher(query)
+    closePopup();
+    reset()
   }, []);
 
   return (
@@ -71,8 +70,8 @@ export default function GraphContainer() {
         </Flex>
       )}
       {connectStatus === Status.Connected ? ( <>
-          <Graph cypher={cypher} setPopupContent={setPopupContent} setOpenPopup={setOpenPopup}/>
-          <GraphPopup content={popupContent} isOpen={openPopup} setOpenPopup={setOpenPopup}/>
+          <Graph cypher={cypher} />
+          <GraphPopup />
         </>
         ) : <Login />}
     </Flex>

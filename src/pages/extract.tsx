@@ -76,10 +76,7 @@ export default function Extract() {
                 subtitle={"Adicione um arquivo e deixe o resto com a gente"}
               />
             : <TableExtract title='Atos Extraídos'/>
-
           }
-          
-
         </Flex>
       </Flex>
     </Flex>

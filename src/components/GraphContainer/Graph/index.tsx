@@ -1,18 +1,16 @@
-import { Dispatch, SetStateAction, useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { Flex, useToast } from '@chakra-ui/react';
-import { PopupContentType } from "../GraphPopup";
 import NeoVis, { NeoVisEvents } from 'neovis.js';
 import { useUser } from '../../../hooks/user';
 import Config from './config';
 
 interface GraphProps {
   cypher: string;
-  setPopupContent : Dispatch<SetStateAction<PopupContentType>>;
-  setOpenPopup : Dispatch<SetStateAction<boolean>>;
 }
 
-function Graph({ cypher, setPopupContent, setOpenPopup }: GraphProps) {
+function Graph({ cypher }: GraphProps) {
   const visRef = useRef<HTMLDivElement>();
+  const { setPopupContent, closePopup } = useUser();
   const { user} = useUser();
   const toast = useToast();
 
@@ -21,7 +19,6 @@ function Graph({ cypher, setPopupContent, setOpenPopup }: GraphProps) {
       title: data?.raw?.type || data?.raw?.labels[0],
       properties: data?.raw?.properties
     });
-    setOpenPopup(true);
   };
 
   useLayoutEffect(() => {
@@ -34,7 +31,7 @@ function Graph({ cypher, setPopupContent, setOpenPopup }: GraphProps) {
     vis.registerOnEvent(NeoVisEvents.ClickNodeEvent, (data) => handleClick(data.node));
     vis.registerOnEvent(NeoVisEvents.ClickEdgeEvent, (data) => handleClick(data.edge));
     vis.registerOnEvent(NeoVisEvents.CompletionEvent, (data) => {
-      if(data.recordCount === 0) {
+      if(!data.recordCount) {
         toast({
           title: 'Sua consulta não retornou resultados.',
           status: 'info',
@@ -43,7 +40,7 @@ function Graph({ cypher, setPopupContent, setOpenPopup }: GraphProps) {
         })
       }
     });
-    vis.registerOnEvent(NeoVisEvents.ErrorEvent, (data) => setOpenPopup(false));
+    vis.registerOnEvent(NeoVisEvents.ErrorEvent, () => closePopup());
 
   }, [cypher]);
 

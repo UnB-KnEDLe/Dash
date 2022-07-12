@@ -1,11 +1,9 @@
 import { Stack, Flex, Icon, Progress } from "@chakra-ui/react";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
-import { FaEye, FaEyeSlash, FaTrash } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import { BoxLoading } from 'react-loadingg';
 import { useExtract } from "../../hooks/extract";
-import { useCallback, useState } from "react";
-
 
 export default function ExtractFileManager() {
     const { filesUploaded, handleFilesUploaded, setFilesUploaded, loadingFile } = useExtract();

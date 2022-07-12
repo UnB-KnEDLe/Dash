@@ -1,28 +1,19 @@
 import { Flex, IconButton } from '@chakra-ui/react';
-import { SetStateAction, Dispatch } from 'react';
+import { useCallback } from 'react';
 import SmallText from '../../Typography/SmallText';
 import HeadingTwo from '../../Typography/HeadingTwo';
 import { IoMdClose } from 'react-icons/io';
+import { useUser } from '../../../hooks/user';
 
-export type PopupContentType = {
-  title: string;
-  properties: Object;
-};
-
-interface GraphPopupProps {
-  content: PopupContentType;
-  isOpen: boolean;
-  setOpenPopup: Dispatch<SetStateAction<Boolean>>;
-}
-
-export function GraphPopup({ content, isOpen, setOpenPopup }: GraphPopupProps) {
-  const onClose = () => {
-    setOpenPopup(false);
-  };
+export function GraphPopup() {
+  const { popupContent, setPopupContent } = useUser();
+  const onClose = useCallback(() => {
+    setPopupContent(null);
+  }, []);
 
   return (
     <Flex
-      visibility={isOpen ? 'visible' : 'hidden'}
+      visibility={!!popupContent ? 'visible' : 'hidden'}
       direction="column"
       maxHeight="80%"
       maxWidth="30rem"
@@ -35,11 +26,11 @@ export function GraphPopup({ content, isOpen, setOpenPopup }: GraphPopupProps) {
       p="4"
     >
       <Flex direction="row" justifyContent="space-between" alignItems='center'>
-        <HeadingTwo headingTwoText={content?.title} />
+        <HeadingTwo headingTwoText={popupContent?.title} />
         <IconButton aria-label='Search database' icon={<IoMdClose />} onClick={onClose} size='lg'/>
       </Flex>
       <Flex as={Flex} direction="column" overflowY="auto">
-        {Object.entries(content?.properties || {}).map((entries, index) => (
+        {Object.entries(popupContent?.properties || {}).map((entries, index) => (
           <Flex key={index} w="100%" gap="0.5rem">
             <SmallText smallText={`${entries[0]}: `} fontWeight="bold" />
             <SmallText smallText={`${entries[1]}`} />

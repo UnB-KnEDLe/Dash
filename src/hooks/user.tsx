@@ -14,6 +14,11 @@ type userType = {
   password: string;
 }
 
+type PopupContentType = {
+  title: string;
+  properties: Object;
+} | null;
+
 interface UserContextData {
     handleLogin: (user: userType) => any;
     logout: () => void;
@@ -24,6 +29,9 @@ interface UserContextData {
     handleCypher: (cypher: string) => void;
     history: string[];
     setHistory: (history: string[]) => void;
+    popupContent: PopupContentType;
+    setPopupContent: (popupContent: PopupContentType) => void;
+    closePopup: () => void;
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -38,6 +46,7 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
   const [cypher, setCypher] = useState<string>('match p=(Pessoa)-[r]->() return p limit 10');
   const localStorageHistory = typeof window !== "undefined" ? localStorage.getItem("history") : '[]';
   const [history, setHistory] = useState<string[]>([...JSON.parse(localStorageHistory)].slice(0, 10));
+  const [popupContent, setPopupContent] = useState<PopupContentType>();
 
   const handleCypher = useCallback((cypher: string) => {
     setCypher(cypher);
@@ -56,6 +65,8 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
     setConnectStatus(Status.Unconnected)
     setUser(null)
   };
+
+  const closePopup = () => setPopupContent(null);
 
   const handleLogin = (userEntry: userType) => {
     const { host, port } = DEFAULT_DB_SETTINGS;
@@ -85,6 +96,9 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
         handleCypher,
         history,
         setHistory,
+        popupContent,
+        setPopupContent,
+        closePopup,
       }}
     >
       {children}
