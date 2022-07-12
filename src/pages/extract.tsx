@@ -12,7 +12,7 @@ import { useCallback, useEffect } from 'react';
 
 export default function Extract() {
   const { loadingFile, selectedExtractAct, filesUploaded } = useExtract();
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle  } = useDisclosure();
   const disclosure = useDisclosure();
 
   useEffect(() => {
@@ -24,6 +24,7 @@ export default function Extract() {
   useEffect(() => {
     if(filesUploaded.length !== 0) disclosure.onToggle()
   }, [filesUploaded])
+  
   return (
     <Flex direction="column" h="100vh">
       <Flex direction="row" w="100%" my="6" maxWidth={1480} mx="auto" px="6">
@@ -55,7 +56,7 @@ export default function Extract() {
               </Box>
             </SlideFade>
 
-              <SlideFade style={{transitionDuration: "1.6s", height: "100%"}} in={isOpen} offsetY='20px'>
+                <SlideFade style={{transitionDuration: "1.6s", height: "100%"}} in={isOpen} offsetY='20px'>
                 <Box
                   flex={1}
                   padding="2rem"
@@ -67,6 +68,7 @@ export default function Extract() {
                   <ExtractActTypeSelect />
                 </Box>
               </SlideFade>
+
           </SimpleGrid>
           <Divider text="resultados" />
 

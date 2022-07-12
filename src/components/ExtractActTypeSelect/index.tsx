@@ -4,7 +4,7 @@ import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 
 export default function ExtractActTypeSelect() {
-    const { typeExtractActs, handleSalectedExtractionActs, selectedExtractAct } = useExtract();
+    const { typeExtractActs, handleSalectedExtractionActs, selectedExtractAct, loadingFile } = useExtract();
 
     return (
         <Stack spacing="1rem">
@@ -25,6 +25,7 @@ export default function ExtractActTypeSelect() {
                 placeholder="Escolha um tipo de ato"
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25);"
                 size="lg"
+                disabled={loadingFile!==100 ? true : false}
             >
                 {typeExtractActs.map((actName, index) => (
                     <option key={index} value={actName["field"]}>
