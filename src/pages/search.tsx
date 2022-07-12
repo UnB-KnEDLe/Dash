@@ -6,7 +6,7 @@ import SearchSelectActType from '../components/SearchSelectActType';
 import SearchSetInput from '../components/SearchSetInput';
 import { Sidebar } from "../components/Sidebar";
 import { useAct } from '../hooks/act';
-import Table from '../components/Table';
+import TableSearch from '../components/TableSearch';
 import { TouchBallLoading } from 'react-loadingg';
 import { NotFound } from '../components/NotFound';
 
@@ -71,7 +71,7 @@ export default function Search(){
                 subtitle={"Verifique a pesquisa"}
               />
             : (showResults 
-              ? <Table title={`Atos de ${allActsName[selectedAct]}`}/>
+              ? <TableSearch title={`Atos de ${allActsName[selectedAct]}`}/>
               : <TouchBallLoading speed="1.5" color="#99A8F4" style={{ alignSelf: 'center', transform: 'scale(2.3)', marginTop: '2.5rem' }}/>
               )
             }

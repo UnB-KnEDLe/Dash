@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import Image from 'next/image'
-import NotFoundSVG from '../../assets/not-found-act.svg';
+import NotFoundSVG from '../../assets/extract-background.svg';
 
 interface NotFoundProps {
   title: string;

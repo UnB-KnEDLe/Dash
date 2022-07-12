@@ -18,7 +18,7 @@ const animationKeyFrames = keyframes`
 const animation = `${animationKeyFrames} 3s ease-in-out infinite`;
 
 export default function Dropzone() {
-    const { handleFilesUploaded, filesUploaded, setFilesUploaded } = useExtract();
+    const { handleFilesUploaded, filesUploaded, loadingFile } = useExtract();
     const onDrop = useCallback(acceptedFiles => {
     handleFilesUploaded(acceptedFiles);
  
@@ -63,7 +63,6 @@ export default function Dropzone() {
                 <SmallText alignSelf="center" smallText='Arraste um ou mais arquivos' /> :
                 <Button buttonText='Selecionar arquivo'/>
             }
-            
 
         </Flex>
     );

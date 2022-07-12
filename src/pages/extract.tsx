@@ -1,15 +1,29 @@
-import { Flex, SimpleGrid, Box } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Box, useDisclosure, Collapse, SlideFade, Fade } from '@chakra-ui/react';
 import { Divider } from '../components/Divider';
 import { Header } from '../components/Header';
 import ExtractSelectFile from '../components/ExtractSelectFile';
 import { Sidebar } from '../components/Sidebar';
 import ExtractFileManager from '../components/ExtractFileManager';
 import ExtractActTypeSelect from '../components/ExtractActTypeSelect';
-
-const fileList = [{name: "arquivo1.pdf", id:"1", viewState:true}, {name: "arquivo2.pdf", id:"2", viewState:true}, {name: "arquivo3.pdf", id:"3", viewState: false}];
-const actTypeList = [["Tipo 1", "1"], ["Tipo 2", "2"], ["Tipo 3", "3"],];
+import TableExtract from '../components/TableExtract';
+import { useExtract } from '../hooks/extract';
+import { NotFound } from '../components/NotFound';
+import { useCallback, useEffect } from 'react';
 
 export default function Extract() {
+  const { loadingFile, selectedExtractAct, filesUploaded } = useExtract();
+  const { isOpen, onToggle } = useDisclosure();
+  const disclosure = useDisclosure();
+
+  useEffect(() => {
+    if(loadingFile === 100){
+      onToggle()
+    }
+  }, [loadingFile])
+
+  useEffect(() => {
+    if(filesUploaded.length !== 0) disclosure.onToggle()
+  }, [filesUploaded])
   return (
     <Flex direction="column" h="100vh">
       <Flex direction="row" w="100%" my="6" maxWidth={1480} mx="auto" px="6">
@@ -27,31 +41,44 @@ export default function Extract() {
             >
 							<ExtractSelectFile />
 						</Box>
-            <Box
-              flex={1}
-              padding="2rem"
-              borderRadius="0.25rem"
-              bgColor="pallete.cardBackground"
-              flexDirection="column"
-              h="100%"
-            >
-							<ExtractFileManager />
-						</Box>
-						<Box
-              flex={1}
-              padding="2rem"
-              borderRadius="0.25rem"
-              bgColor="pallete.cardBackground"
-              flexDirection="column"
-              h="100%"
-            >
-							<ExtractActTypeSelect
-								actsTypes={actTypeList}
-								selectedAct={actTypeList[0][0]}
-							/>
-						</Box>
+
+            <SlideFade style={{transitionDuration: "1.6s", height: "100%"}} in={disclosure.isOpen} offsetY='20px'>
+              <Box
+                flex={1}
+                padding="2rem"
+                borderRadius="0.25rem"
+                bgColor="pallete.cardBackground"
+                flexDirection="column"
+                h="100%"
+              >
+                <ExtractFileManager />
+              </Box>
+            </SlideFade>
+
+              <SlideFade style={{transitionDuration: "1.6s", height: "100%"}} in={isOpen} offsetY='20px'>
+                <Box
+                  flex={1}
+                  padding="2rem"
+                  borderRadius="0.25rem"
+                  bgColor="pallete.cardBackground"
+                  flexDirection="column"
+                  h="100%"
+                >
+                  <ExtractActTypeSelect />
+                </Box>
+              </SlideFade>
           </SimpleGrid>
           <Divider text="resultados" />
+
+          {loadingFile !== 100 || selectedExtractAct.length === 0
+            ? <NotFound
+                title={"Atos não foram encontrados"} 
+                subtitle={"Adicione um arquivo e deixe o resto para a gente"}
+              />
+            : <TableExtract title='Atos Extraídos'/>
+
+          }
+          
 
         </Flex>
       </Flex>

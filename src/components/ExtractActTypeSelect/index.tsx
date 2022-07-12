@@ -1,14 +1,11 @@
 import { Stack, Flex, Select } from "@chakra-ui/react";
+import { useExtract } from "../../hooks/extract";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 
-interface ExtractActTypeSelectProps {
-    actsTypes: Array< string[]>;
-    onChangeActType?: (actTypeID: string) => void;  // Remove opcional set
-    selectedAct: string;
-}
+export default function ExtractActTypeSelect() {
+    const { typeExtractActs, handleSalectedExtractionActs, selectedExtractAct } = useExtract();
 
-export default function ExtractActTypeSelect({actsTypes, onChangeActType, selectedAct}: ExtractActTypeSelectProps) {
     return (
         <Stack spacing="1rem">
             <Flex flexDirection="column">
@@ -19,8 +16,8 @@ export default function ExtractActTypeSelect({actsTypes, onChangeActType, select
                 _hover={{ bg: 'pallete.primaryLight50' }}
                 borderRadius="0.25rem"
                 fontWeight="500"
-                onChange={e => onChangeActType(e.target.value)}
-                value={selectedAct}
+                onChange={e => handleSalectedExtractionActs(e.target.value)}
+                value={selectedExtractAct}
                 color="pallete.text"
                 bg="pallete.secondaryLight100"
                 variant="filled"
@@ -29,9 +26,9 @@ export default function ExtractActTypeSelect({actsTypes, onChangeActType, select
                 boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25);"
                 size="lg"
             >
-                {actsTypes.map((actName) => (
-                    <option key={actName[0]} value={actName[0]}>
-                        {actName[1]}
+                {typeExtractActs.map((actName, index) => (
+                    <option key={index} value={actName["field"]}>
+                        {actName["name"]}
                     </option>
                 ))}
             </Select>

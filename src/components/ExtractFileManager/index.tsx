@@ -1,4 +1,4 @@
-import { Stack, Flex, Icon } from "@chakra-ui/react";
+import { Stack, Flex, Icon, Progress } from "@chakra-ui/react";
 import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 import { FaEye, FaEyeSlash, FaTrash } from 'react-icons/fa';
@@ -8,24 +8,8 @@ import { useCallback, useState } from "react";
 
 
 export default function ExtractFileManager() {
-    const { filesUploaded, handleFilesUploaded, setFilesUploaded } = useExtract();
-
-    const handleViewFile = useCallback((status: boolean, fileTarget) => {
-        let updateStatus = filesUploaded.map(function(changeStatusFile){
-            if(JSON.stringify(changeStatusFile) === JSON.stringify(fileTarget)){
-                let fileFormatted = {
-                    ...fileTarget, 
-                    status: status
-                }
-                return fileFormatted
-            }
-            return changeStatusFile
-        });
-
-        setFilesUploaded(updateStatus);
-        
-    }, [filesUploaded, setFilesUploaded])
-
+    const { filesUploaded, handleFilesUploaded, setFilesUploaded, loadingFile } = useExtract();
+    
     return (
         <Stack spacing="1rem" maxHeight="28rem">
             <Flex flexDirection="column">
@@ -35,12 +19,14 @@ export default function ExtractFileManager() {
                 />
             </Flex>
             {filesUploaded.length > 0 ? (
-                <Flex
+                loadingFile !== 100 
+                ? <Progress hasStripe isAnimated value={loadingFile} />
+                : <Flex
                     flexDirection="column"
                     gap=".5rem"
                     maxHeight='100%'
                     overflowY='auto'
-                >
+                    >
                     { filesUploaded.map((fileTarget, index) => (
                         <Flex
                             background={fileTarget?.status ? "pallete.deactivated" : "pallete.secondaryLight10"}
@@ -55,18 +41,6 @@ export default function ExtractFileManager() {
                                 alignItems='center'
                                 gap='.75rem'
                             >
-                                {fileTarget?.status ? (
-                                    <Icon 
-                                        as={FaEye} 
-                                        color={fileTarget?.status ? "pallete.secondaryLight10" : "palpallete.deactivatedText"}
-                                        onClick={() => handleViewFile(false, fileTarget)} />
-                                ) : (
-                                    <Icon
-                                        color={fileTarget?.status ? "pallete.secondaryLight10" : "palpallete.deactivatedText"}
-                                        as={FaEyeSlash}
-                                        onClick={() => handleViewFile(true, fileTarget)} 
-                                    />
-                                )}
                                 <SmallText color={fileTarget?.status ? "pallete.text" : "palpallete.deactivatedText"} smallText={fileTarget?.file?.name} />
                             </Flex>
                             <Icon 

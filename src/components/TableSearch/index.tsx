@@ -1,4 +1,4 @@
-import { Table as Tb, Thead, Tbody, Tr, Th, Td, Box, Flex, Icon } from '@chakra-ui/react';
+import { Table as Tb, Thead, Tbody, Tr, Th, Box, Flex, Icon } from '@chakra-ui/react';
 import HeadingTwo from '../Typography/HeadingTwo';
 import Button from '../Button';
 import { RiDownload2Fill, RiH1 } from 'react-icons/ri';
@@ -14,11 +14,7 @@ interface TableProps {
 	title: string;
 }
 
-interface FilterActsProps {
-  [key: string]: string | boolean | null | number;
-}
-
-export default function Table({ title }: TableProps) {
+export default function TableSearch({ title }: TableProps) {
 	const [headTableFields, setHeadTableFields] = useState<string[][]>([]);
 	const [actualPage, setActualPage] = useState(1);
 	const [headerDownloadLink, setHeaderDownloadLink] = useState([]);
@@ -27,20 +23,6 @@ export default function Table({ title }: TableProps) {
 
 	const { getTableSearchFieldNames, getFieldActsPerPage, selectedAct, searchActs, numberOfSearchActs, getFieldActsWithoutPage } = useAct();
 	const csvLinkEl = useRef<any>();
-
-	const headTableDownload = useCallback(async () => {
-		let headers = [];
-		for (const [key, value] of headTableFields) {
-			headers.push({
-					label: value,
-					key
-			})
-		}
-		let acts = await getFieldActsWithoutPage();
-		setDataDownloadLink(acts);
-		setHeaderDownloadLink(headers);
-	}, [headTableFields, getFieldActsWithoutPage])
-
 
 	const headTable = useCallback(async() => {
 		const headFields = await getTableSearchFieldNames(selectedAct);
