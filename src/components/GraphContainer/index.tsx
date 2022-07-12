@@ -70,8 +70,11 @@ export default function GraphContainer() {
           <Button type="submit" buttonText="Consultar" />
         </Flex>
       )}
-      {connectStatus === Status.Connected ? <Graph cypher={cypher} setPopupContent={setPopupContent} setOpenPopup={setOpenPopup}/> : <Login />}
-      <GraphPopup content={popupContent} isOpen={openPopup} setOpenPopup={setOpenPopup}/>
+      {connectStatus === Status.Connected ? ( <>
+          <Graph cypher={cypher} setPopupContent={setPopupContent} setOpenPopup={setOpenPopup}/>
+          <GraphPopup content={popupContent} isOpen={openPopup} setOpenPopup={setOpenPopup}/>
+        </>
+        ) : <Login />}
     </Flex>
   );
 }

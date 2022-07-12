@@ -43,7 +43,7 @@ function Graph({ cypher, setPopupContent, setOpenPopup }: GraphProps) {
         })
       }
     });
-    vis.registerOnEvent(NeoVisEvents.ErrorEvent, (data) => console.log(data));
+    vis.registerOnEvent(NeoVisEvents.ErrorEvent, (data) => setOpenPopup(false));
 
   }, [cypher]);
 

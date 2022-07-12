@@ -34,7 +34,7 @@ export function GraphPopup({ content, isOpen, setOpenPopup }: GraphPopupProps) {
       boxShadow="0px 1px 5px rgba(0, 0, 0, 0.25)"
       p="4"
     >
-      <Flex direction="row" justifyContent="space-between">
+      <Flex direction="row" justifyContent="space-between" alignItems='center'>
         <HeadingTwo headingTwoText={content?.title} />
         <IconButton aria-label='Search database' icon={<IoMdClose />} onClick={onClose} size='lg'/>
       </Flex>
