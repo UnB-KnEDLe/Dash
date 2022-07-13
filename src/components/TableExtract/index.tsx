@@ -59,11 +59,6 @@ export default function TableExtract({ title }: TableProps) {
 		}
 	}, [headerActTextDownload, bodyActTextDownload, csvLinkEl])
 
-	useEffect(() => {
-		console.log(bodyActTextDownload)
-		console.log(headerActTextDownload)
-	}, [bodyActTextDownload, headerActTextDownload])
-
   return (
 		<>
 			<Flex
