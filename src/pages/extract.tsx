@@ -8,26 +8,26 @@ import ExtractActTypeSelect from '../components/ExtractActTypeSelect';
 import TableExtract from '../components/TableExtract';
 import { useExtract } from '../hooks/extract';
 import { NotFound } from '../components/NotFound';
-import { useCallback, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Extract() {
   const { loadingFile, selectedExtractAct, filesUploaded } = useExtract();
-  const { isOpen, onToggle  } = useDisclosure();
-  const disclosure = useDisclosure();
+  const [finishUpload, setFinishUpload] = useState(false);
+  const [finishSelectTypeAct, setFinishSelectTypeAct] = useState(false);
 
   useEffect(() => {
     if(loadingFile === 100){
-      onToggle()
+      setFinishSelectTypeAct(true);
     }
   }, [loadingFile])
 
   useEffect(() => {
-    if(filesUploaded.length !== 0) disclosure.onToggle()
+    if(filesUploaded.length !== 0) setFinishUpload(true);
   }, [filesUploaded])
   
   return (
     <Flex direction="column" h="100vh">
-      <Flex direction="row" w="100%" my="6" maxWidth={1480} mx="auto" px="6">
+      <Flex direction="row" w="100%" my="6" maxWidth={1400} mx="auto" px="12">
         <Sidebar />
         <Flex direction="column" w="100%">
           <Header title="Extração" description="Extraia atos de um documento em PDF" />
@@ -43,7 +43,7 @@ export default function Extract() {
 							<ExtractSelectFile />
 						</Box>
 
-            <SlideFade style={{transitionDuration: "1.6s", height: "100%"}} in={disclosure.isOpen} offsetY='20px'>
+            <SlideFade style={{transitionDuration: "1.6s", height: "100%"}} in={finishUpload} offsetY='20px'>
               <Box
                 flex={1}
                 padding="2rem"
@@ -56,7 +56,7 @@ export default function Extract() {
               </Box>
             </SlideFade>
 
-                <SlideFade style={{transitionDuration: "1.6s", height: "100%"}} in={isOpen} offsetY='20px'>
+                <SlideFade style={{transitionDuration: "1.6s", height: "100%"}} in={finishSelectTypeAct} offsetY='20px'>
                 <Box
                   flex={1}
                   padding="2rem"
@@ -68,20 +68,17 @@ export default function Extract() {
                   <ExtractActTypeSelect />
                 </Box>
               </SlideFade>
-
           </SimpleGrid>
-          <Divider text="resultados" />
 
+          <Divider text="resultados" />
           {loadingFile !== 100 || selectedExtractAct.length === 0
             ? <NotFound
                 title={"Atos não foram encontrados"} 
                 subtitle={"Adicione um arquivo e deixe o resto com a gente"}
               />
-            : <TableExtract title='Atos Extraídos'/>
+            : <Box width={1090}><TableExtract title='Atos Extraídos'/></Box>
 
           }
-          
-
         </Flex>
       </Flex>
     </Flex>

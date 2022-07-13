@@ -14,6 +14,7 @@ interface ExtractActContextData {
   selectedExtractAct: string;
   handleSalectedExtractionActs: (act: string) => void;
   loadingFile: number;
+  setSelectedExtractAct: React.Dispatch<React.SetStateAction<string>>
 }
 
 const ExtractActContext = createContext<ExtractActContextData>({} as ExtractActContextData);
@@ -155,6 +156,7 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
         bodyActText,
         textActs,
         loadingFile,
+        setSelectedExtractAct
       }}
     >
       {children}

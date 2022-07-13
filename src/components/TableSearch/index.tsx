@@ -103,7 +103,7 @@ export default function TableSearch({ title }: TableProps) {
 						<Icon pointerEvents={actualPage === numberOfSearchActs ? "none" : "auto"} onClick={() => handlePage(+1)} cursor="pointer" color={actualPage !== numberOfSearchActs ? "pallete.background" : "pallete.text"} as={AiFillRightCircle} ml="1rem" transform="scale(1.8)"/>
 					</Flex>
 			</Flex>
-			<Box mb="4rem" overflowY="auto" maxHeight={800} width={1200} bgColor="pallete.cardBackground" borderRadius='0.25rem'> 
+			<Box mb="4rem" overflowY="auto" maxHeight={800} bgColor="pallete.cardBackground" borderRadius='0.25rem'> 
 				<Tb variant="striped" colorScheme="facebook">
 					<Thead bgColor="pallete.secondary">
 						<Tr>
