@@ -16,11 +16,34 @@ interface TableProps {
 }
 
 export default function TableExtract({ title }: TableProps) {
-	const {headerActText, bodyActText, textActs } = useExtract();
+	const {headerActText, bodyActText, textActs, headerActTextDownload, handleBodyText } = useExtract();
 
 	const [switchView, setSwitchView] = useState(false);
 	const [switchHeader, setSwitchHeader] = useState([]);
 	const [switchBody, setSwitchBody] = useState([]);
+
+	const [bodyActTextDownload, setBodyActTextDownload] = useState([]);
+	const [dowloadActReady, setDowloadActReady] = useState(false);
+	const [dowloadTextReady, setDowloadTextReady] = useState(false);
+	const [actHeaderText, setActHeaderText] = useState([]);
+	const csvLinkEl = useRef<any>();
+
+	const downloadReport = useCallback(() => {
+		setDowloadActReady(true);
+		setBodyActTextDownload(handleBodyText());
+		
+	}, [handleBodyText]);
+
+	const downloadTextReport = useCallback(() => {
+		setDowloadTextReady(true);
+
+		let formattedHeader = textActs.map(function(act){
+			return {text: act}
+			})
+
+		setActHeaderText(formattedHeader)
+
+	}, [textActs]);
 
 	const handleSwitchView = useCallback(() => {
 		setSwitchView(prev => !prev);
@@ -42,8 +65,26 @@ export default function TableExtract({ title }: TableProps) {
 	}, [handleEntitiesOrTextActs])
 
 	useEffect(() => {
-		console.log(switchBody);
-	}, [switchBody])
+		if(headerActTextDownload.length !== 0 && bodyActTextDownload.length !== 0) {			
+			csvLinkEl?.current?.link.click();
+		}
+		setDowloadActReady(false);
+	}, [headerActTextDownload, bodyActTextDownload, csvLinkEl])
+
+	useEffect(() => {
+		if(actHeaderText.length !== 0) {			
+			csvLinkEl?.current?.link.click();
+		}
+		 setDowloadTextReady(false);
+	}, [actHeaderText, csvLinkEl])
+
+	const loadingRule = useCallback((dowloadActReady: boolean, dowloadTextReady: boolean) => {
+		if(dowloadActReady && !dowloadTextReady) return true;
+	
+		else if(!dowloadActReady && dowloadTextReady) return true;
+
+		return false;
+	}, [])
 
   return (
 		<>
@@ -58,9 +99,17 @@ export default function TableExtract({ title }: TableProps) {
 					<Flex alignItems="center"> 
 						<HeadingTwo color="pallete.background" ml="2rem" mr="1rem" headingTwoText={!switchView ? title: "Entidades Extraídas"} padding="1rem 0"/>
 						<Switch onChange={handleSwitchView} colorScheme='facebook' size='md'/>
+						<Button marginLeft="1.5rem" loading={loadingRule(dowloadActReady, dowloadTextReady)} onClick={switchView ? downloadReport : downloadTextReport} icon={(dowloadActReady || dowloadTextReady) ? Loading	: RiDownload2Fill } />
+						<CSVLink
+							headers={switchView ? headerActTextDownload : [{label: "TEXTO", key:"text"}]}
+							filename="resultado-extracao.csv"
+							data={switchView ? bodyActTextDownload : actHeaderText }
+							ref={csvLinkEl}
+						/>
+ 
 					</Flex>
 					<Flex alignItems="center" mr="2rem">
-						<Icon onClick={() => console.log("Oi")} cursor="pointer" as={AiFillLeftCircle} mr="1rem" transform="scale(1.8)"/>
+						<Icon cursor="pointer" as={AiFillLeftCircle} mr="1rem" transform="scale(1.8)"/>
 						<SmallText color="pallete.background" smallText={`Página 1 de 1`}/>
 						<Icon cursor="pointer" as={AiFillRightCircle} ml="1rem" transform="scale(1.8)"/>
 					</Flex>
