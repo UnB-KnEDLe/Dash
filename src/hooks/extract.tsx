@@ -17,6 +17,9 @@ interface ExtractActContextData {
   setSelectedExtractAct: React.Dispatch<React.SetStateAction<string>>;
   handleBodyText: () => any[];
   headerActTextDownload: any[];
+  setHeaderActTextDownload: React.Dispatch<React.SetStateAction<any[]>>;
+  setBodyActTextDownload: React.Dispatch<React.SetStateAction<any[]>>;
+  bodyActTextDownload: any[]
 }
 
 const ExtractActContext = createContext<ExtractActContextData>({} as ExtractActContextData);
@@ -34,6 +37,7 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
   const [bodyActText, setBodyActText] = useState([]);
   const [textActs, setTextActs] = useState([]);
   const [loadingFile, setLoadingFile] = useState(0);
+  const [bodyActTextDownload, setBodyActTextDownload] = useState([]);
 
   const { allActsName } = useAct();
   const toast = useToast();
@@ -43,35 +47,34 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
       return {
           [header.key]: ent[index]
       }
-  }))
+    }))
   
-  let flagActs = 0;
-  let totalActs = bodyDownload.length;
-  let totalEntities = bodyDownload[0].length - 1;
-  
-  let all = {};
-  let pic = []
-  
-  bodyDownload.forEach(function(elem, index) {
-      if(flagActs === totalActs) return "Opa";
-      
-      let flagEntities = 0;
-      while(flagEntities <= totalEntities){
-          if(flagEntities === totalEntities){
-              let mac = Object.assign({}, all);
-              pic[index] = mac;
-              break;
-          }
-          
-          let key = Object.keys(elem[flagEntities])[0];
-          let values = Object.values(elem[flagEntities])[0];
-          all[key] = values;
-          
-          flagEntities+=1;
-      }
-      flagActs+=1;
-  }) 
-  
+    let flagActs = 0;
+    let totalActs = bodyDownload.length;
+    let totalEntities = bodyDownload[0].length - 1;
+    
+    let all = {};
+    let pic = []
+    
+    bodyDownload.forEach(function(elem, index) {
+        if(flagActs === totalActs) return;
+        
+        let flagEntities = 0;
+        while(flagEntities <= totalEntities){
+            if(flagEntities === totalEntities){
+                let mac = Object.assign({}, all);
+                pic[index] = mac;
+                break;
+            }
+            
+            let key = Object.keys(elem[flagEntities])[0];
+            let values = Object.values(elem[flagEntities])[0];
+            all[key] = values;
+            
+            flagEntities+=1;
+        }
+        flagActs+=1;
+    }) 
   return pic;
   
   }, [headerActTextDownload, bodyActText])
@@ -138,6 +141,8 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
 
   const handleSalectedExtractionActs = useCallback((act: string) => {
     setSelectedExtractAct(act);
+    setBodyActTextDownload([]);
+    setHeaderActTextDownload([]);
   }, [])
 
   const handleExtractedEntitiesAndText = useCallback(() => {
@@ -213,7 +218,10 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
         loadingFile,
         setSelectedExtractAct,
         handleBodyText,
-        headerActTextDownload
+        headerActTextDownload,
+        setHeaderActTextDownload,
+        bodyActTextDownload,
+        setBodyActTextDownload
       }}
     >
       {children}
