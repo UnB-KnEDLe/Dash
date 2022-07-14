@@ -16,11 +16,22 @@ interface TableProps {
 }
 
 export default function TableExtract({ title }: TableProps) {
-	const {headerActText, bodyActText, textActs } = useExtract();
+	const {headerActText, bodyActText, textActs, headerActTextDownload, handleBodyText, bodyActTextDownload, setBodyActTextDownload } = useExtract();
 
 	const [switchView, setSwitchView] = useState(false);
 	const [switchHeader, setSwitchHeader] = useState([]);
 	const [switchBody, setSwitchBody] = useState([]);
+
+	
+	const [dowloadActReady, setDowloadActReady] = useState(false);
+
+	const csvLinkEl = useRef<any>();
+
+	const downloadReport = useCallback(() => {
+		setDowloadActReady(true);
+		setBodyActTextDownload(handleBodyText());
+		
+	}, [handleBodyText, setBodyActTextDownload]);
 
 	const handleSwitchView = useCallback(() => {
 		setSwitchView(prev => !prev);
@@ -42,8 +53,11 @@ export default function TableExtract({ title }: TableProps) {
 	}, [handleEntitiesOrTextActs])
 
 	useEffect(() => {
-		console.log(switchBody);
-	}, [switchBody])
+		setDowloadActReady(false);
+		if(headerActTextDownload.length !== 0 && bodyActTextDownload.length !== 0) {			
+			csvLinkEl?.current?.link.click();
+		}
+	}, [headerActTextDownload, bodyActTextDownload, csvLinkEl])
 
   return (
 		<>
@@ -58,9 +72,17 @@ export default function TableExtract({ title }: TableProps) {
 					<Flex alignItems="center"> 
 						<HeadingTwo color="pallete.background" ml="2rem" mr="1rem" headingTwoText={!switchView ? title: "Entidades Extraídas"} padding="1rem 0"/>
 						<Switch onChange={handleSwitchView} colorScheme='facebook' size='md'/>
+						<Button marginLeft="1.5rem" loading={dowloadActReady} onClick={downloadReport} icon={dowloadActReady ? Loading	: RiDownload2Fill } />
+						<CSVLink
+							headers={headerActTextDownload}
+							filename="resultado-extracao.csv"
+							data={bodyActTextDownload}
+							ref={csvLinkEl}
+						/>
+ 
 					</Flex>
 					<Flex alignItems="center" mr="2rem">
-						<Icon onClick={() => console.log("Oi")} cursor="pointer" as={AiFillLeftCircle} mr="1rem" transform="scale(1.8)"/>
+						<Icon cursor="pointer" as={AiFillLeftCircle} mr="1rem" transform="scale(1.8)"/>
 						<SmallText color="pallete.background" smallText={`Página 1 de 1`}/>
 						<Icon cursor="pointer" as={AiFillRightCircle} ml="1rem" transform="scale(1.8)"/>
 					</Flex>

@@ -24,15 +24,15 @@ export function Sidebar() {
           <Stack spacing="4" mt="8" align="stretch">
             <Link href="/search" display="flex" alignItems="center">
               <Icon as={RiSearchLine} fontSize={22}/>
-              <Text ml="4" fontWeight="medium">Pesquisa</Text>
+              <Text ml="4" fontWeight="medium">Pesquisar</Text>
             </Link>
             <Link href="/extract" display="flex" alignItems="center">
               <Icon as={RiArchiveLine} fontSize={22}/>
-              <Text ml="4" fontWeight="medium">Extração</Text>
+              <Text ml="4" fontWeight="medium">Extrair</Text>
             </Link>
             <Link href="/query" display="flex" alignItems="center">
               <Icon as={RiDatabase2Line} fontSize={22}/>
-              <Text ml="4" fontWeight="medium">Consulta</Text>
+              <Text ml="4" fontWeight="medium">Consultar</Text>
             </Link>
           </Stack>
         </Box>

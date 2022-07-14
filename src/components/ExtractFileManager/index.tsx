@@ -6,7 +6,11 @@ import { BoxLoading } from 'react-loadingg';
 import { useExtract } from "../../hooks/extract";
 
 export default function ExtractFileManager() {
-    const { filesUploaded, handleFilesUploaded, setFilesUploaded, loadingFile } = useExtract();
+    const { filesUploaded, setSelectedExtractAct, setFilesUploaded, loadingFile } = useExtract();
+    const handleDeleteFile = useCallback((fileTarget) => {
+        setFilesUploaded(filesUploaded.filter(removeFile => removeFile !== fileTarget));
+        setSelectedExtractAct('');
+    },[filesUploaded])
     
     return (
         <Stack spacing="1rem" maxHeight="28rem">
@@ -44,7 +48,7 @@ export default function ExtractFileManager() {
                             <Icon 
                                 as={FaTrash}
                                 color={fileTarget?.status ? "pallete.secondaryLight10" : "palpallete.deactivatedText"} 
-                                onClick={() => setFilesUploaded(filesUploaded.filter(removeFile => removeFile !== fileTarget))}
+                                onClick={() => handleDeleteFile(fileTarget) }
                             />
                         </Flex>
                     ))}

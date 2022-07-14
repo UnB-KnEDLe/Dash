@@ -23,7 +23,7 @@ export default function Search(){
 
   return(
     <Flex direction="column" h="100vh">
-      <Flex direction="row" w="100%" my="6" maxWidth={1480} mx="auto" px="12">
+      <Flex direction="row" w="100%" my="6" maxWidth={1400} mx="auto" px="12">
         <Sidebar />
         <Flex direction="column" w="100%">
             <Header 
@@ -71,11 +71,10 @@ export default function Search(){
                 subtitle={"Verifique a pesquisa"}
               />
             : (showResults 
-              ? <TableSearch title={`Atos de ${allActsName[selectedAct]}`}/>
-              : <TouchBallLoading speed="1.5" color="#99A8F4" style={{ alignSelf: 'center', transform: 'scale(2.3)', marginTop: '2.5rem' }}/>
+                ? <Box maxWidth={1090}><TableSearch title={`Atos de ${allActsName[selectedAct]}`}/></Box>
+                : <TouchBallLoading speed="1.5" color="#99A8F4" style={{ alignSelf: 'center', transform: 'scale(2.3)', marginTop: '2.5rem' }}/>
               )
-            }
-
+              }
         </Flex>
       </Flex>
     </Flex>
