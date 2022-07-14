@@ -19,6 +19,7 @@ export const theme = extendTheme({
       "backgroundButton": "#E3E3E3",
       "deactivated": "#212121",
       "deactivatedText": "#454545",
+      "error": "#DD0000",
     }
   },
   fonts:{

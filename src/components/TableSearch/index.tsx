@@ -14,7 +14,11 @@ interface TableProps {
 	title: string;
 }
 
-export default function TableSearch({ title }: TableProps) {
+interface FilterActsProps {
+	[key: string]: string | boolean | null | number;
+}
+
+export default function Table({ title }: TableProps) {
 	const [headTableFields, setHeadTableFields] = useState<string[][]>([]);
 	const [actualPage, setActualPage] = useState(1);
 	const [headerDownloadLink, setHeaderDownloadLink] = useState([]);

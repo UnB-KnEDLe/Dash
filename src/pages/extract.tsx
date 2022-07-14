@@ -71,13 +71,12 @@ export default function Extract() {
           </SimpleGrid>
 
           <Divider text="resultados" />
-          {loadingFile !== 100 || selectedExtractAct.length === 0
+          { loadingFile !== 100 || selectedExtractAct.length === 0
             ? <NotFound
                 title={"Atos não foram encontrados"} 
                 subtitle={"Adicione um arquivo e deixe o resto com a gente"}
               />
             : <Box width={1090}><TableExtract title='Atos Extraídos'/></Box>
-
           }
         </Flex>
       </Flex>
