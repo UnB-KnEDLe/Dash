@@ -4,6 +4,7 @@ import SmallText from "../Typography/SmallText";
 import { FaTrash } from 'react-icons/fa';
 import { BoxLoading } from 'react-loadingg';
 import { useExtract } from "../../hooks/extract";
+import { useCallback } from "react";
 
 export default function ExtractFileManager() {
     const { filesUploaded, setSelectedExtractAct, setFilesUploaded, loadingFile } = useExtract();
