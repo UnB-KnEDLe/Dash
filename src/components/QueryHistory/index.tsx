@@ -64,6 +64,7 @@ export default function QueryHistory() {
                 <SmallText smallText={query} />
               </Flex>
             ))}
+            { history.length == 0 && <SmallText smallText="Nenhuma consulta no histórico." /> }
           </ModalBody>
         </ModalContent>
       </Modal>
