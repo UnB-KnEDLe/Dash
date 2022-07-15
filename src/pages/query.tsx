@@ -25,7 +25,7 @@ export default function Query() {
 
   return (
     <Flex direction="column" h="100vh">
-      <Flex direction="row" w="100%" maxWidth={1480} mx="auto" px="6">
+      <Flex direction="row" w="100%" my="6" maxWidth={1400} mx="auto" px="12">
         <Sidebar />
         <SimpleGrid
           columns={1}
