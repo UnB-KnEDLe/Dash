@@ -2,8 +2,10 @@
   "name": "dash",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/dash",
   "scripts": {
     "dev": "next dev",
+    "test": "echo \"script de teste aqui \"",
     "build": "next build",
     "start": "next start",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet --fix"
