@@ -1,21 +1,8 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+// next.config.js
 
 module.exports = {
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-      images: {
-        loader: 'akamai',
-        path: '',
-      },
-    });
-
-    return config;
-  }
-};
-
-module.exports = nextConfig
+  images: {
+    loader: 'akamai',
+    path: '',
+  },
+}
