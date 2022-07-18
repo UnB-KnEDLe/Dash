@@ -1,11 +1,11 @@
 version: '2'
 services:
   dash:
-    build: ./dash
+    build: .
     command: npm start
     container_name: dash
     volumes:
       - .dash:/usr/app/
       - /usr/app/node_modules
     ports:
-      - "3001:3001"
+      - "3002:3002"
