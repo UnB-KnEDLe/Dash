@@ -1,14 +1,14 @@
 import { Flex, SimpleGrid, Box, Image } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
-import { Divider } from '../components/Divider';
-import { Header } from "../components/Header";
-import SearchSelectActType from '../components/SearchSelectActType';
-import SearchSetInput from '../components/SearchSetInput';
-import { Sidebar } from "../components/Sidebar";
-import { useAct } from '../hooks/act';
-import TableSearch from '../components/TableSearch';
+import { Divider } from '../../components/Divider';
+import { Header } from "../../components/Header";
+import SearchSelectActType from '../../components/SearchSelectActType';
+import SearchSetInput from '../../components/SearchSetInput';
+import { Sidebar } from "../../components/Sidebar";
+import { useAct } from '../../hooks/act';
+import TableSearch from '../../components/TableSearch';
 import { TouchBallLoading } from 'react-loadingg';
-import { NotFound } from '../components/NotFound';
+import { NotFound } from '../../components/NotFound';
 
 export default function Search(){
   const { allActsName, selectedAct, searchActs } = useAct()

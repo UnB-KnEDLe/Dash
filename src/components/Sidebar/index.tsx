@@ -8,7 +8,7 @@ export function Sidebar() {
     <Box as="aside" w="64">
       <Stack spacing="12" align="flex-start">
         <Link
-          href="/"
+          href="/dash"
           mt="33px"
           fontSize='3xl'
           fontWeight='bold'
@@ -22,15 +22,15 @@ export function Sidebar() {
         <Box>
           <Text fontWeight="bold" color="gray.400" fontSize="small">GERAL</Text>
           <Stack spacing="4" mt="8" align="stretch">
-            <Link href="/search" display="flex" alignItems="center">
+            <Link href="/dash/search" display="flex" alignItems="center">
               <Icon as={RiSearchLine} fontSize={22}/>
               <Text ml="4" fontWeight="medium">Pesquisar</Text>
             </Link>
-            <Link href="/extract" display="flex" alignItems="center">
+            <Link href="/dash/extract" display="flex" alignItems="center">
               <Icon as={RiArchiveLine} fontSize={22}/>
               <Text ml="4" fontWeight="medium">Extrair</Text>
             </Link>
-            <Link href="/query" display="flex" alignItems="center">
+            <Link href="/dash/query" display="flex" alignItems="center">
               <Icon as={RiDatabase2Line} fontSize={22}/>
               <Text ml="4" fontWeight="medium">Consultar</Text>
             </Link>

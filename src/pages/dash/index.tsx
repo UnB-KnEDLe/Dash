@@ -1,11 +1,11 @@
 import { Flex, Text, Image, Divider, Link } from '@chakra-ui/react';
-import Button from '../components/Button';
-import HomeMenu from '../components/HomeMenu';
+import Button from '../../components/Button';
+import HomeMenu from '../../components/HomeMenu';
 
-import fapdfLogo from '../assets/companyLogos/fapdf.png';
-import finatecLogo from '../assets/companyLogos/finatec.svg';
-import unbLogo from '../assets/companyLogos/unb.svg';
-import frontImage from '../assets/homepage.png';
+import fapdfLogo from '/src/assets/companyLogos/fapdf.png';
+import finatecLogo from '/src/assets/companyLogos/finatec.svg';
+import unbLogo from '/src/assets/companyLogos/unb.svg';
+import frontImage from '/src/assets/homepage.png';
 
 export default function Home() {
   return (
@@ -51,7 +51,7 @@ export default function Home() {
               </Text>
             </Flex>
             <Link
-              href='/search'
+              href='/dash/search'
               alignSelf='flex-end'
             >
               <Button
