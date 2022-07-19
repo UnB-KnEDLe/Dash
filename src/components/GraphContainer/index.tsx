@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 export default function GraphContainer() {
   const handle = useFullScreenHandle();
   const { register, handleSubmit, reset } = useForm();
-  const { connectStatus, cypher, handleCypher, setPopupContent, closePopup } = useUser();
+  const { connectStatus, cypher, handleCypher, closePopup } = useUser();
 
   const Graph = dynamic(() => import('./Graph'), {
     ssr: false,
@@ -26,7 +26,7 @@ export default function GraphContainer() {
     const {query} = values;
     handleCypher(query)
     closePopup();
-    reset()
+    reset();
   }, []);
 
   return (

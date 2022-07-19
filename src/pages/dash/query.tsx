@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 import QueryHistory from '../../components/QueryHistory';
 
 export default function Query() {
-  const { connectStatus, user, logout, cypher, handleCypher } = useUser();
+  const { connectStatus, user, logout, cypher, handleCypher, popupContent, completed } = useUser();
   const { register, handleSubmit } = useForm();
 
   const onHandleCypher = useCallback( values => {
@@ -89,7 +89,7 @@ export default function Query() {
                       icon={SiNeo4J}
                       {...register('query')}
                     />
-                    <Button type="submit" buttonText="Consultar" />
+                    <Button type="submit" buttonText="Consultar" isLoading={!completed}/>
                   </Flex>
                 </Flex>
               ) : (

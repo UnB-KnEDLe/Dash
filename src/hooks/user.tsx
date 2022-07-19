@@ -32,6 +32,8 @@ interface UserContextData {
     popupContent: PopupContentType;
     setPopupContent: (popupContent: PopupContentType) => void;
     closePopup: () => void;
+    completed: boolean;
+    setCompleted: (completed: boolean) => void;
 }
 
 const UserContext = createContext<UserContextData>({} as UserContextData);
@@ -48,6 +50,7 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
   localStorageHistory ??= '[]';
   const [history, setHistory] = useState<string[]>([...JSON.parse(localStorageHistory)].slice(0, 10));
   const [popupContent, setPopupContent] = useState<PopupContentType>();
+  const [completed, setCompleted] = useState(false);
 
   const handleCypher = useCallback((cypher: string) => {
     setCypher(cypher);
@@ -60,6 +63,7 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
       return [cypher, ...history];
 
     });
+    setCompleted(false);
   }, []);
 
   const logout = () => {
@@ -100,6 +104,8 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
         popupContent,
         setPopupContent,
         closePopup,
+        completed,
+        setCompleted
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useCallback, useLayoutEffect, useRef } from 'react';
 import { Flex, useToast } from '@chakra-ui/react';
 import NeoVis, { NeoVisEvents } from 'neovis.js';
 import { useUser } from '../../../hooks/user';
@@ -10,16 +10,20 @@ interface GraphProps {
 
 function Graph({ cypher }: GraphProps) {
   const visRef = useRef<HTMLDivElement>();
-  const { setPopupContent, closePopup } = useUser();
+  const { setPopupContent, closePopup, setCompleted, completed } = useUser();
   const { user} = useUser();
   const toast = useToast();
 
-  const handleClick = (data: any) => {
+  const handleClick = useCallback((data: any) => {
     setPopupContent({
       title: data?.raw?.type || data?.raw?.labels[0],
       properties: data?.raw?.properties
     });
-  };
+  }, []);
+
+  const handleCompleted = useCallback(() => {
+    setCompleted(true);
+  }, []);
 
   useLayoutEffect(() => {
     const config = Config(visRef, user, cypher);
@@ -39,10 +43,12 @@ function Graph({ cypher }: GraphProps) {
           isClosable: true,
         })
       }
+      console.log(vis);
+      vis.network.on("afterDrawing", handleCompleted);
     });
     vis.registerOnEvent(NeoVisEvents.ErrorEvent, () => closePopup());
 
-  }, [cypher]);
+  }, [cypher, completed]);
 
   return <Flex ref={visRef} id="viz" w="100%" />;
 }
