@@ -103,7 +103,7 @@ export default function Table({ title }: TableProps) {
 					</Flex>
 					<Flex alignItems="center" mr="2rem">
 						<Icon pointerEvents={actualPage === 1 ? "none" : "auto"} onClick={() => handlePage(-1)} cursor="pointer" color={actualPage !== 1 ? "pallete.background" : "pallete.text"} as={AiFillLeftCircle} mr="1rem" transform="scale(1.8)"/>
-						<SmallText color="pallete.background" smallText={`Página ${actualPage} de ${numberOfSearchActs}`}/>
+						{ numberOfSearchActs > 1 && <SmallText color="pallete.background" smallText={`Página ${actualPage} de ${numberOfSearchActs}`}/>}
 						<Icon pointerEvents={actualPage === numberOfSearchActs ? "none" : "auto"} onClick={() => handlePage(+1)} cursor="pointer" color={actualPage !== numberOfSearchActs ? "pallete.background" : "pallete.text"} as={AiFillRightCircle} ml="1rem" transform="scale(1.8)"/>
 					</Flex>
 			</Flex>

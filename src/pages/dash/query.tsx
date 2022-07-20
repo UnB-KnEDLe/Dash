@@ -36,7 +36,7 @@ export default function Query() {
           h="100vh"
           pb="1rem"
         >
-          <Header title="Consulta" description="Crie consultas na ferramenta." />
+          <Header title="Consultar" description="Crie consultas no banco de dados neo4j da ferramenta." />
           <Flex flex="1" gap="4" mb="1rem" alignItems="flex-start">
             {connectStatus === Status.Connected && (
               <Box
@@ -93,7 +93,10 @@ export default function Query() {
                   </Flex>
                 </Flex>
               ) : (
-                <SmallText smallText="Realize o login para fazer uma consulta." />
+                <>
+                  <SmallText smallText="Realize o login para fazer uma consulta." />
+                  <SmallText fontSize='md' smallText="Caso não tenha usuário, envie um email para ask_knedle@googlegroups.com" />
+                </>
               )}
             </Box>
           </Flex>

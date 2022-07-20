@@ -1,11 +1,12 @@
-import { Flex, Text, Image, Divider, Link } from '@chakra-ui/react';
-import Button from '../../components/Button';
+import { Flex, Text, Image, Divider, Link, Button } from '@chakra-ui/react';
 import HomeMenu from '../../components/HomeMenu';
+
+import HeadingTwo from '../../components/Typography/HeadingTwo';
 
 import fapdfLogo from '/src/assets/companyLogos/fapdf.png';
 import finatecLogo from '/src/assets/companyLogos/finatec.svg';
 import unbLogo from '/src/assets/companyLogos/unb.svg';
-import frontImage from '/src/assets/homepage.png';
+import frontImage from '/src/assets/homepage.webp';
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
         <Divider orientation="horizontal" />
         <Flex
           gap='4rem'
-          height='82vh'
+          height='75vh'
           minHeight='36rem'
           paddingBlockStart='4rem'
         >
@@ -47,7 +48,7 @@ export default function Home() {
                 fontWeight={500}
                 lineHeight={1}
               >
-                Lorem Ipsum is simply dummy text of print and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                Por meio de Inteligência Artificial, o Knedash realiza consultas e de extrações de atos e entidades do Diário Oficial para o Tribunal de Contas do Distrito Federal.
               </Text>
             </Flex>
             <Link
@@ -55,8 +56,16 @@ export default function Home() {
               alignSelf='flex-end'
             >
               <Button
-                buttonText="Começar"
-              />
+                bgColor="transparent"
+                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.25)"
+                borderRadius='0.125rem'
+                p='6'
+                display='flex'
+                alignItems='center'
+                _hover={{bgColor: 'pallete.cardBackground'}}
+              >
+                <HeadingTwo headingTwoText="Começar" />
+              </Button>
             </Link>
           </Flex>
         </Flex>

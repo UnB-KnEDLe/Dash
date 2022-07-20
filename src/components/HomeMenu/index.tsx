@@ -1,13 +1,12 @@
-import { Flex, Text } from '@chakra-ui/react';
-import MenuLink from '../Typography/MenuLink';
+import { Flex, Text, Image } from '@chakra-ui/react';
+import LogoKnedle from '../../assets/logo_knedle.svg';
 
 export default function HomeMenu() {
     return (
         <Flex
             justifyContent='space-between'
             alignItems='center'
-            paddingInline='1rem'
-            paddingBlock='1rem'
+            padding='1rem'
         >
             <Text
                 fontSize='3xl'
@@ -24,22 +23,10 @@ export default function HomeMenu() {
                 </Text>
             </Text>
             <Flex gap='4rem'>
-                <a href="#">
-                    <MenuLink
-                        color='pallete.primary'
-                        menuLinkText='Workshop'
-                    />
-                </a>
-                <a href="#">
-                    <MenuLink
-                        color='pallete.primary'
-                        menuLinkText='Equipe'
-                    />
-                </a>
-                <a href="#">
-                    <MenuLink
-                        color='pallete.primary'
-                        menuLinkText='Ajuda'
+                <a href="http://nido.unb.br/">
+                    <Image
+                        src={LogoKnedle.src}
+                        height='2rem'
                     />
                 </a>
             </Flex>

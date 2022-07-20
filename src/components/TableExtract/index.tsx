@@ -83,7 +83,6 @@ export default function TableExtract({ title }: TableProps) {
 					</Flex>
 					<Flex alignItems="center" mr="2rem">
 						<Icon cursor="pointer" as={AiFillLeftCircle} mr="1rem" transform="scale(1.8)"/>
-						<SmallText color="pallete.background" smallText={`Página 1 de 1`}/>
 						<Icon cursor="pointer" as={AiFillRightCircle} ml="1rem" transform="scale(1.8)"/>
 					</Flex>
 			</Flex>
