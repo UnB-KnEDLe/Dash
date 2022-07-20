@@ -2,7 +2,7 @@
   "name": "dash",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/dash",
+  "homepage": "/knedash",
   "scripts": {
     "dev": "next dev",
     "test": "echo \"script de teste aqui \"",
