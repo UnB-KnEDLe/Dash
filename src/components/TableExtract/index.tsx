@@ -79,11 +79,6 @@ export default function TableExtract({ title }: TableProps) {
 							data={bodyActTextDownload}
 							ref={csvLinkEl}
 						/>
- 
-					</Flex>
-					<Flex alignItems="center" mr="2rem">
-						<Icon cursor="pointer" as={AiFillLeftCircle} mr="1rem" transform="scale(1.8)"/>
-						<Icon cursor="pointer" as={AiFillRightCircle} ml="1rem" transform="scale(1.8)"/>
 					</Flex>
 			</Flex>
 			<Box mb="4rem" overflowY="auto" maxHeight={800} bgColor="pallete.cardBackground" borderRadius='0.25rem'> 
