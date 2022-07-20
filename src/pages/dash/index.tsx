@@ -20,7 +20,7 @@ export default function Home() {
         <Divider orientation="horizontal" />
         <Flex
           gap='4rem'
-          height='75vh'
+          height='73vh'
           minHeight='36rem'
           paddingBlockStart='4rem'
         >
