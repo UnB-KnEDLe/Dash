@@ -39,7 +39,7 @@ export function Sidebar() {
         <Box>
           <Text fontWeight="bold" color="gray.400" fontSize="small">TIMELINE</Text>
           <Stack spacing="4" mt="8" align="stretch">
-            <Link display="flex" alignItems="center">
+            <Link href="http://164.41.76.30/timeline" display="flex" alignItems="center">
               <Icon as={FcTimeline} fontSize={22} filter="grayscale(100%)" color="gray.400"/>
               <Text ml="4" fontWeight="medium">Contratos</Text>
             </Link>
