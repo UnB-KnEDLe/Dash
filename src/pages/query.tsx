@@ -1,17 +1,17 @@
 import { Flex, Box, SimpleGrid } from '@chakra-ui/react';
 import { useCallback, useState } from 'react';
-import { Header } from '../../components/Header';
-import { Sidebar } from '../../components/Sidebar';
-import HeadingTwo from '../../components/Typography/HeadingTwo';
-import SmallText from '../../components/Typography/SmallText';
-import { Input } from '../../components/Input';
-import Button from '../../components/Button';
-import GraphContainer from '../../components/GraphContainer';
+import { Header } from '../components/Header';
+import { Sidebar } from '../components/Sidebar';
+import HeadingTwo from '../components/Typography/HeadingTwo';
+import SmallText from '../components/Typography/SmallText';
+import { Input } from '../components/Input';
+import Button from '../components/Button';
+import GraphContainer from '../components/GraphContainer';
 import { SiNeo4J } from 'react-icons/si';
-import { useUser, Status } from '../../hooks/user';
+import { useUser, Status } from '../hooks/user';
 import { AiOutlineUser, AiOutlineLogout } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
-import QueryHistory from '../../components/QueryHistory';
+import QueryHistory from '../components/QueryHistory';
 
 export default function Query() {
   const { connectStatus, user, logout, cypher, handleCypher } = useUser();

@@ -1,7 +1,7 @@
 import { Flex, Text, Image, Divider, Link, Button } from '@chakra-ui/react';
-import HomeMenu from '../../components/HomeMenu';
+import HomeMenu from '../components/HomeMenu';
 
-import HeadingTwo from '../../components/Typography/HeadingTwo';
+import HeadingTwo from '../components/Typography/HeadingTwo';
 
 import fapdfLogo from '/src/assets/companyLogos/fapdf.png';
 import finatecLogo from '/src/assets/companyLogos/finatec.svg';

@@ -1,13 +1,13 @@
 import { Flex, SimpleGrid, Box, SlideFade } from '@chakra-ui/react';
-import { Divider } from '../../components/Divider';
-import { Header } from '../../components/Header';
-import ExtractSelectFile from '../../components/ExtractSelectFile';
-import { Sidebar } from '../../components/Sidebar';
-import ExtractFileManager from '../../components/ExtractFileManager';
-import ExtractActTypeSelect from '../../components/ExtractActTypeSelect';
-import TableExtract from '../../components/TableExtract';
-import { useExtract } from '../../hooks/extract';
-import { NotFound } from '../../components/NotFound';
+import { Divider } from '../components/Divider';
+import { Header } from '../components/Header';
+import ExtractSelectFile from '../components/ExtractSelectFile';
+import { Sidebar } from '../components/Sidebar';
+import ExtractFileManager from '../components/ExtractFileManager';
+import ExtractActTypeSelect from '../components/ExtractActTypeSelect';
+import TableExtract from '../components/TableExtract';
+import { useExtract } from '../hooks/extract';
+import { NotFound } from '../components/NotFound';
 import { useEffect, useState } from 'react';
 
 export default function Extract() {
