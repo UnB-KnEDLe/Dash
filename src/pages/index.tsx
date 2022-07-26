@@ -52,7 +52,7 @@ export default function Home() {
               </Text>
             </Flex>
             <Link
-              href='/knedash/search'
+              href='/search'
               alignSelf='flex-end'
             >
               <Button
