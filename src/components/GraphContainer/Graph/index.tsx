@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { Flex, useToast } from '@chakra-ui/react';
 import NeoVis, { NeoVisEvents } from 'neovis.js';
 import { useUser } from '../../../hooks/user';
@@ -8,7 +8,7 @@ interface GraphProps {
   cypher: string;
 }
 
-function Graph({ cypher }: GraphProps) {
+function GraphComponent({ cypher }: GraphProps) {
   const visRef = useRef<HTMLDivElement>();
   const { setPopupContent, closePopup } = useUser();
   const { user } = useUser();
@@ -45,4 +45,6 @@ function Graph({ cypher }: GraphProps) {
   return <Flex ref={visRef} id="viz" w="100%" />;
 }
 
-export default Graph;
+export const Graph = memo(GraphComponent, (prevProps, nextProps) => {
+  return Object.is(prevProps.cypher, nextProps.cypher);
+});

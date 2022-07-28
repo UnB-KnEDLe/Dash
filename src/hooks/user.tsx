@@ -60,7 +60,7 @@ function UserProvider({children}: UserProviderProps ): JSX.Element {
       return [cypher, ...history];
 
     });
-  }, []);
+  }, [connectStatus, Status ]);
 
   const logout = () => {
     setConnectStatus(Status.Unconnected)

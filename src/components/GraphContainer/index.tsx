@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Login } from './Login';
 import { GraphPopup } from './GraphPopup';
@@ -10,16 +10,13 @@ import { useUser, Status } from '../../hooks/user';
 import { Input } from '../Input';
 import { SiNeo4J } from 'react-icons/si';
 import { useForm } from 'react-hook-form';
+import { Graph } from './Graph';
 
-export default function GraphContainer() {
+export default function GraphContainerComponent() {
   const handle = useFullScreenHandle();
   const { register, handleSubmit, reset } = useForm();
   const { connectStatus, cypher, handleCypher, closePopup } = useUser();
-
-  const Graph = dynamic(() => import('./Graph'), {
-    ssr: false,
-  });
-
+  
   const onHandleFullScreen = () => (handle.active ? handle.exit() : handle.enter());
 
   const onHandleCypher = useCallback( values => {
@@ -77,3 +74,5 @@ export default function GraphContainer() {
     </Flex>
   );
 }
+
+export const GraphContainer = memo(GraphContainerComponent);
