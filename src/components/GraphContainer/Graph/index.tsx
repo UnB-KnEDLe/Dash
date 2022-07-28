@@ -4,7 +4,7 @@ import NeoVis, { NeoVisEvents } from 'neovis.js';
 import { useUser } from '../../../hooks/user';
 import Config from './config';
 
-interface GraphProps {
+export interface GraphProps {
   cypher: string;
 }
 

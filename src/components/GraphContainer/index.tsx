@@ -10,7 +10,13 @@ import { useUser, Status } from '../../hooks/user';
 import { Input } from '../Input';
 import { SiNeo4J } from 'react-icons/si';
 import { useForm } from 'react-hook-form';
-import { Graph } from './Graph';
+import { GraphProps } from './Graph';
+
+const Graph = dynamic<GraphProps>(() => {
+  return import ('./Graph').then(mod => mod.Graph);
+}, {
+  ssr: false
+})
 
 export default function GraphContainerComponent() {
   const handle = useFullScreenHandle();
