@@ -24,6 +24,7 @@ function GraphComponent({ cypher }: GraphProps) {
   useEffect(() => {
     const config = Config(visRef, user, cypher);
 
+    if(!cypher) return;
     let vis = new NeoVis(config);
     
     vis.registerOnEvent(NeoVisEvents.ClickNodeEvent, (data) => handleClick(data.node));
