@@ -43,7 +43,7 @@ type UserProviderProps = {
 function UserProvider({children}: UserProviderProps ): JSX.Element {
   const [user, setUser] = useState<userType | undefined>();
   const [connectStatus, setConnectStatus] = useState<Status>(Status.Unconnected);
-  const [cypher, setCypher] = useState<string>('match p=(Pessoa)-[r]->() return p limit 10');
+  const [cypher, setCypher] = useState<string>('');
   var localStorageHistory = typeof window !== "undefined" ? localStorage.getItem("history") : '[]';
   localStorageHistory ??= '[]';
   const [history, setHistory] = useState<string[]>([...JSON.parse(localStorageHistory)].slice(0, 10));
