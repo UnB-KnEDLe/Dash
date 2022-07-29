@@ -22,6 +22,7 @@ export enum FIELDS {
   "Sistema de Compras" = "sistema_compras",
   "Número do Contrato" = "numero_contrato_convenio",
   "Objeto do Contrato" = "objeto_contrato_convenio",
+  "Órgão Licitante" = "orgao_licitante",
 }
 
 export const SAME_BOTTOM_MAX_2 = {
@@ -82,5 +83,7 @@ export const BOTTOM_SEARCH = {
   nomeacao_efetiva: SAME_BOTTOM_MAX_6,
   licitacao: SAME_BOTTOM_MAX_4,
   aditamento_contratual: SAME_BOTTOM_MAX_6,
-  contrato_convenio: SAME_BOTTOM_MAX_4
+  contrato_convenio: SAME_BOTTOM_MAX_4,
+  Revogacao_anulacao_licitacao: SAME_BOTTOM_MAX_4,
+  Suspensao_licitacao: SAME_BOTTOM_MAX_4,
 } 
