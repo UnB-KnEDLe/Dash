@@ -3,7 +3,7 @@ import SmallText from "../Typography/SmallText";
 
 interface CheckboxProps {
     checkboxText: string;
-    name: string;
+    name?: string;
 }
 
 export default function Checkbox({ checkboxText, name }: CheckboxProps) {
