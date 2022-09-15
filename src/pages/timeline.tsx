@@ -9,6 +9,8 @@ import HeadingTwo from '../components/Typography/HeadingTwo';
 import SmallText from '../components/Typography/SmallText';
 import Container from '../components/Container';
 import Button from '../components/Button';
+import HeadingOne from '../components/Typography/HeadingOne';
+import { useState } from 'react';
 
 const actsTypes = [
 	'Aviso de Licitação',
@@ -25,6 +27,8 @@ const secretaries = [
 ]
 
 export default function Timeline(){
+	const [secretary, setSecretary] = useState('Secretaria de Estado de Agricultura');
+
   return(
     <Flex direction="column" h="100vh">
       <Container>
@@ -34,13 +38,14 @@ export default function Timeline(){
               title="Timeline"
               description="Veja todas as etapas do procedimento de um processo licitatório."
             />
-            <SimpleGrid flex="1" gap="4" minChildWidth="20rem" alignItems="flex-start">
+            <Flex flex="1" gap="4" alignItems="flex-start">
               <Box
                 as='div'
                 padding='2rem'
                 borderRadius='0.25rem'
                 bgColor='pallete.cardBackground'
                 flexDirection='column'
+								flex={4}
                 h='100%'
                 filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05))"
               >
@@ -49,16 +54,16 @@ export default function Timeline(){
 									<Flex flexDirection="column" >
 											<HeadingTwo headingTwoText='Data do processo' />
 											<SmallText mb='1rem' smallText='Defina a data da pesquisa dos processos' />
-											<Flex alignItems={'center'} gap='1rem'>
-												<Input placeholder="01/01/2020" icon={AiOutlineCalendar}/>
+											<Flex alignItems={'center'} gap='.75rem'>
+												<Input name='' type="date" placeholder="01/01/2020" icon={AiOutlineCalendar}/>
 												<SmallText smallText='até' />
-												<Input placeholder="31/12/2020" icon={AiOutlineCalendar}/>
+												<Input name='' type="date" placeholder="31/12/2020" icon={AiOutlineCalendar}/>
 											</Flex>
 										</Flex>
 										<Flex flexDirection="column" >
 											<HeadingTwo headingTwoText='Número do processo' />
 											<SmallText mb="1rem" smallText='Digite o número do processo licitatório' />
-											<Input placeholder="00410-000243230/2017-06" icon={AiOutlineFile} mb="1rem"/>
+											<Input type='number' name='' placeholder="00410-000243230/2017-06" icon={AiOutlineFile} mb="1rem"/>
 											<Checkbox checkboxText='Sem número de processo'/>
 										</Flex>
 										z<Flex justifyContent='flex-end'>
@@ -68,7 +73,7 @@ export default function Timeline(){
 								</Flex>
               </Box>
               <Box
-                flex={1}
+                flex={3}
                 padding='2rem'
                 borderRadius='0.25rem'
                 bgColor='pallete.cardBackground'
@@ -103,8 +108,9 @@ export default function Timeline(){
 								</Flex>
               </Box>
 
-            </SimpleGrid>
+            </Flex>
             <Divider text="resultado"/>
+						<HeadingTwo textAlign='center' color='pallete.darkPrimary' headingTwoText={secretary}/>
         </Flex>
       </Container>
     </Flex>
