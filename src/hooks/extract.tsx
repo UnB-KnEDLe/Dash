@@ -91,6 +91,17 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
       })
     }
 
+    let fileFormat = files[0].split('.').at(-1);
+    if (['json','pdf'].includes(fileFormat)) {
+      return toast({
+        title: 'Erro ao adicionar arquivos',
+        description: 'Somente arquivos nos formatos PDF e JSON são permitidos.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+
     let filesUploadedWithStatus = files.map(function(file){
       return {
           file,

@@ -1,5 +1,4 @@
 import { Flex, Image, keyframes, Input } from '@chakra-ui/react';
-import { default as DropEl } from 'react-dropzone'
 import SmallText from '../Typography/SmallText';
 import uploadImage from '../../assets/cloud-upload.svg'
 import Button from '../Button';
