@@ -10,6 +10,7 @@ import SmallText from '../components/Typography/SmallText';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import TimelineComponent from '../components/TimelineComponent';
+import TimelineSelector from '../components/TimelineComponent/TimelineSelector';
 import { useState } from 'react';
 
 const actsTypes = [
@@ -126,6 +127,7 @@ export default function Timeline(){
 							</Flex>
 						</Box>
 					</Flex>
+					<TimelineSelector />
 					<Divider text="resultado"/>
 					<TimelineComponent secretary={secretary} timelineElements={elements}/>
 				</Flex>
