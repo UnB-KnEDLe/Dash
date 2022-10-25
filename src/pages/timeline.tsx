@@ -214,7 +214,7 @@ export default function Timeline(){
 					</Flex>
 					{/* <TimelineSelector /> */}
 					<Divider text="resultado"/>
-					{ acts && <TimelineComponent items={acts}/> }
+					{ acts.length ? <TimelineComponent items={acts}/> : null}
 				</Flex>
 			</Container>
 		</Flex>
