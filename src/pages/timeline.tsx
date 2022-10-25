@@ -4,49 +4,133 @@ import { Divider } from '../components/Divider';
 import { Header } from "../components/Header";
 import { Input } from "../components/Input";
 import { Sidebar } from "../components/Sidebar";
-import { AiOutlineCalendar, AiOutlineFile, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineCalendar, AiOutlineConsoleSql, AiOutlineFile, AiOutlineSearch } from 'react-icons/ai';
 import HeadingTwo from '../components/Typography/HeadingTwo';
 import SmallText from '../components/Typography/SmallText';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import TimelineComponent from '../components/TimelineComponent';
 import TimelineSelector from '../components/TimelineComponent/TimelineSelector';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const actsTypes = [
-	'Aviso de Licitação',
-	'Aviso de Julgamento',
-	'Aviso de Homologação',
-	'Aviso de suspensão de Licitação',
-]
-
-const secretaries = [
-	'Secretaria de Estado de Agricultura',
-	'Secretaria de Estado de Ciência',
-	'Casa Civil do Distrito Federal',
-	'Secretaria de Estado de Administração Penitenciária',
-]
-
-const elements = [
-	{
-		date: '12/08/2022',
-		title: 'Aviso de Julgamento',
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus leo et felis rutrum ultricies. Nulla eleifend felis in tellus efficitur, a commodo magna finibus. Donec ac porta turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin semper sem et accumsan venenatis. Nullam nisl nunc, gravida vel ipsum vel, egestas rhoncus augue. Aenean rutrum libero in tincidunt rutrum. Nullam sit amet est sit amet dolor rhoncus vulputate. Aliquam dignissim et nisl nec hendrerit.'
+const elements = {
+	'SECRETARIA DE ESTADO DE TRABALHO': {
+		'AVISO DE PRORROGAÇÃO DE PRAZOS': [
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+		]
 	},
-	{
-		date: '12/08/2022',
-		title: 'Aviso de Julgamento',
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus leo et felis rutrum ultricies. Nulla eleifend felis in tellus efficitur, a commodo magna finibus. Donec ac porta turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin semper sem et accumsan venenatis. Nullam nisl nunc, gravida vel ipsum vel, egestas rhoncus augue. Aenean rutrum libero in tincidunt rutrum. Nullam sit amet est sit amet dolor rhoncus vulputate. Aliquam dignissim et nisl nec hendrerit.'
-	},
-	{
-		date: '12/08/2022',
-		title: 'Aviso de Julgamento',
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus leo et felis rutrum ultricies. Nulla eleifend felis in tellus efficitur, a commodo magna finibus. Donec ac porta turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin semper sem et accumsan venenatis. Nullam nisl nunc, gravida vel ipsum vel, egestas rhoncus augue. Aenean rutrum libero in tincidunt rutrum. Nullam sit amet est sit amet dolor rhoncus vulputate. Aliquam dignissim et nisl nec hendrerit.'
+	'SECRETARIA DE ESTADO DE SAUDE': {
+		'EDITAL DE CHAMAMENTO PÚBLICO Nº 16/2021': [
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+		],
+		'EXTRATO DO TERMO DE FOMENTO Nº 05/2021': [
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+			{
+				datePublication: "10/10/2022",
+				text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum eligendi qui laborum, autem nam assumenda repudiandae animi atque aspernatur asperiores dolorum culpa. Dolore, delectus.'
+			},
+		],
 	}
-]
+}
+
+const secretaries = Object.keys(elements);
 
 export default function Timeline(){
-	const [secretary, setSecretary] = useState('Secretaria de Estado de Agricultura');
+	const [secretary, setSecretary] = useState(null);
+	const [actTypes, setActTypes] = useState([]);
+	const [acts, setActs] = useState([]);
+
+	const handleSelectedSecretary = useCallback((secretary: string) => {
+		setSecretary(secretary);
+		setActTypes([]);
+	}, []);
+
+	const handleSelectedActTypes = useCallback((actType: any) => {
+		let {checked, value} = actType;
+		let newActTypes = actTypes;
+		if(checked && !newActTypes.includes(value)) {
+			newActTypes.push(value);
+			setActTypes(newActTypes);
+			return;
+		}
+		newActTypes = newActTypes.filter(act => act != value);
+		setActTypes(newActTypes);
+	}, [])
+
+	useEffect( () => {
+		let newActs = [];
+		actTypes.forEach(type => {
+			newActs.push(...elements[secretary][type])
+		})
+		setActs(newActs);
+	},  )
+
+	const actTypesList = secretary ? Object.keys(elements[secretary]) : [];
 
 	return(
 		<Flex direction="column" h="100vh">
@@ -105,31 +189,32 @@ export default function Timeline(){
 									<Flex flexDirection={'column'}>
 										<HeadingTwo headingTwoText='Secretarias' />
 										<SmallText mb='.5rem' smallText='Essas foram as secretarias encontradas' />
-										<Select>
+										<Select onChange={(el) => handleSelectedSecretary(el.target.value)}>
 											{secretaries.map((secretary, index) => (
 												<option key={index} value={secretary}>{secretary}</option>
 											))}
 										</Select>
 									</Flex>
-
-									<Flex flexDirection={'column'}>
-										<HeadingTwo headingTwoText='Tipo de ato' />
-										<SmallText mb='.5rem' smallText='Selecione o tipo de ato que deseja visualizar' />
-										<Stack maxH='12rem'>
-											{actsTypes.map((actType, index) => (
-												<Flex p='.5rem' borderBottom='1px solid gray'>
-													<Checkbox checkboxText={actType}/>
-												</Flex>
-											))}
-										</Stack>
-									</Flex>
+									{ actTypes && (
+										<Flex flexDirection={'column'}>
+											<HeadingTwo headingTwoText='Tipo de ato' />
+											<SmallText mb='.5rem' smallText='Selecione o tipo de ato que deseja visualizar' />
+											<Stack maxH='12rem'>
+												{actTypesList.map((actType, index) => (
+													<Flex p='.5rem' borderBottom='1px solid gray'>
+														<Checkbox checked={index === 1} value={actType} onChange={e => handleSelectedActTypes(e.target)} checkboxText={actType}/>
+													</Flex>
+												))}
+											</Stack>
+										</Flex>
+									)}
 								</Stack>
 							</Flex>
 						</Box>
 					</Flex>
-					<TimelineSelector />
+					{/* <TimelineSelector /> */}
 					<Divider text="resultado"/>
-					<TimelineComponent secretary={secretary} timelineElements={elements}/>
+					{ acts && <TimelineComponent items={acts}/> }
 				</Flex>
 			</Container>
 		</Flex>
