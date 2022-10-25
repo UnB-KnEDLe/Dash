@@ -101,7 +101,7 @@ const elements = {
 const secretaries = Object.keys(elements);
 
 export default function Timeline(){
-	const [secretary, setSecretary] = useState(null);
+	const [secretary, setSecretary] = useState(secretaries[0]);
 	const [actTypes, setActTypes] = useState([]);
 	const [acts, setActs] = useState([]);
 
@@ -128,7 +128,7 @@ export default function Timeline(){
 			newActs.push(...elements[secretary][type])
 		})
 		setActs(newActs);
-	},  )
+	}, [])
 
 	const actTypesList = secretary ? Object.keys(elements[secretary]) : [];
 

@@ -13,21 +13,21 @@ interface TimelineComponentProps {
 }
 
 export default function TimelineComponent({items}: TimelineComponentProps) {
-    return (
-      <VerticalTimeline>
-        { items.map( comp => (
-          <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-            contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-            date={comp.datePublication}
-            iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-            icon={<FcDocument />}
-          >
-            <p>{comp.text}</p>
-          </VerticalTimelineElement>
-        ) ) }
-      </VerticalTimeline>
-      
-    )
+  return (
+    <VerticalTimeline>
+      { items.map( comp => (
+        <VerticalTimelineElement
+          className="vertical-timeline-element--work"
+          contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+          contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+          date={comp.datePublication}
+          iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+          icon={<FcDocument />}
+        >
+          <p>{comp.text}</p>
+        </VerticalTimelineElement>
+      ) ) }
+    </VerticalTimeline>
+    
+  )
 }
