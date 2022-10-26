@@ -80,47 +80,63 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
   }, [headerActTextDownload, bodyActText])
 
   const handleFilesUploaded = useCallback((files: any[]) => {
-    
-    if (files.length >= 2 || filesUploaded.length !== 0) {
-      return toast({
-        title: 'Erro ao adicionar arquivos',
-        description: "Envie somente um arquivo, ou verifique se um arquivo já foi adicionado",
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      })
-    }
-
-    let fileFormat = files[0].split('.').at(-1);
-    if (['json','pdf'].includes(fileFormat)) {
-      return toast({
-        title: 'Erro ao adicionar arquivos',
-        description: 'Somente arquivos nos formatos PDF e JSON são permitidos.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      })
-    }
-
-    let filesUploadedWithStatus = files.map(function(file){
-      return {
-          file,
-          status: false
+    try {
+      if (files.length >= 2 || filesUploaded.length !== 0) {
+        return toast({
+          title: 'Erro ao adicionar arquivos',
+          description: "Envie somente um arquivo, ou verifique se um arquivo já foi adicionado",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
       }
-  });
 
-  // @ts-ignore
-  if(JSON.stringify(filesUploaded).includes(filesUploadedWithStatus.map(value => JSON.stringify(value)))){
-    toast({
-      title: 'Erro ao adicionar arquivos',
-      description: "Você já adicionou um desses arquivos, verifique novamente",
-      status: 'error',
-      duration: 9000,
-      isClosable: true,
-    })
-    return;
-  }
-    setFilesUploaded([...filesUploaded, ...filesUploadedWithStatus]);
+      let filesUploadedWithStatus = files.map(function(file){
+        return {
+            file,
+            status: false
+        }
+    });
+
+    let arquiveName = JSON.stringify(files[0]?.name.split(`.`)[1]);
+    const TYPE_ARQUIVE = ["pdf", "json"]
+
+    const isValidToExtract = TYPE_ARQUIVE.includes(JSON.parse(arquiveName));
+
+    if (!isValidToExtract) {
+      return toast({
+        title: 'Erro ao adicionar arquivos',
+        description: "Somente arquivos nos formatos PDF e JSON são permitidos.",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+
+  
+    // @ts-ignore
+    if(JSON.stringify(filesUploaded).includes(filesUploadedWithStatus.map(value => JSON.stringify(value)))){
+      toast({
+        title: 'Erro ao adicionar arquivos',
+        description: "Você já adicionou um desses arquivos, verifique novamente",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      return;
+    }
+      setFilesUploaded([...filesUploaded, ...filesUploadedWithStatus]);
+    } catch (error) {
+      return toast({
+        title: 'Erro ao adicionar arquivos',
+        status: 'error',
+        description: "Tente novamente mais tarde.",
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+    
+
   }, [filesUploaded]);
 
   const handleSendFormData = useCallback(async() => {
