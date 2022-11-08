@@ -1,11 +1,13 @@
 import React, { useState, useCallback, createContext, useEffect, useContext } from 'react'
 
 interface TimelineContextData {
-	secretary: any[];
+	secretaries: any[];
+	secretary: string;
 	actTypes: string[];
-	acts: string[];
-	setSecretary: React.Dispatch<React.SetStateAction<any[]>>;
-	setActTypes: React.Dispatch<React.SetStateAction<any[]>>;
+	acts: Array<{
+		datePublication: string;
+		text: string;
+	}>;
 	setActs: React.Dispatch<React.SetStateAction<any[]>>;
 	handleSelectedSecretary: (secretary: string) => void;
 	handleSelectedActTypes: (actType: any) => void;
@@ -19,9 +21,14 @@ type TimelineProviderProps = {
 }
 
 function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
-	const [secretary, setSecretary] = useState([]);
+	const [secretaries, setSecretaries] = useState([]);
+	const [secretary, setSecretary] = useState(null);
 	const [actTypes, setActTypes] = useState([]);
 	const [acts, setActs] = useState([]);
+
+	const getTimelineData = useCallback( () => {
+		console.log("jonatas")
+	}, []);
 
 	const handleSelectedSecretary = useCallback((secretary: string) => {
 		setSecretary(secretary);
@@ -40,6 +47,10 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 		setActTypes(newActTypes);
 	}, [])
 
+	const resetAllFields = useCallback( () => {
+		console.log("Jonatas");
+	}, [])
+
 	useEffect( () => {
 		let newActs = [];
 		actTypes.forEach(type => {
@@ -51,14 +62,14 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 	return (
 		<TimelineContext.Provider
 			value={{
+				secretaries,
 				secretary,
 				actTypes,
 				acts,
-				setSecretary,
-				setActTypes,
 				setActs,
 				handleSelectedSecretary,
 				handleSelectedActTypes,
+				resetAllFields,
 			}}
 		>
 			{children}

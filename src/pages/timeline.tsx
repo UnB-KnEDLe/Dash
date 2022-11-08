@@ -17,22 +17,27 @@ import { useTimeline } from '../hooks/timeline';
 
 export default function Timeline(){
 	const { register, handleSubmit, reset } = useForm();
-	const { secretary, setSecretary, actTypes, setActTypes, acts, setActs, resetAllFields, handleSelectedSecretary, handleSelectedActTypes } = useTimeline();
+	const { secretaries, secretary, actTypes, acts, setActs, resetAllFields, handleSelectedSecretary, handleSelectedActTypes } = useTimeline();
 
 	const handleTimelineChanges = useCallback(async (values) => {
-		resetAllFields();
+		// resetAllFields();
+		console.log(Object.keys(values).sort());
 		const fieldsLabels = ['fromDate', 'toDate', 'processNumber', 'hasProcessNumber'];
+		let fieldFilled = Object.entries(values)
+			.filter(field => fieldsLabels.includes(field[0]));
+		console.log(fieldFilled);
 	}, [])
 
 	useEffect( () => {
+		if(!secretaries) return;
 		let newActs = [];
 		actTypes.forEach(type => {
-			newActs.push(...elements[secretary][type])
+			newActs.push(...secretaries[secretary][type])
 		})
 		setActs(newActs);
 	}, [])
 
-	const actTypesList = secretary ? Object.keys(elements[secretary]) : [];
+	const actTypesList = secretary ? Object.keys(secretaries[secretary]) : [];
 
 	return(
 		<Flex direction="column" h="100vh">
@@ -60,9 +65,23 @@ export default function Timeline(){
 										<HeadingTwo headingTwoText='Data do processo' />
 										<SmallText mb='1rem' smallText='Defina a data da pesquisa dos processos' />
 										<Flex alignItems={'center'} gap='.75rem'>
-											<Input name='' {...register("fromDate")} type="date" placeholder="01/01/2020" icon={AiOutlineCalendar}/>
+											<Input
+												name='fromDate'
+												label="fromDate"
+												type="date"
+												placeholder="01/01/2020"
+												icon={AiOutlineCalendar}
+												{...register("fromDate")}
+											/>
 											<SmallText smallText='até' />
-											<Input name='' {...register("toDate")} type="date" placeholder="31/12/2020" icon={AiOutlineCalendar}/>
+											<Input
+												name='toDate'
+												label='toDate'
+												type="date"
+												placeholder="31/12/2020"
+												icon={AiOutlineCalendar}
+												{...register("toDate")} 
+											/>
 										</Flex>
 									</Flex>
 									<Flex flexDirection="column" >
@@ -72,7 +91,7 @@ export default function Timeline(){
 										<Checkbox {...register("hasProcessNumber")} checkboxText='Sem número de processo'/>
 									</Flex>
 									<Flex justifyContent='flex-end'>
-										<Button icon={AiOutlineSearch} buttonText='Pesquisar' />
+										<Button icon={AiOutlineSearch} onClick={handleTimelineChanges} buttonText='Pesquisar' />
 									</Flex>
 								</Stack>
 							</Flex>
@@ -86,7 +105,7 @@ export default function Timeline(){
 							h='100%'
 							filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05))"
 						>
-							<Flex>
+							{!!secretaries && <Flex>
 								<Stack spacing="2rem" flex={1} >
 									<Flex flexDirection={'column'}>
 										<HeadingTwo headingTwoText='Secretarias' />
@@ -111,12 +130,12 @@ export default function Timeline(){
 										</Flex>
 									)}
 								</Stack>
-							</Flex>
+							</Flex> }
 						</Box>
 					</Flex>
 					{/* <TimelineSelector /> */}
 					<Divider text="resultado"/>
-					{ acts.length ? <TimelineComponent items={acts}/> :
+					{ (!!secretaries && acts.length) ? <TimelineComponent items={acts}/> :
 					<Box
 						flex={3}
 						padding='2rem'
