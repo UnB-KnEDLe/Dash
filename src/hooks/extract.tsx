@@ -1,6 +1,7 @@
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import api from '../services/api';
+import apiTeste from '../services/apiTeste';
 import { useAct } from './act';
 
 interface ExtractActContextData {
@@ -38,6 +39,7 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
   const [textActs, setTextActs] = useState([]);
   const [loadingFile, setLoadingFile] = useState(0);
   const [bodyActTextDownload, setBodyActTextDownload] = useState([]);
+  const [isJson, setIsJson] = useState(false);
 
   const { allActsName } = useAct();
   const toast = useToast();
@@ -113,7 +115,13 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
       })
     }
 
-  
+
+    if(JSON.parse(arquiveName) === "json") {
+      setIsJson(true);
+    } else {
+      setIsJson(false);
+    }
+
     // @ts-ignore
     if(JSON.stringify(filesUploaded).includes(filesUploadedWithStatus.map(value => JSON.stringify(value)))){
       toast({
@@ -139,6 +147,7 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
 
   }, [filesUploaded]);
 
+
   const handleSendFormData = useCallback(async() => {
     setLoadingFile(0);
     let validFiles = filesUploaded.filter(value => value.status === false);
@@ -148,17 +157,34 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
     refine.map(value =>  formData.append('file', value))
     setLoadingFile(40);
 
-    const response = await api.post("/extracao/all", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }})
-        .then( function(response){
-          setLoadingFile(60);
-          return response.data
-        })
+    if(isJson){
+      const response = await api.post("/extracao_js/all", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }})
+          .then( function(response){
+            setLoadingFile(60);
+            return response.data;
+          })
+          setLoadingFile(80);
+          setIsJson(false);
+          setExtractActs(response);
+          return;
+      
+    }else if(!isJson && !!refine.length) {
+      const response = await api.post("/extracao/all", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }})
+          .then( function(response){
+            setLoadingFile(60);
+            return response.data;
+          })
+          setLoadingFile(80);
+          setExtractActs(response);
+          return;
+    }
     
-    setLoadingFile(80);
-    return setExtractActs(response);
   }, [filesUploaded]);
 
   useEffect(() => {
