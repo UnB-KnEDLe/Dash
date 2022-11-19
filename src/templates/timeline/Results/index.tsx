@@ -1,21 +1,32 @@
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import TimelineElement, {TimelineElementProps} from './Element';
-import HeadingTwo from '../Typography/HeadingTwo';
-import { Flex } from '@chakra-ui/react';
 import { FcDocument } from 'react-icons/fc';
+import { useTimeline } from '../../../hooks/timeline'
+import { Box } from '@chakra-ui/react';
+import { BoxLoading } from 'react-loadingg';
 
-interface TimelineComponentProps {
-  items: Array<{
-    datePublication: string;
-    text: string;
-  }>
-}
+export default function Results() {
+  const { secretaries, acts } = useTimeline();
 
-export default function TimelineComponent({items}: TimelineComponentProps) {
+  if(!secretaries && acts.length == 0) {
+    return (
+      <Box
+        flex={3}
+        padding='2rem'
+        borderRadius='0.25rem'
+        bgColor='pallete.cardBackground'
+        flexDirection='column'
+        h='100%'
+        filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05))"
+      >
+        <BoxLoading/>
+      </Box>
+    )
+  }
+
   return (
     <VerticalTimeline>
-      { items.map( comp => (
+      { acts.map( comp => (
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
           contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
@@ -31,3 +42,4 @@ export default function TimelineComponent({items}: TimelineComponentProps) {
     
   )
 }
+
