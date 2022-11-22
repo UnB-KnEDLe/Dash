@@ -1,9 +1,7 @@
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import TimelineElement, {TimelineElementProps} from './Element';
-import HeadingTwo from '../Typography/HeadingTwo';
-import { Flex } from '@chakra-ui/react';
 import { FcDocument } from 'react-icons/fc';
+import React from 'react';
 
 interface TimelineComponentProps {
   items: Array<{
@@ -31,3 +29,4 @@ export default function TimelineComponent({items}: TimelineComponentProps) {
     
   )
 }
+

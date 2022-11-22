@@ -233,7 +233,7 @@ function useExtract(): ExtractActContextData {
   const context = useContext(ExtractActContext);
 
   if (!context) {
-    throw new Error('useAct must be used within an AuthProvider');
+    throw new Error('useExtract must be used within an AuthProvider');
   }
  
   return context;
