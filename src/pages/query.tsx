@@ -12,6 +12,7 @@ import { useUser, Status } from '../hooks/user';
 import { AiOutlineUser, AiOutlineLogout } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 import QueryHistory from '../components/QueryHistory';
+import Container from '../components/Container';
 
 export default function Query() {
   const { connectStatus, user, logout, cypher, handleCypher } = useUser();
@@ -25,7 +26,7 @@ export default function Query() {
 
   return (
     <Flex direction="column" h="100vh">
-      <Flex direction="row" w="100%" my="6" maxWidth={1400} mx="auto" px="12">
+      <Container>
         <Sidebar />
         <SimpleGrid
           columns={1}
@@ -102,7 +103,7 @@ export default function Query() {
           </Flex>
           <GraphContainer />
         </SimpleGrid>
-      </Flex>
+      </Container>
     </Flex>
   );
 }

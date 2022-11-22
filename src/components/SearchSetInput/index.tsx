@@ -41,9 +41,10 @@ export default function SearchSetInput({ showInputElements, handleLoadingResults
     resectAllFilterFields();
     const labelShowInputElements = showInputElements.map(item => item["label"])
     let fieldFilled = Object.entries(values)
-    .filter(field => labelShowInputElements
-    .includes(field[0]))
-    .map(item => item[0] === FIELDS[item[0]] ? item : [item[0] = FIELDS[item[0]], item[1]]);
+      .filter(field => labelShowInputElements.includes(field[0]))
+      .map(item => item[0] === FIELDS[item[0]]
+        ? item
+        : [item[0] = FIELDS[item[0]], item[1]]);
     
     const reduceActs = fieldFilled.reduce((reduceActs, fieldAtual) => {
       reduceActs[fieldAtual[0]] = fieldAtual[1]
@@ -96,7 +97,7 @@ export default function SearchSetInput({ showInputElements, handleLoadingResults
             bottom={BOTTOM_SEARCH[selectedAct][showInputElements?.length]}
           />
         </Flex> )
-       : (
+        : (
         <Flex as={motion.div} flex="1" direction="column" animation={animation} align="center">
           <Image src={NotFound} color="pallete.secondary" alt="Not-Found" width="200" height="200" />
         </Flex>
