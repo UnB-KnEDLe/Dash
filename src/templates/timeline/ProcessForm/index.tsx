@@ -50,7 +50,7 @@ export default function ProcessForm() {
                     <SmallText mb="1rem" smallText='Digite o número do processo licitatório' />
                     <Input
                         type='text'
-                        name='processNumber'
+                        name='numberProcess'
                         placeholder="00410-000243230/2017-06"
                         icon={AiOutlineFile}
                         disabled={noProcessNumber}

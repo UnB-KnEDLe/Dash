@@ -48,18 +48,20 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 
 	useEffect( () => {
 		if (!actType) return;
+		console.log(actType);
 		setActs(secretary[actType]);
-	}, [actType]);
+	}, [actType, setActType]);
 
 	useEffect( () => {
 		if (!secretary) return;
+		console.log(secretary)
 		setActTypesList(Object.keys(secretary));
-		setActType(secretary[Object.keys(secretary)[0]]);
+		setActType(Object.keys(secretary)[0]);
 	}, [secretary]);
 
 	useEffect( () => {
 		if (!process) return;
-		api.post("/timeline", {numberPocess: process})
+		api.post("/timeline", {numberProcess: process})
 			.then( response => {
 				setSecretaries(response.data[0]);
 				let firstSecretaryIndex = Object.keys(response.data[0])[0]
@@ -81,11 +83,16 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 
 	const handleSelectedSecretary = useCallback((secretary: string) => {
 		setSecretary(secretary);
-		setActTypesList([]);
+		setActTypesList(Object.keys(secretary));
+		setActType(Object.keys(secretary)[0]);
 	}, []);
 
+	const handleSelectedActTypes = useCallback((actTypeStr: any) => {
+		setActType(actTypeStr);
+	}, [])
+
 	const handleProcessSearch = useCallback(async (values) => {
-		if(!!noProcessNumber) {
+		if(!!noProcessNumber || values.numberProcess?.length) {
 			let entry = {numberProcess: values.numberProcess}
 			getProcessList(entry);
 			return;
@@ -109,26 +116,6 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 		let {checked} = e.target;
 		setNoProcessNumber(checked);
 	}
-
-	const handleSelectedActTypes = useCallback((actType: any) => {
-		let {checked, value} = actType;
-		let newActTypes = actTypeList;
-		if(checked && !newActTypes.includes(value)) {
-			newActTypes.push(value);
-			setActTypesList(newActTypes);
-			return;
-		}
-		newActTypes = newActTypes.filter(act => act != value);
-		setActTypesList(newActTypes);
-	}, [])
-
-	useEffect( () => {
-		let newActs = [];
-		actTypeList.forEach(type => {
-			newActs.push(...elements[secretary][type])
-		})
-		setActs(newActs);
-	}, [])
 
 	return (
 		<TimelineContext.Provider

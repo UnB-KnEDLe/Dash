@@ -47,9 +47,9 @@ export default function Selection() {
                     </Flex>
                     { !!secretaries && <Flex flexDirection={'column'}>
                         <HeadingTwo headingTwoText='Secretarias' />
-                        <SmallText mb='.5rem' smallText='Essas foram as secretarias encontradas' />
+                        <SmallText mb='.5rem' smallText='Selecione a secretaria' />
                         <Select onChange={(el) => handleSelectedSecretary(el.target.value)}>
-                            {secretaries.map((secretary, index) => (
+                            {Object.keys(secretaries).map((secretary, index) => (
                                 <option key={index} value={secretary}>{secretary}</option>
                             ))}
                         </Select>
@@ -57,14 +57,12 @@ export default function Selection() {
                     { !!actTypeList && (
                         <Flex flexDirection={'column'}>
                             <HeadingTwo headingTwoText='Tipo de ato' />
-                            <SmallText mb='.5rem' smallText='Selecione o tipo de ato que deseja visualizar' />
-                            <Stack maxH='12rem'>
+                            <SmallText mb='.5rem' smallText='Selecione o tipo de ato' />
+                            <Select onChange={(el) => handleSelectedActTypes(el.target.value)}>
                                 {actTypeList.map((actType, index) => (
-                                    <Flex p='.5rem' borderBottom='1px solid gray'>
-                                        <Checkbox checked={index === 1} value={actType} onChange={e => handleSelectedActTypes(e.target)} checkboxText={actType}/>
-                                    </Flex>
+                                    <option key={index} value={actType}>{actType}</option>
                                 ))}
-                            </Stack>
+                            </Select>
                         </Flex>
                     )}
                 </Stack>
