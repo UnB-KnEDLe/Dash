@@ -17,11 +17,11 @@ export default function Results() {
       { acts?.map( (act, index) => (
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
-          contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-          contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+          contentStyle={{ background: '#EDEFF5', color: '#000' }}
+          contentArrowStyle={{ borderRight: '7px solid #EDEFF5' }}
           date={act.datePublication}
-          iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-          icon={<FcDocument />}
+          iconStyle={{ background: '#2980B9', color: '#fff' }}
+          icon={<FcDocument color='#2980B9'/>}
           key={index}
         >
           <p>{act.text}</p>
