@@ -4,8 +4,6 @@ import SmallText from "../Typography/SmallText";
 import Dropzone from "../Dropzone";
 
 export default function ExtractSelectFile() {
-
-
     return (
         <Stack spacing="1rem">
             <Flex flexDirection="column">

@@ -1,6 +1,7 @@
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import api from '../services/api';
+import apiTeste from '../services/apiTeste';
 import { useAct } from './act';
 
 interface ExtractActContextData {
@@ -38,6 +39,7 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
   const [textActs, setTextActs] = useState([]);
   const [loadingFile, setLoadingFile] = useState(0);
   const [bodyActTextDownload, setBodyActTextDownload] = useState([]);
+  const [isJson, setIsJson] = useState(false);
 
   const { allActsName } = useAct();
   const toast = useToast();
@@ -80,37 +82,71 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
   }, [headerActTextDownload, bodyActText])
 
   const handleFilesUploaded = useCallback((files: any[]) => {
-    
-    if (files.length >= 2 || filesUploaded.length !== 0) {
+    try {
+      if (files.length >= 2 || filesUploaded.length !== 0) {
+        return toast({
+          title: 'Erro ao adicionar arquivos',
+          description: "Envie somente um arquivo, ou verifique se um arquivo já foi adicionado",
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+      }
+
+      let filesUploadedWithStatus = files.map(function(file){
+        return {
+            file,
+            status: false
+        }
+    });
+
+    let arquiveName = JSON.stringify(files[0]?.name.split(`.`)[1]);
+    const TYPE_ARQUIVE = ["pdf", "json"]
+
+    const isValidToExtract = TYPE_ARQUIVE.includes(JSON.parse(arquiveName));
+
+    if (!isValidToExtract) {
       return toast({
         title: 'Erro ao adicionar arquivos',
-        description: "Envie somente um arquivo, ou verifique se um arquivo já foi adicionado",
+        description: "Somente arquivos nos formatos PDF e JSON são permitidos.",
         status: 'error',
         duration: 9000,
         isClosable: true,
       })
     }
 
-    let filesUploadedWithStatus = files.map(function(file){
-      return {
-          file,
-          status: false
-      }
-  });
 
-  // @ts-ignore
-  if(JSON.stringify(filesUploaded).includes(filesUploadedWithStatus.map(value => JSON.stringify(value)))){
-    toast({
-      title: 'Erro ao adicionar arquivos',
-      description: "Você já adicionou um desses arquivos, verifique novamente",
-      status: 'error',
-      duration: 9000,
-      isClosable: true,
-    })
-    return;
-  }
-    setFilesUploaded([...filesUploaded, ...filesUploadedWithStatus]);
+    if(JSON.parse(arquiveName) === "json") {
+      setIsJson(true);
+    } else {
+      setIsJson(false);
+    }
+
+    // @ts-ignore
+    if(JSON.stringify(filesUploaded).includes(filesUploadedWithStatus.map(value => JSON.stringify(value)))){
+      toast({
+        title: 'Erro ao adicionar arquivos',
+        description: "Você já adicionou um desses arquivos, verifique novamente",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      return;
+    }
+      setFilesUploaded([...filesUploaded, ...filesUploadedWithStatus]);
+    } catch (error) {
+      return toast({
+        title: 'Erro ao adicionar arquivos',
+        status: 'error',
+        description: "Tente novamente mais tarde.",
+        duration: 9000,
+        isClosable: true,
+      })
+    }
+    
+
   }, [filesUploaded]);
+
 
   const handleSendFormData = useCallback(async() => {
     setLoadingFile(0);
@@ -121,17 +157,34 @@ function ExtractActProvider({ children }: ExtractActProviderProps ): JSX.Element
     refine.map(value =>  formData.append('file', value))
     setLoadingFile(40);
 
-    const response = await api.post("/extracao/all", formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }})
-        .then( function(response){
-          setLoadingFile(60);
-          return response.data
-        })
+    if(isJson){
+      const response = await api.post("/extracao_js/all", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }})
+          .then( function(response){
+            setLoadingFile(60);
+            return response.data;
+          })
+          setLoadingFile(80);
+          setIsJson(false);
+          setExtractActs(response);
+          return;
+      
+    }else if(!isJson && !!refine.length) {
+      const response = await api.post("/extracao/all", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }})
+          .then( function(response){
+            setLoadingFile(60);
+            return response.data;
+          })
+          setLoadingFile(80);
+          setExtractActs(response);
+          return;
+    }
     
-    setLoadingFile(80);
-    return setExtractActs(response);
   }, [filesUploaded]);
 
   useEffect(() => {

@@ -30,7 +30,7 @@ export default function Extract() {
       <Flex direction="row" w="100%" my="6" maxWidth={1400} mx="auto" px="12">
         <Sidebar />
         <Flex direction="column" w="100%">
-          <Header title="Extrair" description="Extraia atos de um documento em PDF" />
+          <Header title="Extrair" description="Extraia atos de um documento em PDF ou JSON" />
           <SimpleGrid flex="1" gap="4" minChildWidth="20rem" alignItems="flex-start">
             <Box
               as="div"
