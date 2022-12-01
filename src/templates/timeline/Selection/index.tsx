@@ -1,12 +1,18 @@
-import { Box, Flex, Stack, Select } from '@chakra-ui/react';
+import { Box, Flex, Stack, Radio, RadioGroup } from '@chakra-ui/react';
 import HeadingTwo from '../../../components/Typography/HeadingTwo';
 import SmallText from '../../../components/Typography/SmallText';
-import Checkbox from '../../../components/Checkbox';
 import { useTimeline } from '../../../hooks/timeline';
 import { BoxLoading } from 'react-loadingg';
+import { useCallback, useState } from 'react';
 
 export default function Selection() {
-    const { secretaries, actTypeList, processList, handleSelectedSecretary, handleSelectedActTypes, handleSelectedProcess } = useTimeline();
+    const { processList, getActs } = useTimeline();
+    const [value, setValue] = useState(processList[0]?.numero);
+
+    const handleSelection = useCallback( (processNumber: string) => {
+        setValue(processNumber);
+        getActs(processNumber);
+    }, []);
 
     if (!processList.length) {
         return (
@@ -31,40 +37,34 @@ export default function Selection() {
             borderRadius='0.25rem'
             bgColor='pallete.cardBackground'
             flexDirection='column'
+            maxHeight='27rem'
             h='100%'
             filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05))"
         >
-            <Flex>
+            <Flex h='100%'>
                 <Stack spacing="2rem" flex={1} >
-                    <Flex flexDirection={'column'}>
-                        <HeadingTwo headingTwoText='Número do processo' />
-                        <SmallText mb='.5rem' smallText='Selecione o número do processo' />
-                        <Select onChange={(el) => handleSelectedProcess(el.target.value)}>
-                            { processList.map((secretary, index) => (
-                                <option key={index} value={secretary}>{secretary}</option>
-                            )) }
-                        </Select>
+                    <Flex h='100%' flexDirection={'column'}>
+                        <HeadingTwo headingTwoText='Selecione o processo' />
+                        <RadioGroup overflowY="auto" height='100%' pr='.5rem' value={value}>
+                            <Stack>
+                                { processList.map( process => (
+                                    <Box
+                                        w='100%'
+                                        background="pallete.background"
+                                        p='.5rem'
+                                        borderRadius='.25rem'
+                                        _hover={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)" }}
+                                        onClick={() => handleSelection(process.numero)}
+                                    >
+                                        <Radio value={process.numero}>
+                                            {process.numero}
+                                            <SmallText fontSize='.75rem' smallText={process.secretaria}/>
+                                        </Radio>
+                                    </Box>
+                                )) }
+                            </Stack>
+                        </RadioGroup>
                     </Flex>
-                    { !!secretaries && <Flex flexDirection={'column'}>
-                        <HeadingTwo headingTwoText='Secretarias' />
-                        <SmallText mb='.5rem' smallText='Selecione a secretaria' />
-                        <Select onChange={(el) => handleSelectedSecretary(el.target.value)}>
-                            {Object.keys(secretaries).map((secretary, index) => (
-                                <option key={index} value={secretary}>{secretary}</option>
-                            ))}
-                        </Select>
-                    </Flex> }
-                    { !!actTypeList && (
-                        <Flex flexDirection={'column'}>
-                            <HeadingTwo headingTwoText='Tipo de ato' />
-                            <SmallText mb='.5rem' smallText='Selecione o tipo de ato' />
-                            <Select onChange={(el) => handleSelectedActTypes(el.target.value)}>
-                                {actTypeList.map((actType, index) => (
-                                    <option key={index} value={actType}>{actType}</option>
-                                ))}
-                            </Select>
-                        </Flex>
-                    )}
                 </Stack>
             </Flex>
         </Box>

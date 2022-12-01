@@ -5,11 +5,10 @@ import { Input } from '../../../components/Input';
 import Button from '../../../components/Button';
 import { AiOutlineCalendar, AiOutlineFile, AiOutlineSearch } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
-import Checkbox from '../../../components/Checkbox';
 import { useTimeline } from '../../../hooks/timeline';
 
 export default function ProcessForm() {
-    const { handleProcessSearch, handleProcessNumberCheck, noProcessNumber } = useTimeline();
+    const { handleProcessSearch } = useTimeline();
     const { register, handleSubmit } = useForm();
 
     return (
@@ -19,11 +18,23 @@ export default function ProcessForm() {
             borderRadius='0.25rem'
             bgColor='pallete.cardBackground'
             flexDirection='column'
-            flex={4}
+            flex={3}
             h='100%'
             filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05))"
         >
-            <Stack as="form" onSubmit={handleSubmit(handleProcessSearch)} spacing="2rem" pb="1rem" flex={1}>
+            <Stack as="form" onSubmit={handleSubmit(handleProcessSearch)} spacing="2rem" flex={1}>
+                <Flex flexDirection="column" >
+                    <HeadingTwo headingTwoText='Número do processo' />
+                    <SmallText mb="1rem" smallText='Digite o número do processo licitatório' />
+                    <Input
+                        type='text'
+                        name='numberProcess'
+                        placeholder="00410-000243230/2017-06"
+                        icon={AiOutlineFile}
+                        {...register("processNumber")}
+                    />
+                    {/* <Checkbox checked={noProcessNumber} onChange={handleProcessNumberCheck} checkboxText='Sem número de processo'/> */}
+                </Flex>
                 <Flex flexDirection="column" >
                     <HeadingTwo headingTwoText='Data do processo' />
                     <SmallText mb='1rem' smallText='Defina a data da pesquisa dos processos' />
@@ -44,20 +55,6 @@ export default function ProcessForm() {
                             {...register("endDate")} 
                         />
                     </Flex>
-                </Flex>
-                <Flex flexDirection="column" >
-                    <HeadingTwo headingTwoText='Número do processo' />
-                    <SmallText mb="1rem" smallText='Digite o número do processo licitatório' />
-                    <Input
-                        type='text'
-                        name='numberProcess'
-                        placeholder="00410-000243230/2017-06"
-                        icon={AiOutlineFile}
-                        disabled={noProcessNumber}
-                        mb="1rem"
-                        {...register("processNumber")}
-                    />
-                    <Checkbox checked={noProcessNumber} onChange={handleProcessNumberCheck} checkboxText='Sem número de processo'/>
                 </Flex>
                 <Flex justifyContent='flex-end'>
                     <Button icon={AiOutlineSearch} type="submit" buttonText='Pesquisar' />
