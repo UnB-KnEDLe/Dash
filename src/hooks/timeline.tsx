@@ -45,7 +45,7 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 		await api.post("/timeline", {numberProcess: processNumber},)
 			.then( response => response.data )
 			.then( data => {
-				if (!data[0].length) {
+				if (!data.length) {
 					toast({
 						title: "Esse processo não está registrado no nosso banco de dados.",
 						status: "error",
@@ -53,7 +53,7 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 						isClosable: true,
 					})
 				}
-				setActs(data[0]);
+				setActs(data);
 			} )
 	}, [])
 
