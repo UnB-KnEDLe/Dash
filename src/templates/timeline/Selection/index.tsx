@@ -1,9 +1,10 @@
-import { Box, Flex, Stack, Radio, RadioGroup } from '@chakra-ui/react';
+import { Box, Flex, Stack, Radio, RadioGroup, Icon } from '@chakra-ui/react';
 import HeadingTwo from '../../../components/Typography/HeadingTwo';
 import SmallText from '../../../components/Typography/SmallText';
 import { useTimeline } from '../../../hooks/timeline';
 import { BoxLoading } from 'react-loadingg';
 import { useCallback, useState } from 'react';
+import { FaFileAlt } from 'react-icons/fa';
 
 export default function Selection() {
     const { processList, getActs } = useTimeline();
@@ -57,7 +58,15 @@ export default function Selection() {
                                         onClick={() => handleSelection(process.numero)}
                                     >
                                         <Radio value={process.numero}>
-                                            {process.numero}
+                                            <Flex gap='.25rem' alignItems='center'>
+                                                <Icon
+                                                    as={FaFileAlt}
+                                                    mb='.25rem'
+                                                    width='.75rem'
+                                                    height='.75rem'
+                                                />
+                                                {process.numero}
+                                            </Flex>
                                             <SmallText fontSize='.75rem' smallText={process.secretaria}/>
                                         </Radio>
                                     </Box>
