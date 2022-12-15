@@ -50,6 +50,7 @@ export default function Selection() {
                                             w='100%'
                                             background="pallete.background"
                                             p='.5rem'
+                                            key={process.numero}
                                             borderRadius='.25rem'
                                             _hover={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.05)" }}
                                             onClick={() => handleSelection(process.numero)}
