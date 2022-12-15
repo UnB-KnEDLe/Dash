@@ -15,7 +15,7 @@ export default function Timeline(){
 				<Sidebar />
 				<Flex direction="column" w="100%">
 					<Header 
-						title="Timeline"
+						title="Contratos"
 						description="Veja todas as etapas do procedimento de um processo licitatório."
 					/>
 					<Flex flex="1" gap="4" alignItems="flex-start">

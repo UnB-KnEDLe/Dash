@@ -1,13 +1,15 @@
 import { useToast } from '@chakra-ui/react';
-import React, { useState, useCallback, createContext, useEffect, useContext } from 'react'
+import React, { useState, useCallback, createContext, useContext, Dispatch, SetStateAction } from 'react'
 import api from '../services/api';
 import { Act, Process, ProcessRequestProps } from '../shared/interfaces/timeline.interface';
 
 interface TimelineContextData {
 	acts: Act[];
 	processList: Process[];
+	selectedDates: Date[];
 	handleProcessSearch: (values: ProcessRequestProps) => void;
 	getActs: (processNumber: string) => void;
+	setSelectedDates: Dispatch<SetStateAction<Date[]>>;
 }
 
 const TimelineContext = createContext<TimelineContextData>({} as TimelineContextData)
@@ -19,6 +21,7 @@ type TimelineProviderProps = {
 function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 	const [acts, setActs] = useState<Act[]>([]);
 	const [processList, setProcessList] = useState<Process[]>([]);
+	const [selectedDates, setSelectedDates] = useState<Date[]>([]);
 	const toast = useToast();
 
 	const clearFields = useCallback( () => {
@@ -27,6 +30,7 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 	}, []);
 
 	const getProcessList = useCallback( async (fields: ProcessRequestProps) => {
+		console.log(fields);
 		await api.post("/timeline", fields,)
 			.then(response => {
 				if(response.data.length <= 50) return response.data;
@@ -42,9 +46,10 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 	}, []);
 
 	const getActs = useCallback( async (processNumber: string) => {
-		await api.post("/timeline", {numberProcess: processNumber},)
+		await api.get("/response/timeline/acts/data", {params: {numberProcess: processNumber}},)
 			.then( response => response.data )
 			.then( data => {
+				console.log(data)
 				if (!data.length) {
 					toast({
 						title: "Esse processo não está registrado no nosso banco de dados.",
@@ -57,27 +62,24 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 			} )
 	}, [])
 
-	const handleProcessSearch = useCallback( async (values) => {
+	const handleProcessSearch = useCallback( (values:ProcessRequestProps) => {
 		clearFields();
 
-		if(values.numberProcess?.length) {
-			let entry = {numberProcess: values.numberProcess}
-			getProcessList(entry);
-			return;
+		if (values.direct)
+			return getActs(values.numberProcess);
+
+		delete values.direct;
+
+		if (selectedDates.length > 0) {
+			values.dateRange = selectedDates.map( (date: Date) => {
+				let day = date.getDate();
+				let month = date.getMonth();
+				let year = date.getFullYear();
+				return `${day}/${month}/${year}`;
+			})
 		}
 
-		const entries = Object.entries(values)
-			.filter(field => field[1])
-			.map(([label, value]:[string, string]) => {
-				if (label == "numberProcess") return [label, value];
-
-				let [year, month, day] = value.split('-');
-				value =  `${day}/${month}/${year}`;
-				return [label, value];
-			});
-		
-		let fieldFilled = Object.fromEntries(entries);
-		getProcessList(fieldFilled);
+		getProcessList(values);
 	}, []);
 
 	return (
@@ -85,8 +87,10 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 			value={{
 				acts,
 				processList,
+				selectedDates,
 				handleProcessSearch,
 				getActs,
+				setSelectedDates,
 			}}
 		>
 			{children}

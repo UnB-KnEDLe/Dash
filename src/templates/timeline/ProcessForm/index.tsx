@@ -1,15 +1,18 @@
-import { Stack, Flex, Box } from '@chakra-ui/react';
+import { Stack, Flex, Box, Checkbox } from '@chakra-ui/react';
 import HeadingTwo from '../../../components/Typography/HeadingTwo';
 import SmallText from '../../../components/Typography/SmallText';
 import { Input } from '../../../components/Input';
 import Button from '../../../components/Button';
-import { AiOutlineCalendar, AiOutlineFile, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineFile, AiOutlineSearch} from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 import { useTimeline } from '../../../hooks/timeline';
+import { RangeDatepicker } from 'chakra-dayzed-datepicker';
+import { useState } from 'react';
 
 export default function ProcessForm() {
-    const { handleProcessSearch } = useTimeline();
-    const { register, handleSubmit } = useForm();
+    const { handleProcessSearch, selectedDates, setSelectedDates } = useTimeline();
+    const { register, handleSubmit, } = useForm();
+    const [haveDate, setHaveDate] = useState<boolean>(true);
 
     return (
         <Box
@@ -20,41 +23,69 @@ export default function ProcessForm() {
             flexDirection='column'
             flex={3}
             h='100%'
+            zIndex='20'
             filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05))"
         >
-            <Stack as="form" onSubmit={handleSubmit(handleProcessSearch)} spacing="2rem" flex={1}>
+            <Stack as="form" onSubmit={handleSubmit(handleProcessSearch)} spacing="1rem" flex={1}>
                 <Flex flexDirection="column" >
                     <HeadingTwo headingTwoText='Número do processo' />
-                    <SmallText mb="1rem" smallText='Digite o número do processo licitatório' />
+                    <SmallText mb="1rem" smallText='Pesquise pelo número do processo licitatório' />
                     <Input
                         type='text'
                         name='numberProcess'
                         placeholder="00410-000243230/2017-06"
                         icon={AiOutlineFile}
-                        {...register("processNumber")}
+                        mb='1rem'
+                        {...register("numberProcess")}
                     />
-                    {/* <Checkbox checked={noProcessNumber} onChange={handleProcessNumberCheck} checkboxText='Sem número de processo'/> */}
+                    <Flex alignItems='center' gap='.5rem'>
+                        <Checkbox
+                            borderColor='pallete.text'
+                            {...register("direct")}
+                            checked={haveDate}
+                            onChange={ () => setHaveDate(!haveDate) }
+                        />
+                        <SmallText mb='-.3rem' smallText="Consulta Direta" />
+                    </Flex>
                 </Flex>
                 <Flex flexDirection="column" >
                     <HeadingTwo headingTwoText='Data do processo' />
-                    <SmallText mb='1rem' smallText='Defina a data da pesquisa dos processos' />
-                    <Flex alignItems={'center'} gap='.75rem'>
-                        <Input
-                            type="date"
-                            name='startDate'
-                            placeholder="01/01/2020"
-                            icon={AiOutlineCalendar}
-                            {...register("startDate")}
-                        />
-                        <SmallText smallText='até' />
-                        <Input
-                            name='endDate'
-                            type="date"
-                            placeholder="31/12/2020"
-                            icon={AiOutlineCalendar}
-                            {...register("endDate")} 
-                        />
-                    </Flex>
+                    <SmallText mb='1rem' smallText='Defina o período da pesquisa dos processos' />
+                    <RangeDatepicker
+                        disabled={!haveDate}
+                        selectedDates={selectedDates}
+                        onDateChange={setSelectedDates}
+                        configs={{
+                            dateFormat:"dd/MM/yyyy",
+                            dayNames: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                            monthNames: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                        }}
+                        propsConfigs={{
+                            dateNavBtnProps: {
+                            },
+                            inputProps: {
+                                background: "white",
+                                borderColor: "pallete.secondary",
+                                borderWidth: "2px"
+                            },
+                            popoverCompProps: {
+                                popoverContentProps: {
+                                    color: "pallete.text",
+                                    border: "pallete.secondary"
+                                },
+                            },
+                            dayOfMonthBtnProps: {
+                                defaultBtnProps: {
+                                    _hover: {
+                                        background: 'pallete.secondaryLight50',
+                                    }
+                                },
+                                todayBtnProps: {
+                                    background: "pallete.secondaryLight100"
+                                }
+                            }
+                        }}
+                    />
                 </Flex>
                 <Flex justifyContent='flex-end'>
                     <Button icon={AiOutlineSearch} type="submit" buttonText='Pesquisar' />
