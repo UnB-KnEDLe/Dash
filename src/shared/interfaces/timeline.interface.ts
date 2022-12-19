@@ -1,5 +1,6 @@
 export interface ProcessRequestProps {
-    dateRange?: string[];
+    startDate?: string;
+    endDate?: string;
     numberProcess?: string;
     direct: boolean;
 };

@@ -72,6 +72,18 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 		if (values.direct)
 			return getActs(values.numberProcess);
 
+		if (values.startDate && values.endDate) {
+			if (values.startDate > values.endDate) {
+				toast({
+					title: 'A data de fim deve ser menor que a data de início.',
+					status: 'warning',
+					duration: 8000,
+					isClosable: true,
+				})
+				return;
+			}
+		}
+
 		delete values.direct;
 
 		getProcessList(values);
