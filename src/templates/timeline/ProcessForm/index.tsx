@@ -3,7 +3,7 @@ import HeadingTwo from '../../../components/Typography/HeadingTwo';
 import SmallText from '../../../components/Typography/SmallText';
 import { Input } from '../../../components/Input';
 import Button from '../../../components/Button';
-import { AiOutlineFile, AiOutlineSearch} from 'react-icons/ai';
+import { AiOutlineFile, AiOutlineSearch, AiOutlineCalendar } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 import { useTimeline } from '../../../hooks/timeline';
 import { RangeDatepicker } from 'chakra-dayzed-datepicker';
@@ -41,51 +41,33 @@ export default function ProcessForm() {
                     <Flex alignItems='center' gap='.5rem'>
                         <Checkbox
                             borderColor='pallete.text'
-                            {...register("direct")}
                             checked={haveDate}
                             onChange={ () => setHaveDate(!haveDate) }
+                            {...register("direct")}
                         />
                         <SmallText mb='-.3rem' smallText="Consulta Direta" />
                     </Flex>
                 </Flex>
                 <Flex flexDirection="column" >
                     <HeadingTwo headingTwoText='Data do processo' />
-                    <SmallText mb='1rem' smallText='Defina o período da pesquisa dos processos' />
-                    <RangeDatepicker
-                        disabled={!haveDate}
-                        selectedDates={selectedDates}
-                        onDateChange={setSelectedDates}
-                        configs={{
-                            dateFormat:"dd/MM/yyyy",
-                            dayNames: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-                            monthNames: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                        }}
-                        propsConfigs={{
-                            dateNavBtnProps: {
-                            },
-                            inputProps: {
-                                background: "white",
-                                borderColor: "pallete.secondary",
-                                borderWidth: "2px"
-                            },
-                            popoverCompProps: {
-                                popoverContentProps: {
-                                    color: "pallete.text",
-                                    border: "pallete.secondary"
-                                },
-                            },
-                            dayOfMonthBtnProps: {
-                                defaultBtnProps: {
-                                    _hover: {
-                                        background: 'pallete.secondaryLight50',
-                                    }
-                                },
-                                todayBtnProps: {
-                                    background: "pallete.secondaryLight100"
-                                }
-                            }
-                        }}
-                    />
+                    <SmallText smallText='Defina o período de pesquisa' mb='1rem'/>
+                    <Flex gap='1rem' alignItems='center'>
+                        <Input
+                            type="date"
+                            name='startDate'
+                            placeholder="01/01/2020"
+                            icon={AiOutlineCalendar}
+                            {...register("startDate")}
+                        />
+                        <SmallText smallText='até' />
+                        <Input
+                            name='endDate'
+                            type="date"
+                            placeholder="31/12/2020"
+                            icon={AiOutlineCalendar}
+                            {...register("endDate")} 
+                        />
+                    </Flex>
                 </Flex>
                 <Flex justifyContent='flex-end'>
                     <Button icon={AiOutlineSearch} type="submit" buttonText='Pesquisar' />

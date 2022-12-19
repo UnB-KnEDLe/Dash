@@ -21,7 +21,7 @@ type TimelineProviderProps = {
 function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 	const [acts, setActs] = useState<Act[]>([]);
 	const [processList, setProcessList] = useState<Process[]>([]);
-	const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+	const [selectedDates, setSelectedDates] = useState<Date[]>([new Date(), new Date()]);
 	const toast = useToast();
 
 	const clearFields = useCallback( () => {
@@ -30,7 +30,6 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 	}, []);
 
 	const getProcessList = useCallback( async (fields: ProcessRequestProps) => {
-		console.log(fields);
 		await api.post("/timeline", fields,)
 			.then(response => {
 				if(response.data.length <= 50) return response.data;
@@ -49,7 +48,6 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 		await api.get("/response/timeline/acts/data", {params: {numberProcess: processNumber}},)
 			.then( response => response.data )
 			.then( data => {
-				console.log(data)
 				if (!data.length) {
 					toast({
 						title: "Esse processo não está registrado no nosso banco de dados.",
@@ -62,13 +60,15 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 			} )
 	}, [])
 
-	const handleProcessSearch = useCallback( (values:ProcessRequestProps) => {
+	const handleProcessSearch = useCallback( (values: ProcessRequestProps) => {
 		clearFields();
 
 		if (values.direct)
 			return getActs(values.numberProcess);
 
 		delete values.direct;
+
+		console.log(selectedDates);
 
 		if (selectedDates.length > 0) {
 			values.dateRange = selectedDates.map( (date: Date) => {
