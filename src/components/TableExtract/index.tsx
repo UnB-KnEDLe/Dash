@@ -1,4 +1,4 @@
-import { Table as Tb, Thead, Tbody, Tr, Th, Box, Flex, Icon, Switch } from '@chakra-ui/react';
+import { Table as Tb, Thead, Tbody, Tr, Th, Box, Flex, Icon, Switch, Text } from '@chakra-ui/react';
 import HeadingTwo from '../Typography/HeadingTwo';
 import Button from '../Button';
 import { RiDownload2Fill, RiH1 } from 'react-icons/ri';
@@ -21,6 +21,7 @@ export default function TableExtract({ title }: TableProps) {
 	const [switchView, setSwitchView] = useState(false);
 	const [switchHeader, setSwitchHeader] = useState([]);
 	const [switchBody, setSwitchBody] = useState([]);
+
 
 	
 	const [dowloadActReady, setDowloadActReady] = useState(false);
@@ -59,6 +60,8 @@ export default function TableExtract({ title }: TableProps) {
 		}
 	}, [headerActTextDownload, bodyActTextDownload, csvLinkEl])
 
+	
+
   return (
 		<>
 			<Flex
@@ -95,21 +98,19 @@ export default function TableExtract({ title }: TableProps) {
 							})}
 						</Tr>
 					</Thead>
-
-					<Tbody fontWeight="500">
+					
+					{!switchView ? (
+						<Tbody fontWeight="500">
 						{switchBody.map((dataItem, dataIndex) => (
 							<Tr key={dataIndex}>
-								{switchHeader.map((headingItem, headingIndex) => {
+								{switchHeader.map((headingIndex) => {
 									var thProps = {width: "5rem", height:"2rem", px: "0.75rem"};
 									return (
 										<TdTable
 											index={headingIndex}
+											position={dataIndex}
 											hasSwitchView={switchView}
-											lineValue={switchView ? (typeof(dataItem[headingIndex]) !== typeof(true) 
-												&& typeof(dataItem[headingIndex]) !== typeof(null)
-												&& typeof(dataItem[headingIndex]) !== typeof(undefined)
-												? String(dataItem[headingIndex]) 
-												: '') : String(dataItem)} 
+											lineValue={String(dataItem)} 
 											{...thProps}
 										/>
 									)
@@ -117,6 +118,33 @@ export default function TableExtract({ title }: TableProps) {
 							</Tr>
 						))}
 					</Tbody>
+					) 
+					: 
+					(
+						<Tbody fontWeight="500">
+							{switchBody.map((dataItem, dataIndex) => (
+								<Tr key={dataIndex}>
+									{switchHeader.map((headingItem, headingIndex) => {
+										var thProps = {width: "5rem", height:"2rem", px: "0.75rem"};
+										return (
+											<TdTable
+												index={headingIndex}
+												position={dataIndex}
+												hasSwitchView={switchView}
+												lineValue={switchView ? (typeof(dataItem[headingIndex]) !== typeof(true) 
+													&& typeof(dataItem[headingIndex]) !== typeof(null)
+													&& typeof(dataItem[headingIndex]) !== typeof(undefined)
+													? String(dataItem[headingIndex]) 
+													: '') : String(dataItem)} 
+												{...thProps}
+											/>
+										)
+									})}
+								</Tr>
+							))}
+						</Tbody>
+					)}
+					
 				</Tb>
 				
 			</Box>
