@@ -31,7 +31,7 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 			.then(response => {
 				if(response.data == 0) {
 					toast({
-						title: 'Houve um erro na busca.',
+						title: 'Houve um erro ou a busca não retornou resultados.',
 						status: 'warning',
 						duration: 8000,
 						isClosable: true,
@@ -71,6 +71,16 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 
 		if (values.direct)
 			return getActs(values.numberProcess);
+
+		if (values.startDate < "2021-07-29") {
+			toast({
+				title: 'As pesquisas só são válidas  a partir do dia 29 de julho de 2021.',
+				status: 'warning',
+				duration: 8000,
+				isClosable: true,
+			})
+			return;
+		}
 
 		if (values.startDate && values.endDate) {
 			if (values.startDate > values.endDate) {
