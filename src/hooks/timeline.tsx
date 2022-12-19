@@ -6,10 +6,8 @@ import { Act, Process, ProcessRequestProps } from '../shared/interfaces/timeline
 interface TimelineContextData {
 	acts: Act[];
 	processList: Process[];
-	selectedDates: Date[];
 	handleProcessSearch: (values: ProcessRequestProps) => void;
 	getActs: (processNumber: string) => void;
-	setSelectedDates: Dispatch<SetStateAction<Date[]>>;
 }
 
 const TimelineContext = createContext<TimelineContextData>({} as TimelineContextData)
@@ -21,7 +19,6 @@ type TimelineProviderProps = {
 function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 	const [acts, setActs] = useState<Act[]>([]);
 	const [processList, setProcessList] = useState<Process[]>([]);
-	const [selectedDates, setSelectedDates] = useState<Date[]>([new Date(), new Date()]);
 	const toast = useToast();
 
 	const clearFields = useCallback( () => {
@@ -32,6 +29,15 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 	const getProcessList = useCallback( async (fields: ProcessRequestProps) => {
 		await api.post("/timeline", fields,)
 			.then(response => {
+				if(response.data == 0) {
+					toast({
+						title: 'Houve um erro na busca.',
+						status: 'warning',
+						duration: 8000,
+						isClosable: true,
+					})
+					return [];
+				}
 				if(response.data.length <= 50) return response.data;
 				toast({
 					title: 'A pesquisa é limitada a 50 atos. Refine sua busca.',
@@ -68,17 +74,6 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 
 		delete values.direct;
 
-		console.log(selectedDates);
-
-		if (selectedDates.length > 0) {
-			values.dateRange = selectedDates.map( (date: Date) => {
-				let day = date.getDate();
-				let month = date.getMonth();
-				let year = date.getFullYear();
-				return `${day}/${month}/${year}`;
-			})
-		}
-
 		getProcessList(values);
 	}, []);
 
@@ -87,10 +82,8 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 			value={{
 				acts,
 				processList,
-				selectedDates,
 				handleProcessSearch,
 				getActs,
-				setSelectedDates,
 			}}
 		>
 			{children}

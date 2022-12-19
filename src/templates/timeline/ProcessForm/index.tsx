@@ -6,13 +6,11 @@ import Button from '../../../components/Button';
 import { AiOutlineFile, AiOutlineSearch, AiOutlineCalendar } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 import { useTimeline } from '../../../hooks/timeline';
-import { RangeDatepicker } from 'chakra-dayzed-datepicker';
 import { useState } from 'react';
 
 export default function ProcessForm() {
-    const { handleProcessSearch, selectedDates, setSelectedDates } = useTimeline();
+    const { handleProcessSearch } = useTimeline();
     const { register, handleSubmit, } = useForm();
-    const [haveDate, setHaveDate] = useState<boolean>(true);
 
     return (
         <Box
@@ -41,8 +39,6 @@ export default function ProcessForm() {
                     <Flex alignItems='center' gap='.5rem'>
                         <Checkbox
                             borderColor='pallete.text'
-                            checked={haveDate}
-                            onChange={ () => setHaveDate(!haveDate) }
                             {...register("direct")}
                         />
                         <SmallText mb='-.3rem' smallText="Consulta Direta" />
