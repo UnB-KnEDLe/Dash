@@ -58,7 +58,6 @@ export default function Table({ title }: TableProps) {
 
 		}catch (e) {
 			setDowloadReady(false);
-			console.log(e);
 		}
 		
 		

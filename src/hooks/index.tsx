@@ -1,6 +1,7 @@
 import React from 'react';
 import { ActProvider } from './act';
 import { ExtractActProvider } from './extract';
+import { TimelineProvider } from './timeline';
 import { UserProvider } from './user';
 
 type AppProviderProps = {
@@ -9,13 +10,15 @@ type AppProviderProps = {
 
 function AppProvider({ children }: AppProviderProps): JSX.Element {
   return(
-    <ActProvider>
-      <ExtractActProvider>
-        <UserProvider>
-          {children}
-        </UserProvider>
-      </ExtractActProvider>
-    </ActProvider>
+    <TimelineProvider>
+      <ActProvider>
+        <ExtractActProvider>
+          <UserProvider>
+            {children}
+          </UserProvider>
+        </ExtractActProvider>
+      </ActProvider>
+    </TimelineProvider>
   )
 };
 

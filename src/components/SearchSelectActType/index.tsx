@@ -15,7 +15,7 @@ interface SearchSelectActTypeProps {
   handleLoadingResults: (value: boolean) => void;
 }
 
-export default function SearchSelectActType({ 
+export default function SearchSelectActType({  
   setShowInputElements, 
   showInputElements, 
   allActsName, 
