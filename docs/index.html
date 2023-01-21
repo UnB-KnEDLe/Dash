@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KnEDLe Contracts</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css' rel='stylesheet'>
+
+  <style>
+    a {
+      text-decoration: none !important;
+    }
+    html{
+      scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Montserrat' !important;
+    }
+
+    .title_div {
+      width: 100%;
+      height: 100%;
+      position:fixed;
+      background: #FCFCFC;
+    }
+
+    .sidebar {
+      background: #99A8F4;
+    }
+    
+    .title_div a {
+      padding-left: 5px !important;
+      color: #000 !important;
+      webkit-transition: all 0.3s ease-out !important;
+      -o-transition: all .3s ease-out !important;
+      transition: all .3s ease-out !important;
+      text-decoration: 0 !important;
+    }
+
+    .sidebar a {
+      padding-left: 5px !important;
+      color: #fcfcfc !important;
+      webkit-transition: all 0.3s ease-out !important;
+      -o-transition: all .3s ease-out !important;
+      transition: all .3s ease-out !important;
+      text-decoration: 0 !important;
+    }
+
+    .sidebar a:hover {
+      color: #99A8F4 !important;
+      text-decoration: 0 !important;
+    }
+
+    .section-link {
+      border-color: white !important;
+      webkit-transition: all 0.3s ease-out !important;
+      -moz-transition: all .3s ease-out !important;
+      -o-transition: all .3s ease-out !important;
+      transition: all .3s ease-out !important;
+      text-decoration: none !important;
+    }
+
+
+    input {
+      border-radius: 15px;
+      background: #FCFCFC !important;
+      webkit-transition: all 0.8s ease-out !important;
+      -moz-transition: all .8s ease-out !important;
+      -o-transition: all .8s ease-out !important;
+      transition: all .8s ease-out !important;
+      color: #00365a !important;
+    }
+
+    .input-wrap {
+      padding: 0 15px;
+      background: #99A8F4 !important;
+      background-color: #99A8F4 !important;
+      border-color:#99A8F4 !important;
+    }
+
+    input:hover, input:focus {
+      background: #FFF !important;
+      background-color: #FFF !important;
+      border-color:#FFF !important;
+    }
+
+    .sidebar strong:not(a strong){
+      color: #fcfcfc;
+      background: #00365a !important;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #99A8F4;
+    }
+
+    .sidebar-toggle {
+      width: 36px;
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important;
+      background: #99A8F4 !important;
+      border: 1px solid #6e85f8 !important;
+      color: #FFF !important;
+      webkit-transition: all 0.3s ease-out !important;
+      -moz-transition: all .3s ease-out !important;
+      -o-transition: all .3s ease-out !important;
+      transition: all .3s ease-out !important;
+    }
+
+    .sidebar-toggle-button {
+      width: 36px;
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important;
+      background: #99A8F4 !important;
+      border: 1px solid #6e85f8 !important;
+      color: #FFF !important;
+      webkit-transition: all 0.3s ease-out !important;
+      -moz-transition: all .3s ease-out !important;
+      -o-transition: all .3s ease-out !important;
+      transition: all .3s ease-out !important;
+    }
+
+    .sidebar-toggle:hover {
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important;
+      background: #FFF !important;
+      color: #99A8F4 !important;
+      width: 46px;
+    }
+
+    .sidebar-toggle-button:hover {
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important;
+      background: #FFF !important;
+      color: #99A8F4 !important;
+      width: 46px;
+    }
+
+    ::-webkit-scrollbar              { width: 5px;background-color: #99A8F4 !important; background: #99A8F4 !important;}
+    ::-webkit-scrollbar-button       { background-color: #99A8F4 !important; background: #99A8F4 !important; }
+    ::-webkit-scrollbar-track        { background-color: #6e85f8 !important; background: #6e85f8 !important; }
+    ::-webkit-scrollbar-track-piece  { background-color: #6e85f8 !important; background: #6e85f8 !important; }
+    ::-webkit-scrollbar-thumb        { background-color: #FFF !important; background: #FFF !important; }
+    ::-webkit-scrollbar-corner       { background-color: #6e85f8 !important; background: #6e85f8 !important; }
+    ::-webkit-resizer                { background-color: #6e85f8 !important; background: #6e85f8 !important; }
+
+    .cover, .show {
+      --selection-color: #99A8F4 !important;
+      background: #99A8F4 !important;
+      color: #99A8F4 !important;
+      background-color: #99A8F4 !important;
+      border-bottom: 2px solid #99A8F4;
+    }
+
+    .cover::after {
+      --selection-color: #FCFCFC !important;
+      background: #FCFCFC !important;
+      color: #FCFCFC !important;
+      background-color: #FCFCFC !important;
+    }
+
+     .show::after {
+      --selection-color: #FCFCFC !important;
+      background: #FCFCFC !important;
+      color: #FCFCFC !important;
+      background-color: #FCFCFC !important;
+    }
+
+    .nav-custom-css-item{
+      color:#fcfc !important; 
+      background: #FFF !important; 
+      padding: 2px 5px !important; 
+      margin-right: 25px;
+      border-radius: 5px !important;
+      border: 1px solid #99A8F4;
+      webkit-transition: all 0.3s ease-out !important;
+      -moz-transition: all .3s ease-out !important;
+      -o-transition: all .3s ease-out !important;
+      transition: all .3s ease-out !important;
+    }
+
+    .nav-custom-css-item:hover{
+      color: #00365a !important; 
+      background: #00365a !important; 
+      border: 1px solid #00365a;
+    }
+
+
+
+    thead{
+      background: #99A8F4 !important;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      border: 1px solid #99A8F4;
+    }
+
+    thead th{
+      color: white !important;
+      text-align: center !important;
+    }
+
+    thead th:first-child{
+      border-top-left-radius: 5px;
+    }
+
+    thead th:last-child{
+      border-top-right-radius: 5px;
+    }
+
+    tbody td {
+      text-align: center !important;
+    }
+
+    img {
+      border-radius: 5px;
+    }
+    
+    
+  </style>
+</head>
+<body>
+  <section>
+    <div class="title_div">
+
+    </div>
+  </section>
+  <!--  <nav style="position: fixed !important">
+    <a class="nav-custom-css-item" href="#">BASE</a>
+    <a class="nav-custom-css-item" href="#">MODELAGEM</a>
+  </nav>
+  -->
+
+  <div id="app"></div>
+
+  <script>
+    window.$docsify = {
+    coverpage: '_coverpage.md',
+    logo: 'assets/logoMenor.svg',
+    themeColor: '#99A8F4',
+	  autoHeader: true,
+	  loadSidebar: true,
+	  subMaxLevel: 3,
+      name: 'KnEDLE',
+      repo: 'https://github.com/UnB-KnEDLe/timeline-contratos/tree/docs'
+    }
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
+  <script src="https://unpkg.com/docsify/lib/plugins/search.js"></script>
+</body>
+</html>
