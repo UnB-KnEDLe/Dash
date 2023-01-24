@@ -1,7 +1,6 @@
-import { useDisclosure, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import api from '../services/api';
-import apiTeste from '../services/apiTeste';
 import { useAct } from './act';
 
 interface ExtractActContextData {

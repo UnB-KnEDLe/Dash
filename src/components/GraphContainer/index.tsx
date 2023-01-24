@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { Login } from './Login';
 import { GraphPopup } from './GraphPopup';
@@ -72,7 +72,8 @@ export default function GraphContainerComponent() {
           <Button type="submit" buttonText="Consultar" />
         </Flex>
       )}
-      {connectStatus === Status.Connected ? ( <>
+      {connectStatus === Status.Connected ? (
+        <>
           <Graph cypher={cypher} />
           <GraphPopup />
         </>
