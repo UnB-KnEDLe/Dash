@@ -13,8 +13,6 @@
 ## Instalação 
 **Linguagens e Tecnologias**: React.js, Next.js, Chakra UI e Typescript<br>
 
-### Instalação do Docker e do Docker-compose
-
 Clone o repositório, na pasta raiz do projeto execute:
 ```
 $ yarn
