@@ -1,7 +1,7 @@
-<h1 style="text-align: center">Documento de Arquitetura de Software</h1>
+<h1 style="text-align: center">Composição do Front-end</h1>
 <br />
 <div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Frontend/01.png">
+    <img src="../assets/Frontend/initial_logo.png">
 </div>
 <br />
 
@@ -147,6 +147,6 @@ Componente responsável por mostrar erros em tela para o usuário
 
 Data | Versão | Descrição | Autor(es) 
 ---- | ----------- | ------ | ---------
-07/03/2022 | 1.0 | Adicionando tópicos 1 e 2| [@dansousamelo](http://github.com/dansousamelo)|
-08/03/2022 | 1.1 | Adicionando tópicos 4| [@dansousamelo](http://github.com/dansousamelo)|
-09/03/2022 | 1.2 | Adicionando tópicos 5 e 6| [@dansousamelo](http://github.com/dansousamelo)|
+30/01/2023 | 1.3 | Refatorando url imagens| [@dansousamelo](http://github.com/dansousamelo)|
+26/01/2023 | 1.2 | Adicionando tópicos 1 a 6| [@jonatas1n](https://github.com/jonatas1n)|
+18/01/2023 | 1.1 | Criação da wiki| [@dansousamelo](http://github.com/dansousamelo)|
