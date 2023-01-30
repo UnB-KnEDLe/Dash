@@ -1,15 +1,28 @@
-[<img src="https://raw.githubusercontent.com/UnB-KnEDLe/DODFMiner/oss_checklist/assets/img/knedle.jpg" width="1300" title="">](https://unb-knedle.github.io/)
+<img src="https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge&logo=appveyor&color=%3Cblue%3E"> <img src="https://img.shields.io/github/issues/UnB-KnEDLe/Dash?style=for-the-badge&logo=appveyor&color=%3Cblue%3E"> <img src="https://img.shields.io/github/issues-closed/UnB-KnEDLe/Dash?style=for-the-badge&logo=appveyor&color=%3Cblue%3E"> <img src="https://img.shields.io/github/stars/UnB-KnEDLe/Dash?style=for-the-badge&logo=appveyor&color=%3Cblue%3E"> <img src="https://img.shields.io/github/forks/UnB-KnEDLe/Dash?style=for-the-badge&logo=appveyor&color=%3Cblue%3E">
 
-### Dash
+</br>
+</br>
+<p align="center"><img src="https://github.com/UnB-KnEDLe/Dash/blob/docs/docs/assets/logo.svg"></p>
 
-Frontend of the KnEDLe project.
 
-### Contribute
 
-If you want to contribute to our project, it's simple! We have a [Contribution Guide](CONTRIBUTING.md) where all the steps to contribute are explained.
-Don't forget to also read our [Code of Conduct](CODE_OF_CONDUCT.md).   
-If you have any questions you can also contact us by creating an issue or by ask.knedle@googlegroups.com
+## Sobre
+<p align="justify">Por meio de Inteligência Artificial, o Knedash realiza consultas e de extrações de atos e entidades do Diário Oficial para o Tribunal de Contas do Distrito Federal.</p>
 
-### Collaborators
 
-The information of [collaborators](https://unb-knedle.github.io/#members) can be accessed on our page.
+## Instalação 
+**Linguagens e Tecnologias**: React.js, Next.js, Chakra UI e Typescript<br>
+
+### Instalação do Docker e do Docker-compose
+
+Clone o repositório, na pasta raiz do projeto execute:
+```
+$ yarn
+```
+E executar o comando
+```
+$ yarn dev
+```
+> Tudp Pronto! A aplicação estará rodando e pode ser testada através da rota
+```
+http://localhost:3000
