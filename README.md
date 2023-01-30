@@ -13,14 +13,14 @@
 ## Instalação 
 **Linguagens e Tecnologias**: React.js, Next.js, Chakra UI e Typescript<br>
 
-Clone o repositório, na pasta raiz do projeto execute:
+Clone o repositório, na pasta raiz do projeto e execute:
 ```
 $ yarn
 ```
-E executar o comando
+Feito isso basta executar:
 ```
 $ yarn dev
 ```
-> Tudp Pronto! A aplicação estará rodando e pode ser testada através da rota
+> Tudo Pronto! A aplicação estará rodando e pode ser testada através da rota
 ```
 http://localhost:3000
