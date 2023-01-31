@@ -77,6 +77,7 @@ Foi utilizada a biblioteca react-hook-form e a NeoVis. A primeira faz o processa
     <li><h3>pages</h3> Trata-se de todos as páginas disponíveis no sistema.</li>
     <li><h3>services</h3> Trata-se de arquivos responsáveis por se conectar com a api externa.</li>
     <li><h3>styles</h3> Trata-se de arquivos de estilização global.</li>
+    <li><h3>templates</h3> Trata-se de agrupamentos que compõem componentes mais complexos.</li>
     <li><h3>utils</h3> Trata-se de funções específicas que auxiliam em partes específicas do código.</li>
 </ul>
 
