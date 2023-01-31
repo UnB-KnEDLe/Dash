@@ -3,3 +3,6 @@ up:
 
 start:
 	npm start
+
+docs:
+	docsify serve docs
