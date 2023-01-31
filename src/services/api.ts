@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://knedash.unb.br/dodfminner/api',
+  baseURL: process.env.BASE_URL,
 });
 
 

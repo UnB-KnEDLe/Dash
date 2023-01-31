@@ -6,3 +6,5 @@ services:
     container_name: dash
     ports:
       - "3002:3002"
+    environment:
+      - BASE_URL=http://knedash.unb.br/dodfminner/api
