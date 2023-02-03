@@ -7,7 +7,7 @@ import { useExtract } from "../../hooks/extract";
 import { useCallback } from "react";
 
 export default function ExtractFileManager() {
-    const { filesUploaded, setSelectedExtractAct, setFilesUploaded, loadingFile, selectedExtractAct } = useExtract();
+    const { filesUploaded, setSelectedExtractAct, setFilesUploaded, loadingFile } = useExtract();
     const handleDeleteFile = useCallback((fileTarget) => {
         setFilesUploaded(filesUploaded.filter(removeFile => removeFile !== fileTarget));
         setSelectedExtractAct('');
@@ -32,7 +32,6 @@ export default function ExtractFileManager() {
                     overflowY='auto'
                     >
                     { filesUploaded.map((fileTarget, index) => (
-                        <>
                         <Flex
                             background={fileTarget?.status ? "pallete.deactivated" : "pallete.secondaryLight10"}
                             borderRadius=".25rem"
@@ -55,8 +54,6 @@ export default function ExtractFileManager() {
                             />
                              
                         </Flex>
-                        
-                    </>
                     ))}
                 </Flex>
             ): (
