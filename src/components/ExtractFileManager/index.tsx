@@ -7,12 +7,13 @@ import { useExtract } from "../../hooks/extract";
 import { useCallback } from "react";
 
 export default function ExtractFileManager() {
-    const { filesUploaded, setSelectedExtractAct, setFilesUploaded, loadingFile } = useExtract();
+    const { filesUploaded, setSelectedExtractAct, setFilesUploaded, loadingFile, selectedExtractAct } = useExtract();
     const handleDeleteFile = useCallback((fileTarget) => {
         setFilesUploaded(filesUploaded.filter(removeFile => removeFile !== fileTarget));
         setSelectedExtractAct('');
     },[filesUploaded])
     
+
     return (
         <Stack spacing="1rem" maxHeight="28rem">
             <Flex flexDirection="column">
@@ -31,6 +32,7 @@ export default function ExtractFileManager() {
                     overflowY='auto'
                     >
                     { filesUploaded.map((fileTarget, index) => (
+                        <>
                         <Flex
                             background={fileTarget?.status ? "pallete.deactivated" : "pallete.secondaryLight10"}
                             borderRadius=".25rem"
@@ -51,7 +53,10 @@ export default function ExtractFileManager() {
                                 color={fileTarget?.status ? "pallete.secondaryLight10" : "palpallete.deactivatedText"} 
                                 onClick={() => handleDeleteFile(fileTarget) }
                             />
+                             
                         </Flex>
+                        
+                    </>
                     ))}
                 </Flex>
             ): (
@@ -61,6 +66,7 @@ export default function ExtractFileManager() {
                     style={{ alignSelf: 'center', transform: 'scale(2.3)', marginTop: '2.5rem' }}
                 />
             )}
+           
         </Stack>
     );
 }
