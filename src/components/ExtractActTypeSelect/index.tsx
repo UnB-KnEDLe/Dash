@@ -4,7 +4,15 @@ import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 
 export default function ExtractActTypeSelect() {
-    const { typeExtractActs, handleSalectedExtractionActs, selectedExtractAct, loadingFile } = useExtract();
+    const { textActs, typeExtractActs, handleSalectedExtractionActs, selectedExtractAct, loadingFile } = useExtract();
+
+    const RENDER_MESSAGE_SIZE_ACTS_EXTRACT = {
+        1: `Foi encontrado apenas ${textActs?.length} ato deste tipo`,
+        default: `Foram encontrados ${textActs?.length} atos deste tipo`
+    }
+    
+    const sizActs = textActs?.length > 1 ? "default" : textActs?.length;
+    const pluralActsMessage =  RENDER_MESSAGE_SIZE_ACTS_EXTRACT[sizActs]
 
     return (
         <Stack spacing="1rem">
@@ -33,6 +41,8 @@ export default function ExtractActTypeSelect() {
                     </option>
                 ))}
             </Select>
+            
+            {typeExtractActs?.length !== 0 && <SmallText smallText={pluralActsMessage} />}
         </Stack>
     );
 }
