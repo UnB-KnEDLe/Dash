@@ -87,30 +87,7 @@ Foi utilizada a biblioteca react-hook-form e a NeoVis. A primeira faz o processa
     <img src="https://unb-knedle.github.io/Dash/assets/Frontend/11.png">
 </div>
 
-### ActType
-Esse componente se conecta com o banco de dados para pegar informações sobre quais os tipos de ato o usuário poderá escolher na busca avançada.
-
-### AdvancedFilter
-Componente responsável por renderizar a busca avançada em tela.
-
-### Button
-Componente responsável por renderizar os botões em tela.
-
-### IconsAnimation
-Componente responsável por renderizar as animações dos ícones na <b>Home</b> do projeto.
-
-### Input
-Componente resposável por pegar e validar informações provindas do nosso usuário.
-
-### ToastContainer
-Componente responsável por exibir mensagem de sucesso, erro e informações genéricas para o usuário quando esse conclui alguma etapa dentro do sistema.
-
-### Tooltip
-Componente responsável por mostrar erros em tela para o usuário
-
 </br>
-</br>
-<p align="justify">Para exemplificar o gif abaixo mostra todos os componentes devidamente renderizados em tela.</p>
 
 <div style="display: flex; justify-content: center; align-items:center;">
     <img src="https://unb-knedle.github.io/Dash/assets/Frontend/12.gif">
@@ -126,28 +103,23 @@ Componente responsável por mostrar erros em tela para o usuário
 </p>Acima podemos ver uma URL comentada, essa é usada se quisermos utilizar o banco em localhost.</p>
 
 ## 6. Contexts
-<p align="justify"><b>Context</b> é um conceito que cresceu muito nos últimos anos na comunidade <b>React.js</b>, esse é responsável por exibir dados em qualquer lugar da aplicação. Dentro da pasta <b>hooks</b> temos um <b>index</b>, esse gerencia os contexts, elém disso temos também 3 outros contexts: <b>toast</b>, <b>useAdvancedSearch</b> e <b>useProcess</b>.</p>
+<p align="justify"><b>Context</b> é um conceito que cresceu muito nos últimos anos na comunidade <b>React.js</b>, esse é responsável por exibir dados em qualquer lugar da aplicação. Dentro da pasta <b>hooks</b> temos um <b>index</b>, esse gerencia os contexts, elém disso temos também 5 outros contexts: <b>act</b>, <b>extract</b>, <b>timeline</b> e <b>user</b></p>
 
-### 6.1. toast
-<p align="justify">Responsável por renderizar mensagens de status após algum processo de falha ou sucesso, por exemplo. Podemos adicionar funcionalidades que modificam a funicionalidade desses.</p>
-<div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Frontend/14.png">
-</div>
+### 6.1. act
+<p align="justify">Responsável por gerenciar as chamadas para a API da página Pesquisar.</p>
 
-### 6.2. useAdvancedSearch
-<p align="justify">Responsável por garantir uma busca avançada efetiva, esse também se conecta com o banco para poder buscar os parâmetros de filtro que o usuário estabeleceu, basta ver a imagem abaixo.</p>
-<div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Frontend/15.png">
-</div>
+### 6.2. extract
+<p align="justify">Responsável pelas chamadas na API e gerenciamento dos estados na página Extrair, tornando as interações possíveis entre o usuário e os componentes de gerenciamento de arquivo, extração, e filtragem. </p>
 
-### 6.3. useProcess
-<p align="justify">Responsável por adicionar tipo aos parâmetros de um ato, assim como é responsável por uma série de funções que auxiliam na manipulação desses. Abaixo conseguimos ver a função responsável por salvar atos provenientes do back-end através de um número de um processo forncecido pelo usuário.</p>
-<div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Frontend/16.png">
-</div>
+### 6.3. timeline
+<p align="justify">Context responsável pelos chamadas e gerenciamento de estados da página Timeline, fazendo as requisições de busca e detalhes dos processos.</p>
+
+### 6.4. user
+<p align="justify">Este contexto é responsável por fazer as chamadas para o banco de dados Neo4j, gerenciar os usuários e gerenciar os estados da página de Consulta.
 
 Data | Versão | Descrição | Autor(es) 
 ---- | ----------- | ------ | ---------
+07/02/2023 | 1.4 | Refazendo o tópico 6| [@jonatas1n](https://github.com/jonatas1n)|
 30/01/2023 | 1.3 | Refatorando url imagens| [@dansousamelo](http://github.com/dansousamelo)|
 26/01/2023 | 1.2 | Adicionando tópicos 1 a 6| [@jonatas1n](https://github.com/jonatas1n)|
 18/01/2023 | 1.1 | Criação da wiki| [@dansousamelo](http://github.com/dansousamelo)|

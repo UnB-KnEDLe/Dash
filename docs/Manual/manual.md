@@ -30,14 +30,14 @@ Para filtrar, selecione o campo desejado, clicando no botão com o nome desse ca
 
 <!-- Adicionar aqui uma imagem dos filtros -->
 <div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Manual/02.png">
+    <img src="https://unb-knedle.github.io/Dash/assets/Manual/03.png">
 </div>
 
 Na janela de campo, um campo estará disponibilizado para a alteração do valor. Para aplicar o filtro, clique nesse campo, digite o valor que será utilizado no filtro e clique em pesquisar para realizara busca.
 
 <!-- Adicionar aqui uma imagem dos campos dos filtros -->
 <div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Manual/03.png">
+    <img src="https://unb-knedle.github.io/Dash/assets/Manual/03b.png">
 </div>
 
 
@@ -106,8 +106,6 @@ As consultas são realizadas com uma linguagem de requisição própria da lingu
     <img src="https://unb-knedle.github.io/Dash/assets/Manual/10.png">
 </div>
 
-### Lidando com erros
-
 ## 4. Contratos
 
 Essa tela disponibiliza a visualização de uma linha do tempo dos contratos registrados em nosso banco de dados, permitindo visualização em detalhees de cada contrato.
@@ -149,4 +147,10 @@ Você pode inserir um trecho do processo que está procurando, a fim de pesquisa
     <img src="https://unb-knedle.github.io/Dash/assets/Manual/15.png">
 </div>
 
-### Lidando com erros
+<div style="display: flex; justify-content: center; align-items:center;">
+    <img src="https://unb-knedle.github.io/Dash/assets/Manual/16.png">
+</div>
+
+Data | Versão | Descrição | Autor(es) 
+---- | ----------- | ------ | ---------
+06/02/2023 | 1.4 | Inserindo imagens dos tópicos 1 a 6| [@jonatas1n](https://github.com/jonatas1n)|
