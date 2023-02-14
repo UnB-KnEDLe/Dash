@@ -115,14 +115,15 @@ export default function ExtractFileManager() {
               overflowY="auto"
               css={{
                 '&::-webkit-scrollbar': {
-                  width: '4px',
+                  width: '0.35rem',
                 },
                 '&::-webkit-scrollbar-track': {
-                  width: '6px',
+                  width: '1rem',
+                  background: '#D7DCFF',
                 },
                 '&::-webkit-scrollbar-thumb': {
                   background: '#17385F',
-                  borderRadius: '24px',
+                  borderRadius: '2rem',
                 },
               }}
             >
