@@ -2,15 +2,19 @@
 Por meio de Inteligência Artificial, o Knedash realiza consultas e de extrações de atos e entidades do Diário Oficial para o Tribunal de Contas do Distrito Federal. Essa interface utiliza as API's e processamentos do DODF Miner, para processar e tratar arquivos e retornar informações úteis para o usuário.
 
 ## Colaboradores
-- Andre Lima Queiroz
-- Jônatas Gomes Barbosa da Silva (17/0059847)
-- Daniel de Souza
-- Luis Fernando Ferreira Pereira Lopes
+- Luis Paulo
+- Andrei Lima Queiroz
+- Jônatas Gomes Barbosa da Silva
+- Daniel Sousa Melo
+- Luis Fernando
 
 
 ### Ex-integrantes
-- Larissa
-- 
+- Rafael Amaral
+- Vitor Araruna
+- Larissa Andrade
+- Khalil Carsten do Nascimento
+- Felipe Campos
 
 
 ## Sobre o Knedle
