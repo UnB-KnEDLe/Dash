@@ -87,3 +87,10 @@ export const BOTTOM_SEARCH = {
   Revogacao_anulacao_licitacao: SAME_BOTTOM_MAX_4,
   Suspensao_licitacao: SAME_BOTTOM_MAX_4,
 } 
+
+export const CONTRACT_KEYS = [
+  'Suspensao_licitacao',
+  'aditamento_contratual',
+  'contrato_convenio',
+  'licitacao'
+]
