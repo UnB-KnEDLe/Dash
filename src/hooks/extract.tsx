@@ -141,21 +141,21 @@ function ExtractActProvider({
         }
 
         // @ts-ignore
-        if (
-          JSON.stringify(filesUploaded).includes(
-            filesUploadedWithStatus.map((value) => JSON.stringify(value)),
-          )
-        ) {
-          toast({
-            title: 'Erro ao adicionar arquivos',
-            description:
-              'Você já adicionou um desses arquivos, verifique novamente',
-            status: 'error',
-            duration: 9000,
-            isClosable: true,
-          })
-          return
-        }
+        // if (
+        //   JSON.stringify(filesUploaded).includes(
+        //     filesUploadedWithStatus.map((value) => JSON.stringify(value)),
+        //   )
+        // ) {
+        //   toast({
+        //     title: 'Erro ao adicionar arquivos',
+        //     description:
+        //       'Você já adicionou um desses arquivos, verifique novamente',
+        //     status: 'error',
+        //     duration: 9000,
+        //     isClosable: true,
+        //   })
+        //   return
+        // }
         setFilesUploaded([...filesUploaded, ...filesUploadedWithStatus])
       } catch (error) {
         return toast({
