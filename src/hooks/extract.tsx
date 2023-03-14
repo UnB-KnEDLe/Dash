@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useToast } from '@chakra-ui/react'
 import React, {
   createContext,
@@ -31,7 +32,7 @@ interface ExtractActContextData {
   setHeaderActTextDownload: React.Dispatch<React.SetStateAction<any[]>>
   setBodyActTextDownload: React.Dispatch<React.SetStateAction<any[]>>
   bodyActTextDownload: any[]
-  extractActs: any[]
+  extractActs: {}
 }
 
 const ExtractActContext = createContext<ExtractActContextData>(
@@ -41,6 +42,7 @@ const ExtractActContext = createContext<ExtractActContextData>(
 type ExtractActProviderProps = {
   children: React.ReactNode
 }
+
 function ExtractActProvider({
   children,
 }: ExtractActProviderProps): JSX.Element {
@@ -167,7 +169,7 @@ function ExtractActProvider({
         })
       }
     },
-    [filesUploaded],
+    [filesUploaded, toast],
   )
 
   const handleSendFormData = useCallback(async () => {
@@ -207,7 +209,7 @@ function ExtractActProvider({
       setLoadingFile(80)
       setExtractActs(response)
     }
-  }, [filesUploaded])
+  }, [filesUploaded, isJson])
 
   useEffect(() => {
     if (Object.entries(extractActs).length > 0) {
@@ -264,7 +266,7 @@ function ExtractActProvider({
     if (filesUploaded) {
       handleSendFormData()
     }
-  }, [handleSendFormData])
+  }, [filesUploaded, handleSendFormData])
 
   useEffect(() => {
     const formTypeActs = Object.keys(extractActs)
