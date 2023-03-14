@@ -16,7 +16,7 @@ export default function ExtractFileManager() {
     extractActs,
   } = useExtract()
 
-  const totalNumber = Object.entries(extractActs).map((item) => ({
+  const totalNumber = Object.entries(extractActs).map((item: any) => ({
     n: item[1]?.content?.length,
     name: item[0],
   }))
