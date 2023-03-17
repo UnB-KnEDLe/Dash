@@ -5,6 +5,7 @@ import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 import { BoxLoading } from 'react-loadingg';
 import { useAct } from "../../hooks/act";
+import { CONTRACT_KEYS } from "../../constants/search.constants";
 
 interface SearchSelectActTypeProps {
   setShowInputElements: Dispatch<SetStateAction<any[]>>;
@@ -23,7 +24,17 @@ export default function SearchSelectActType({
 }: SearchSelectActTypeProps){
   const { allInitialActs, resectAllFilterFields, selectedAct, handleSelectAct } = useAct();
 
-  
+  const contractActs = [];
+  const personelActs = [];
+
+  Object.entries(allActsName).forEach( ([label, value]) => {
+    if (CONTRACT_KEYS.includes(label)) {
+      contractActs.push([label, value]);
+      return;
+    } 
+    personelActs.push([label, value]);
+  })
+
   const [allActs, setAllActs] = useState<Object>(JSON.parse(JSON.stringify(allInitialActs)));
 
   const handleOnChange = useCallback((value: string) => {
@@ -77,13 +88,22 @@ export default function SearchSelectActType({
           boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25);"
           size="lg"
         >
-          {Object.entries(allActsName).map(function (actName) {
-            return (
-              <option key={actName[0]} value={actName[0]}>
-                {actName[1]}
-              </option>
-            );
-          })}
+          <optgroup label="Atos de Contrato">
+            {contractActs.map((actName) => (
+                <option key={actName[0]} value={actName[0]}>
+                  {actName[1]}
+                </option>
+              )
+            )}
+          </optgroup>
+          <optgroup label="Atos de Pessoal">
+            {personelActs.map((actName) => (
+                <option key={actName[0]} value={actName[0]}>
+                  {actName[1]}
+                </option>
+              )
+            )}
+          </optgroup>
         </Select>
       </Flex>
       <Flex flexDirection="column">
