@@ -1,18 +1,18 @@
 import { Box, Text } from "@chakra-ui/react";
 import Image from 'next/image'
-import NotFoundSVG from '../../assets/extract-background.svg';
+import SuccessImage from '../../assets/check-extract.svg';
 
-interface NotFoundProps {
+interface SuccessExtractProps {
   title: string;
   subtitle: string;
 }
 
-export function NotFound({ title, subtitle } : NotFoundProps){
+export function SuccessExtract({ title, subtitle } : SuccessExtractProps){
   return(
     <Box borderRadius="0.35rem" color="pallete.primary" filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.10))">
        <Image
           style={{zIndex: 0}}
-          src={NotFoundSVG}
+          src={SuccessImage}
           alt="Picture of the author"
         />
       <Text

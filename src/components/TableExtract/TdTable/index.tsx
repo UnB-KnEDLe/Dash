@@ -12,54 +12,77 @@ interface TdTableProps {
 
 export function TdTable({lineValue, index,position, hasSwitchView=true, ...props}: TdTableProps) {
   const [fulField, setFullField] = useState(false);
-  const {headerActText, bodyActText } = useExtract();
+  const {headerActText, highlights } = useExtract();
 
-  const deleteEntities = ['titulo', 'text', "Nome do DODF", "Data do DODF", "Numero do DODF"];
+  const deleteEntities = [
+    'titulo', 'text', "Nome do DODF", 
+    "Data do DODF", "Numero do DODF", 
+    'Dodf_fonte_arquivo', 'Dodf_fonte_data', 'Dodf_fonte_numero'];
 
   const indexesArrayWithoutDeleteEntities = deleteEntities
   .map(item => headerActText.indexOf(item))
 
+  
   const headerActTextWithoutDeleteEntities = headerActText
   .filter((item, index) => 
     index !== indexesArrayWithoutDeleteEntities[index])
 
-
-  const bodyActFormatted = bodyActText
+  
+  const bodyActFormatted = highlights
   .map((item, i) => item
   .filter((item, j) => 
-    j !== indexesArrayWithoutDeleteEntities[j]))
-  
+    j !== indexesArrayWithoutDeleteEntities[j.name]))
 
-  
+  const bodyActFormattedWithoutPoints = bodyActFormatted.map(i => i.map(j => {
+    if(j?.name === '.'){
+        return null
+    }
+    return j
+  }))
 
-  
   function paintVariablesInText(lineValue: string){
+
     let sizeHeader = headerActTextWithoutDeleteEntities.length;
+
     let count = 0;
+    let copyLineValue = lineValue;
 
     while(count < sizeHeader){
-      let initialPaintString = lineValue
-      .indexOf(bodyActFormatted[position]?.[count]?.slice(0,7))
-      let sizePaintString = bodyActFormatted[position]?.[count]?.length
-      let endPosition = sizePaintString + initialPaintString
+      
+      let initialPaintString = 
+        bodyActFormattedWithoutPoints[position]?.[count]?.start
 
-      if(sizePaintString !== undefined && !deleteEntities.includes(headerActTextWithoutDeleteEntities[count])) {
+      let endPosition = 
+      bodyActFormattedWithoutPoints[position]?.[count]?.end
 
-        let firstStep =  lineValue.substring(0, initialPaintString)
+      let paintString = copyLineValue.slice(initialPaintString, endPosition)
+      
+      if(paintString.length && 
+        !deleteEntities.includes(headerActTextWithoutDeleteEntities[count]) 
+        && !!bodyActFormattedWithoutPoints[position]?.[count]?.name) {
+
         let substringTemplate = 
-          `<time title=${headerActTextWithoutDeleteEntities[count]} style="cursor: pointer; color:black; text-align: center; background: ${COLOR_PARAMETER[headerActTextWithoutDeleteEntities[count]]}; padding: 8px 8px 4px 8px; border-radius: 4px">${bodyActFormatted[position]?.[count]}</time>`
-        let finalStep = lineValue.substring(endPosition)
+          `<time 
+            title=${headerActTextWithoutDeleteEntities[count]} 
+              style="cursor: pointer; 
+              color:black;
+              text-align:center; 
+              background: ${COLOR_PARAMETER[headerActTextWithoutDeleteEntities[count]]};
+              padding: 8px 8px 4px 8px; 
+              border-radius: 4px">
+              ${bodyActFormattedWithoutPoints[position]?.[count]?.name}
+            </time>`
 
-        lineValue = `${firstStep}${substringTemplate}${finalStep}`
+        lineValue = lineValue.replace(paintString, substringTemplate)
       }
 
       count++;
 
       }
 
+
     return lineValue
   }
-
   return (
     <Td 
       onClick={() => hasSwitchView && setFullField(true)} 

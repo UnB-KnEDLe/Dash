@@ -26,7 +26,7 @@ export default function SearchSelectActType({
   
   const [allActs, setAllActs] = useState<Object>(JSON.parse(JSON.stringify(allInitialActs)));
 
-  const handleOncChange = useCallback((value: string) => {
+  const handleOnChange = useCallback((value: string) => {
     handleSelectAct(value);
     setAllActs(allInitialActs);
     setShowInputElements([]);
@@ -67,7 +67,7 @@ export default function SearchSelectActType({
           _hover={{ bg: 'pallete.primaryLight50' }}
           borderRadius="0.25rem"
           fontWeight="500"
-          onChange={e => handleOncChange(e.target.value)}
+          onChange={e => handleOnChange(e.target.value)}
           value={selectedAct}
           color="pallete.text"
           bg="pallete.secondaryLight100"

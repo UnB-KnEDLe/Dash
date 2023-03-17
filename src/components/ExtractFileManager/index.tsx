@@ -128,14 +128,13 @@ export default function ExtractFileManager() {
               }}
             >
               {totalNumberFormat.map((typeAct, index) => (
-                <>
                   <Flex
+                    key={typeAct.name}
                     justifyContent="space-between"
                     borderBottom="1px solid #D7DCFF"
                     padding="0.4rem 1rem 0.4rem 0"
                   >
                     <SmallText
-                      key={typeAct.name}
                       smallText={typeExtractActs[index]?.name}
                       fontSize="lg"
                       width="11rem"
@@ -162,7 +161,6 @@ export default function ExtractFileManager() {
                       />
                     </Flex>
                   </Flex>
-                </>
               ))}
             </Flex>
           </Flex>

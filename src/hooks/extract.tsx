@@ -33,6 +33,8 @@ interface ExtractActContextData {
   setBodyActTextDownload: React.Dispatch<React.SetStateAction<any[]>>
   bodyActTextDownload: any[]
   extractActs: {}
+  setHighlights: React.Dispatch<React.SetStateAction<any[]>>
+  highlights: any[]
 }
 
 const ExtractActContext = createContext<ExtractActContextData>(
@@ -53,6 +55,7 @@ function ExtractActProvider({
   const [headerActText, setHeaderActText] = useState([])
   const [headerActTextDownload, setHeaderActTextDownload] = useState([])
   const [bodyActText, setBodyActText] = useState([])
+  const [highlights, setHighlights] = useState([])
   const [textActs, setTextActs] = useState([])
   const [loadingFile, setLoadingFile] = useState(0)
   const [bodyActTextDownload, setBodyActTextDownload] = useState([])
@@ -141,23 +144,7 @@ function ExtractActProvider({
         } else {
           setIsJson(false)
         }
-
-        // @ts-ignore
-        // if (
-        //   JSON.stringify(filesUploaded).includes(
-        //     filesUploadedWithStatus.map((value) => JSON.stringify(value)),
-        //   )
-        // ) {
-        //   toast({
-        //     title: 'Erro ao adicionar arquivos',
-        //     description:
-        //       'Você já adicionou um desses arquivos, verifique novamente',
-        //     status: 'error',
-        //     duration: 9000,
-        //     isClosable: true,
-        //   })
-        //   return
-        // }
+        
         setFilesUploaded([...filesUploaded, ...filesUploadedWithStatus])
       } catch (error) {
         return toast({
@@ -181,23 +168,10 @@ function ExtractActProvider({
     refine.map((value) => formData.append('file', value))
     setLoadingFile(40)
 
-    if (isJson) {
+  if (!!refine.length) {
+      try {
       const response = await api
-        .post('/extracao_js/all', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then(function (response) {
-          setLoadingFile(60)
-          return response.data
-        })
-      setLoadingFile(80)
-      setIsJson(false)
-      setExtractActs(response)
-    } else if (!isJson && !!refine.length) {
-      const response = await api
-        .post('/extracao/all', formData, {
+        .post('/extracao/entidade_highlight', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -208,6 +182,17 @@ function ExtractActProvider({
         })
       setLoadingFile(80)
       setExtractActs(response)
+      }catch(e){
+        setFilesUploaded([])
+        setSelectedExtractAct('')
+        return toast({
+          title: 'Erro ao adicionar arquivos',
+          status: 'error',
+          description: 'Servidor indisponível.',
+          duration: 9000,
+          isClosable: true,
+        })
+      }
     }
   }, [filesUploaded, isJson])
 
@@ -252,8 +237,31 @@ function ExtractActProvider({
         },
       )
       const chosenActEntitiesRight = Object.entries(chosenActEnttitiesFormated)
+      const allBodyActText = chosenActEntitiesRight[1][1].map((act) => act.entities);
+      
+      const formattedAllBodyActText = []
+      allBodyActText.map(item => {
+        const firstPositionsBodyActTextRefact = item.slice(0, 2)
+        const bodyActTextRefact = item.slice(2, )
+        
+        const bodyActTextModify = bodyActTextRefact.map(act => {
+          if(act!==null)  return act.name
+            return null
+        })
+        
+        const result = [...firstPositionsBodyActTextRefact, ...bodyActTextModify]
+        formattedAllBodyActText.push(result)
+      })
 
-      setBodyActText(chosenActEntitiesRight[1][1].map((act) => act.entities))
+      const allHighlights = []
+      allBodyActText.map(item => {
+        const bodyActTextRefact = item.slice(2, )
+        allHighlights.push([...bodyActTextRefact])
+      })
+
+      setHighlights([...allHighlights])
+
+      setBodyActText([...formattedAllBodyActText])
       setTextActs(chosenActEntitiesRight[1][1].map((act) => act.text))
     }
   }, [extractActs, selectedExtractAct])
@@ -303,6 +311,8 @@ function ExtractActProvider({
         bodyActTextDownload,
         setBodyActTextDownload,
         extractActs,
+        setHighlights,
+        highlights
       }}
     >
       {children}
