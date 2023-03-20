@@ -1,5 +1,4 @@
 import { Flex } from '@chakra-ui/react';
-import { Divider } from '../components/Divider';
 import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import Container from '../components/Container';
@@ -22,7 +21,6 @@ export default function Timeline(){
 						<ProcessForm />
 						<Selection />
 					</Flex>
-					<Divider text="resultado"/>
 					<Results/>
 				</Flex>
 			</Container>

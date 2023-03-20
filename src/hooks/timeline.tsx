@@ -72,7 +72,7 @@ function TimelineProvider({children}: TimelineProviderProps ): JSX.Element {
 		if (values.direct)
 			return getActs(values.numberProcess);
 
-		if (values.startDate < "2021-07-29") {
+		if (values.startDate && values.startDate < "2021-07-29") {
 			toast({
 				title: 'As pesquisas só são válidas  a partir do dia 29 de julho de 2021.',
 				status: 'warning',
