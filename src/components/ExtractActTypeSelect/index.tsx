@@ -1,4 +1,5 @@
 import { Stack, Flex, Select } from '@chakra-ui/react'
+import { CONTRACT_KEYS } from '../../constants/search.constants';
 import { useExtract } from '../../hooks/extract'
 import HeadingTwo from '../Typography/HeadingTwo'
 import SmallText from '../Typography/SmallText'
@@ -9,7 +10,19 @@ export default function ExtractActTypeSelect() {
     handleSalectedExtractionActs,
     selectedExtractAct,
     loadingFile,
-  } = useExtract()
+  } = useExtract();
+
+  const contractActs = [];
+  const personelActs = [];
+
+  typeExtractActs.forEach((act) => {
+    let {field} = act;
+    if (CONTRACT_KEYS.includes(field)) {
+      contractActs.push(act);
+      return;
+    }
+    personelActs.push(act);
+  })
 
   return (
     <Stack spacing="1rem">
@@ -32,11 +45,24 @@ export default function ExtractActTypeSelect() {
         size="lg"
         disabled={loadingFile !== 100}
       >
-        {typeExtractActs.map((actName, index) => (
-          <option key={index} value={actName.field}>
-            {actName.name}
-          </option>
-        ))}
+          {contractActs && (
+            <optgroup label="Atos de Contrato">
+              {contractActs.map((actName, index) => (
+                <option key={index} value={actName.field}>
+                  {actName.name}
+                </option>
+              ))}
+            </optgroup>
+          )}
+          {personelActs && (
+            <optgroup label="Atos de Pessoal">
+              {personelActs.map((actName, index) => (
+                <option key={index} value={actName.field}>
+                  {actName.name}
+                </option>
+              ))}
+            </optgroup>
+          )}
       </Select>
     </Stack>
   )
