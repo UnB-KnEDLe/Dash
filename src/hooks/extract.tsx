@@ -35,6 +35,7 @@ interface ExtractActContextData {
   extractActs: {}
   setHighlights: React.Dispatch<React.SetStateAction<any[]>>
   highlights: any[]
+  allTexts: any[]
 }
 
 const ExtractActContext = createContext<ExtractActContextData>(
@@ -60,6 +61,7 @@ function ExtractActProvider({
   const [loadingFile, setLoadingFile] = useState(0)
   const [bodyActTextDownload, setBodyActTextDownload] = useState([])
   const [isJson, setIsJson] = useState(false)
+  const [allTexts, setAllTexts] = useState([])
 
   const { allActsName } = useAct()
   const toast = useToast()
@@ -212,6 +214,9 @@ function ExtractActProvider({
     const content = extractActs[selectedExtractAct]
 
     if (content) {
+      const allTextsPerActs = content.content.map(item => item.entities[1])
+      setAllTexts([...allTextsPerActs])
+
       const chosenActs: any[] = Object.entries(content)
 
       const headerActs = Object.values(chosenActs[0][1])
@@ -238,7 +243,6 @@ function ExtractActProvider({
       )
       const chosenActEntitiesRight = Object.entries(chosenActEnttitiesFormated)
       const allBodyActText = chosenActEntitiesRight[1][1].map((act) => act.entities);
-      
       const formattedAllBodyActText = []
       allBodyActText.map(item => {
         const firstPositionsBodyActTextRefact = item.slice(0, 2)
@@ -312,7 +316,8 @@ function ExtractActProvider({
         setBodyActTextDownload,
         extractActs,
         setHighlights,
-        highlights
+        highlights,
+        allTexts
       }}
     >
       {children}

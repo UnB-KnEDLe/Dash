@@ -17,7 +17,11 @@ export function TdTable({lineValue, index,position, hasSwitchView=true, ...props
   const deleteEntities = [
     'titulo', 'text', "Nome do DODF", 
     "Data do DODF", "Numero do DODF", 
-    'Dodf_fonte_arquivo', 'Dodf_fonte_data', 'Dodf_fonte_numero'];
+    'Dodf_fonte_arquivo', 'Dodf_fonte_data', 
+    'Dodf_fonte_numero', 'data_dodf',
+    'pagina_dodf', 'numero_dodf',
+    'nome do dodf', 'data do dodf', 'numero do dodf'
+  ];
 
   const indexesArrayWithoutDeleteEntities = deleteEntities
   .map(item => headerActText.indexOf(item))
@@ -39,6 +43,11 @@ export function TdTable({lineValue, index,position, hasSwitchView=true, ...props
     }
     return j
   }))
+  
+
+  const replaceAt = ({str, start ,final, replacement}) => {
+    return str.slice(0, start) + replacement + str.slice(final);
+  }
 
   function paintVariablesInText(lineValue: string){
 
@@ -56,24 +65,43 @@ export function TdTable({lineValue, index,position, hasSwitchView=true, ...props
       bodyActFormattedWithoutPoints[position]?.[count]?.end
 
       let paintString = copyLineValue.slice(initialPaintString, endPosition)
-      
       if(paintString.length && 
         !deleteEntities.includes(headerActTextWithoutDeleteEntities[count]) 
         && !!bodyActFormattedWithoutPoints[position]?.[count]?.name) {
 
-        let substringTemplate = 
+        const isOnlyOneCharacter = bodyActFormattedWithoutPoints[position]?.[count]?.name.length === 1
+        
+        if(!isOnlyOneCharacter){
+          let substringTemplate = 
           `<time 
-            title=${headerActTextWithoutDeleteEntities[count]} 
+            title=${bodyActFormattedWithoutPoints[position]?.[count]?.type?.toLowerCase()} 
               style="cursor: pointer; 
               color:black;
               text-align:center; 
-              background: ${COLOR_PARAMETER[headerActTextWithoutDeleteEntities[count]]};
+              background: ${COLOR_PARAMETER[bodyActFormattedWithoutPoints[position]?.[count]?.type?.toLowerCase()]};
               padding: 8px 8px 4px 8px; 
               border-radius: 4px">
               ${bodyActFormattedWithoutPoints[position]?.[count]?.name}
             </time>`
 
-        lineValue = lineValue.replace(paintString, substringTemplate)
+            lineValue = lineValue.replace(paintString, substringTemplate)
+        }else {
+          let substringTemplate = 
+            `<time 
+              title=${bodyActFormattedWithoutPoints[position]?.[count]?.type?.toLowerCase()} 
+                style="cursor: pointer; 
+                color:black;
+                text-align:center; 
+                background: ${COLOR_PARAMETER[bodyActFormattedWithoutPoints[position]?.[count]?.type?.toLowerCase()]};
+                padding: 8px 8px 4px 8px; 
+                border-radius: 4px">
+                ${bodyActFormattedWithoutPoints[position]?.[count]?.name}
+              </time>`
+
+              lineValue = lineValue.replace(` ${paintString}`, substringTemplate)
+        }
+
+        
       }
 
       count++;
