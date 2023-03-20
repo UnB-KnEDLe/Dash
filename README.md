@@ -5,7 +5,6 @@
 <p align="center"><img src="https://github.com/UnB-KnEDLe/Dash/blob/docs/docs/assets/logo.svg"></p>
 
 
-
 ## Sobre
 <p align="justify">Por meio de Inteligência Artificial, o Knedash realiza consultas e de extrações de atos e entidades do Diário Oficial para o Tribunal de Contas do Distrito Federal.</p>
 
