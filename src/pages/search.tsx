@@ -15,7 +15,7 @@ export default function Search(){
 
   const [showInputElements, setShowInputElements] = useState([]);
 
-  const [showResults, setShowResults] = useState(true);
+  const [showResults, setShowResults] = useState(false);
   
   const handleLoadingResults = useCallback((value: boolean) => {
     setShowResults(value);
