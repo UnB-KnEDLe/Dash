@@ -16,12 +16,11 @@ interface TableProps {
 }
 
 export default function TableExtract({ title }: TableProps) {
-	const {headerActText, bodyActText, textActs, headerActTextDownload, handleBodyText, bodyActTextDownload, setBodyActTextDownload } = useExtract();
+	const {headerActText, bodyActText, allTexts, headerActTextDownload, handleBodyText, bodyActTextDownload, setBodyActTextDownload } = useExtract();
 
 	const [switchView, setSwitchView] = useState(false);
 	const [switchHeader, setSwitchHeader] = useState([]);
 	const [switchBody, setSwitchBody] = useState([]);
-
 
 	
 	const [dowloadActReady, setDowloadActReady] = useState(false);
@@ -45,9 +44,9 @@ export default function TableExtract({ title }: TableProps) {
 			return;
 		}
 		setSwitchHeader(["Texto"]);
-		setSwitchBody(textActs);
+		setSwitchBody(allTexts);
 
-	}, [switchView, headerActText, bodyActText, textActs])
+	}, [switchView, headerActText, bodyActText, allTexts])
 
 	useEffect(() => {
 		handleEntitiesOrTextActs();

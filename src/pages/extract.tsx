@@ -1,4 +1,4 @@
-import { Flex, SimpleGrid, Box, SlideFade } from '@chakra-ui/react'
+import { Flex, SimpleGrid, Box, SlideFade, ScaleFade } from '@chakra-ui/react'
 import { Divider } from '../components/Divider'
 import { Header } from '../components/Header'
 import ExtractSelectFile from '../components/ExtractSelectFile'
@@ -9,17 +9,23 @@ import TableExtract from '../components/TableExtract'
 import { useExtract } from '../hooks/extract'
 import { NotFound } from '../components/NotFound'
 import { useEffect, useState } from 'react'
+import { BannerInitExtract } from '../components/BannerInitExtract'
+import { PointSpreadLoading } from 'react-loadingg'
+import { SuccessExtract } from '../components/SuccessExtract'
 
 export default function Extract() {
-  const { loadingFile, selectedExtractAct, filesUploaded } = useExtract()
+  const { loadingFile, selectedExtractAct, filesUploaded, extractActs } = useExtract()
   const [finishUpload, setFinishUpload] = useState(false)
   const [finishSelectTypeAct, setFinishSelectTypeAct] = useState(false)
+
+  const hasEntities = Object.keys(extractActs).length > 0;
 
   useEffect(() => {
     if (loadingFile === 100) {
       setFinishSelectTypeAct(true)
     }
   }, [loadingFile])
+
 
   useEffect(() => {
     if (filesUploaded.length !== 0) setFinishUpload(true)
@@ -87,15 +93,45 @@ export default function Extract() {
           </SimpleGrid>
 
           <Divider text="resultados" />
-          {loadingFile !== 100 || selectedExtractAct.length === 0 ? (
+          {filesUploaded.length === 0 && loadingFile !== 100 && (
+            <ScaleFade initialScale={0.9} in={filesUploaded.length === 0 && loadingFile !== 100}>
+              <BannerInitExtract
+                title={'Nenhum arquivo foi enviado'}
+                subtitle={'Adicione um arquivo e deixe o resto com a gente.'}
+              />
+            </ScaleFade>
+          )}
+          {loadingFile === 100 && !hasEntities && (
             <NotFound
-              title={'Atos não foram encontrados'}
-              subtitle={'Adicione um arquivo e deixe o resto com a gente'}
+              title={'Nào foi possível encontrar atos'}
+              subtitle={'Adicione um outro arquivo.'}
             />
-          ) : (
-            <Box width={1090}>
-              <TableExtract title="Atos Extraídos" />
-            </Box>
+          )}
+          
+
+          {filesUploaded.length !== 0 && loadingFile !== 100 && (
+              <PointSpreadLoading
+                speed="1.5"
+                color="#99A8F4"
+                style={{ alignSelf: 'center', transform: 'scale(6)', marginTop: '2.5rem' }}
+              />
+          )}
+
+          {!selectedExtractAct && loadingFile === 100 && (
+            <ScaleFade initialScale={0.9} in={!selectedExtractAct && loadingFile === 100}>
+              <SuccessExtract
+                title={'Atos encontrados com sucesso'}
+                subtitle={'Selecione o ato desejado e aproveite a nossa ferramenta! '}
+              />
+            </ScaleFade>
+          )}
+
+          {loadingFile === 100 && hasEntities && selectedExtractAct && (
+            <ScaleFade initialScale={0.9} in={loadingFile === 100 && hasEntities && !!selectedExtractAct}>
+              <Box width={1090}>
+                <TableExtract title="Atos Extraídos" />
+              </Box>
+            </ScaleFade>
           )}
         </Flex>
       </Flex>
