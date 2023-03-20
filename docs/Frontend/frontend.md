@@ -45,19 +45,6 @@
     <img src="https://unb-knedle.github.io/Dash/assets/Frontend/07.png">
 </div>
 
-### 3.4. Consultar
-<p align="justify">A página <b><i>consultar</i></b>, diferentes das demais, tem a peculiaridade de precisar de um login individual, pois é necessário validar e autenticar o acesso ao banco de dados Neo4J, permitindo inserir requisições e receber dados em formas de grafos.
-
-a visualização com os grafos, mostrando as relações requeridas.
-<div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Frontend/08.png">
-</div>
-
-Foi utilizada a biblioteca react-hook-form e a NeoVis. A primeira faz o processamento das requisições e definições dos parâmetros para que a busca seja a mais otimizada. A NeoVis, é a biblioteca que recebe os dados advindos da requisição e gera a visualização com os grafos, mostrando as relações requeridas.
-<div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Frontend/07.png">
-</div>
-
 ### 3.4. Contratos
 <p align="justify">Na página <b><i>Contratos</i></b>, foi preciso a utilização da biblioteca <b><i>vertical-timeline-component-for-react</i></b> em sua versão <b><i>1.0.7</i></b>, abaixo está representado o principal componente da página
 <div style="display: flex; justify-content: center; align-items:center;">
@@ -119,6 +106,7 @@ Foi utilizada a biblioteca react-hook-form e a NeoVis. A primeira faz o processa
 
 Data | Versão | Descrição | Autor(es) 
 ---- | ----------- | ------ | ---------
+07/02/2023 | 1.5 | Remove a consulta| [@jonatas1n](https://github.com/jonatas1n)|
 07/02/2023 | 1.4 | Refazendo o tópico 6| [@jonatas1n](https://github.com/jonatas1n)|
 30/01/2023 | 1.3 | Refatorando url imagens| [@dansousamelo](http://github.com/dansousamelo)|
 26/01/2023 | 1.2 | Adicionando tópicos 1 a 6| [@jonatas1n](https://github.com/jonatas1n)|
