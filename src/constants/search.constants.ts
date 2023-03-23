@@ -92,5 +92,8 @@ export const CONTRACT_KEYS = [
   'Suspensao_licitacao',
   'aditamento_contratual',
   'contrato_convenio',
-  'licitacao'
+  'licitacao',
+  'revogacao_anulacao_licitacao',
+  'convenio',
+  'contrato',
 ]
