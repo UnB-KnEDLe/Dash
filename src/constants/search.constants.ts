@@ -89,7 +89,6 @@ export const BOTTOM_SEARCH = {
 }
 
 export const CONTRACT_KEYS = [
-  'Suspensao_licitacao',
   'aditamento_contratual',
   'contrato_convenio',
   'licitacao',
