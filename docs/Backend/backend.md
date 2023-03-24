@@ -8,21 +8,24 @@
 ## 1. Tecnologia
 <p align="justify">Toda a aplicação se nutre de endpoints da REST API <a href=https://github.com/UnB-KnEDLe/DODFMinerAPI><b>DODFMinerAPI</b></a>.</p> 
 
-<p align="justify">O <a href=https://github.com/UnB-KnEDLe/DODFMinerAPI><b>DODFMinerAPI</b></a>.foi desenvolvido a partir do Python, como linguagem de programação, e Flask como framework. Essas tecnologias foram escolhidas por causa da facilidade de uso e flexibilidade, além do framework Flask oferecer recursos e extensões para o desenvolvimento de APIs RESTful de alta qualidade. Com a REST API, o knedash lida com grandes quantidades de dados de forma mais eficiente, confiável e escalável, melhorando a performance e experiência do usuário.</p>
+<p align="justify">O <a href=https://github.com/UnB-KnEDLe/DODFMinerAPI><b>DODFMinerAPI</b></a> foi desenvolvido a partir do Python como linguagem de programação e Flask como framework. Essas tecnologias foram escolhidas por causa da facilidade de uso e flexibilidade, além do framework Flask oferecer recursos e extensões para o desenvolvimento de APIs RESTful de alta qualidade. Com a REST API, o knedash lida com grandes quantidades de dados de forma mais eficiente, confiável e escalável, melhorando a performance e experiência do usuário.</p>
 
 <p align="justify">Além disso a ferramenta docker foi utilizada para realizar a instalação e deploy de todo o sistema knedash.</p>
 
 <p align="justify">As versões utilizadas de cada tecnologia encontram-se na imagem abaixo.</p>
 
-					XXXXXXXXXXXXXXXXX
+<div style="display: flex; justify-content: center; align-items:center;">
+    <img src="https://unb-knedle.github.io/Dash/assets/Backend/01.png">
+</div>
+						
 
 ## 2. Inicializando aplicação
-<p align="justify">Para a inicialização do Back-end da aplicação, não há nada mais simples do que utilizar a ferramente Docker Compose</p>
+<p align="justify">Para a inicialização do Back-end da aplicação, não há nada mais simples do que utilizar a ferramente Docker Compose.</p>
 
-<p align="justify">O Docker Compose é uma ferramenta para executar aplicações com vários contêineres Docker. Ele permite criar e gerenciar contêineres, redes e volumes usando um arquivo YAML</p>
+<p align="justify">O Docker Compose é uma ferramenta para executar aplicações com vários contêineres Docker. Ele permite criar e gerenciar contêineres, redes e volumes usando um arquivo YAML.</p>
 
 
-<p align="justify">Com essa ferramenta há duas formas recomendadas para inicializar o Back-end: <b>Docker Compose Direto</b>, <b>Git Clone e Docker Compose</b></p>
+<p align="justify">Com essa ferramenta há duas formas recomendadas para inicializar o Back-end: <b>Docker Compose Direto</b>, <b>Git Clone e Docker Compose</b>.</p>
 
 ### 2.1 Docker-Compose Direto
 <p align="justify">Para inicialização através do Docker-Compose direto, primeiro devemos criar o arquivo docker-compose.yml abaixo:</p>
@@ -30,7 +33,7 @@
 
     services:
 	  api:
-	    image: knedleunb/knedash:api_teste
+	    image: knedleunb/knedash_dodfminerapi
 	    container_name: dodfminerapi-api
 	    ports:
 	      - "5999:8080"
@@ -41,7 +44,7 @@
 	      - dodfminer-api-network
 	    
 	  neo4j-db:
-	    image: knedleunb/knedash:db_teste
+	    image: knedleunb/knedash_db
 	    container_name: dodfminerapi-pessoal
 	    ports:
 	      - "7473"
@@ -60,7 +63,7 @@
 
 	      
 	  neo4j-db-contratos:
-	    image: knedleunb/knedash:db_teste
+	    image: knedleunb/knedash_db
 	    container_name: dodfminerapi-contratos
 	    ports:
 	      - "7473"
@@ -80,7 +83,7 @@
 	      - $NEO4J_VOLUME_CONF_CONTRATOS:/conf
 
 	  neo4j-db-timeline:
-	    image: knedleunb/knedash:db_teste
+	    image: knedleunb/knedash_db
 	    container_name: dodfminerapi-timeline
 	    ports:
 	      - "7473"
@@ -99,8 +102,9 @@
 	      - $NEO4J_VOLUME_PLUGINS_TIMELINE:/plugins
 	      - $NEO4J_VOLUME_CONF_TIMELINE:/conf
 
+	  ## Caso nao queira inicializar o container knedash_dash, basta comentar todo o serviço dash
 	  dash:
-	    image: knedleunb/knedash:dash_teste
+	    image: knedleunb/knedash_dash
 	    command: npm start
 	    container_name: dash
 	    ports:
@@ -111,6 +115,9 @@
 	  dodfminer-api-network:
 	    driver: bridge
 
+<div style="display: flex; justify-content: center; align-items:center;">
+    <img src="https://unb-knedle.github.io/Dash/assets/Backend/02.png">
+</div>
 
 <p align="justify">Após criado o arquivo docker-compose.yml, deve-se criar o arquivo de váriaveis de ambiente .env. Utilize o modelo abaixo e insira, entre <>,  os valores que lhe for conveniente.</p>
     
@@ -154,31 +161,28 @@
 	NEO4J_VOLUME_PLUGINS_TIMELINE=<volume de plugins do DB de Timeline>
 	NEO4J_VOLUME_CONF_TIMELINE=<volume de configuração do DB de Timeline>
 
-
-
-	POSTGRES_USER=seyjlcnrbrpron
-	POSTGRES_PASSWORD=2e70995152d21d59b2d8d9cd343e79c51114b459c2e5891ad6eafd702a593a15
-	POSTGRES_DB=d68hhktm17dpvi
-	DATABASE_URL=postgresql+psycopg2://seyjlcnrbrpron:2e70995152d21d59b2d8d9cd343e79c51114b459c2e5891ad6eafd702a593a15@ailab.unb.br:5435/d68hhktm17dpvi
-	DATABASE_TEST_URL=postgres://postgres:postgres@db:5432/test
-	APP_SETTINGS=app.timeline_config.DevelopmentConfig
-	FLASK_ENV=production
-	FLASK_DEBUG=false
-
-	NUMBER_OF_THREADS_EXTRACTION=2
+<div style="display: flex; justify-content: center; align-items:center;">
+    <img src="https://unb-knedle.github.io/Dash/assets/Backend/03.png">
+</div>
 
 <p align="justify">Como último passo para esse tipo de inicialização, deve-se executar o comando abaixo:</p>
 
 
 		docker-compose up
 
-<p align="justify">Dessa forma os containers serão criados teremos o swagger-ui do DODFMinerAPI e o Dash nas seguintes URLs:</p>
+<div style="display: flex; justify-content: center; align-items:center;">
+    <img src="https://unb-knedle.github.io/Dash/assets/Backend/04.png">
+</div>
+
+<p align="justify">Dessa forma os containers serão criados.</p>
+
+<p align="justify">Teremos o swagger-ui do DODFMinerAPI e o Dash nas seguintes URLs:</p>
 
 - **DODFMinerAPI**: http://localhost:5999/dodfminner/api/swagger-ui/
 - **Dash**: http://localhost:3002/
 
 ### 2.2 Git Clone e Docker Compose
-<p align="justify">Para inicialização através do Git Clone e Docker Compose, primeiro devemos clonar o repositório do projeto em <a href="https://github.com/UnB-KnEDLe/DODFMinerAPI.git"><b><i>DODFMinerAPI</b></i></a> ou então via SSH git@github.com:UnB-KnEDLe/DODFMinerAPI.git. Feito isso, devemos criar um arquivo de variáveis de ambiente .env, conforme mostrado na seção 2.1</p>
+<p align="justify">Para inicialização através do Git Clone e Docker Compose, primeiro devemos clonar o repositório do projeto em <a href="https://github.com/UnB-KnEDLe/DODFMinerAPI.git"><b><i>DODFMinerAPI</b></i></a> ou então via SSH git@github.com:UnB-KnEDLe/DODFMinerAPI.git. Feito isso, devemos criar um arquivo de variáveis de ambiente .env, conforme mostrado na seção 2.1 .</p>
 
 
 
@@ -187,8 +191,13 @@
 
 		docker-compose up --build
 
+<div style="display: flex; justify-content: center; align-items:center;">
+    <img src="https://unb-knedle.github.io/Dash/assets/Backend/05.png">
+</div>
 
-<p align="justify">Dessa forma os containers serão criados teremos o swagger-ui do DODFMinerAPI e o Dash nas seguintes URLs:</p>
+<p align="justify">Dessa forma os containers serão criados.</p>
+
+<p align="justify">Teremos o swagger-ui do DODFMinerAPI e o Dash nas seguintes URLs:</p>
 
 - **DODFMinerAPI**: http://localhost:5999/dodfminner/api/swagger-ui/
 - **Dash**: http://localhost:3002/
@@ -202,15 +211,15 @@
 <p align="justify">No Back-end São utilizados 3 Bancos de Dados (BDs):</p> 
 
 - **BD de Pessoal**:
-Banco responsável por armazenar informações sobre os atos de pessoal
+Banco responsável por armazenar informações sobre os atos de pessoal.
 
 - **BD de Contratos**:
-Banco responsável por armazenar informações sobre os atos de contrato
+Banco responsável por armazenar informações sobre os atos de contrato.
 
 - **BD de Timeline.**:
-Banco responsável por armazenar informações sobre os atos de licitação para construção da timeline
+Banco responsável por armazenar informações sobre os atos de licitação para construção da timeline.
 
-<p align="justify">Esses bancos estão hospedados em containers docker e suas configuração são definidas no arquivo 
+<p align="justify">Esses bancos estão hospedados em containers docker e suas configuração são definidas no arquivo.
 
 ## 4. REST API
 
@@ -233,59 +242,12 @@ Além disso, também serve como documentação do DODFMinerAPI, lá é possível
         
 <p align="justify">Os endpoints para pesquisa são utilizados pela funcionalidade `Pesquisar` do Knedash, afim de se pesquisar atos que correspondam com os filtros/campos inseridos pelo usuário.</p>
     
-<p align="justify">Podemos separar os endpoints de Pesquisa em duas categorias: Pessoal, Contratos.</p>
+<p align="justify">Podemos separar os endpoints de Pesquisa em duas categorias: <b>Pessoal</b>, <b>Contrato</b>.</p>
+    
 
 #### 5.1.1. Pessoal
-    
-<p align="justify">Os endpoints de pesquisa que lidam com os atos de Pessoal são:</p>
+<p align="justify">Os endpoints de Pesquisa que lidam com os atos de Pessoal são:</p>
 
-   
-- Suspensão de Licitação:
-    
-	    /dodfminner/api/Seuspensao_licitacao
-	    /dodfminner/api/Seuspensao_licitacao/count
-	    /dodfminner/api/Seuspensao_licitacao/fields
-	    /dodfminner/api/Seuspensao_licitacao/no_pag
-	    /dodfminner/api/Seuspensao_licitacao/{flat}
-    
-- Aditamento Contratual
-    
-	    /dodfminner/api/aditamento_contratual
-	    /dodfminner/api/aditamento_contratual/count
-	    /dodfminner/api/aditamento_contratual/fields
-	    /dodfminner/api/aditamento_contratual/no_pag
-	    /dodfminner/api/aditamento_contratual/{flat}
-    
-- Contrato e Convênio
-    
-	    /dodfminner/api/contrato_convenio
-	    /dodfminner/api/contrato_convenio/count
-	    /dodfminner/api/contrato_convenio/fields
-	    /dodfminner/api/contrato_convenio/no_pag
-	    /dodfminner/api/contrato_convenio/{flat}
-    
-- Licitação
-    
-	    /dodfminner/api/licitacao
-	    /dodfminner/api/licitacao/count
-	    /dodfminner/api/licitacao/fields
-	    /dodfminner/api/licitacao/no_pag
-	    /dodfminner/api/licitacao/{flat}
-</ul>
-    
-
-#### 5.1.2. Contrato
-
-<p align="justify">Os endpoints de pesquisa que lidam com os atos de Contrato são:</p>
-
-
-- Revogação ou Anulação de Licitação
-
-    		/dodfminner/api/Revogacao_anulacao_licitacao
-    		/dodfminner/api/Revogacao_anulacao_licitacao/count
-    		/dodfminner/api/Revogacao_anulacao_licitacao/fields
-    		/dodfminner/api/Revogacao_anulacao_licitacao/no_pag
-    		/dodfminner/api/Revogacao_anulacao_licitacao/{flat}
     
 - Abono de Permanência
     
@@ -399,15 +361,58 @@ Além disso, também serve como documentação do DODFMinerAPI, lá é possível
     		/dodfminner/api/tornado_sea/v2/{flat}
     		/dodfminner/api/tornado_sea/{flat}
 
+#### 5.1.2. Contrato
+<p align="justify">Os endpoints de Pesquisa que lidam com os atos de Contrato são:</p>
+
+- Aditamento Contratual
+    
+	    /dodfminner/api/aditamento_contratual
+	    /dodfminner/api/aditamento_contratual/count
+	    /dodfminner/api/aditamento_contratual/fields
+	    /dodfminner/api/aditamento_contratual/no_pag
+	    /dodfminner/api/aditamento_contratual/{flat}
+
+- Contrato e Convênio
+    
+	    /dodfminner/api/contrato_convenio
+	    /dodfminner/api/contrato_convenio/count
+	    /dodfminner/api/contrato_convenio/fields
+	    /dodfminner/api/contrato_convenio/no_pag
+	    /dodfminner/api/contrato_convenio/{flat}
+
+- Licitação
+    
+	    /dodfminner/api/licitacao
+	    /dodfminner/api/licitacao/count
+	    /dodfminner/api/licitacao/fields
+	    /dodfminner/api/licitacao/no_pag
+	    /dodfminner/api/licitacao/{flat}
+
+- Revogação ou Anulação de Licitação
+
+    		/dodfminner/api/Revogacao_anulacao_licitacao
+    		/dodfminner/api/Revogacao_anulacao_licitacao/count
+    		/dodfminner/api/Revogacao_anulacao_licitacao/fields
+    		/dodfminner/api/Revogacao_anulacao_licitacao/no_pag
+    		/dodfminner/api/Revogacao_anulacao_licitacao/{flat}
+
+- Suspensão de Licitação:
+    
+	    /dodfminner/api/Seuspensao_licitacao
+	    /dodfminner/api/Seuspensao_licitacao/count
+	    /dodfminner/api/Seuspensao_licitacao/fields
+	    /dodfminner/api/Seuspensao_licitacao/no_pag
+	    /dodfminner/api/Seuspensao_licitacao/{flat}
+    
 ### 5.2. Extração (Json e PDF)
 
 <p align="justify">Os endpoints para Extração são utilizados pela funcionalidade `Extrair` do Knedash, afim de se extrair de arquivos, no formato PDF e Json, os tipos de atos presentes, bem como suas respectivas entidades.</p>
 
-<p align="justify">Podemos separar os endpoints de Extração em duas categorias: PDF, Json.</p>
+<p align="justify">Podemos separar os endpoints de Extração em duas categorias: <b>PDF</b>, <b>Json</b>.</p>
 
 #### 5.2.1. PDF
 
-<p align="justify">Os endpoints de extração que lidam com arquivos no formato PDF são:</p>
+<p align="justify">Os endpoints de Extração que lidam com arquivos no formato PDF são:</p>
 
 - Extração Entidade e Ato
     
@@ -425,7 +430,7 @@ Além disso, também serve como documentação do DODFMinerAPI, lá é possível
 
 #### 5.2.2. Json
 
-<p align="justify">Os endpoints de extração que lidam com arquivos no formato Json são:</p>
+<p align="justify">Os endpoints de Extração que lidam com arquivos no formato Json são:</p>
 
 - Extração Entidade e Ato<br>
     
@@ -442,7 +447,7 @@ Além disso, também serve como documentação do DODFMinerAPI, lá é possível
 ### 5.3 Timeline
 <p align="justify">Os endpoints para Timeline são utilizados pela funcionalidade `Timeline` do Knedash, afim de se montar uma linha do tempo dos atos de mesmo número de processo.</p>
 
-<p align="justify">Podemos separar os endpoints da Timeline em 3 categorias: <b>Lista de Atos</b>, <b>Lista de Processos</b>, <b>Contagem</b>.</p>
+<p align="justify">Podemos separar os endpoints da Timeline em 2 categorias: <b>Lista de Atos</b>, <b>Lista de Processos</b>.</p>
 
 #### 5.3.1 Lista de Atos
     
@@ -468,30 +473,30 @@ Além disso, também serve como documentação do DODFMinerAPI, lá é possível
 
 <p align="justify">Docker é uma plataforma que permite empacotar, distribuir e executar aplicativos em contêineres, que são unidades portáteis de software isoladas umas das outras e do host. A utilização de contêineres Docker para a instalação de dependências e aplicações traz diversas vantagens, como a simplificação e rapidez do processo de instalação, a garantia de consistência entre os ambientes de desenvolvimento e produção, a facilidade de escalabilidade e o aumento da segurança do sistema.</p>
 
-<p align="justify">Para o Deploy do sistema knedash foi utlizado 5 Containers Docker:</p>
+<p align="justify">Para o Deploy do sistema knedash foi utlizado 5 contêineres Docker:</p>
 
 - **dodfminerapi-api**:
     
-    Container responsável por hospedar o REST API DodfminerAPI
+    Container responsável por hospedar o REST API DodfminerAPI.
     
 - **dodfminerapi-timeline**:
     
-    Container responsável por hospedar o BD da Timeline
+    Container responsável por hospedar o BD de Timeline.
     
 - **dodfminerapi-contratos**:
     
-    Container responsável por hospedar o BD de Contratos
+    Container responsável por hospedar o BD de Contratos.
     
 - **dodfminerapi-pessoal**:
     
-    Container responsável por hospedar o BD de Atos de Pessoal
+    Container responsável por hospedar o BD de Pessoal.
     
 - **dash**:
     
-    Container responsável por hospedar o front-end do Knedash
+    Container responsável por hospedar o front-end do Knedash, isto é, a aplicação Dash.
     
 
-<p align="justify">Todos esses containers compartilham uma mesma rede bridge, podendo assim comunicarem entre si ao utilizar os nomes dos containers ao invés de seus endereços IP’s.</p>
+<p align="justify">Todos esses contêineres compartilham uma mesma rede bridge, podendo assim comunicarem entre si ao utilizar os nomes dos contêineres ao invés de seus endereços IP’s.</p>
 
 
 ## 7) Outras Funcionalidades
