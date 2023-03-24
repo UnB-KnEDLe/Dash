@@ -118,7 +118,7 @@ export default function SearchSelectActType({
         />
         {!!selectedAct ? (
           <SimpleGrid columns={2} spacing={2} flexDirection="row" alignItems="flex-start">
-            {Object.keys(allActs[selectedAct]).map(key => (
+            {!!allActs[selectedAct] && Object?.keys(allActs[selectedAct]).map(key => (
               <FilterButton
                 active={allActs[selectedAct][key]?.status}
                 onClick={() => handleActiveButton(key)}
