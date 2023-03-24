@@ -497,9 +497,3 @@ Além disso, também serve como documentação do DODFMinerAPI, lá é possível
     
 
 <p align="justify">Todos esses contêineres compartilham uma mesma rede bridge, podendo assim comunicarem entre si ao utilizar os nomes dos contêineres ao invés de seus endereços IP’s.</p>
-
-
-## 7) Outras Funcionalidades
-
-- 1.1) Load e Dump
-- 1.2) Script de Escrita
