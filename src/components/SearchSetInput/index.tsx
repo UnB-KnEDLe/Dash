@@ -31,7 +31,7 @@ const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 export default function SearchSetInput({ showInputElements, handleLoadingResults }: SearchSetInputProps) {
   const { register, handleSubmit, reset } = useForm();
   const { getFieldActs, selectedAct, handleSearchActs, resectAllFilterFields, getTotalSearchActs } = useAct();
-
+  const fieldAct = BOTTOM_SEARCH[selectedAct]?.[showInputElements?.length]
   useEffect(() => {
     !!showInputElements && reset();
   }, [showInputElements, reset])
@@ -94,7 +94,7 @@ export default function SearchSetInput({ showInputElements, handleLoadingResults
             buttonText='Pesquisar'
             type="submit"
             icon={FaSearch} 
-            bottom={BOTTOM_SEARCH[selectedAct][showInputElements?.length]}
+            bottom={!!fieldAct ? fieldAct : BOTTOM_SEARCH.default[4]}
           />
         </Flex> )
         : (
