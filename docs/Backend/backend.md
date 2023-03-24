@@ -115,10 +115,6 @@
 	  dodfminer-api-network:
 	    driver: bridge
 
-<div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Backend/02.png">
-</div>
-
 <p align="justify">Após criado o arquivo docker-compose.yml, deve-se criar o arquivo de váriaveis de ambiente .env. Utilize o modelo abaixo e insira, entre <>,  os valores que lhe for conveniente.</p>
     
 
@@ -161,14 +157,8 @@
 	NEO4J_VOLUME_PLUGINS_TIMELINE=<volume de plugins do DB de Timeline>
 	NEO4J_VOLUME_CONF_TIMELINE=<volume de configuração do DB de Timeline>
 
-<div style="display: flex; justify-content: center; align-items:center;">
-    <img src="https://unb-knedle.github.io/Dash/assets/Backend/03.png">
-</div>
 
 <p align="justify">Como último passo para esse tipo de inicialização, deve-se executar o comando abaixo:</p>
-
-
-		docker-compose up
 
 <div style="display: flex; justify-content: center; align-items:center;">
     <img src="https://unb-knedle.github.io/Dash/assets/Backend/04.png">
@@ -187,9 +177,6 @@
 
 
 <p align="justify">Após criado o arquivo .env e estando na raíz do projeto, para a etapa final da inicialização será necessário executar o comando abaixo:</p>
-
-
-		docker-compose up --build
 
 <div style="display: flex; justify-content: center; align-items:center;">
     <img src="https://unb-knedle.github.io/Dash/assets/Backend/05.png">
