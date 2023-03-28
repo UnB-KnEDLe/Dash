@@ -3,11 +3,13 @@ Por meio de Inteligência Artificial, o Knedash realiza consultas e de extraçõ
 
 ## Coordenação do projeto
 
-- **Thiago de Paulo Faleiros** | Coordenador do Projeto Knedle
+- **Prof. Dr. Thiago de Paulo Faleiros** | Coordenador do Projeto Knedle
 
 ## Coordenação de equipe
 
-- **Luís Paulo Faina Garcia** | Coordenador de Equipe
+- **Prof. Dr. Luís Paulo Faina Garcia** | Coordenador de Equipe
+
+- **Prof. Dr. Vinícius Ruela Pereira Borges** | Coordenador de Equipe
   
 - **Dr. Andrei Lima Queiroz** | Coordenador da equipe
 
