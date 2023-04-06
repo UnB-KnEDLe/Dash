@@ -72,29 +72,32 @@ export default function SearchSetInput({ showInputElements, handleLoadingResults
 
       {showInputElements?.length ? (
         <Flex as="form" onSubmit={handleSubmit(handleSearchAct)} direction="column">
-          <SimpleGrid 
-            columns={2} 
-            spacing={2} 
-            flexDirection='row' 
-            alignItems="flex-start">
+          <SimpleGrid
+            columns={2}
+            spacing={2}
+            flexDirection={'row'}
+            alignItems="flex-start"
+            alignContent="baseline"
+            minHeight='256px'
+          >
             {showInputElements.map((elem) => elem["label"]).map(label => (
               <Input
-                hasValue={!!showInputElements}
-                key={label} 
-                name={label} 
-                label={label} 
-                placeholder={label} 
-                type='text' 
-                icon={RiMarkPenLine}
-                {...register(label)}
+                  hasValue={!!showInputElements}
+                  key={label}
+                  name={label}
+                  label={label}
+                  placeholder={label}
+                  type={'text'}
+                  icon={RiMarkPenLine}
+                  {...register(label)}
               />
             ))}
           </SimpleGrid>
-          <Button 
+          <Button
             buttonText='Pesquisar'
             type="submit"
-            icon={FaSearch} 
-            bottom={BOTTOM_SEARCH[selectedAct][showInputElements?.length]}
+            icon={FaSearch}
+            marginTop='32px'
           />
         </Flex> )
         : (
