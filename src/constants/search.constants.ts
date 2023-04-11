@@ -23,6 +23,11 @@ export enum FIELDS {
   "Número do Contrato" = "numero_contrato_convenio",
   "Objeto do Contrato" = "objeto_contrato_convenio",
   "Órgão Licitante" = "orgao_licitante",
+  "Número da licitação" = "numero_licitacao",
+  "Sistema de compras" = "sistema_compras",
+  "Num Contrato/Convênio" = "numero_contrato_convenio",
+  "Obj Contrato/Convênio" = "objeto_contrato_convenio"
+
 }
 
 export const SAME_BOTTOM_MAX_2 = {
