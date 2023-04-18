@@ -5,7 +5,7 @@ import HeadingTwo from "../Typography/HeadingTwo";
 import SmallText from "../Typography/SmallText";
 import { BoxLoading } from 'react-loadingg';
 import { useAct } from "../../hooks/act";
-import { CONTRACT_KEYS } from "../../constants/search.constants";
+import { CONTRACT_KEYS, PERSONAL_KEYS } from "../../constants/search.constants";
 
 interface SearchSelectActTypeProps {
   setShowInputElements: Dispatch<SetStateAction<any[]>>;
@@ -27,12 +27,18 @@ export default function SearchSelectActType({
   const contractActs = [];
   const personelActs = [];
 
+
+
   Object.entries(allActsName).forEach( ([label, value]) => {
     if (CONTRACT_KEYS.includes(label)) {
       contractActs.push([label, value]);
       return;
     } 
-    personelActs.push([label, value]);
+
+    else if (PERSONAL_KEYS.includes(label)) {
+      personelActs.push([label, value]);
+      return;
+    } 
   })
 
   const [allActs, setAllActs] = useState<Object>(JSON.parse(JSON.stringify(allInitialActs)));

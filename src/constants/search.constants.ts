@@ -100,6 +100,18 @@ export const CONTRACT_KEYS = [
   'contrato_convenio',
   'licitacao',
   'revogacao_anulacao_licitacao',
-  'convenio',
-  'contrato',
+]
+
+export const PERSONAL_KEYS = [
+  "abono",
+  "aposentadoria",
+  "cessao",
+  "exo_efetivo",
+  "exoneracao",
+  "nomeacao_comissionada",
+  "nomeacao_efetiva",
+  "retificacao",
+  "reversao",
+  "substituicao",
+  "tornado_sea",
 ]
