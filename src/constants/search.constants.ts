@@ -26,7 +26,8 @@ export enum FIELDS {
   "Número da licitação" = "numero_licitacao",
   "Sistema de compras" = "sistema_compras",
   "Num Contrato/Convênio" = "numero_contrato_convenio",
-  "Obj Contrato/Convênio" = "objeto_contrato_convenio"
+  "Obj Contrato/Convênio" = "objeto_contrato_convenio",
+  "Orgão licitante" = "orgao_licitante"
 
 }
 
